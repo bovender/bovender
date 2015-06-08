@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['add',['Add',['../classBovender_1_1Text_1_1Multiline.html#ad0d81c48083b9478da1a775d80593988',1,'Bovender.Text.Multiline.Add(string text)'],['../classBovender_1_1Text_1_1Multiline.html#ac6d64c458562be55d9e7d8bbcc1fe9a2',1,'Bovender.Text.Multiline.Add(string text, string newLineSeparator)']]],
+  ['addeventhandler',['AddEventHandler',['../classXamlGeneratedNamespace_1_1GeneratedInternalTypeHelper.html#a73471f4a6d1ca4c4fceec9ad8610f0c8',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo eventInfo, object target, System.Delegate handler)'],['../classXamlGeneratedNamespace_1_1GeneratedInternalTypeHelper.html#a73471f4a6d1ca4c4fceec9ad8610f0c8',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo eventInfo, object target, System.Delegate handler)'],['../classXamlGeneratedNamespace_1_1GeneratedInternalTypeHelper.html#a73471f4a6d1ca4c4fceec9ad8610f0c8',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo eventInfo, object target, System.Delegate handler)']]],
+  ['addfilter',['AddFilter',['../classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a29ea0a61a3e797323e632ba9cdf5c0e2',1,'Bovender::Mvvm::Messaging::FileNameMessageContent']]],
+  ['addline',['AddLine',['../classBovender_1_1Text_1_1Multiline.html#afec962ae863c610990f1d24f0a4721bf',1,'Bovender::Text::Multiline']]]
+];
