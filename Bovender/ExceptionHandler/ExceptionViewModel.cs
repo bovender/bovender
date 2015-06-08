@@ -137,6 +137,14 @@ namespace Bovender.ExceptionHandler
 
         public string ReportID { get; private set; }
 
+        public string BovenderFramework
+        {
+            get
+            {
+                return typeof(ExceptionViewModel).Assembly.GetName().Version.ToString();
+            }
+        }
+
         #endregion
 
         #region Commands
