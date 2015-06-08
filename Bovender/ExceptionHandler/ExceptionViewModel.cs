@@ -248,7 +248,11 @@ namespace Bovender.ExceptionHandler
             ReportID = Convert.ToString(now - baseDate, 16);
 
             string devPath = DevPath();
-            Exception = e.ToString().Replace(devPath, String.Empty);
+            if (devPath.Length > 0)
+            {
+                Exception = e.ToString().Replace(devPath, String.Empty);
+                StackTrace = e.StackTrace.Replace(devPath, String.Empty);
+            }
             Message = e.Message;
             if (e.InnerException != null)
             {
@@ -260,7 +264,6 @@ namespace Bovender.ExceptionHandler
                 InnerException = "";
                 InnerMessage = "";
             }
-            StackTrace = e.StackTrace.Replace(devPath, String.Empty);
 
             User = Settings.User;
             Email = Settings.Email;
