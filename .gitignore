@@ -25,3 +25,4 @@ source.zip
 doc/
 private/
 *.nupkg
+doxygen_sqlite3.db
