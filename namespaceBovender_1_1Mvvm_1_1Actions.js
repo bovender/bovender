@@ -7,6 +7,7 @@ var namespaceBovender_1_1Mvvm_1_1Actions =
     [ "FileDialogActionBase", "classBovender_1_1Mvvm_1_1Actions_1_1FileDialogActionBase.html", "classBovender_1_1Mvvm_1_1Actions_1_1FileDialogActionBase" ],
     [ "FileFolderActionBase", "classBovender_1_1Mvvm_1_1Actions_1_1FileFolderActionBase.html", "classBovender_1_1Mvvm_1_1Actions_1_1FileFolderActionBase" ],
     [ "MessageActionBase", "classBovender_1_1Mvvm_1_1Actions_1_1MessageActionBase.html", "classBovender_1_1Mvvm_1_1Actions_1_1MessageActionBase" ],
+    [ "MessageActionExtensions", "classBovender_1_1Mvvm_1_1Actions_1_1MessageActionExtensions.html", "classBovender_1_1Mvvm_1_1Actions_1_1MessageActionExtensions" ],
     [ "NonUiTrigger", "classBovender_1_1Mvvm_1_1Actions_1_1NonUiTrigger.html", "classBovender_1_1Mvvm_1_1Actions_1_1NonUiTrigger" ],
     [ "NotificationAction", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction" ],
     [ "ProcessAction", "classBovender_1_1Mvvm_1_1Actions_1_1ProcessAction.html", "classBovender_1_1Mvvm_1_1Actions_1_1ProcessAction" ],

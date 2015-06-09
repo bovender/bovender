@@ -5,6 +5,8 @@ var namespaceBovender_1_1Mvvm =
     [ "Messaging", "namespaceBovender_1_1Mvvm_1_1Messaging.html", "namespaceBovender_1_1Mvvm_1_1Messaging" ],
     [ "ViewModels", "namespaceBovender_1_1Mvvm_1_1ViewModels.html", "namespaceBovender_1_1Mvvm_1_1ViewModels" ],
     [ "Views", "namespaceBovender_1_1Mvvm_1_1Views.html", "namespaceBovender_1_1Mvvm_1_1Views" ],
+    [ "BindingWebBrowser", "classBovender_1_1Mvvm_1_1BindingWebBrowser.html", "classBovender_1_1Mvvm_1_1BindingWebBrowser" ],
     [ "DelegatingCommand", "classBovender_1_1Mvvm_1_1DelegatingCommand.html", "classBovender_1_1Mvvm_1_1DelegatingCommand" ],
-    [ "EnumProvider", "classBovender_1_1Mvvm_1_1EnumProvider.html", "classBovender_1_1Mvvm_1_1EnumProvider" ]
+    [ "EnumProvider", "classBovender_1_1Mvvm_1_1EnumProvider.html", "classBovender_1_1Mvvm_1_1EnumProvider" ],
+    [ "Workarounds", "classBovender_1_1Mvvm_1_1Workarounds.html", "classBovender_1_1Mvvm_1_1Workarounds" ]
 ];

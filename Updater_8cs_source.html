@@ -206,7 +206,7 @@ $(document).ready(function(){initNavTree('Updater_8cs_source.html','');});
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">             * with the same name, but different content (broken download?).</span></div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">             */</span></div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            <span class="keywordflow">if</span> (File.Exists(_destinationFileName) &amp;&amp;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                FileHelpers.Sha1Hash(_destinationFileName) == UpdateSha1)</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                <a class="code" href="classBovender_1_1FileHelpers.html">FileHelpers</a>.<a class="code" href="classBovender_1_1FileHelpers.html#adf15cccbe9a22f02afecd06fef32e9b9">Sha1Hash</a>(_destinationFileName) == UpdateSha1)</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            {</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                <span class="comment">// Bypass the download and signal that the file is present</span></div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                IsVerifiedDownload = <span class="keyword">true</span>;</div>
@@ -231,7 +231,7 @@ $(document).ready(function(){initNavTree('Updater_8cs_source.html','');});
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            <span class="keywordflow">if</span> (!IsUpdateAvailable) <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            <span class="comment">// As a security measure, compute the SHA1 again so we know it&#39;s current.</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            IsVerifiedDownload = FileHelpers.Sha1Hash(_destinationFileName) == UpdateSha1;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            IsVerifiedDownload = <a class="code" href="classBovender_1_1FileHelpers.html">FileHelpers</a>.<a class="code" href="classBovender_1_1FileHelpers.html#adf15cccbe9a22f02afecd06fef32e9b9">Sha1Hash</a>(_destinationFileName) == UpdateSha1;</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordflow">if</span> (IsVerifiedDownload)</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            {</div>
@@ -330,7 +330,7 @@ $(document).ready(function(){initNavTree('Updater_8cs_source.html','');});
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            <span class="keywordflow">if</span> (!e.Cancelled)</div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            {</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                DownloadException = e.Error;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                IsVerifiedDownload = FileHelpers.Sha1Hash(_destinationFileName) == UpdateSha1;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                IsVerifiedDownload = <a class="code" href="classBovender_1_1FileHelpers.html">FileHelpers</a>.<a class="code" href="classBovender_1_1FileHelpers.html#adf15cccbe9a22f02afecd06fef32e9b9">Sha1Hash</a>(_destinationFileName) == UpdateSha1;</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                IsUpdatePending = IsVerifiedDownload;</div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                OnDownloadUpdateFinished();</div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            }</div>
@@ -400,6 +400,8 @@ $(document).ready(function(){initNavTree('Updater_8cs_source.html','');});
 <div class="ttc" id="namespaceBovender_1_1Mvvm_1_1Messaging_html"><div class="ttname"><a href="namespaceBovender_1_1Mvvm_1_1Messaging.html">Bovender.Mvvm.Messaging</a></div><div class="ttdef"><b>Definition:</b> <a href="FileNameMessageContent_8cs_source.html#l00023">FileNameMessageContent.cs:23</a></div></div>
 <div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a7f41f82879f62c343d03eea736c8e7f8"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a7f41f82879f62c343d03eea736c8e7f8">Bovender.Versioning.Updater.DownloadProgressChanged</a></div><div class="ttdeci">EventHandler&lt; DownloadProgressChangedEventArgs &gt; DownloadProgressChanged</div><div class="ttdoc">Signals a change in the download process of the executable file. </div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00128">Updater.cs:128</a></div></div>
 <div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a4953ce32a61bf0cd327d717dd49a9b19"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a4953ce32a61bf0cd327d717dd49a9b19">Bovender.Versioning.Updater.InstallUpdate</a></div><div class="ttdeci">void InstallUpdate()</div><div class="ttdoc">Verifies the Sha1 checksum of the file on disk again and executes the file if it is valid...</div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00201">Updater.cs:201</a></div></div>
+<div class="ttc" id="classBovender_1_1FileHelpers_html"><div class="ttname"><a href="classBovender_1_1FileHelpers.html">Bovender.FileHelpers</a></div><div class="ttdef"><b>Definition:</b> <a href="FileHelpers_8cs_source.html#l00027">FileHelpers.cs:27</a></div></div>
+<div class="ttc" id="classBovender_1_1FileHelpers_html_adf15cccbe9a22f02afecd06fef32e9b9"><div class="ttname"><a href="classBovender_1_1FileHelpers.html#adf15cccbe9a22f02afecd06fef32e9b9">Bovender.FileHelpers.Sha1Hash</a></div><div class="ttdeci">static string Sha1Hash(string file)</div><div class="ttdoc">Computes the Sha1 hash of a given file. </div><div class="ttdef"><b>Definition:</b> <a href="FileHelpers_8cs_source.html#l00034">FileHelpers.cs:34</a></div></div>
 <div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a89cd2629171c75cb576cb3d50195e9c6"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a89cd2629171c75cb576cb3d50195e9c6">Bovender.Versioning.Updater.BuildDestinationFileName</a></div><div class="ttdeci">virtual string BuildDestinationFileName()</div><div class="ttdoc">Builds the destination file name from the download URI and the destination folder (which is stored in...</div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00290">Updater.cs:290</a></div></div>
 <div class="ttc" id="classBovender_1_1Text_1_1Multiline_html_afd4d6fe2715b376ea42b8bf4f3497b71"><div class="ttname"><a href="classBovender_1_1Text_1_1Multiline.html#afd4d6fe2715b376ea42b8bf4f3497b71">Bovender.Text.Multiline.Text</a></div><div class="ttdeci">string Text</div><div class="ttdoc">Gets the multiline text as a single string. </div><div class="ttdef"><b>Definition:</b> <a href="Multiline_8cs_source.html#l00039">Multiline.cs:39</a></div></div>
 <div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a51c6f8a82001eaee3fc99036fd9c7551"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a51c6f8a82001eaee3fc99036fd9c7551">Bovender.Versioning.Updater.GetInstallerCommand</a></div><div class="ttdeci">virtual string GetInstallerCommand()</div><div class="ttdoc">Returns the command to execute in the shell to install the update. </div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00323">Updater.cs:323</a></div></div>
@@ -418,7 +420,7 @@ $(document).ready(function(){initNavTree('Updater_8cs_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b1f430ed3406a33213bdd9fb7eb3676b.html">Bovender</a></li><li class="navelem"><a class="el" href="dir_089c2982baee9e17f342685fecb73410.html">Versioning</a></li><li class="navelem"><b>Updater.cs</b></li>
-    <li class="footer">Generated on Mon Jun 8 2015 22:23:56 for bovender framework by
+    <li class="footer">Generated on Tue Jun 9 2015 22:01:43 for bovender framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
   </ul>

@@ -3,6 +3,8 @@ var hierarchy =
     [ "ApplicationSettingsBase", null, [
       [ "Bovender.Mvvm.Views.Settings.WindowSettings", "classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowSettings.html", null ]
     ] ],
+    [ "Bovender.Mvvm.BindingWebBrowser", "classBovender_1_1Mvvm_1_1BindingWebBrowser.html", null ],
+    [ "Bovender.ExceptionHandler.CentralHandler", "classBovender_1_1ExceptionHandler_1_1CentralHandler.html", null ],
     [ "Bovender.UnitTests.Mvvm.EnumProviderTest", "classBovender_1_1UnitTests_1_1Mvvm_1_1EnumProviderTest.html", null ],
     [ "EventArgs", null, [
       [ "Bovender.ExceptionHandler.ManageExceptionEventArgs", "classBovender_1_1ExceptionHandler_1_1ManageExceptionEventArgs.html", null ],
@@ -18,30 +20,12 @@ var hierarchy =
       [ "Bovender.Versioning.DownloadCorruptException", "classBovender_1_1Versioning_1_1DownloadCorruptException.html", null ],
       [ "Bovender.Versioning.InvalidVersionStringException", "classBovender_1_1Versioning_1_1InvalidVersionStringException.html", null ]
     ] ],
+    [ "Bovender.FileHelpers", "classBovender_1_1FileHelpers.html", null ],
     [ "ICommand", null, [
       [ "Bovender.Mvvm.DelegatingCommand", "classBovender_1_1Mvvm_1_1DelegatingCommand.html", null ]
     ] ],
     [ "IComparable", null, [
       [ "Bovender.Versioning.SemanticVersion", "classBovender_1_1Versioning_1_1SemanticVersion.html", null ]
-    ] ],
-    [ "IComponentConnector", null, [
-      [ "Bovender.Mvvm.Views.ConfirmationView", "classBovender_1_1Mvvm_1_1Views_1_1ConfirmationView.html", null ],
-      [ "Bovender.Mvvm.Views.ConfirmationView", "classBovender_1_1Mvvm_1_1Views_1_1ConfirmationView.html", null ],
-      [ "Bovender.Mvvm.Views.ConfirmationView", "classBovender_1_1Mvvm_1_1Views_1_1ConfirmationView.html", null ],
-      [ "Bovender.Mvvm.Views.ConfirmationView", "classBovender_1_1Mvvm_1_1Views_1_1ConfirmationView.html", null ],
-      [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
-      [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
-      [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
-      [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
-      [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
-      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ],
-      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ],
-      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ],
-      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ],
-      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ],
-      [ "XLToolbox.Versioning.UpdaterProcessView", "classXLToolbox_1_1Versioning_1_1UpdaterProcessView.html", null ],
-      [ "XLToolbox.WindowCheckForUpdate", "classXLToolbox_1_1WindowCheckForUpdate.html", null ],
-      [ "XLToolbox.WindowCheckForUpdate", "classXLToolbox_1_1WindowCheckForUpdate.html", null ]
     ] ],
     [ "IDataErrorInfo", null, [
       [ "Bovender.Mvvm.Messaging.StringMessageContent", "classBovender_1_1Mvvm_1_1Messaging_1_1StringMessageContent.html", [
@@ -71,11 +55,6 @@ var hierarchy =
         [ "Bovender.Versioning.UpdaterViewModel", "classBovender_1_1Versioning_1_1UpdaterViewModel.html", null ]
       ] ]
     ] ],
-    [ "InternalTypeHelper", null, [
-      [ "XamlGeneratedNamespace.GeneratedInternalTypeHelper", "classXamlGeneratedNamespace_1_1GeneratedInternalTypeHelper.html", null ],
-      [ "XamlGeneratedNamespace.GeneratedInternalTypeHelper", "classXamlGeneratedNamespace_1_1GeneratedInternalTypeHelper.html", null ],
-      [ "XamlGeneratedNamespace.GeneratedInternalTypeHelper", "classXamlGeneratedNamespace_1_1GeneratedInternalTypeHelper.html", null ]
-    ] ],
     [ "IValueConverter", null, [
       [ "Bovender.Mvvm.Converters.BooleanNegationConverter", "classBovender_1_1Mvvm_1_1Converters_1_1BooleanNegationConverter.html", null ],
       [ "Bovender.Mvvm.Converters.EnumBooleanConverter", "classBovender_1_1Mvvm_1_1Converters_1_1EnumBooleanConverter.html", null ],
@@ -87,6 +66,7 @@ var hierarchy =
     [ "Bovender.Mvvm.Messaging.Message< ProcessMessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],
     [ "Bovender.Mvvm.Messaging.Message< StringMessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],
     [ "Bovender.Mvvm.Messaging.Message< ViewModelMessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],
+    [ "Bovender.Mvvm.Actions.MessageActionExtensions", "classBovender_1_1Mvvm_1_1Actions_1_1MessageActionExtensions.html", null ],
     [ "Bovender.Text.Multiline", "classBovender_1_1Text_1_1Multiline.html", null ],
     [ "Bovender.UnitTests.Text.MultilineTest", "classBovender_1_1UnitTests_1_1Text_1_1MultilineTest.html", null ],
     [ "Object", null, [
@@ -96,7 +76,10 @@ var hierarchy =
     [ "ObservableCollection", null, [
       [ "Bovender.Mvvm.ViewModels.ViewModelCollection< TModel, TViewModel >", "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelCollection.html", null ]
     ] ],
+    [ "Bovender.PathHelpers", "classBovender_1_1PathHelpers.html", null ],
+    [ "Bovender.Unmanaged.Pinvoke", "classBovender_1_1Unmanaged_1_1Pinvoke.html", null ],
     [ "Bovender.UnitTests.PinvokeTests", "classBovender_1_1UnitTests_1_1PinvokeTests.html", null ],
+    [ "Bovender.Settings", "classBovender_1_1Settings.html", null ],
     [ "Bovender.UnitTests.Mvvm.TestModel", "classBovender_1_1UnitTests_1_1Mvvm_1_1TestModel.html", null ],
     [ "TriggerAction", null, [
       [ "Bovender.Mvvm.Actions.MessageActionBase", "classBovender_1_1Mvvm_1_1Actions_1_1MessageActionBase.html", [
@@ -130,24 +113,9 @@ var hierarchy =
     [ "Bovender.UnitTests.Mvvm.ViewModelCollectionTest", "classBovender_1_1UnitTests_1_1Mvvm_1_1ViewModelCollectionTest.html", null ],
     [ "Window", null, [
       [ "Bovender.Mvvm.Views.ConfirmationView", "classBovender_1_1Mvvm_1_1Views_1_1ConfirmationView.html", null ],
-      [ "Bovender.Mvvm.Views.ConfirmationView", "classBovender_1_1Mvvm_1_1Views_1_1ConfirmationView.html", null ],
-      [ "Bovender.Mvvm.Views.ConfirmationView", "classBovender_1_1Mvvm_1_1Views_1_1ConfirmationView.html", null ],
-      [ "Bovender.Mvvm.Views.ConfirmationView", "classBovender_1_1Mvvm_1_1Views_1_1ConfirmationView.html", null ],
-      [ "Bovender.Mvvm.Views.ConfirmationView", "classBovender_1_1Mvvm_1_1Views_1_1ConfirmationView.html", null ],
       [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
-      [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
-      [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
-      [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
-      [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
-      [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
-      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ],
-      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ],
-      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ],
-      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ],
-      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ],
-      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ],
-      [ "XLToolbox.Versioning.UpdaterProcessView", "classXLToolbox_1_1Versioning_1_1UpdaterProcessView.html", null ],
-      [ "XLToolbox.WindowCheckForUpdate", "classXLToolbox_1_1WindowCheckForUpdate.html", null ],
-      [ "XLToolbox.WindowCheckForUpdate", "classXLToolbox_1_1WindowCheckForUpdate.html", null ]
-    ] ]
+      [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ]
+    ] ],
+    [ "Bovender.Mvvm.Views.Settings.WindowState", "classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html", null ],
+    [ "Bovender.Mvvm.Workarounds", "classBovender_1_1Mvvm_1_1Workarounds.html", null ]
 ];

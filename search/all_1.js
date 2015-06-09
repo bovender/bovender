@@ -1,6 +1,7 @@
 var searchData=
 [
   ['actions',['Actions',['../namespaceBovender_1_1Mvvm_1_1Actions.html',1,'Bovender::Mvvm']]],
+  ['bindingwebbrowser',['BindingWebBrowser',['../classBovender_1_1Mvvm_1_1BindingWebBrowser.html',1,'Bovender::Mvvm']]],
   ['booleannegationconverter',['BooleanNegationConverter',['../classBovender_1_1Mvvm_1_1Converters_1_1BooleanNegationConverter.html',1,'Bovender::Mvvm::Converters']]],
   ['bovender',['Bovender',['../namespaceBovender.html',1,'']]],
   ['builddestinationfilename',['BuildDestinationFileName',['../classBovender_1_1Versioning_1_1Updater.html#a89cd2629171c75cb576cb3d50195e9c6',1,'Bovender.Versioning.Updater.BuildDestinationFileName()'],['../classBovender_1_1UnitTests_1_1UpdaterForTesting.html#a2d9dabaaec0a9ce91a33d43c71923029',1,'Bovender.UnitTests.UpdaterForTesting.BuildDestinationFileName()']]],
@@ -8,8 +9,8 @@ var searchData=
   ['exceptionhandler',['ExceptionHandler',['../namespaceBovender_1_1ExceptionHandler.html',1,'Bovender']]],
   ['htmlfiles',['HtmlFiles',['../namespaceBovender_1_1HtmlFiles.html',1,'Bovender']]],
   ['messaging',['Messaging',['../namespaceBovender_1_1Mvvm_1_1Messaging.html',1,'Bovender::Mvvm']]],
-  ['mvvm',['Mvvm',['../namespaceBovender_1_1Mvvm.html',1,'Bovender']]],
   ['mvvm',['Mvvm',['../namespaceBovender_1_1UnitTests_1_1Mvvm.html',1,'Bovender::UnitTests']]],
+  ['mvvm',['Mvvm',['../namespaceBovender_1_1Mvvm.html',1,'Bovender']]],
   ['properties',['Properties',['../namespaceBovender_1_1Properties.html',1,'Bovender']]],
   ['settings',['Settings',['../namespaceBovender_1_1Mvvm_1_1Views_1_1Settings.html',1,'Bovender::Mvvm::Views']]],
   ['text',['Text',['../namespaceBovender_1_1UnitTests_1_1Text.html',1,'Bovender::UnitTests']]],

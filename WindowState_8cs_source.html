@@ -121,12 +121,12 @@ $(document).ready(function(){initNavTree('WindowState_8cs_source.html','');});
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceBovender.html">Bovender</a>.Mvvm.Views.Settings</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class </span>WindowState</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html">   33</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class </span><a class="code" href="classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html">WindowState</a></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">        #region Attached property &quot;Save&quot;</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">public</span> <span class="keyword">static</span> readonly DependencyProperty SaveProperty = DependencyProperty.RegisterAttached(</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="stringliteral">&quot;Save&quot;</span>, typeof(<span class="keywordtype">bool</span>), typeof(WindowState), <span class="keyword">new</span> PropertyMetadata(OnSavePropertyChanged));</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="stringliteral">&quot;Save&quot;</span>, typeof(<span class="keywordtype">bool</span>), typeof(<a class="code" href="classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html">WindowState</a>), <span class="keyword">new</span> PropertyMetadata(OnSavePropertyChanged));</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        [AttachedPropertyBrowsableForType(typeof(Window))]</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> GetSave(UIElement element)</div>
@@ -165,10 +165,10 @@ $(document).ready(function(){initNavTree('WindowState_8cs_source.html','');});
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">        #region Attached property &quot;CenterScreen&quot;</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">public</span> <span class="keyword">static</span> readonly DependencyProperty CenterScreenProperty = DependencyProperty.RegisterAttached(</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="stringliteral">&quot;CenterScreen&quot;</span>, typeof(<span class="keywordtype">bool</span>), typeof(WindowState), <span class="keyword">new</span> PropertyMetadata(OnCenterScreenPropertyChanged));</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="stringliteral">&quot;CenterScreen&quot;</span>, typeof(<span class="keywordtype">bool</span>), typeof(<a class="code" href="classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html">WindowState</a>), <span class="keyword">new</span> PropertyMetadata(OnCenterScreenPropertyChanged));</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        [AttachedPropertyBrowsableForType(typeof(Window))]</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> GetCenterScreen(UIElement element)</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html#a352b990f3ff3dbd5422641d45357bc36">   88</a></span>&#160;        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html#a352b990f3ff3dbd5422641d45357bc36">GetCenterScreen</a>(UIElement element)</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        {</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordflow">return</span> (<span class="keywordtype">bool</span>)element.GetValue(CenterScreenProperty);</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        }</div>
@@ -303,6 +303,8 @@ $(document).ready(function(){initNavTree('WindowState_8cs_source.html','');});
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;           </div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    }</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;}</div>
+<div class="ttc" id="classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState_html"><div class="ttname"><a href="classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html">Bovender.Mvvm.Views.Settings.WindowState</a></div><div class="ttdoc">Provides an attached property to enable Windows to save and restore their screen position and state...</div><div class="ttdef"><b>Definition:</b> <a href="WindowState_8cs_source.html#l00033">WindowState.cs:33</a></div></div>
+<div class="ttc" id="classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState_html_a352b990f3ff3dbd5422641d45357bc36"><div class="ttname"><a href="classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html#a352b990f3ff3dbd5422641d45357bc36">Bovender.Mvvm.Views.Settings.WindowState.GetCenterScreen</a></div><div class="ttdeci">static bool GetCenterScreen(UIElement element)</div><div class="ttdoc">Centers the Window that the property is attached to on the screen that the window is currently being ...</div><div class="ttdef"><b>Definition:</b> <a href="WindowState_8cs_source.html#l00088">WindowState.cs:88</a></div></div>
 <div class="ttc" id="namespaceBovender_html"><div class="ttname"><a href="namespaceBovender.html">Bovender</a></div></div>
 <div class="ttc" id="namespaceSystem_html"><div class="ttname"><a href="namespaceSystem.html">System</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -311,7 +313,7 @@ $(document).ready(function(){initNavTree('WindowState_8cs_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b1f430ed3406a33213bdd9fb7eb3676b.html">Bovender</a></li><li class="navelem"><a class="el" href="dir_2ce273268718703cc755fd07c25ef1dc.html">Mvvm</a></li><li class="navelem"><a class="el" href="dir_5ba95b1bc520d03289260b98f0b18c0b.html">Views</a></li><li class="navelem"><a class="el" href="dir_fac5ad576f7da62b9de6849e9d5f965b.html">Settings</a></li><li class="navelem"><b>WindowState.cs</b></li>
-    <li class="footer">Generated on Mon Jun 8 2015 22:23:56 for bovender framework by
+    <li class="footer">Generated on Tue Jun 9 2015 22:01:43 for bovender framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
   </ul>

@@ -127,8 +127,8 @@ $(document).ready(function(){initNavTree('ChooseFileOpenAction_8cs_source.html',
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        {</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            OpenFileDialog dlg = <span class="keyword">new</span> OpenFileDialog();</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            dlg.Filter = filter;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            dlg.FileName = PathHelpers.GetFileNamePart(defaultString);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            dlg.InitialDirectory = PathHelpers.GetDirectoryPart(defaultString);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            dlg.FileName = <a class="code" href="classBovender_1_1PathHelpers.html">PathHelpers</a>.<a class="code" href="classBovender_1_1PathHelpers.html#a230105a958f29c41d492399e55dce48c">GetFileNamePart</a>(defaultString);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            dlg.InitialDirectory = <a class="code" href="classBovender_1_1PathHelpers.html">PathHelpers</a>.<a class="code" href="classBovender_1_1PathHelpers.html#a90e492b3a9e9098e9ee79a893f6efece">GetDirectoryPart</a>(defaultString);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            dlg.AddExtension = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            dlg.RestoreDirectory = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            dlg.SupportMultiDottedExtensions = <span class="keyword">true</span>;</div>
@@ -138,9 +138,12 @@ $(document).ready(function(){initNavTree('ChooseFileOpenAction_8cs_source.html',
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        }</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
+<div class="ttc" id="classBovender_1_1PathHelpers_html"><div class="ttname"><a href="classBovender_1_1PathHelpers.html">Bovender.PathHelpers</a></div><div class="ttdef"><b>Definition:</b> <a href="PathHelpers_8cs_source.html#l00026">PathHelpers.cs:26</a></div></div>
+<div class="ttc" id="classBovender_1_1PathHelpers_html_a90e492b3a9e9098e9ee79a893f6efece"><div class="ttname"><a href="classBovender_1_1PathHelpers.html#a90e492b3a9e9098e9ee79a893f6efece">Bovender.PathHelpers.GetDirectoryPart</a></div><div class="ttdeci">static string GetDirectoryPart(string path)</div><div class="ttdoc">Extracts the directory information from path . </div><div class="ttdef"><b>Definition:</b> <a href="PathHelpers_8cs_source.html#l00038">PathHelpers.cs:38</a></div></div>
 <div class="ttc" id="classBovender_1_1Mvvm_1_1Actions_1_1FileDialogActionBase_html"><div class="ttname"><a href="classBovender_1_1Mvvm_1_1Actions_1_1FileDialogActionBase.html">Bovender.Mvvm.Actions.FileDialogActionBase</a></div><div class="ttdoc">Base class for actions that use dialogs based on System.Windows.Forms.FileDialog. ...</div><div class="ttdef"><b>Definition:</b> <a href="FileDialogActionBase_8cs_source.html#l00031">FileDialogActionBase.cs:31</a></div></div>
 <div class="ttc" id="namespaceBovender_html"><div class="ttname"><a href="namespaceBovender.html">Bovender</a></div></div>
 <div class="ttc" id="namespaceSystem_html"><div class="ttname"><a href="namespaceSystem.html">System</a></div></div>
+<div class="ttc" id="classBovender_1_1PathHelpers_html_a230105a958f29c41d492399e55dce48c"><div class="ttname"><a href="classBovender_1_1PathHelpers.html#a230105a958f29c41d492399e55dce48c">Bovender.PathHelpers.GetFileNamePart</a></div><div class="ttdeci">static string GetFileNamePart(string path)</div><div class="ttdoc">Extracts the file name from path . </div><div class="ttdef"><b>Definition:</b> <a href="PathHelpers_8cs_source.html#l00060">PathHelpers.cs:60</a></div></div>
 <div class="ttc" id="classBovender_1_1Mvvm_1_1Actions_1_1ChooseFileOpenAction_html"><div class="ttname"><a href="classBovender_1_1Mvvm_1_1Actions_1_1ChooseFileOpenAction.html">Bovender.Mvvm.Actions.ChooseFileOpenAction</a></div><div class="ttdoc">Lets the user choose a file name for opening a file. </div><div class="ttdef"><b>Definition:</b> <a href="ChooseFileOpenAction_8cs_source.html#l00030">ChooseFileOpenAction.cs:30</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -148,7 +151,7 @@ $(document).ready(function(){initNavTree('ChooseFileOpenAction_8cs_source.html',
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b1f430ed3406a33213bdd9fb7eb3676b.html">Bovender</a></li><li class="navelem"><a class="el" href="dir_2ce273268718703cc755fd07c25ef1dc.html">Mvvm</a></li><li class="navelem"><a class="el" href="dir_c765d93443f5b24a118fe292f0eee04d.html">Actions</a></li><li class="navelem"><b>ChooseFileOpenAction.cs</b></li>
-    <li class="footer">Generated on Mon Jun 8 2015 22:23:56 for bovender framework by
+    <li class="footer">Generated on Tue Jun 9 2015 22:01:43 for bovender framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
   </ul>

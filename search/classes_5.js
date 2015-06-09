@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['generatedinternaltypehelper',['GeneratedInternalTypeHelper',['../classXamlGeneratedNamespace_1_1GeneratedInternalTypeHelper.html',1,'XamlGeneratedNamespace']]]
+  ['htmlfileviewmodel',['HtmlFileViewModel',['../classBovender_1_1HtmlFiles_1_1HtmlFileViewModel.html',1,'Bovender::HtmlFiles']]]
 ];

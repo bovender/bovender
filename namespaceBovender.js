@@ -6,5 +6,8 @@ var namespaceBovender =
     [ "Text", "namespaceBovender_1_1Text.html", "namespaceBovender_1_1Text" ],
     [ "UnitTests", "namespaceBovender_1_1UnitTests.html", "namespaceBovender_1_1UnitTests" ],
     [ "Unmanaged", "namespaceBovender_1_1Unmanaged.html", "namespaceBovender_1_1Unmanaged" ],
-    [ "Versioning", "namespaceBovender_1_1Versioning.html", "namespaceBovender_1_1Versioning" ]
+    [ "Versioning", "namespaceBovender_1_1Versioning.html", "namespaceBovender_1_1Versioning" ],
+    [ "FileHelpers", "classBovender_1_1FileHelpers.html", "classBovender_1_1FileHelpers" ],
+    [ "PathHelpers", "classBovender_1_1PathHelpers.html", "classBovender_1_1PathHelpers" ],
+    [ "Settings", "classBovender_1_1Settings.html", "classBovender_1_1Settings" ]
 ];
