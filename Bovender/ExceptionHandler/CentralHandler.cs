@@ -30,7 +30,7 @@ namespace Bovender.ExceptionHandler
     /// the exception to the user and set the event argument's
     /// <see cref="ManageExceptionEventArgs.IsHandled"/> property to
     /// true. If the Manage method does not find this property with a
-    /// True value, it will throw an <see cref="UnhandeldException"/>
+    /// True value, it will throw an <see cref="UnhandledException"/>
     /// exception itself which will contain the original exception as
     /// inner exception.
     /// </remarks>
