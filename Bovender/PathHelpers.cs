@@ -37,6 +37,8 @@ namespace Bovender
         /// <see cref="System.IO.Path.GetFileName()"/>.</returns>
         public static string GetDirectoryPart(string path)
         {
+            if (String.IsNullOrEmpty(path)) return path;
+
             if (System.IO.Directory.Exists(path))
             {
                 return path;
@@ -59,6 +61,8 @@ namespace Bovender
         /// <see cref="System.IO.Path.GetFileName()"/>.</returns>
         public static string GetFileNamePart(string path)
         {
+            if (String.IsNullOrEmpty(path)) return path;
+
             if (System.IO.Directory.Exists(path))
             {
                 return String.Empty;
