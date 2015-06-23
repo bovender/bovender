@@ -318,13 +318,13 @@ namespace Bovender.Versioning
             }
         }
 
-        public Message<StringMessageContent> ChooseDestinationFolderMessage
+        public Message<FileNameMessageContent> ChooseDestinationFolderMessage
         {
             get
             {
                 if (_chooseDestinationFolderMessage == null)
                 {
-                    _chooseDestinationFolderMessage = new Message<StringMessageContent>();
+                    _chooseDestinationFolderMessage = new Message<FileNameMessageContent>();
                 }
                 return _chooseDestinationFolderMessage;
             }
@@ -461,8 +461,8 @@ namespace Bovender.Versioning
         private void DoChooseDestinationFolder()
         {
             ChooseDestinationFolderMessage.Send(
-                new StringMessageContent(DestinationFolder),
-                (StringMessageContent returnContent) =>
+                new FileNameMessageContent(DestinationFolder),
+                (FileNameMessageContent returnContent) =>
                 {
                     if (returnContent.Confirmed)
                     {
@@ -617,7 +617,7 @@ namespace Bovender.Versioning
         private Message<ViewModelMessageContent> _updateInstallableMessage;
         private Message<ViewModelMessageContent> _updateFailedVerificationMessage;
         private Message<ViewModelMessageContent> _networkFailureMessage;
-        private Message<StringMessageContent> _chooseDestinationFolderMessage;
+        private Message<FileNameMessageContent> _chooseDestinationFolderMessage;
         private ProcessMessageContent _checkProcessMessageContent;
         private ProcessMessageContent _downloadProcessMessageContent;
         private bool _isLocked;
