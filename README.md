@@ -91,5 +91,6 @@ This framework is distributed under the [Apache License 2.0][apache].
 [gh-pages]: http://bovender.github.io/bovender
 [apache]: http://www.apache.org/licenses/LICENSE-2.0
 [semver]: http://semver.org
+[Doxygen]: http://www.doxygen.org
 
 <!-- vim: set tw=72 ai fo+=tqn wrap : -->
