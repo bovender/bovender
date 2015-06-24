@@ -62,9 +62,9 @@ var hierarchy =
       [ "Bovender.Mvvm.Converters.VisibilityBooleanConverter", "classBovender_1_1Mvvm_1_1Converters_1_1VisibilityBooleanConverter.html", null ]
     ] ],
     [ "Bovender.Mvvm.Messaging.Message< Bovender.Mvvm.Messaging.ProcessMessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],
+    [ "Bovender.Mvvm.Messaging.Message< FileNameMessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],
     [ "Bovender.Mvvm.Messaging.Message< MessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],
     [ "Bovender.Mvvm.Messaging.Message< ProcessMessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],
-    [ "Bovender.Mvvm.Messaging.Message< StringMessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],
     [ "Bovender.Mvvm.Messaging.Message< ViewModelMessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],
     [ "Bovender.Mvvm.Actions.MessageActionExtensions", "classBovender_1_1Mvvm_1_1Actions_1_1MessageActionExtensions.html", null ],
     [ "Bovender.Text.Multiline", "classBovender_1_1Text_1_1Multiline.html", null ],

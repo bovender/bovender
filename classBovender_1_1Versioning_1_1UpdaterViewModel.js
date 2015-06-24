@@ -7,7 +7,7 @@ var classBovender_1_1Versioning_1_1UpdaterViewModel =
     [ "CheckForUpdateMessage", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a30acbf9b8dc0b9f5b706419c5322bdc2", null ],
     [ "CheckProcessMessageContent", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a79906b889360899160d7e9e3b76eb552", null ],
     [ "ChooseDestinationFolderCommand", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#ac6e5aff27ef0040d9cca8dcc0d346842", null ],
-    [ "ChooseDestinationFolderMessage", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#ab95e1e4346110f4e57de345549b881a6", null ],
+    [ "ChooseDestinationFolderMessage", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a098bba3f205c7633f103c647ce4402b9", null ],
     [ "CurrentVersion", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a3ea780e09aeae1556955d4889f4964f9", null ],
     [ "DestinationFolder", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a11bcced70c67ae79d3dc88b9a6342b82", null ],
     [ "DownloadException", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a7e894a87965001536128b0819a330f44", null ],
