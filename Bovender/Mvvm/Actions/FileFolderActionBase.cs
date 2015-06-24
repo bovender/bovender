@@ -60,7 +60,20 @@ namespace Bovender.Mvvm.Actions
 
         protected override void Invoke(object parameter)
         {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("FileFolderActionBase parameter must not be null");
+            }
             MessageArgs<FileNameMessageContent> args = parameter as MessageArgs<FileNameMessageContent>;
+            if (args == null)
+            {
+                throw new ArgumentException(
+                    String.Format(
+                        "FileFolderActionBase must be invoked with FileNameMessageContent; got {0}",
+                        parameter.GetType().ToString()
+                        )
+                    );
+            }
             MessageContent = args.Content;
             string result = GetDialogResult(args.Content.Value, args.Content.Filter);
             args.Content.Confirmed = !string.IsNullOrEmpty(result);
