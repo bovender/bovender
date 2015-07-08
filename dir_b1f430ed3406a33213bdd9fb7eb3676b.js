@@ -1,6 +1,7 @@
 var dir_b1f430ed3406a33213bdd9fb7eb3676b =
 [
     [ "ExceptionHandler", "dir_772a5a7305370050bbc0011abdda5454.html", "dir_772a5a7305370050bbc0011abdda5454" ],
+    [ "Extensions", "dir_7a3daad6423d34941a857c6e0d070ed3.html", "dir_7a3daad6423d34941a857c6e0d070ed3" ],
     [ "HtmlFiles", "dir_af159dad5763c9896b027ec735e8745e.html", "dir_af159dad5763c9896b027ec735e8745e" ],
     [ "Mvvm", "dir_2ce273268718703cc755fd07c25ef1dc.html", "dir_2ce273268718703cc755fd07c25ef1dc" ],
     [ "Properties", "dir_baf472371818ce4a40ea8b1de5dc5389.html", "dir_baf472371818ce4a40ea8b1de5dc5389" ],

@@ -11,6 +11,7 @@ var searchData=
   ['showviewaction',['ShowViewAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ShowViewAction.html',1,'Bovender::Mvvm::Actions']]],
   ['showviewdialogaction',['ShowViewDialogAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ShowViewDialogAction.html',1,'Bovender::Mvvm::Actions']]],
   ['simpleexceptionconverter',['SimpleExceptionConverter',['../classBovender_1_1Mvvm_1_1Converters_1_1SimpleExceptionConverter.html',1,'Bovender::Mvvm::Converters']]],
+  ['slice_3c_20t_20_3e',['Slice&lt; T &gt;',['../classBovender_1_1Extensions_1_1ArrayExtensions.html#a271b751f47bd0fbb8f106e9af2e7fcaa',1,'Bovender::Extensions::ArrayExtensions']]],
   ['stringmessagecontent',['StringMessageContent',['../classBovender_1_1Mvvm_1_1Messaging_1_1StringMessageContent.html',1,'Bovender::Mvvm::Messaging']]],
   ['submitreportmessage',['SubmitReportMessage',['../classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#a3a4501a329bea8b648e932762731a247',1,'Bovender::ExceptionHandler::ExceptionViewModel']]],
   ['synchronizeoff',['SynchronizeOff',['../classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelCollection.html#ad472fddb4142d9e381d0ead6573811ca',1,'Bovender::Mvvm::ViewModels::ViewModelCollection']]],

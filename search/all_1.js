@@ -7,6 +7,8 @@ var searchData=
   ['builddestinationfilename',['BuildDestinationFileName',['../classBovender_1_1Versioning_1_1Updater.html#a89cd2629171c75cb576cb3d50195e9c6',1,'Bovender.Versioning.Updater.BuildDestinationFileName()'],['../classBovender_1_1UnitTests_1_1UpdaterForTesting.html#a2d9dabaaec0a9ce91a33d43c71923029',1,'Bovender.UnitTests.UpdaterForTesting.BuildDestinationFileName()']]],
   ['converters',['Converters',['../namespaceBovender_1_1Mvvm_1_1Converters.html',1,'Bovender::Mvvm']]],
   ['exceptionhandler',['ExceptionHandler',['../namespaceBovender_1_1ExceptionHandler.html',1,'Bovender']]],
+  ['extensions',['Extensions',['../namespaceBovender_1_1UnitTests_1_1Extensions.html',1,'Bovender::UnitTests']]],
+  ['extensions',['Extensions',['../namespaceBovender_1_1Extensions.html',1,'Bovender']]],
   ['htmlfiles',['HtmlFiles',['../namespaceBovender_1_1HtmlFiles.html',1,'Bovender']]],
   ['messaging',['Messaging',['../namespaceBovender_1_1Mvvm_1_1Messaging.html',1,'Bovender::Mvvm']]],
   ['mvvm',['Mvvm',['../namespaceBovender_1_1UnitTests_1_1Mvvm.html',1,'Bovender::UnitTests']]],

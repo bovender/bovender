@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['delegatingcommand',['DelegatingCommand',['../classBovender_1_1Mvvm_1_1DelegatingCommand.html',1,'Bovender::Mvvm']]],
-  ['dllloadingfailedexception',['DllLoadingFailedException',['../classBovender_1_1Unmanaged_1_1DllLoadingFailedException.html',1,'Bovender::Unmanaged']]],
-  ['dllmanager',['DllManager',['../classBovender_1_1Unmanaged_1_1DllManager.html',1,'Bovender::Unmanaged']]],
-  ['dllnotfoundexception',['DllNotFoundException',['../classBovender_1_1Unmanaged_1_1DllNotFoundException.html',1,'Bovender::Unmanaged']]],
-  ['dllsha1mismatchexception',['DllSha1MismatchException',['../classBovender_1_1Unmanaged_1_1DllSha1MismatchException.html',1,'Bovender::Unmanaged']]],
-  ['downloadcorruptexception',['DownloadCorruptException',['../classBovender_1_1Versioning_1_1DownloadCorruptException.html',1,'Bovender::Versioning']]]
+  ['centralhandler',['CentralHandler',['../classBovender_1_1ExceptionHandler_1_1CentralHandler.html',1,'Bovender::ExceptionHandler']]],
+  ['choosefileopenaction',['ChooseFileOpenAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ChooseFileOpenAction.html',1,'Bovender::Mvvm::Actions']]],
+  ['choosefilesaveaction',['ChooseFileSaveAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ChooseFileSaveAction.html',1,'Bovender::Mvvm::Actions']]],
+  ['choosefolderaction',['ChooseFolderAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ChooseFolderAction.html',1,'Bovender::Mvvm::Actions']]],
+  ['confirmationaction',['ConfirmationAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ConfirmationAction.html',1,'Bovender::Mvvm::Actions']]],
+  ['confirmationview',['ConfirmationView',['../classBovender_1_1Mvvm_1_1Views_1_1ConfirmationView.html',1,'Bovender::Mvvm::Views']]]
 ];

@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['enumbooleanconverter',['EnumBooleanConverter',['../classBovender_1_1Mvvm_1_1Converters_1_1EnumBooleanConverter.html',1,'Bovender::Mvvm::Converters']]],
-  ['enumprovider',['EnumProvider',['../classBovender_1_1Mvvm_1_1EnumProvider.html',1,'Bovender::Mvvm']]],
-  ['enumprovidertest',['EnumProviderTest',['../classBovender_1_1UnitTests_1_1Mvvm_1_1EnumProviderTest.html',1,'Bovender::UnitTests::Mvvm']]],
-  ['enumviewmodel',['EnumViewModel',['../classBovender_1_1Mvvm_1_1ViewModels_1_1EnumViewModel.html',1,'Bovender::Mvvm::ViewModels']]],
-  ['exceptionviewmodel',['ExceptionViewModel',['../classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html',1,'Bovender::ExceptionHandler']]]
+  ['delegatingcommand',['DelegatingCommand',['../classBovender_1_1Mvvm_1_1DelegatingCommand.html',1,'Bovender::Mvvm']]],
+  ['dllloadingfailedexception',['DllLoadingFailedException',['../classBovender_1_1Unmanaged_1_1DllLoadingFailedException.html',1,'Bovender::Unmanaged']]],
+  ['dllmanager',['DllManager',['../classBovender_1_1Unmanaged_1_1DllManager.html',1,'Bovender::Unmanaged']]],
+  ['dllnotfoundexception',['DllNotFoundException',['../classBovender_1_1Unmanaged_1_1DllNotFoundException.html',1,'Bovender::Unmanaged']]],
+  ['dllsha1mismatchexception',['DllSha1MismatchException',['../classBovender_1_1Unmanaged_1_1DllSha1MismatchException.html',1,'Bovender::Unmanaged']]],
+  ['downloadcorruptexception',['DownloadCorruptException',['../classBovender_1_1Versioning_1_1DownloadCorruptException.html',1,'Bovender::Versioning']]]
 ];

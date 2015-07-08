@@ -1,6 +1,7 @@
 var namespaceBovender =
 [
     [ "ExceptionHandler", "namespaceBovender_1_1ExceptionHandler.html", "namespaceBovender_1_1ExceptionHandler" ],
+    [ "Extensions", "namespaceBovender_1_1Extensions.html", "namespaceBovender_1_1Extensions" ],
     [ "HtmlFiles", "namespaceBovender_1_1HtmlFiles.html", "namespaceBovender_1_1HtmlFiles" ],
     [ "Mvvm", "namespaceBovender_1_1Mvvm.html", "namespaceBovender_1_1Mvvm" ],
     [ "Text", "namespaceBovender_1_1Text.html", "namespaceBovender_1_1Text" ],

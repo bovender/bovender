@@ -3,6 +3,8 @@ var hierarchy =
     [ "ApplicationSettingsBase", null, [
       [ "Bovender.Mvvm.Views.Settings.WindowSettings", "classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowSettings.html", null ]
     ] ],
+    [ "Bovender.Extensions.ArrayExtensions", "classBovender_1_1Extensions_1_1ArrayExtensions.html", null ],
+    [ "Bovender.UnitTests.Extensions.ArrayExtensionsTest", "classBovender_1_1UnitTests_1_1Extensions_1_1ArrayExtensionsTest.html", null ],
     [ "Bovender.Mvvm.BindingWebBrowser", "classBovender_1_1Mvvm_1_1BindingWebBrowser.html", null ],
     [ "Bovender.ExceptionHandler.CentralHandler", "classBovender_1_1ExceptionHandler_1_1CentralHandler.html", null ],
     [ "Bovender.UnitTests.Mvvm.EnumProviderTest", "classBovender_1_1UnitTests_1_1Mvvm_1_1EnumProviderTest.html", null ],
