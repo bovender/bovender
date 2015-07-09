@@ -262,6 +262,8 @@ namespace Bovender.Versioning
 
         protected virtual void OnDownloadUpdateFinished()
         {
+            IsVerifiedDownload = FileHelpers.Sha1Hash(_destinationFileName) == UpdateSha1;
+            IsUpdatePending = IsVerifiedDownload;
             if (DownloadUpdateFinished != null)
             {
                 DownloadUpdateFinished(this, EventArgs.Empty);
@@ -343,8 +345,6 @@ namespace Bovender.Versioning
             if (!e.Cancelled)
             {
                 DownloadException = e.Error;
-                IsVerifiedDownload = FileHelpers.Sha1Hash(_destinationFileName) == UpdateSha1;
-                IsUpdatePending = IsVerifiedDownload;
                 OnDownloadUpdateFinished();
             }
             else
