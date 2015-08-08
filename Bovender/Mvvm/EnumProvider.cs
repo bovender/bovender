@@ -32,6 +32,28 @@ namespace Bovender.Mvvm
     /// </summary>
     /// <remarks>
     /// <para>
+    /// When providing a public EnumProvider property, you need to wire up
+    /// the PropertyChanged event:
+    ///     <code>
+    ///     public EnumProvider<MyType> MyProperty
+    ///     {
+    ///         get
+    ///         {
+    ///             if (_myPropertyField == null)
+    ///             {
+    ///                 _myPropertyField = new EnumProvider<MyType>(_myModel.Property);
+    ///                 _myPropertyField.PropertyChanged += (sender, args) =>
+    ///                 {
+    ///                     _myModel.Property = _myPropertyField.AsEnum;
+    ///                 };
+    ///             }
+    ///             return _myPropertyField;
+    ///         }
+    ///     }
+    ///
+    ///     </code>
+    /// </para>
+    /// <para>
     /// To bind to a ComboBox to an EnumProvider property, use:
     ///     <code>
     ///         <ComboBox 
@@ -134,7 +156,7 @@ namespace Bovender.Mvvm
         public EnumProvider(T initialValue)
             : this()
         {
-            _enum = initialValue;
+            AsEnum = initialValue;
         }
 
         #endregion
