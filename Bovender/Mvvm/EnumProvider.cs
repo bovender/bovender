@@ -257,7 +257,6 @@ namespace Bovender.Mvvm
 
         #region Private fields
 
-        private T _enum;
         private EnumViewModel<T> _selectedItem;
         private Collection<EnumViewModel<T>> _choices;
 
