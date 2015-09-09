@@ -277,61 +277,61 @@ $(document).ready(function(){initNavTree('Updater_8cs_source.html','');});
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnDownloadUpdateFinished()</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        {</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            <span class="keywordflow">if</span> (DownloadUpdateFinished != null)</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            {</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                DownloadUpdateFinished(<span class="keyword">this</span>, EventArgs.Empty);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        }</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnCheckForUpdateFinished()</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        {</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keywordflow">if</span> (CheckForUpdateFinished != null)</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            {</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                CheckForUpdateFinished(<span class="keyword">this</span>, EventArgs.Empty);</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            }</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        }</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
-<div class="line"><a name="l00290"></a><span class="lineno"><a class="line" href="classBovender_1_1Versioning_1_1Updater.html#a89cd2629171c75cb576cb3d50195e9c6">  290</a></span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">string</span> <a class="code" href="classBovender_1_1Versioning_1_1Updater.html#a89cd2629171c75cb576cb3d50195e9c6">BuildDestinationFileName</a>()</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        {</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="namespaceSystem.html">System</a>.IO.Path.Combine(</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                DestinationFolder,</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                String.Format(<span class="stringliteral">&quot;update-{0}.exe&quot;</span>, NewVersion.ToString())</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                );</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        }</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;</div>
-<div class="line"><a name="l00308"></a><span class="lineno"><a class="line" href="classBovender_1_1Versioning_1_1Updater.html#afe3e43875eb8039837bac19d4a710ad1">  308</a></span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classBovender_1_1Versioning_1_1Updater.html#afe3e43875eb8039837bac19d4a710ad1">DoInstallUpdate</a>()</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        {</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            <span class="keywordflow">if</span> (IsVerifiedDownload)</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;            {</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                <a class="code" href="namespaceSystem.html">System</a>.Diagnostics.Process.Start(</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                    GetInstallerCommand(),</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                    GetInstallerParameters()</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                );</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            }</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        }</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;</div>
-<div class="line"><a name="l00323"></a><span class="lineno"><a class="line" href="classBovender_1_1Versioning_1_1Updater.html#a51c6f8a82001eaee3fc99036fd9c7551">  323</a></span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">string</span> <a class="code" href="classBovender_1_1Versioning_1_1Updater.html#a51c6f8a82001eaee3fc99036fd9c7551">GetInstallerCommand</a>()</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        {</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            <span class="keywordflow">return</span> _destinationFileName;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        }</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;</div>
-<div class="line"><a name="l00331"></a><span class="lineno"><a class="line" href="classBovender_1_1Versioning_1_1Updater.html#a0306c694ef98f31e377e74ce3cc4047e">  331</a></span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">string</span> <a class="code" href="classBovender_1_1Versioning_1_1Updater.html#a0306c694ef98f31e377e74ce3cc4047e">GetInstallerParameters</a>()</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        {</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            <span class="comment">// silencing parameters for InnoSetup installers</span></div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;/SP- /SILENT /SUPPRESSMSGBOXES&quot;</span>;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        }</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="preprocessor">        #endregion</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            IsVerifiedDownload = <a class="code" href="classBovender_1_1FileHelpers.html">FileHelpers</a>.<a class="code" href="classBovender_1_1FileHelpers.html#adf15cccbe9a22f02afecd06fef32e9b9">Sha1Hash</a>(_destinationFileName) == UpdateSha1;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            IsUpdatePending = IsVerifiedDownload;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            <span class="keywordflow">if</span> (DownloadUpdateFinished != null)</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            {</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                DownloadUpdateFinished(<span class="keyword">this</span>, EventArgs.Empty);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            }</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        }</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnCheckForUpdateFinished()</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        {</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            <span class="keywordflow">if</span> (CheckForUpdateFinished != null)</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            {</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                CheckForUpdateFinished(<span class="keyword">this</span>, EventArgs.Empty);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            }</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;</div>
+<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="classBovender_1_1Versioning_1_1Updater.html#a89cd2629171c75cb576cb3d50195e9c6">  292</a></span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">string</span> <a class="code" href="classBovender_1_1Versioning_1_1Updater.html#a89cd2629171c75cb576cb3d50195e9c6">BuildDestinationFileName</a>()</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        {</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="namespaceSystem.html">System</a>.IO.Path.Combine(</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                DestinationFolder,</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                String.Format(<span class="stringliteral">&quot;update-{0}.exe&quot;</span>, NewVersion.ToString())</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                );</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        }</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
+<div class="line"><a name="l00310"></a><span class="lineno"><a class="line" href="classBovender_1_1Versioning_1_1Updater.html#afe3e43875eb8039837bac19d4a710ad1">  310</a></span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classBovender_1_1Versioning_1_1Updater.html#afe3e43875eb8039837bac19d4a710ad1">DoInstallUpdate</a>()</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        {</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            <span class="keywordflow">if</span> (IsVerifiedDownload)</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            {</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                <a class="code" href="namespaceSystem.html">System</a>.Diagnostics.Process.Start(</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                    GetInstallerCommand(),</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                    GetInstallerParameters()</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                );</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;            }</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        }</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;</div>
+<div class="line"><a name="l00325"></a><span class="lineno"><a class="line" href="classBovender_1_1Versioning_1_1Updater.html#a51c6f8a82001eaee3fc99036fd9c7551">  325</a></span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">string</span> <a class="code" href="classBovender_1_1Versioning_1_1Updater.html#a51c6f8a82001eaee3fc99036fd9c7551">GetInstallerCommand</a>()</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        {</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            <span class="keywordflow">return</span> _destinationFileName;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        }</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;</div>
+<div class="line"><a name="l00333"></a><span class="lineno"><a class="line" href="classBovender_1_1Versioning_1_1Updater.html#a0306c694ef98f31e377e74ce3cc4047e">  333</a></span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">string</span> <a class="code" href="classBovender_1_1Versioning_1_1Updater.html#a0306c694ef98f31e377e74ce3cc4047e">GetInstallerParameters</a>()</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        {</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            <span class="comment">// silencing parameters for InnoSetup installers</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;/SP- /SILENT /SUPPRESSMSGBOXES&quot;</span>;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        }</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="preprocessor">        #region Private methods</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="preprocessor">        #endregion</span></div>
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <span class="keywordtype">void</span> _client_DownloadFileCompleted(<span class="keywordtype">object</span> sender, <a class="code" href="namespaceSystem.html">System</a>.ComponentModel.AsyncCompletedEventArgs e)</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        {</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            <span class="keywordflow">if</span> (!e.Cancelled)</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            {</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                DownloadException = e.Error;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                IsVerifiedDownload = <a class="code" href="classBovender_1_1FileHelpers.html">FileHelpers</a>.<a class="code" href="classBovender_1_1FileHelpers.html#adf15cccbe9a22f02afecd06fef32e9b9">Sha1Hash</a>(_destinationFileName) == UpdateSha1;</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                IsUpdatePending = IsVerifiedDownload;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="preprocessor">        #region Private methods</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordtype">void</span> _client_DownloadFileCompleted(<span class="keywordtype">object</span> sender, <a class="code" href="namespaceSystem.html">System</a>.ComponentModel.AsyncCompletedEventArgs e)</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        {</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            <span class="keywordflow">if</span> (!e.Cancelled)</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            {</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                DownloadException = e.Error;</div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                OnDownloadUpdateFinished();</div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            }</div>
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            <span class="keywordflow">else</span></div>
@@ -357,41 +357,44 @@ $(document).ready(function(){initNavTree('Updater_8cs_source.html','');});
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                {</div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                    StringReader r = <span class="keyword">new</span> StringReader(e.Result);</div>
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                    NewVersion = <span class="keyword">new</span> SemanticVersion(r.ReadLine());</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                    DownloadUri = <span class="keyword">new</span> Uri(r.ReadLine());</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                    <span class="comment">// Use only the first word of the line as Sha1 sum</span></div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                    <span class="comment">// to make it compatible with the output of `sha1sum`</span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                    UpdateSha1 = r.ReadLine().Split(<span class="charliteral">&#39; &#39;</span>)[0];</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                    <a class="code" href="classBovender_1_1Text_1_1Multiline.html">Multiline</a> multi = <span class="keyword">new</span> <a class="code" href="classBovender_1_1Text_1_1Multiline.html">Multiline</a>(r.ReadToEnd(), <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                    UpdateSummary = multi.<a class="code" href="classBovender_1_1Text_1_1Multiline.html#afd4d6fe2715b376ea42b8bf4f3497b71">Text</a>;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                    IsUpdateAvailable = NewVersion &gt; GetCurrentVersion();</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                }</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                {</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                    DownloadException = e.Error;</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                    IsUpdateAvailable = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;                }</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;                OnCheckForUpdateFinished();</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;            }</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        }</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="preprocessor">        #endregion</span></div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="preprocessor">        #region Private properties</span></div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <span class="keyword">private</span> <span class="keywordtype">string</span> Sha1 { <span class="keyword">get</span>; set; }</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="preprocessor">        #endregion</span></div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="preprocessor">        #region Private fields</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        <span class="keyword">private</span> WebClient _client;</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        <span class="keyword">private</span> WebClient _versionInfoClient;</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        <span class="keyword">private</span> <span class="keywordtype">string</span> _destinationFileName;</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="preprocessor">        #endregion</span></div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    }</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;}</div>
-<div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_afe3e43875eb8039837bac19d4a710ad1"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#afe3e43875eb8039837bac19d4a710ad1">Bovender.Versioning.Updater.DoInstallUpdate</a></div><div class="ttdeci">virtual void DoInstallUpdate()</div><div class="ttdoc">Executes the update file. </div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00308">Updater.cs:308</a></div></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                    <span class="keywordtype">string</span> rawUri = r.ReadLine();</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                    <span class="comment">// If the raw URI contains the placeholder $VERSION, replace</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                    <span class="comment">// it with the new version.</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                    DownloadUri = <span class="keyword">new</span> Uri(rawUri.Replace(<span class="stringliteral">&quot;$VERSION&quot;</span>, NewVersion.ToString()));</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                    <span class="comment">// Use only the first word of the line as Sha1 sum</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                    <span class="comment">// to make it compatible with the output of `sha1sum`</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                    UpdateSha1 = r.ReadLine().Split(<span class="charliteral">&#39; &#39;</span>)[0];</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                    <a class="code" href="classBovender_1_1Text_1_1Multiline.html">Multiline</a> multi = <span class="keyword">new</span> <a class="code" href="classBovender_1_1Text_1_1Multiline.html">Multiline</a>(r.ReadToEnd(), <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                    UpdateSummary = multi.<a class="code" href="classBovender_1_1Text_1_1Multiline.html#afd4d6fe2715b376ea42b8bf4f3497b71">Text</a>;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                    IsUpdateAvailable = NewVersion &gt; GetCurrentVersion();</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                }</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;                {</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;                    DownloadException = e.Error;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;                    IsUpdateAvailable = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;                }</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;                OnCheckForUpdateFinished();</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;            }</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        }</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="preprocessor">        #endregion</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="preprocessor">        #region Private properties</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        <span class="keyword">private</span> <span class="keywordtype">string</span> Sha1 { <span class="keyword">get</span>; set; }</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="preprocessor">        #endregion</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="preprocessor">        #region Private fields</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        <span class="keyword">private</span> WebClient _client;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        <span class="keyword">private</span> WebClient _versionInfoClient;</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        <span class="keyword">private</span> <span class="keywordtype">string</span> _destinationFileName;</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="preprocessor">        #endregion</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    }</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;}</div>
+<div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_afe3e43875eb8039837bac19d4a710ad1"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#afe3e43875eb8039837bac19d4a710ad1">Bovender.Versioning.Updater.DoInstallUpdate</a></div><div class="ttdeci">virtual void DoInstallUpdate()</div><div class="ttdoc">Executes the update file. </div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00310">Updater.cs:310</a></div></div>
 <div class="ttc" id="classBovender_1_1Text_1_1Multiline_html"><div class="ttname"><a href="classBovender_1_1Text_1_1Multiline.html">Bovender.Text.Multiline</a></div><div class="ttdoc">Represents a text with multiple lines. </div><div class="ttdef"><b>Definition:</b> <a href="Multiline_8cs_source.html#l00031">Multiline.cs:31</a></div></div>
 <div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a6c26c7732db33369147f40b57c51d914"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a6c26c7732db33369147f40b57c51d914">Bovender.Versioning.Updater.DownloadUpdateFinished</a></div><div class="ttdeci">EventHandler&lt; EventArgs &gt; DownloadUpdateFinished</div><div class="ttdoc">Signals that an update has been downloaded. </div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00134">Updater.cs:134</a></div></div>
 <div class="ttc" id="namespaceBovender_1_1Text_html"><div class="ttname"><a href="namespaceBovender_1_1Text.html">Bovender.Text</a></div><div class="ttdef"><b>Definition:</b> <a href="Multiline_8cs_source.html#l00025">Multiline.cs:25</a></div></div>
@@ -402,14 +405,14 @@ $(document).ready(function(){initNavTree('Updater_8cs_source.html','');});
 <div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a4953ce32a61bf0cd327d717dd49a9b19"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a4953ce32a61bf0cd327d717dd49a9b19">Bovender.Versioning.Updater.InstallUpdate</a></div><div class="ttdeci">void InstallUpdate()</div><div class="ttdoc">Verifies the Sha1 checksum of the file on disk again and executes the file if it is valid...</div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00201">Updater.cs:201</a></div></div>
 <div class="ttc" id="classBovender_1_1FileHelpers_html"><div class="ttname"><a href="classBovender_1_1FileHelpers.html">Bovender.FileHelpers</a></div><div class="ttdef"><b>Definition:</b> <a href="FileHelpers_8cs_source.html#l00027">FileHelpers.cs:27</a></div></div>
 <div class="ttc" id="classBovender_1_1FileHelpers_html_adf15cccbe9a22f02afecd06fef32e9b9"><div class="ttname"><a href="classBovender_1_1FileHelpers.html#adf15cccbe9a22f02afecd06fef32e9b9">Bovender.FileHelpers.Sha1Hash</a></div><div class="ttdeci">static string Sha1Hash(string file)</div><div class="ttdoc">Computes the Sha1 hash of a given file. </div><div class="ttdef"><b>Definition:</b> <a href="FileHelpers_8cs_source.html#l00034">FileHelpers.cs:34</a></div></div>
-<div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a89cd2629171c75cb576cb3d50195e9c6"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a89cd2629171c75cb576cb3d50195e9c6">Bovender.Versioning.Updater.BuildDestinationFileName</a></div><div class="ttdeci">virtual string BuildDestinationFileName()</div><div class="ttdoc">Builds the destination file name from the download URI and the destination folder (which is stored in...</div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00290">Updater.cs:290</a></div></div>
+<div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a89cd2629171c75cb576cb3d50195e9c6"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a89cd2629171c75cb576cb3d50195e9c6">Bovender.Versioning.Updater.BuildDestinationFileName</a></div><div class="ttdeci">virtual string BuildDestinationFileName()</div><div class="ttdoc">Builds the destination file name from the download URI and the destination folder (which is stored in...</div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00292">Updater.cs:292</a></div></div>
 <div class="ttc" id="classBovender_1_1Text_1_1Multiline_html_afd4d6fe2715b376ea42b8bf4f3497b71"><div class="ttname"><a href="classBovender_1_1Text_1_1Multiline.html#afd4d6fe2715b376ea42b8bf4f3497b71">Bovender.Text.Multiline.Text</a></div><div class="ttdeci">string Text</div><div class="ttdoc">Gets the multiline text as a single string. </div><div class="ttdef"><b>Definition:</b> <a href="Multiline_8cs_source.html#l00039">Multiline.cs:39</a></div></div>
-<div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a51c6f8a82001eaee3fc99036fd9c7551"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a51c6f8a82001eaee3fc99036fd9c7551">Bovender.Versioning.Updater.GetInstallerCommand</a></div><div class="ttdeci">virtual string GetInstallerCommand()</div><div class="ttdoc">Returns the command to execute in the shell to install the update. </div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00323">Updater.cs:323</a></div></div>
+<div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a51c6f8a82001eaee3fc99036fd9c7551"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a51c6f8a82001eaee3fc99036fd9c7551">Bovender.Versioning.Updater.GetInstallerCommand</a></div><div class="ttdeci">virtual string GetInstallerCommand()</div><div class="ttdoc">Returns the command to execute in the shell to install the update. </div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00325">Updater.cs:325</a></div></div>
 <div class="ttc" id="namespaceBovender_1_1Mvvm_html"><div class="ttname"><a href="namespaceBovender_1_1Mvvm.html">Bovender.Mvvm</a></div></div>
 <div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a29d15d84ea99515e648eb6849ab96085"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a29d15d84ea99515e648eb6849ab96085">Bovender.Versioning.Updater.DownloadUpdate</a></div><div class="ttdeci">void DownloadUpdate()</div><div class="ttdoc">Downloads the current release from the internet. </div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00167">Updater.cs:167</a></div></div>
 <div class="ttc" id="namespaceBovender_html"><div class="ttname"><a href="namespaceBovender.html">Bovender</a></div></div>
 <div class="ttc" id="namespaceSystem_html"><div class="ttname"><a href="namespaceSystem.html">System</a></div></div>
-<div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a0306c694ef98f31e377e74ce3cc4047e"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a0306c694ef98f31e377e74ce3cc4047e">Bovender.Versioning.Updater.GetInstallerParameters</a></div><div class="ttdeci">virtual string GetInstallerParameters()</div><div class="ttdoc">Returns commandline parameters for the update installer. </div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00331">Updater.cs:331</a></div></div>
+<div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html_a0306c694ef98f31e377e74ce3cc4047e"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html#a0306c694ef98f31e377e74ce3cc4047e">Bovender.Versioning.Updater.GetInstallerParameters</a></div><div class="ttdeci">virtual string GetInstallerParameters()</div><div class="ttdoc">Returns commandline parameters for the update installer. </div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00333">Updater.cs:333</a></div></div>
 <div class="ttc" id="classBovender_1_1Versioning_1_1DownloadCorruptException_html"><div class="ttname"><a href="classBovender_1_1Versioning_1_1DownloadCorruptException.html">Bovender.Versioning.DownloadCorruptException</a></div><div class="ttdef"><b>Definition:</b> <a href="DownloadCorruptException_8cs_source.html#l00024">DownloadCorruptException.cs:24</a></div></div>
 <div class="ttc" id="classBovender_1_1Versioning_1_1SemanticVersion_html"><div class="ttname"><a href="classBovender_1_1Versioning_1_1SemanticVersion.html">Bovender.Versioning.SemanticVersion</a></div><div class="ttdoc">Class that handles semantic versioning. </div><div class="ttdef"><b>Definition:</b> <a href="SemanticVersion_8cs_source.html#l00044">SemanticVersion.cs:44</a></div></div>
 <div class="ttc" id="classBovender_1_1Versioning_1_1Updater_html"><div class="ttname"><a href="classBovender_1_1Versioning_1_1Updater.html">Bovender.Versioning.Updater</a></div><div class="ttdoc">Fetches version information from the internet and raises an UpdateAvailable event if a new version is...</div><div class="ttdef"><b>Definition:</b> <a href="Updater_8cs_source.html#l00040">Updater.cs:40</a></div></div>
@@ -420,7 +423,7 @@ $(document).ready(function(){initNavTree('Updater_8cs_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b1f430ed3406a33213bdd9fb7eb3676b.html">Bovender</a></li><li class="navelem"><a class="el" href="dir_089c2982baee9e17f342685fecb73410.html">Versioning</a></li><li class="navelem"><b>Updater.cs</b></li>
-    <li class="footer">Generated on Wed Jul 8 2015 21:04:30 for bovender framework by
+    <li class="footer">Generated on Wed Sep 9 2015 21:43:28 for bovender framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
   </ul>

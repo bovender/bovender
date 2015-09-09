@@ -152,7 +152,22 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Facilitates WPF data binding to enums by providing an enumeration of Choices, read/write access to a string representation (which may be localized in derived classes), and the type-safe enum value itself. </p>
-<p>To bind to a ComboBox to an <a class="el" href="classBovender_1_1Mvvm_1_1EnumProvider.html" title="Facilitates WPF data binding to enums by providing an enumeration of Choices, read/write access to a ...">EnumProvider</a> property, use: </p><div class="fragment"><div class="line">&lt;ComboBox </div>
+<p>When providing a public <a class="el" href="classBovender_1_1Mvvm_1_1EnumProvider.html" title="Facilitates WPF data binding to enums by providing an enumeration of Choices, read/write access to a ...">EnumProvider</a> property, you need to wire up the PropertyChanged event: </p><div class="fragment"><div class="line"><span class="keyword">public</span> EnumProvider&lt;MyType&gt; MyProperty</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">get</span></div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (_myPropertyField == null)</div>
+<div class="line">        {</div>
+<div class="line">            _myPropertyField = <span class="keyword">new</span> EnumProvider&lt;MyType&gt;(_myModel.Property);</div>
+<div class="line">            _myPropertyField.PropertyChanged += (sender, args) =&gt;</div>
+<div class="line">            {</div>
+<div class="line">                _myModel.Property = _myPropertyField.AsEnum;</div>
+<div class="line">            };</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">return</span> _myPropertyField;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --> <p>To bind to a ComboBox to an <a class="el" href="classBovender_1_1Mvvm_1_1EnumProvider.html" title="Facilitates WPF data binding to enums by providing an enumeration of Choices, read/write access to a ...">EnumProvider</a> property, use: </p><div class="fragment"><div class="line">&lt;ComboBox </div>
 <div class="line">    ItemsSource=<span class="stringliteral">&quot;{Binding MyEnumProviderProperty.Choices}&quot;</span></div>
 <div class="line">    ToolTip=<span class="stringliteral">&quot;{Binding MyEnumProviderProperty.ToolTip}&quot;</span></div>
 <div class="line">    SelectedItem=<span class="stringliteral">&quot;{Binding MyEnumProviderProperty.SelectedItem}&quot;</span></div>
@@ -171,7 +186,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 </dl>
 </div>
 
-<p>Definition at line <a class="el" href="EnumProvider_8cs_source.html#l00061">61</a> of file <a class="el" href="EnumProvider_8cs_source.html">EnumProvider.cs</a>.</p>
+<p>Definition at line <a class="el" href="EnumProvider_8cs_source.html#l00083">83</a> of file <a class="el" href="EnumProvider_8cs_source.html">EnumProvider.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a662a96937533823c2029a0512bae0593"></a>
 <div class="memitem">
@@ -206,7 +221,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 <dl class="section return"><dt>Returns</dt><dd>Display string</dd></dl>
 <p>See <a href="http://stackoverflow.com/a/1799401/270712">http://stackoverflow.com/a/1799401/270712</a> for description of attribute accession.</p>
 
-<p>Definition at line <a class="el" href="EnumProvider_8cs_source.html#l00154">154</a> of file <a class="el" href="EnumProvider_8cs_source.html">EnumProvider.cs</a>.</p>
+<p>Definition at line <a class="el" href="EnumProvider_8cs_source.html#l00176">176</a> of file <a class="el" href="EnumProvider_8cs_source.html">EnumProvider.cs</a>.</p>
 
 </div>
 </div>
@@ -242,7 +257,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Tooltip string (may be localized in derived classes).</dd></dl>
 
-<p>Definition at line <a class="el" href="EnumProvider_8cs_source.html#l00179">179</a> of file <a class="el" href="EnumProvider_8cs_source.html">EnumProvider.cs</a>.</p>
+<p>Definition at line <a class="el" href="EnumProvider_8cs_source.html#l00201">201</a> of file <a class="el" href="EnumProvider_8cs_source.html">EnumProvider.cs</a>.</p>
 
 </div>
 </div>
@@ -278,7 +293,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Instance of EnumViewModel </dd></dl>
 
-<p>Definition at line <a class="el" href="EnumProvider_8cs_source.html#l00204">204</a> of file <a class="el" href="EnumProvider_8cs_source.html">EnumProvider.cs</a>.</p>
+<p>Definition at line <a class="el" href="EnumProvider_8cs_source.html#l00226">226</a> of file <a class="el" href="EnumProvider_8cs_source.html">EnumProvider.cs</a>.</p>
 
 </div>
 </div>
@@ -303,7 +318,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 
 <p>Returns an array of enum view models that represent the enum members. </p>
 
-<p>Definition at line <a class="el" href="EnumProvider_8cs_source.html#l00108">108</a> of file <a class="el" href="EnumProvider_8cs_source.html">EnumProvider.cs</a>.</p>
+<p>Definition at line <a class="el" href="EnumProvider_8cs_source.html#l00130">130</a> of file <a class="el" href="EnumProvider_8cs_source.html">EnumProvider.cs</a>.</p>
 
 </div>
 </div>
@@ -316,7 +331,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceBovender.html">Bovender</a></li><li class="navelem"><a class="el" href="namespaceBovender_1_1Mvvm.html">Mvvm</a></li><li class="navelem"><a class="el" href="classBovender_1_1Mvvm_1_1EnumProvider.html">EnumProvider</a></li>
-    <li class="footer">Generated on Wed Jul 8 2015 21:04:31 for bovender framework by
+    <li class="footer">Generated on Wed Sep 9 2015 21:43:28 for bovender framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
   </ul>

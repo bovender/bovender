@@ -10,5 +10,6 @@ var namespaceBovender =
     [ "Versioning", "namespaceBovender_1_1Versioning.html", "namespaceBovender_1_1Versioning" ],
     [ "FileHelpers", "classBovender_1_1FileHelpers.html", "classBovender_1_1FileHelpers" ],
     [ "PathHelpers", "classBovender_1_1PathHelpers.html", "classBovender_1_1PathHelpers" ],
-    [ "Settings", "classBovender_1_1Settings.html", "classBovender_1_1Settings" ]
+    [ "Settings", "classBovender_1_1Settings.html", "classBovender_1_1Settings" ],
+    [ "WpfHelpers", "classBovender_1_1WpfHelpers.html", "classBovender_1_1WpfHelpers" ]
 ];

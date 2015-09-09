@@ -10,5 +10,6 @@ var dir_b1f430ed3406a33213bdd9fb7eb3676b =
     [ "Versioning", "dir_089c2982baee9e17f342685fecb73410.html", "dir_089c2982baee9e17f342685fecb73410" ],
     [ "FileHelpers.cs", "FileHelpers_8cs_source.html", null ],
     [ "PathHelpers.cs", "PathHelpers_8cs_source.html", null ],
-    [ "Settings.cs", "Settings_8cs_source.html", null ]
+    [ "Settings.cs", "Settings_8cs_source.html", null ],
+    [ "WpfHelpers.cs", "WpfHelpers_8cs_source.html", null ]
 ];

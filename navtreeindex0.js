@@ -74,6 +74,7 @@ var NAVTREEINDEX0 =
 "WindowSettings_8cs_source.html":[2,0,0,3,4,0,0],
 "WindowState_8cs_source.html":[2,0,0,3,4,0,1],
 "Workarounds_8cs_source.html":[2,0,0,3,9],
+"WpfHelpers_8cs_source.html":[2,0,0,11],
 "annotated.html":[1,0],
 "classBovender_1_1ExceptionHandler_1_1CentralHandler.html":[1,0,0,0,0],
 "classBovender_1_1ExceptionHandler_1_1CentralHandler.html#a737d7a1b69550d782d46ca0246c4db3a":[1,0,0,0,0,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a29ea0a61a3e797323e632ba9cdf5c0e2":[1,0,0,3,2,0,3],
 "classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a64d5a31d7bb639fc4e48ccdf664b8ac2":[1,0,0,3,2,0,4],
 "classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a9479f469fe9a02651a47dab4f8dcea29":[1,0,0,3,2,0,2],
-"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#ab197ce937f4bfaf13847f80c1b39d2cb":[1,0,0,3,2,0,0],
-"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#ad46ec8dc36e3f99578925acd7c23f907":[1,0,0,3,2,0,1]
+"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#ab197ce937f4bfaf13847f80c1b39d2cb":[1,0,0,3,2,0,0]
 };

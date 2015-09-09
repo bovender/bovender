@@ -119,5 +119,6 @@ var hierarchy =
       [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ]
     ] ],
     [ "Bovender.Mvvm.Views.Settings.WindowState", "classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html", null ],
-    [ "Bovender.Mvvm.Workarounds", "classBovender_1_1Mvvm_1_1Workarounds.html", null ]
+    [ "Bovender.Mvvm.Workarounds", "classBovender_1_1Mvvm_1_1Workarounds.html", null ],
+    [ "Bovender.WpfHelpers", "classBovender_1_1WpfHelpers.html", null ]
 ];

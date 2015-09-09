@@ -448,10 +448,10 @@ $(document).ready(function(){initNavTree('UpdaterViewModel_8cs_source.html','');
 <div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        <span class="keyword">private</span> <span class="keywordtype">void</span> DoChooseDestinationFolder()</div>
 <div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;        {</div>
 <div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;            ChooseDestinationFolderMessage.Send(</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;                <span class="keyword">new</span> <a class="code" href="classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html">FileNameMessageContent</a>(DestinationFolder),</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;                <span class="keyword">new</span> <a class="code" href="classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html">FileNameMessageContent</a>(DestinationFolder, String.Empty),</div>
 <div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;                (<a class="code" href="classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html">FileNameMessageContent</a> returnContent) =&gt;</div>
 <div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;                {</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                    <span class="keywordflow">if</span> (returnContent.Confirmed)</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                    if (returnContent.Confirmed)</div>
 <div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;                    {</div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;                        DestinationFolder = returnContent.Value;</div>
 <div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;                        Properties.Settings.Default.UpdateDestinationFolder = DestinationFolder;</div>
@@ -643,7 +643,7 @@ $(document).ready(function(){initNavTree('UpdaterViewModel_8cs_source.html','');
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b1f430ed3406a33213bdd9fb7eb3676b.html">Bovender</a></li><li class="navelem"><a class="el" href="dir_089c2982baee9e17f342685fecb73410.html">Versioning</a></li><li class="navelem"><b>UpdaterViewModel.cs</b></li>
-    <li class="footer">Generated on Wed Jul 8 2015 21:04:30 for bovender framework by
+    <li class="footer">Generated on Wed Sep 9 2015 21:43:28 for bovender framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
   </ul>

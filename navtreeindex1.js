@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#ad46ec8dc36e3f99578925acd7c23f907":[1,0,0,3,2,0,1],
 "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html":[1,0,0,3,2,2],
 "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html#a044a3d2758cb94994bc41c89378e8c1d":[1,0,0,3,2,2,0],
 "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html#a26fd1faa40a8611e07d65e08ecd0909f":[1,0,0,3,2,2,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classBovender_1_1Versioning_1_1Updater.html#a16b2b1f8d9302897b6345c5a9c4e02de":[1,0,0,7,3,28],
 "classBovender_1_1Versioning_1_1Updater.html#a1b6307a80fe34af5119ddd2514f01722":[1,0,0,7,3,21],
 "classBovender_1_1Versioning_1_1Updater.html#a2677dbe22ae9b14d9a69c13445c78f1e":[1,0,0,7,3,6],
-"classBovender_1_1Versioning_1_1Updater.html#a29d15d84ea99515e648eb6849ab96085":[1,0,0,7,3,8],
-"classBovender_1_1Versioning_1_1Updater.html#a2fc33845bff9c93ee7a59e6bc78dd6aa":[1,0,0,7,3,16]
+"classBovender_1_1Versioning_1_1Updater.html#a29d15d84ea99515e648eb6849ab96085":[1,0,0,7,3,8]
 };
