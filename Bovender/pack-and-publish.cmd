@@ -1,2 +1,2 @@
-nuget pack -Symbols Bovender.csproj
+nuget pack Bovender.csproj -Build -Symbols -Properties Configuration=Release
 nuget push
