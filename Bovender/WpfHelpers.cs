@@ -36,7 +36,7 @@ namespace Bovender
         /// <remarks>
         /// http://stackoverflow.com/a/2553297/270712
         /// </remarks>
-        static void RegisterTextBoxSelectAll()
+        public static void RegisterTextBoxSelectAll()
         {
             // Select the text in a TextBox when it receives focus.
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.PreviewMouseLeftButtonDownEvent,
