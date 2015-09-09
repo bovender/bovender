@@ -10,7 +10,6 @@
     <projectUrl>https://github.com/bovender/Bovender</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Add extension class for arrays.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Framework Bovender In-House MVVM</tags>
   </metadata>

@@ -131,6 +131,7 @@
     <Compile Include="Versioning\SemanticVersion.cs" />
     <Compile Include="Versioning\Updater.cs" />
     <Compile Include="Versioning\UpdaterViewModel.cs" />
+    <Compile Include="WpfHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -157,6 +158,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Mvvm\Views\ProcessView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

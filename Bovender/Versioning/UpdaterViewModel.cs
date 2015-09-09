@@ -461,7 +461,7 @@ namespace Bovender.Versioning
         private void DoChooseDestinationFolder()
         {
             ChooseDestinationFolderMessage.Send(
-                new FileNameMessageContent(DestinationFolder),
+                new FileNameMessageContent(DestinationFolder, String.Empty),
                 (FileNameMessageContent returnContent) =>
                 {
                     if (returnContent.Confirmed)

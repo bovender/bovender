@@ -262,6 +262,8 @@ namespace Bovender.Versioning
 
         protected virtual void OnDownloadUpdateFinished()
         {
+            IsVerifiedDownload = FileHelpers.Sha1Hash(_destinationFileName) == UpdateSha1;
+            IsUpdatePending = IsVerifiedDownload;
             if (DownloadUpdateFinished != null)
             {
                 DownloadUpdateFinished(this, EventArgs.Empty);
@@ -343,8 +345,6 @@ namespace Bovender.Versioning
             if (!e.Cancelled)
             {
                 DownloadException = e.Error;
-                IsVerifiedDownload = FileHelpers.Sha1Hash(_destinationFileName) == UpdateSha1;
-                IsUpdatePending = IsVerifiedDownload;
                 OnDownloadUpdateFinished();
             }
             else
@@ -375,7 +375,10 @@ namespace Bovender.Versioning
                 {
                     StringReader r = new StringReader(e.Result);
                     NewVersion = new SemanticVersion(r.ReadLine());
-                    DownloadUri = new Uri(r.ReadLine());
+                    string rawUri = r.ReadLine();
+                    // If the raw URI contains the placeholder $VERSION, replace
+                    // it with the new version.
+                    DownloadUri = new Uri(rawUri.Replace("$VERSION", NewVersion.ToString()));
                     // Use only the first word of the line as Sha1 sum
                     // to make it compatible with the output of `sha1sum`
                     UpdateSha1 = r.ReadLine().Split(' ')[0];
