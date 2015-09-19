@@ -1,4 +1,12 @@
-Version 0.3.2 (2015-09-15)
+Version 0.3.3 (2015-09-19)
+========================================================================
+
+- FIX: Close 'update available' views when update download starts.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+Version 0.3.2. (2015-09-15)
 ========================================================================
 
 - FIX: Cancel button of ProcessView was missing command binding.
