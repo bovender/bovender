@@ -484,6 +484,7 @@ namespace Bovender.Versioning
         {
             IsLocked = true;
             DownloadUpdateMessage.Send(DownloadProcessMessageContent);
+            CloseViewCommand.Execute(null);
             _updater.DownloadUpdate();
         }
 
