@@ -1,4 +1,14 @@
-Version 0.3.3 (2015-09-19)
+Version 0.4.0 (2015-09-28)
+========================================================================
+
+- CHANGE: PercentCompleted property of ProcessMessageContent to int (because the ProgressBar expects a number between 0 and 100, rather than 0.0 and 1.0).
+- FIX: ViewModelBase.InjectAndShowInThread invoked Dispatcher shutdown too early.
+- NEW: Implement last-resort crash dump in central exception handler.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+Version 0.3.3. (2015-09-19)
 ========================================================================
 
 - FIX: Close 'update available' views when update download starts.

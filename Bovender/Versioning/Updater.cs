@@ -176,7 +176,6 @@ namespace Bovender.Versioning
                 FileHelpers.Sha1Hash(_destinationFileName) == UpdateSha1)
             {
                 // Bypass the download and signal that the file is present
-                IsVerifiedDownload = true;
                 OnDownloadUpdateFinished();
             }
             else
