@@ -63,6 +63,55 @@ namespace Bovender.ExceptionHandler
             return args.IsHandled;
         }
 
+        /// <summary>
+        /// Event handler for the AddDomain.CurrentDomain.UnhandledException event.
+        /// </summary>
+        public static void AppDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            string dump = 
+                "AppDomain_UnhandledException dump" + Environment.NewLine +
+                DateTime.Now.ToString("s", System.Globalization.CultureInfo.InvariantCulture) + Environment.NewLine +
+                "============================================================" + Environment.NewLine;
+            try
+            {
+                dump += e.ExceptionObject.ToString();
+                System.IO.File.WriteAllText(DumpFile, dump);
+            }
+            catch { }
+        }
+
+        #endregion
+
+        #region Static properties
+
+        /// <summary>
+        /// Gets or sets the path of the dump file. By default, a file
+        /// 'bovender-dump.txt' in the temporary directory will be used.
+        /// </summary>
+        public static string DumpFile
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_dumpFile))
+                {
+                    _dumpFile = System.IO.Path.Combine(
+                        System.IO.Path.GetTempPath(),
+                        "bovender-dump.txt");
+                }
+                return _dumpFile;
+            }
+            set
+            {
+                _dumpFile = value;
+            }
+        }
+
+        #endregion
+
+        #region Fields
+
+        private static string _dumpFile;
+
         #endregion
     }
 }
