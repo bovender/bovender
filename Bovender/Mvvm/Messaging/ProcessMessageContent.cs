@@ -57,7 +57,7 @@ namespace Bovender.Mvvm.Messaging
             }
         }
 
-        public double PercentCompleted
+        public int PercentCompleted
         {
             get
             {
@@ -230,7 +230,7 @@ namespace Bovender.Mvvm.Messaging
 
         #region Private fields
 
-        private double _percentCompleted;
+        private int _percentCompleted;
         private DelegatingCommand _cancelCommand;
         private Message<ProcessMessageContent> _completedMessage;
         private bool _processing;
