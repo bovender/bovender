@@ -228,9 +228,11 @@ namespace Bovender.Mvvm.ViewModels
                 h = (sender, args) =>
                 {
                     this.RequestCloseView -= h;
-                    view.DataContext = null;
-                    // view.Close();
-                    view.Dispatcher.Invoke(new Action(view.Close));
+                    view.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        view.DataContext = null;
+                        view.Close();
+                    }));
                 };
                 this.RequestCloseView += h;
                 view.DataContext = this;
@@ -255,11 +257,17 @@ namespace Bovender.Mvvm.ViewModels
                     this.RequestCloseView -= h;
                     // view.Close();
                     view.Dispatcher.Invoke(new Action(view.Close));
+                    view.Dispatcher.InvokeShutdown();
                 };
                 this.RequestCloseView += h;
                 ViewDispatcher = view.Dispatcher;
                 view.DataContext = this;
-                view.Closed += (sender, args) => view.Dispatcher.InvokeShutdown();
+                // Must shut down the Dispatcher, but this has been moved from
+                // the Closed event of the view to the RequestCloseView event
+                // of the view model in order to prevent premature termination
+                // of the thread if there are other views that this view model
+                // has been injected into.
+                // view.Closed += (sender, args) => view.Dispatcher.InvokeShutdown();
                 view.Show();
                 System.Windows.Threading.Dispatcher.Run();
             });

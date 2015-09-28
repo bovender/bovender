@@ -99,7 +99,6 @@
     <Compile Include="Mvvm\Actions\MessageActionBase.cs" />
     <Compile Include="Mvvm\DelegatingCommand.cs" />
     <Compile Include="Mvvm\Messaging\ProcessMessageContent.cs" />
-    <Compile Include="Mvvm\Workarounds.cs" />
     <Compile Include="Mvvm\Messaging\IMessage.cs" />
     <Compile Include="Mvvm\Messaging\Message.cs" />
     <Compile Include="Mvvm\Messaging\MessageArgs.cs" />
