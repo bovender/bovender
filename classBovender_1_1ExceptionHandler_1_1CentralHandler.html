@@ -91,6 +91,7 @@ $(document).ready(function(){initNavTree('classBovender_1_1ExceptionHandler_1_1C
 <div class="header">
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="#events">Events</a> &#124;
 <a href="classBovender_1_1ExceptionHandler_1_1CentralHandler-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -106,6 +107,15 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aa0e8bf5b3128ca2ee9838f54983d7e3e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBovender_1_1ExceptionHandler_1_1CentralHandler.html#aa0e8bf5b3128ca2ee9838f54983d7e3e">Manage</a> (object origin, Exception e)</td></tr>
 <tr class="memdesc:aa0e8bf5b3128ca2ee9838f54983d7e3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Central exception managing method; can be called in try...catch statements of user entry points.  <a href="#aa0e8bf5b3128ca2ee9838f54983d7e3e">More...</a><br /></td></tr>
 <tr class="separator:aa0e8bf5b3128ca2ee9838f54983d7e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21211d416489a15c6ee256d58d054dc6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBovender_1_1ExceptionHandler_1_1CentralHandler.html#a21211d416489a15c6ee256d58d054dc6">AppDomain_UnhandledException</a> (object sender, UnhandledExceptionEventArgs e)</td></tr>
+<tr class="memdesc:a21211d416489a15c6ee256d58d054dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handler for the AddDomain.CurrentDomain.UnhandledException event.  <a href="#a21211d416489a15c6ee256d58d054dc6">More...</a><br /></td></tr>
+<tr class="separator:a21211d416489a15c6ee256d58d054dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a1845d049bd2913f7c5701456247615e3"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBovender_1_1ExceptionHandler_1_1CentralHandler.html#a1845d049bd2913f7c5701456247615e3">DumpFile</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a1845d049bd2913f7c5701456247615e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the path of the dump file.  <a href="#a1845d049bd2913f7c5701456247615e3">More...</a><br /></td></tr>
+<tr class="separator:a1845d049bd2913f7c5701456247615e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="events"></a>
 Events</h2></td></tr>
@@ -119,6 +129,44 @@ static EventHandler&lt; <a class="el" href="classBovender_1_1ExceptionHandler_1_
 
 <p>Definition at line <a class="el" href="CentralHandler_8cs_source.html#l00037">37</a> of file <a class="el" href="CentralHandler_8cs_source.html">CentralHandler.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a21211d416489a15c6ee256d58d054dc6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Bovender.ExceptionHandler.CentralHandler.AppDomain_UnhandledException </td>
+          <td>(</td>
+          <td class="paramtype">object&#160;</td>
+          <td class="paramname"><em>sender</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UnhandledExceptionEventArgs&#160;</td>
+          <td class="paramname"><em>e</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Event handler for the AddDomain.CurrentDomain.UnhandledException event. </p>
+
+<p>Definition at line <a class="el" href="CentralHandler_8cs_source.html#l00069">69</a> of file <a class="el" href="CentralHandler_8cs_source.html">CentralHandler.cs</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aa0e8bf5b3128ca2ee9838f54983d7e3e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -165,6 +213,32 @@ static EventHandler&lt; <a class="el" href="classBovender_1_1ExceptionHandler_1_
 
 </div>
 </div>
+<h2 class="groupheader">Property Documentation</h2>
+<a class="anchor" id="a1845d049bd2913f7c5701456247615e3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Bovender.ExceptionHandler.CentralHandler.DumpFile</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets or sets the path of the dump file. </p>
+<p>By default, a file 'bovender-dump.txt' in the temporary directory will be used. </p>
+
+<p>Definition at line <a class="el" href="CentralHandler_8cs_source.html#l00092">92</a> of file <a class="el" href="CentralHandler_8cs_source.html">CentralHandler.cs</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Bovender/ExceptionHandler/<a class="el" href="CentralHandler_8cs_source.html">CentralHandler.cs</a></li>
 </ul>
@@ -174,7 +248,7 @@ static EventHandler&lt; <a class="el" href="classBovender_1_1ExceptionHandler_1_
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceBovender.html">Bovender</a></li><li class="navelem"><a class="el" href="namespaceBovender_1_1ExceptionHandler.html">ExceptionHandler</a></li><li class="navelem"><a class="el" href="classBovender_1_1ExceptionHandler_1_1CentralHandler.html">CentralHandler</a></li>
-    <li class="footer">Generated on Sat Sep 19 2015 05:49:05 for bovender framework by
+    <li class="footer">Generated on Sun Oct 18 2015 06:44:01 for bovender framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
   </ul>

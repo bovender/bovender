@@ -8,6 +8,5 @@ var dir_2ce273268718703cc755fd07c25ef1dc =
     [ "BindingWebBrowser.cs", "BindingWebBrowser_8cs_source.html", null ],
     [ "CommandManagerHelper.cs", "CommandManagerHelper_8cs_source.html", null ],
     [ "DelegatingCommand.cs", "DelegatingCommand_8cs_source.html", null ],
-    [ "EnumProvider.cs", "EnumProvider_8cs_source.html", null ],
-    [ "Workarounds.cs", "Workarounds_8cs_source.html", null ]
+    [ "EnumProvider.cs", "EnumProvider_8cs_source.html", null ]
 ];

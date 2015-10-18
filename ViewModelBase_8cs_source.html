@@ -277,43 +277,51 @@ $(document).ready(function(){initNavTree('ViewModelBase_8cs_source.html','');});
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                h = (sender, args) =&gt;</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                {</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                    this.RequestCloseView -= h;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                    view.DataContext = null;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                    <span class="comment">// view.Close();</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                    view.Dispatcher.Invoke(<span class="keyword">new</span> Action(view.Close));</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                };</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                this.RequestCloseView += h;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                view.DataContext = <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                ViewDispatcher = view.Dispatcher;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            }</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            <span class="keywordflow">return</span> view;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        }</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
-<div class="line"><a name="l00247"></a><span class="lineno"><a class="line" href="classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a33a11abf2ab24e2680f77941209b6800">  247</a></span>&#160;        <span class="keyword">public</span> <span class="keywordtype">void</span> InjectAndShowInThread&lt;T&gt;() where T: Window, <span class="keyword">new</span>()</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            Thread t = <span class="keyword">new</span> Thread(() =&gt;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                T view = <span class="keyword">new</span> T();</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                EventHandler h = null;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                h = (sender, args) =&gt;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                {</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                    this.RequestCloseView -= h;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                    <span class="comment">// view.Close();</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                    view.Dispatcher.Invoke(<span class="keyword">new</span> Action(view.Close));</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                };</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                this.RequestCloseView += h;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                ViewDispatcher = view.Dispatcher;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                view.DataContext = <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                view.Closed += (sender, args) =&gt; view.Dispatcher.InvokeShutdown();</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                view.Show();</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                <a class="code" href="namespaceSystem.html">System</a>.Windows.Threading.Dispatcher.Run();</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            });</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            t.SetApartmentState(ApartmentState.STA);</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            t.Start();</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="preprocessor">        #endregion</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    }</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;}</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                    view.Dispatcher.BeginInvoke(<span class="keyword">new</span> Action(() =&gt;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                    {</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                        view.DataContext = null;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                        view.Close();</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                    }));</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                };</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                this.RequestCloseView += h;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                view.DataContext = <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                ViewDispatcher = view.Dispatcher;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            }</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="keywordflow">return</span> view;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;</div>
+<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a33a11abf2ab24e2680f77941209b6800">  249</a></span>&#160;        <span class="keyword">public</span> <span class="keywordtype">void</span> InjectAndShowInThread&lt;T&gt;() where T: Window, <span class="keyword">new</span>()</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        {</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            Thread t = <span class="keyword">new</span> Thread(() =&gt;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            {</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                T view = <span class="keyword">new</span> T();</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                EventHandler h = null;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                h = (sender, args) =&gt;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                {</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                    this.RequestCloseView -= h;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                    <span class="comment">// view.Close();</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                    view.Dispatcher.Invoke(<span class="keyword">new</span> Action(view.Close));</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                    view.Dispatcher.InvokeShutdown();</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                };</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                this.RequestCloseView += h;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                ViewDispatcher = view.Dispatcher;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                view.DataContext = <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                <span class="comment">// Must shut down the Dispatcher, but this has been moved from</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                <span class="comment">// the Closed event of the view to the RequestCloseView event</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                <span class="comment">// of the view model in order to prevent premature termination</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                <span class="comment">// of the thread if there are other views that this view model</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                <span class="comment">// has been injected into.</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                <span class="comment">// view.Closed += (sender, args) =&gt; view.Dispatcher.InvokeShutdown();</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                view.Show();</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                <a class="code" href="namespaceSystem.html">System</a>.Windows.Threading.Dispatcher.Run();</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            });</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            t.SetApartmentState(ApartmentState.STA);</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            t.Start();</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        }</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="preprocessor">        #endregion</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;}</div>
 <div class="ttc" id="classBovender_1_1Mvvm_1_1DelegatingCommand_html"><div class="ttname"><a href="classBovender_1_1Mvvm_1_1DelegatingCommand.html">Bovender.Mvvm.DelegatingCommand</a></div><div class="ttdoc">Command that implements ICommand and accepts delegates that contain the command implementation. </div><div class="ttdef"><b>Definition:</b> <a href="DelegatingCommand_8cs_source.html#l00038">DelegatingCommand.cs:38</a></div></div>
 <div class="ttc" id="classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase_html_abea21bdf6ecdca10baab86931821bb16"><div class="ttname"><a href="classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#abea21bdf6ecdca10baab86931821bb16">Bovender.Mvvm.ViewModels.ViewModelBase.ViewModelBase</a></div><div class="ttdeci">ViewModelBase()</div><div class="ttdoc">Does not allow public instantiation of this class. </div><div class="ttdef"><b>Definition:</b> <a href="ViewModelBase_8cs_source.html#l00191">ViewModelBase.cs:191</a></div></div>
 <div class="ttc" id="classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase_html_a4c5521878a0225514539cada6016bdb0"><div class="ttname"><a href="classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a4c5521878a0225514539cada6016bdb0">Bovender.Mvvm.ViewModels.ViewModelBase.InjectInto</a></div><div class="ttdeci">Window InjectInto(Window view)</div><div class="ttdoc">Injects the view model into an existing view by setting the view&#39;s DataContext. </div><div class="ttdef"><b>Definition:</b> <a href="ViewModelBase_8cs_source.html#l00223">ViewModelBase.cs:223</a></div></div>
@@ -328,7 +336,7 @@ $(document).ready(function(){initNavTree('ViewModelBase_8cs_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b1f430ed3406a33213bdd9fb7eb3676b.html">Bovender</a></li><li class="navelem"><a class="el" href="dir_2ce273268718703cc755fd07c25ef1dc.html">Mvvm</a></li><li class="navelem"><a class="el" href="dir_cfb6cfb0a71865af1dfaa07cfffecf10.html">ViewModels</a></li><li class="navelem"><b>ViewModelBase.cs</b></li>
-    <li class="footer">Generated on Sat Sep 19 2015 05:49:05 for bovender framework by
+    <li class="footer">Generated on Sun Oct 18 2015 06:44:01 for bovender framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
   </ul>

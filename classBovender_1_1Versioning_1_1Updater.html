@@ -189,9 +189,9 @@ string&#160;</td><td class="memItemRight" valign="bottom"><b>DestinationFolder</
 <tr class="memitem:abfe233868d9519da834f53cc201ffef5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBovender_1_1Versioning_1_1Updater.html#abfe233868d9519da834f53cc201ffef5">IsVerifiedDownload</a><code> [get, protected set]</code></td></tr>
 <tr class="memdesc:abfe233868d9519da834f53cc201ffef5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the Sha1 of the downloaded file matches the one in the version information file.  <a href="#abfe233868d9519da834f53cc201ffef5">More...</a><br /></td></tr>
 <tr class="separator:abfe233868d9519da834f53cc201ffef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad311c37b426e2af83e1758db1efaff59"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBovender_1_1Versioning_1_1Updater.html#ad311c37b426e2af83e1758db1efaff59">UpdateSha1</a><code> [get, protected set]</code></td></tr>
-<tr class="memdesc:ad311c37b426e2af83e1758db1efaff59"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Sha1 hash of the remote file as reported in the version info file.  <a href="#ad311c37b426e2af83e1758db1efaff59">More...</a><br /></td></tr>
-<tr class="separator:ad311c37b426e2af83e1758db1efaff59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31b13865050092f6fd92ccb93bb5ca4b"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBovender_1_1Versioning_1_1Updater.html#a31b13865050092f6fd92ccb93bb5ca4b">UpdateChecksum</a><code> [get, protected set]</code></td></tr>
+<tr class="memdesc:a31b13865050092f6fd92ccb93bb5ca4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Sha1 hash of the remote file as reported in the version info file.  <a href="#a31b13865050092f6fd92ccb93bb5ca4b">More...</a><br /></td></tr>
+<tr class="separator:a31b13865050092f6fd92ccb93bb5ca4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bd9fc528a03a26b8820e9562dae5428"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBovender_1_1Versioning_1_1Updater.html#a5bd9fc528a03a26b8820e9562dae5428">UpdateSummary</a><code> [get, protected set]</code></td></tr>
 <tr class="memdesc:a5bd9fc528a03a26b8820e9562dae5428"><td class="mdescLeft">&#160;</td><td class="mdescRight">Summary of changes as reported in the version info file.  <a href="#a5bd9fc528a03a26b8820e9562dae5428">More...</a><br /></td></tr>
 <tr class="separator:a5bd9fc528a03a26b8820e9562dae5428"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -247,7 +247,7 @@ Events</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classBovender_1_1UnitTests_1_1UpdaterForTesting.html#a2d9dabaaec0a9ce91a33d43c71923029">Bovender.UnitTests.UpdaterForTesting</a>.</p>
 
-<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00292">292</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
+<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00287">287</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
 
 </div>
 </div>
@@ -302,7 +302,7 @@ Events</h2></td></tr>
 
 <p>Performs the actual download once the user has confirmed the download destination. </p>
 
-<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00253">253</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
+<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00249">249</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
 
 </div>
 </div>
@@ -331,7 +331,7 @@ Events</h2></td></tr>
 <p>This method is called by <a class="el" href="classBovender_1_1Versioning_1_1Updater.html#a4953ce32a61bf0cd327d717dd49a9b19" title="Verifies the Sha1 checksum of the file on disk again and executes the file if it is valid...">InstallUpdate()</a> only if the Sha1 checksum of the file meets the expectation. </p>
 <p>The path of the downloaded file is stored in _destinationFileName. Implementations of this class may want to override this method if updating is not simply a matter of executing this file. The base method executes the file with an "/UPDATE" command line parameter. </p>
 
-<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00310">310</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
+<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00305">305</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
 
 </div>
 </div>
@@ -414,7 +414,7 @@ Events</h2></td></tr>
 <p>Returns the command to execute in the shell to install the update. </p>
 <dl class="section return"><dt>Returns</dt><dd>Command to execute.</dd></dl>
 
-<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00325">325</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
+<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00320">320</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
 
 </div>
 </div>
@@ -441,7 +441,7 @@ Events</h2></td></tr>
 
 <p>Returns commandline parameters for the update installer. </p>
 
-<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00333">333</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
+<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00328">328</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
 
 </div>
 </div>
@@ -503,7 +503,7 @@ Events</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00201">201</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
+<p>Definition at line <a class="el" href="Updater_8cs_source.html#l00199">199</a> of file <a class="el" href="Updater_8cs_source.html">Updater.cs</a>.</p>
 
 </div>
 </div>
@@ -629,7 +629,7 @@ Events</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad311c37b426e2af83e1758db1efaff59"></a>
+<a class="anchor" id="a31b13865050092f6fd92ccb93bb5ca4b"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -637,7 +637,7 @@ Events</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string Bovender.Versioning.Updater.UpdateSha1</td>
+          <td class="memname">string Bovender.Versioning.Updater.UpdateChecksum</td>
         </tr>
       </table>
   </td>
@@ -737,7 +737,7 @@ Events</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceBovender.html">Bovender</a></li><li class="navelem"><a class="el" href="namespaceBovender_1_1Versioning.html">Versioning</a></li><li class="navelem"><a class="el" href="classBovender_1_1Versioning_1_1Updater.html">Updater</a></li>
-    <li class="footer">Generated on Sat Sep 19 2015 05:49:05 for bovender framework by
+    <li class="footer">Generated on Sun Oct 18 2015 06:44:02 for bovender framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
   </ul>

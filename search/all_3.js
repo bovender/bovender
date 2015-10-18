@@ -15,5 +15,6 @@ var searchData=
   ['downloadprogresschanged',['DownloadProgressChanged',['../classBovender_1_1Versioning_1_1Updater.html#a7f41f82879f62c343d03eea736c8e7f8',1,'Bovender::Versioning::Updater']]],
   ['downloadupdate',['DownloadUpdate',['../classBovender_1_1Versioning_1_1Updater.html#a29d15d84ea99515e648eb6849ab96085',1,'Bovender::Versioning::Updater']]],
   ['downloadupdatefinished',['DownloadUpdateFinished',['../classBovender_1_1Versioning_1_1Updater.html#a6c26c7732db33369147f40b57c51d914',1,'Bovender::Versioning::Updater']]],
-  ['downloaduri',['DownloadUri',['../classBovender_1_1Versioning_1_1Updater.html#a3360c4d976107665d174a29eaaf95172',1,'Bovender::Versioning::Updater']]]
+  ['downloaduri',['DownloadUri',['../classBovender_1_1Versioning_1_1Updater.html#a3360c4d976107665d174a29eaaf95172',1,'Bovender::Versioning::Updater']]],
+  ['dumpfile',['DumpFile',['../classBovender_1_1ExceptionHandler_1_1CentralHandler.html#a1845d049bd2913f7c5701456247615e3',1,'Bovender::ExceptionHandler::CentralHandler']]]
 ];

@@ -73,12 +73,13 @@ var NAVTREEINDEX0 =
 "VisibilityBooleanConverter_8cs_source.html":[2,0,0,3,1,3],
 "WindowSettings_8cs_source.html":[2,0,0,3,4,0,0],
 "WindowState_8cs_source.html":[2,0,0,3,4,0,1],
-"Workarounds_8cs_source.html":[2,0,0,3,9],
 "WpfHelpers_8cs_source.html":[2,0,0,11],
 "annotated.html":[1,0],
 "classBovender_1_1ExceptionHandler_1_1CentralHandler.html":[1,0,0,0,0],
-"classBovender_1_1ExceptionHandler_1_1CentralHandler.html#a737d7a1b69550d782d46ca0246c4db3a":[1,0,0,0,0,1],
-"classBovender_1_1ExceptionHandler_1_1CentralHandler.html#aa0e8bf5b3128ca2ee9838f54983d7e3e":[1,0,0,0,0,0],
+"classBovender_1_1ExceptionHandler_1_1CentralHandler.html#a1845d049bd2913f7c5701456247615e3":[1,0,0,0,0,2],
+"classBovender_1_1ExceptionHandler_1_1CentralHandler.html#a21211d416489a15c6ee256d58d054dc6":[1,0,0,0,0,0],
+"classBovender_1_1ExceptionHandler_1_1CentralHandler.html#a737d7a1b69550d782d46ca0246c4db3a":[1,0,0,0,0,3],
+"classBovender_1_1ExceptionHandler_1_1CentralHandler.html#aa0e8bf5b3128ca2ee9838f54983d7e3e":[1,0,0,0,0,1],
 "classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html":[1,0,0,0,1],
 "classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#a07b858595fc53af32c9ae567d17b4889":[1,0,0,0,1,17],
 "classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#a2487090732f4189ba7acfcbcd86e584a":[1,0,0,0,1,8],
@@ -133,6 +134,7 @@ var NAVTREEINDEX0 =
 "classBovender_1_1Extensions_1_1ArrayExtensions.html":[1,0,0,1,0],
 "classBovender_1_1Extensions_1_1ArrayExtensions.html#a271b751f47bd0fbb8f106e9af2e7fcaa":[1,0,0,1,0,0],
 "classBovender_1_1FileHelpers.html":[1,0,0,8],
+"classBovender_1_1FileHelpers.html#aa23ff652befea5d71ee9e22411552c92":[1,0,0,8,1],
 "classBovender_1_1FileHelpers.html#adf15cccbe9a22f02afecd06fef32e9b9":[1,0,0,8,0],
 "classBovender_1_1HtmlFiles_1_1HtmlFileViewModel.html":[1,0,0,2,0],
 "classBovender_1_1HtmlFiles_1_1HtmlFileViewModel.html#a30fae9d3656e6b8eaad551eca0b36ebc":[1,0,0,2,0,3],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "classBovender_1_1Mvvm_1_1EnumProvider.html#ae6d8afaf40b6e4e37f17e32c9f16c11b":[1,0,0,3,7,7],
 "classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html":[1,0,0,3,2,0],
 "classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a29ea0a61a3e797323e632ba9cdf5c0e2":[1,0,0,3,2,0,3],
-"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a64d5a31d7bb639fc4e48ccdf664b8ac2":[1,0,0,3,2,0,4],
-"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a9479f469fe9a02651a47dab4f8dcea29":[1,0,0,3,2,0,2],
-"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#ab197ce937f4bfaf13847f80c1b39d2cb":[1,0,0,3,2,0,0]
+"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a64d5a31d7bb639fc4e48ccdf664b8ac2":[1,0,0,3,2,0,4]
 };

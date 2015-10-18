@@ -6,7 +6,7 @@ var searchData=
   ['sent',['Sent',['../classBovender_1_1Mvvm_1_1Messaging_1_1Message.html#a26fd1faa40a8611e07d65e08ecd0909f',1,'Bovender::Mvvm::Messaging::Message']]],
   ['settings',['Settings',['../classBovender_1_1Settings.html',1,'Bovender']]],
   ['sha1hash',['Sha1Hash',['../classBovender_1_1FileHelpers.html#adf15cccbe9a22f02afecd06fef32e9b9',1,'Bovender::FileHelpers']]],
-  ['showmodelessinexcel_3c_20t_20_3e',['ShowModelessInExcel&lt; T &gt;',['../classBovender_1_1Mvvm_1_1Workarounds.html#aef146b2ea00577fe4982a810667fd05d',1,'Bovender.Mvvm.Workarounds.ShowModelessInExcel&lt; T &gt;()'],['../classBovender_1_1Mvvm_1_1Workarounds.html#a8db82aff8204a10d380439ec6ca7b637',1,'Bovender.Mvvm.Workarounds.ShowModelessInExcel&lt; T &gt;(ViewModelBase viewModel)']]],
+  ['sha256hash',['Sha256Hash',['../classBovender_1_1FileHelpers.html#aa23ff652befea5d71ee9e22411552c92',1,'Bovender::FileHelpers']]],
   ['showview',['ShowView',['../classBovender_1_1Mvvm_1_1Actions_1_1MessageActionBase.html#aaa968a3fe7c2e2b6d5fbce7ddc7edd17',1,'Bovender.Mvvm.Actions.MessageActionBase.ShowView()'],['../classBovender_1_1Mvvm_1_1Actions_1_1ShowViewAction.html#ae5951769f5f82b43fcfb378e704e5c00',1,'Bovender.Mvvm.Actions.ShowViewAction.ShowView()'],['../classBovender_1_1Mvvm_1_1Actions_1_1ShowViewDialogAction.html#aa74c449183eded80dc34b40b8b6ea52a',1,'Bovender.Mvvm.Actions.ShowViewDialogAction.ShowView()']]],
   ['showviewaction',['ShowViewAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ShowViewAction.html',1,'Bovender::Mvvm::Actions']]],
   ['showviewdialogaction',['ShowViewDialogAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ShowViewDialogAction.html',1,'Bovender::Mvvm::Actions']]],

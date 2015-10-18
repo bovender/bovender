@@ -26,7 +26,7 @@ var classBovender_1_1Versioning_1_1Updater =
     [ "IsVerifiedDownload", "classBovender_1_1Versioning_1_1Updater.html#abfe233868d9519da834f53cc201ffef5", null ],
     [ "NewVersion", "classBovender_1_1Versioning_1_1Updater.html#a12579cdb34f438cf4a5ab1f88c7c8ae8", null ],
     [ "Sha1", "classBovender_1_1Versioning_1_1Updater.html#a5940e0a83523454f19597bcb65f94aa4", null ],
-    [ "UpdateSha1", "classBovender_1_1Versioning_1_1Updater.html#ad311c37b426e2af83e1758db1efaff59", null ],
+    [ "UpdateChecksum", "classBovender_1_1Versioning_1_1Updater.html#a31b13865050092f6fd92ccb93bb5ca4b", null ],
     [ "UpdateSummary", "classBovender_1_1Versioning_1_1Updater.html#a5bd9fc528a03a26b8820e9562dae5428", null ],
     [ "CheckForUpdateFinished", "classBovender_1_1Versioning_1_1Updater.html#a16b2b1f8d9302897b6345c5a9c4e02de", null ],
     [ "DownloadProgressChanged", "classBovender_1_1Versioning_1_1Updater.html#a7f41f82879f62c343d03eea736c8e7f8", null ],

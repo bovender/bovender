@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a9479f469fe9a02651a47dab4f8dcea29":[1,0,0,3,2,0,2],
+"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#ab197ce937f4bfaf13847f80c1b39d2cb":[1,0,0,3,2,0,0],
 "classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#ad46ec8dc36e3f99578925acd7c23f907":[1,0,0,3,2,0,1],
 "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html":[1,0,0,3,2,2],
 "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html#a044a3d2758cb94994bc41c89378e8c1d":[1,0,0,3,2,2,0],
@@ -26,6 +28,7 @@ var NAVTREEINDEX1 =
 "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#a5fb65196fe29655bd16ce0e97efd248b":[1,0,0,3,2,5,10],
 "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#a67e871178aabe5b7a62d38e9ecbd0993":[1,0,0,3,2,5,5],
 "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#a6d318fc2571aa229521367d9d2b0c75f":[1,0,0,3,2,5,6],
+"classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#a761249af2c74b8c8f52dec9a2c1fe605":[1,0,0,3,2,5,14],
 "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#a7f38c059a408b2ead4c2a6c75258a534":[1,0,0,3,2,5,13],
 "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#aa4058251bcc2c758a91f5649a2e3fd68":[1,0,0,3,2,5,9],
 "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#aac6c385cc08f18c58e4b3196dbd875be":[1,0,0,3,2,5,3],
@@ -33,7 +36,6 @@ var NAVTREEINDEX1 =
 "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#ad816a6c186f7797ba56744e8c61f7d9a":[1,0,0,3,2,5,12],
 "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#ae66323a23cf4cd4e2834457c427634c6":[1,0,0,3,2,5,17],
 "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#ae957271d3a8e222d6544d28ea49f9771":[1,0,0,3,2,5,4],
-"classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#aea310f6c3200d4079f04f47cade11c15":[1,0,0,3,2,5,14],
 "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#aeeb7158fb5e405c4850f18459d691fff":[1,0,0,3,2,5,0],
 "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#afd806ff6ac4b3715da7e6b94344b059f":[1,0,0,3,2,5,16],
 "classBovender_1_1Mvvm_1_1Messaging_1_1StringMessageContent.html":[1,0,0,3,2,6],
@@ -101,9 +103,6 @@ var NAVTREEINDEX1 =
 "classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html#a7fe05802e46b75e7615f679a0f7e2cbe":[1,0,0,3,4,0,1,1],
 "classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html#ab7315dfe158bc44e9c71cb10fdfb6d5e":[1,0,0,3,4,0,1,4],
 "classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html#aeec47bedc867df2b5a4906cff1676198":[1,0,0,3,4,0,1,5],
-"classBovender_1_1Mvvm_1_1Workarounds.html":[1,0,0,3,8],
-"classBovender_1_1Mvvm_1_1Workarounds.html#a8db82aff8204a10d380439ec6ca7b637":[1,0,0,3,8,1],
-"classBovender_1_1Mvvm_1_1Workarounds.html#aef146b2ea00577fe4982a810667fd05d":[1,0,0,3,8,0],
 "classBovender_1_1PathHelpers.html":[1,0,0,9],
 "classBovender_1_1PathHelpers.html#a230105a958f29c41d492399e55dce48c":[1,0,0,9,1],
 "classBovender_1_1PathHelpers.html#a90e492b3a9e9098e9ee79a893f6efece":[1,0,0,9,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX1 =
 "classBovender_1_1Versioning_1_1Updater.html#a16b2b1f8d9302897b6345c5a9c4e02de":[1,0,0,7,3,28],
 "classBovender_1_1Versioning_1_1Updater.html#a1b6307a80fe34af5119ddd2514f01722":[1,0,0,7,3,21],
 "classBovender_1_1Versioning_1_1Updater.html#a2677dbe22ae9b14d9a69c13445c78f1e":[1,0,0,7,3,6],
-"classBovender_1_1Versioning_1_1Updater.html#a29d15d84ea99515e648eb6849ab96085":[1,0,0,7,3,8]
+"classBovender_1_1Versioning_1_1Updater.html#a29d15d84ea99515e648eb6849ab96085":[1,0,0,7,3,8],
+"classBovender_1_1Versioning_1_1Updater.html#a2fc33845bff9c93ee7a59e6bc78dd6aa":[1,0,0,7,3,16]
 };

@@ -14,7 +14,7 @@ var classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent =
     [ "Exception", "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#a46af3ba8a43d72b4662abb2143f62281", null ],
     [ "IsIndeterminate", "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#ad816a6c186f7797ba56744e8c61f7d9a", null ],
     [ "Message", "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#a7f38c059a408b2ead4c2a6c75258a534", null ],
-    [ "PercentCompleted", "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#aea310f6c3200d4079f04f47cade11c15", null ],
+    [ "PercentCompleted", "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#a761249af2c74b8c8f52dec9a2c1fe605", null ],
     [ "Processing", "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#a2f9ddc3ebef6b142815532fb8fcf8448", null ],
     [ "WasCancelled", "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#afd806ff6ac4b3715da7e6b94344b059f", null ],
     [ "WasSuccessful", "classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#ae66323a23cf4cd4e2834457c427634c6", null ]
