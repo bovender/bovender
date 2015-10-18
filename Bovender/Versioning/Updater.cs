@@ -74,7 +74,7 @@ namespace Bovender.Versioning
         /// info file.
         /// </summary>
         /// 
-        public string UpdateSha1 { get; protected set; }
+        public string UpdateChecksum { get; protected set; }
 
         /// <summary>
         /// Summary of changes as reported in the version info file.
@@ -168,12 +168,11 @@ namespace Bovender.Versioning
         {
             _destinationFileName = BuildDestinationFileName();
 
-            /* Check if the file exists already. If the Sha1 is identical,
-             * do not download it again. If the Sha1 is different, it is a file
+            /* Check if the file exists already. If the checksum is identical,
+             * do not download it again. If the checksum is different, it is a file
              * with the same name, but different content (broken download?).
              */
-            if (File.Exists(_destinationFileName) &&
-                FileHelpers.Sha1Hash(_destinationFileName) == UpdateSha1)
+            if (File.Exists(_destinationFileName) && VerifyDownload())
             {
                 // Bypass the download and signal that the file is present
                 OnDownloadUpdateFinished();
@@ -202,15 +201,13 @@ namespace Bovender.Versioning
             if (!IsUpdateAvailable) return;
 
             // As a security measure, compute the SHA1 again so we know it's current.
-            IsVerifiedDownload = FileHelpers.Sha1Hash(_destinationFileName) == UpdateSha1;
-
-            if (IsVerifiedDownload)
+            if (VerifyDownload())
             {
                 DoInstallUpdate();
             }
             else
             {
-                throw new DownloadCorruptException("The Sha1 checksum of the file on disk is unexpected.");
+                throw new DownloadCorruptException("The checksum of the file on disk is unexpected.");
             }
         }
 
@@ -261,8 +258,7 @@ namespace Bovender.Versioning
 
         protected virtual void OnDownloadUpdateFinished()
         {
-            IsVerifiedDownload = FileHelpers.Sha1Hash(_destinationFileName) == UpdateSha1;
-            IsUpdatePending = IsVerifiedDownload;
+            IsUpdatePending = VerifyDownload();
             if (DownloadUpdateFinished != null)
             {
                 DownloadUpdateFinished(this, EventArgs.Empty);
@@ -380,7 +376,7 @@ namespace Bovender.Versioning
                     DownloadUri = new Uri(rawUri.Replace("$VERSION", NewVersion.ToString()));
                     // Use only the first word of the line as Sha1 sum
                     // to make it compatible with the output of `sha1sum`
-                    UpdateSha1 = r.ReadLine().Split(' ')[0];
+                    UpdateChecksum = r.ReadLine().Trim().Split(' ')[0];
                     Multiline multi = new Multiline(r.ReadToEnd(), true);
                     UpdateSummary = multi.Text;
                     IsUpdateAvailable = NewVersion > GetCurrentVersion();
@@ -392,6 +388,28 @@ namespace Bovender.Versioning
                 }
                 OnCheckForUpdateFinished();
             }
+        }
+
+        /// <summary>
+        /// Compares the actual and expected checksum hashes and sets
+        /// the IsVerifiedDownload property accordingly. Automatically
+        /// switches between SHA-256 and the obsolete SHA-1 algorithms.
+        /// </summary>
+        bool VerifyDownload()
+        {
+            switch (UpdateChecksum.Length)
+            {
+                case 40:
+                    IsVerifiedDownload = FileHelpers.Sha1Hash(_destinationFileName) == UpdateChecksum;
+                    break;
+                case 64:
+                    IsVerifiedDownload = FileHelpers.Sha256Hash(_destinationFileName) == UpdateChecksum;
+                    break;
+                default:
+                    IsVerifiedDownload = false;
+                    break;
+            }
+            return IsVerifiedDownload;
         }
 
         #endregion

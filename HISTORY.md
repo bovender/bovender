@@ -1,3 +1,12 @@
+Versio 0.5.0 (2015-10-18)
+========================================================================
+
+- FIX: Set progress bar range in ProcessView to integers.
+- IMPROVEMENT: Updater class now handles SHA-256 checksums in version info files.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.4.0 (2015-09-28)
 ========================================================================
 
