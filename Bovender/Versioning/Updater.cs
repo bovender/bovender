@@ -188,7 +188,10 @@ namespace Bovender.Versioning
 
         public void CancelDownload()
         {
-            _client.CancelAsync();
+            if (_client !=null)
+            {
+                _client.CancelAsync();
+            }
         }
 
         /// <summary>
