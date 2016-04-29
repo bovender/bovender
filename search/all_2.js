@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['canceldownloadupdate',['CancelDownloadUpdate',['../classBovender_1_1UnitTests_1_1UpdaterViewModelTest.html#a26ea83203ea3575dde3a8be380030448',1,'Bovender::UnitTests::UpdaterViewModelTest']]],
   ['cancelprocess',['CancelProcess',['../classBovender_1_1Mvvm_1_1Messaging_1_1ProcessMessageContent.html#ab1338a544ce0096d8fc58880995d59f6',1,'Bovender::Mvvm::Messaging::ProcessMessageContent']]],
   ['canconfirm',['CanConfirm',['../classBovender_1_1Mvvm_1_1Messaging_1_1MessageContent.html#ad5636630c2517ba8d74285196d6b8afa',1,'Bovender.Mvvm.Messaging.MessageContent.CanConfirm()'],['../classBovender_1_1Mvvm_1_1Messaging_1_1StringMessageContent.html#a081b5367d82fa5a1fe955a65db1f1464',1,'Bovender.Mvvm.Messaging.StringMessageContent.CanConfirm()']]],
   ['centralhandler',['CentralHandler',['../classBovender_1_1ExceptionHandler_1_1CentralHandler.html',1,'Bovender::ExceptionHandler']]],

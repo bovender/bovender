@@ -173,9 +173,10 @@ var NAVTREEINDEX1 =
 "classBovender_1_1UnitTests_1_1UpdaterForTesting.html#ab0139afe1995e1e74e5bf4d9b37b48ff":[1,0,0,5,4,5],
 "classBovender_1_1UnitTests_1_1UpdaterForTesting.html#abad21077c7aba74659d8675399959047":[1,0,0,5,4,7],
 "classBovender_1_1UnitTests_1_1UpdaterViewModelTest.html":[1,0,0,5,5],
-"classBovender_1_1UnitTests_1_1UpdaterViewModelTest.html#a25ec0676e2444b048537c29516c0bfb8":[1,0,0,5,5,0],
-"classBovender_1_1UnitTests_1_1UpdaterViewModelTest.html#a476da6818934c937462694d38c1877cd":[1,0,0,5,5,2],
-"classBovender_1_1UnitTests_1_1UpdaterViewModelTest.html#a7d79345c826728a028abe6c3113f73d3":[1,0,0,5,5,1],
+"classBovender_1_1UnitTests_1_1UpdaterViewModelTest.html#a25ec0676e2444b048537c29516c0bfb8":[1,0,0,5,5,1],
+"classBovender_1_1UnitTests_1_1UpdaterViewModelTest.html#a26ea83203ea3575dde3a8be380030448":[1,0,0,5,5,0],
+"classBovender_1_1UnitTests_1_1UpdaterViewModelTest.html#a476da6818934c937462694d38c1877cd":[1,0,0,5,5,3],
+"classBovender_1_1UnitTests_1_1UpdaterViewModelTest.html#a7d79345c826728a028abe6c3113f73d3":[1,0,0,5,5,2],
 "classBovender_1_1Unmanaged_1_1DllLoadingFailedException.html":[1,0,0,6,0],
 "classBovender_1_1Unmanaged_1_1DllLoadingFailedException.html#a177debecc4004bffd508235826de4363":[1,0,0,6,0,3],
 "classBovender_1_1Unmanaged_1_1DllLoadingFailedException.html#a258060640d1dec99e0519b348b0691dc":[1,0,0,6,0,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classBovender_1_1Versioning_1_1Updater.html#a16b2b1f8d9302897b6345c5a9c4e02de":[1,0,0,7,3,28],
 "classBovender_1_1Versioning_1_1Updater.html#a1b6307a80fe34af5119ddd2514f01722":[1,0,0,7,3,21],
 "classBovender_1_1Versioning_1_1Updater.html#a2677dbe22ae9b14d9a69c13445c78f1e":[1,0,0,7,3,6],
-"classBovender_1_1Versioning_1_1Updater.html#a29d15d84ea99515e648eb6849ab96085":[1,0,0,7,3,8],
-"classBovender_1_1Versioning_1_1Updater.html#a2fc33845bff9c93ee7a59e6bc78dd6aa":[1,0,0,7,3,16]
+"classBovender_1_1Versioning_1_1Updater.html#a29d15d84ea99515e648eb6849ab96085":[1,0,0,7,3,8]
 };
