@@ -403,6 +403,7 @@ namespace Bovender.ExceptionHandler
             v["operating_system"] = OS;
             v["os_bitness"] = OSBitness;
             v["clr_version"] = CLR;
+            v["bovender_version"] = BovenderFramework;
             return v;
         }
 

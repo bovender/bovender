@@ -120,5 +120,59 @@ namespace Bovender.UnitTests
             cancelTask = !updateInstallable;
             Assert.True(updateInstallable, "Update should have been downloaded and be installable, but isn't.");
         }
+
+        /// <summary>
+        /// The updater in version 0.5.0 of the Bovender assembly could through an error
+        /// if the download of an update was cancelled (cf. exception id #703f87f7).
+        /// The Updater class' internal _updater field may not have been set e.g. if the
+        /// target file existed already and no download was necessary, resulting in a
+        /// null reference exception.
+        /// This test asserts that cancelling does not throw an exception.
+        /// </summary>
+        [Test]
+        public void CancelDownloadUpdate()
+        {
+            UpdaterForTesting updater = new UpdaterForTesting();
+            updater.TestVersion = "0.0.0";
+            UpdaterViewModel vm = new UpdaterViewModel(updater);
+            bool done = false;
+            bool cancel = false;
+            bool raised = false;
+
+            // In order to test whether cancelling throws an exception, we need
+            // to catch unhandled exceptions because there is no other way to
+            // capture an exception that occurs in a different thread.
+            AppDomain.CurrentDomain.UnhandledException +=
+                (object sender, UnhandledExceptionEventArgs e) =>
+                {
+                    raised = true;
+                };
+
+            vm.UpdateAvailableMessage.Sent += (object sender, MessageArgs<ViewModelMessageContent> args) =>
+            {
+                UpdaterViewModel relayedViewModel = args.Content.ViewModel as UpdaterViewModel;
+                relayedViewModel.DownloadUpdateMessage.Sent +=
+                    (object sender2, MessageArgs<ProcessMessageContent> args2) =>
+                    {
+                        done = true;
+                        args2.Content.CancelProcess.Invoke();
+                    };
+                relayedViewModel.DownloadUpdateCommand.Execute(null);
+            };
+            vm.CheckForUpdateCommand.Execute(null);
+
+            Task waitForMessages = new Task(() =>
+            {
+                while (!done && !cancel) ;
+            });
+
+            waitForMessages.Start();
+            waitForMessages.Wait(10000);
+            // Cancel the task in case the timeout was reached
+            // but the DownloadUpdateMessage was still not sent
+            cancel = !done;
+            Assert.True(done, "Did not reach the code that cancels the download...");
+            Assert.False(raised, "Cancelling should not throw an exception.");
+        }
     }
 }
