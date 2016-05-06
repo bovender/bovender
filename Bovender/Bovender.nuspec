@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/bovender/Bovender</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <copyright>Copyright 2015</copyright>
+    <copyright>Copyright 2015-2016</copyright>
     <tags>Framework Bovender In-House MVVM</tags>
   </metadata>
 </package>
