@@ -40,24 +40,39 @@ namespace Bovender.Extensions
         #region Public extension methods for Window
 
         /// <summary>
-        /// Shows the Window as a dialog that belongs to a Windows form parent.
+        /// Make a Windows Form the Owner of a WPF Window.
         /// </summary>
-        public static bool? ShowDialogInForm(this Window window, IntPtr parentForm)
+        /// <param name="ownerForm">Windows Forms handle that will be used as
+        /// the owner of the WPF window.</param>
+        public static void SetOwnerForm(this Window window, IntPtr ownerForm)
         {
-            if (parentForm != IntPtr.Zero)
+            // This method should not throw an exception when ownerForm is zero.
+            if (ownerForm != IntPtr.Zero)
             {
                 WindowInteropHelper h = new WindowInteropHelper(window);
-                h.Owner = TopLevelWindow;
+                h.Owner = ownerForm;
             }
-            return window.ShowDialog();
         }
 
         /// <summary>
         /// Shows the Window as a dialog that belongs to a Windows form parent.
         /// </summary>
-        /// <param name="window">WPF window who's Windows forms owner to set.</param>
+        public static bool? ShowDialogInForm(this Window window, IntPtr parentForm)
+        {
+            window.SetOwnerForm(parentForm);
+            return window.ShowDialog();
+        }
+
+        /// <summary>
+        /// Shows the Window as a dialog that belongs to a Windows form parent.
+        /// This overload requires the TopLevelWindow property to be set.
+        /// </summary>
         public static bool? ShowDialogInForm(this Window window)
         {
+            if (TopLevelWindow == IntPtr.Zero)
+            {
+                throw new InvalidOperationException("Must set TopLevelWindow property before calling this method.");
+            }
             return window.ShowDialogInForm(TopLevelWindow);
         }
 
