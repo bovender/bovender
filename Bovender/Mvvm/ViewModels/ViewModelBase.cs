@@ -276,5 +276,6 @@ namespace Bovender.Mvvm.ViewModels
         }
 
         #endregion
+
     }
 }

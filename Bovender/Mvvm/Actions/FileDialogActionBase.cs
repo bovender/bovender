@@ -50,7 +50,7 @@ namespace Bovender.Mvvm.Actions
 
         #region Abstract methods
 
-        protected abstract dynamic GetDialog(
+        protected abstract FileDialog GetDialog(
             string defaultString,
             string filter);
 
@@ -62,7 +62,7 @@ namespace Bovender.Mvvm.Actions
             string defaultString,
             string filter)
         {
-            dynamic dlg = GetDialog(defaultString, filter);
+            FileDialog dlg = GetDialog(defaultString, filter);
             dlg.Title = this.Caption;
             if (String.IsNullOrEmpty(dlg.Filter))
             {
@@ -75,8 +75,7 @@ namespace Bovender.Mvvm.Actions
                     dlg.Filter = _messageContent.Filter;
                 }
             }
-            // if (dlg.ShowDialog(new Form() { TopLevel = true }) == true)
-            if (dlg.ShowDialog() == true)
+            if (dlg.ShowDialog() == DialogResult.OK)
             {
                 return dlg.FileName;
             }

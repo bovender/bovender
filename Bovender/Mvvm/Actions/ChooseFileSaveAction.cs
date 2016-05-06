@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 using System;
+using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
 using Bovender;
-using Microsoft.Win32;
 
 namespace Bovender.Mvvm.Actions
 {
@@ -28,7 +28,7 @@ namespace Bovender.Mvvm.Actions
     /// </summary>
     public class ChooseFileSaveAction : FileDialogActionBase
     {
-        protected override dynamic GetDialog(
+        protected override FileDialog GetDialog(
             string defaultString,
             string filter)
         {
@@ -38,7 +38,9 @@ namespace Bovender.Mvvm.Actions
             dlg.InitialDirectory = PathHelpers.GetDirectoryPart(defaultString);
             dlg.AddExtension = true;
             dlg.RestoreDirectory = true;
+            dlg.SupportMultiDottedExtensions = true;
             dlg.ValidateNames = true;
+            dlg.ShowHelp = false;
             dlg.OverwritePrompt = true;
             return dlg;
         }
