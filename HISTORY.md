@@ -1,3 +1,12 @@
+Version 0.5.2 (2016-05-06)
+------------------------------------------------------------------------
+
+- FIX: Revert the changes related to Windows Forms dialog introduced in version 0.5.1 because they did not prevent the sporadic hangs.
+- IMPROVEMENT: Added Window extensions methods (ShowDialogInForm) that can set the Window's owner to a Windows Forms window.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.5.1 (2016-04-29)
 ------------------------------------------------------------------------
 
