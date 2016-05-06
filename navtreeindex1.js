@@ -1,5 +1,13 @@
 var NAVTREEINDEX1 =
 {
+"classBovender_1_1Mvvm_1_1EnumProvider.html#a79e8ceb1e63865f1491c48f968ddee01":[1,0,0,3,7,1],
+"classBovender_1_1Mvvm_1_1EnumProvider.html#a8fa29d8be0385af4423b8b2b84a28f0a":[1,0,0,3,7,3],
+"classBovender_1_1Mvvm_1_1EnumProvider.html#ab14268f46691df31bc7aeae8c0d4d0aa":[1,0,0,3,7,6],
+"classBovender_1_1Mvvm_1_1EnumProvider.html#acf505390f43d3b28d6ba1e2a8e5c38e2":[1,0,0,3,7,5],
+"classBovender_1_1Mvvm_1_1EnumProvider.html#ae6d8afaf40b6e4e37f17e32c9f16c11b":[1,0,0,3,7,7],
+"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html":[1,0,0,3,2,0],
+"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a29ea0a61a3e797323e632ba9cdf5c0e2":[1,0,0,3,2,0,3],
+"classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a64d5a31d7bb639fc4e48ccdf664b8ac2":[1,0,0,3,2,0,4],
 "classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#a9479f469fe9a02651a47dab4f8dcea29":[1,0,0,3,2,0,2],
 "classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#ab197ce937f4bfaf13847f80c1b39d2cb":[1,0,0,3,2,0,0],
 "classBovender_1_1Mvvm_1_1Messaging_1_1FileNameMessageContent.html#ad46ec8dc36e3f99578925acd7c23f907":[1,0,0,3,2,0,1],
@@ -241,13 +249,5 @@ var NAVTREEINDEX1 =
 "classBovender_1_1Versioning_1_1SemanticVersion.html#afa7fb4fe69102eac61ce36555f580f1b":[1,0,0,7,2,16],
 "classBovender_1_1Versioning_1_1SemanticVersion.html#afdcf1b23aeb12602d68a06f6f3af9df8":[1,0,0,7,2,8],
 "classBovender_1_1Versioning_1_1Updater.html":[1,0,0,7,3],
-"classBovender_1_1Versioning_1_1Updater.html#a013928c30f5cc94269e8ed9a311b7e24":[1,0,0,7,3,4],
-"classBovender_1_1Versioning_1_1Updater.html#a0306c694ef98f31e377e74ce3cc4047e":[1,0,0,7,3,11],
-"classBovender_1_1Versioning_1_1Updater.html#a073a45fc9c650ca50e0137655e76b737":[1,0,0,7,3,12],
-"classBovender_1_1Versioning_1_1Updater.html#a0828b009ff515b6a43d4ca3ba6264e29":[1,0,0,7,3,15],
-"classBovender_1_1Versioning_1_1Updater.html#a12579cdb34f438cf4a5ab1f88c7c8ae8":[1,0,0,7,3,24],
-"classBovender_1_1Versioning_1_1Updater.html#a16b2b1f8d9302897b6345c5a9c4e02de":[1,0,0,7,3,28],
-"classBovender_1_1Versioning_1_1Updater.html#a1b6307a80fe34af5119ddd2514f01722":[1,0,0,7,3,21],
-"classBovender_1_1Versioning_1_1Updater.html#a2677dbe22ae9b14d9a69c13445c78f1e":[1,0,0,7,3,6],
-"classBovender_1_1Versioning_1_1Updater.html#a29d15d84ea99515e648eb6849ab96085":[1,0,0,7,3,8]
+"classBovender_1_1Versioning_1_1Updater.html#a013928c30f5cc94269e8ed9a311b7e24":[1,0,0,7,3,4]
 };

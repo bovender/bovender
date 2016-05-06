@@ -118,6 +118,7 @@ var hierarchy =
       [ "Bovender.Mvvm.Views.NotificationView", "classBovender_1_1Mvvm_1_1Views_1_1NotificationView.html", null ],
       [ "Bovender.Mvvm.Views.ProcessView", "classBovender_1_1Mvvm_1_1Views_1_1ProcessView.html", null ]
     ] ],
+    [ "Bovender.Extensions.WindowExtensions", "classBovender_1_1Extensions_1_1WindowExtensions.html", null ],
     [ "Bovender.Mvvm.Views.Settings.WindowState", "classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowState.html", null ],
     [ "Bovender.WpfHelpers", "classBovender_1_1WpfHelpers.html", null ]
 ];
