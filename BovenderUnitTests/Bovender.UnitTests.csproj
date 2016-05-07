@@ -81,6 +81,7 @@
     <Compile Include="UpdaterForTesting.cs" />
     <Compile Include="UpdaterViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Versioning\VersioningTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BovenderUnitTests.licenseheader" />

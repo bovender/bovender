@@ -138,12 +138,26 @@ namespace Bovender.Versioning
 
         public static bool operator ==(SemanticVersion v1, SemanticVersion v2)
         {
-            return (v1.Equals(v2));
+            try
+            {
+                return (v1.Equals(v2));
+            }
+            catch (NullReferenceException)
+            {
+                return (object)v2 == null;
+            }
         }
 
         public static bool operator !=(SemanticVersion v1, SemanticVersion v2)
         {
-            return (!v1.Equals(v2));
+            try
+            {
+                return (!v1.Equals(v2));
+            }
+            catch (NullReferenceException)
+            {
+                return (object)v2 != null;
+            }
         }
 
         #endregion
@@ -274,11 +288,13 @@ namespace Bovender.Versioning
         /// <returns></returns>
         public override string ToString()
         {
+            BuildString();
             return _version;
         }
 
         public override int GetHashCode()
         {
+            BuildString();
             return _version.GetHashCode();
         }
 
@@ -340,6 +356,27 @@ namespace Bovender.Versioning
             };
 
             Build = m.Groups["build"].Value;
+        }
+
+        protected void BuildString()
+        {
+            string s = String.Format("{0}.{1}.{2}", Major, Minor, Patch);
+            if (Prerelease != Prerelease.None)
+            {
+                if (Prerelease == Prerelease.Numeric)
+                {
+                    s += String.Format("-{0}.{1}.{2}", PreMajor, PreMinor, PrePatch);
+                }
+                else
+                {
+                    s += String.Format("-{0}.{1}", Prerelease.ToString().ToLower(), PrePatch);
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(Build))
+            {
+                s += String.Format("+{0}", Build);
+            }
+            _version = s;
         }
 
         #endregion
