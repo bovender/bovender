@@ -51,6 +51,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="YamlDotNet, Version=3.8.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.Signed.3.8.0\lib\net35\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExceptionHandler\CentralHandler.cs" />
@@ -120,12 +124,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Versioning.settings</DependentUpon>
     </Compile>
+    <Compile Include="UserSettings\UserSettingsBase.cs" />
     <Compile Include="Text\Multiline.cs" />
     <Compile Include="Unmanaged\DllLoadingFailedException.cs" />
     <Compile Include="Unmanaged\DllManager.cs" />
     <Compile Include="Unmanaged\DllNotFoundException.cs" />
     <Compile Include="Unmanaged\DllSha1MismatchException.cs" />
     <Compile Include="Unmanaged\Pinvoke.cs" />
+    <Compile Include="UserSettings\UserSettingsExceptionViewModel.cs" />
+    <Compile Include="UserSettings\UserSettingsViewModel.cs" />
     <Compile Include="Versioning\DownloadCorruptException.cs" />
     <Compile Include="Versioning\InvalidVersionStringException.cs" />
     <Compile Include="Versioning\SemanticVersion.cs" />

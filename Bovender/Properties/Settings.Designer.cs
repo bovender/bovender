@@ -23,51 +23,21 @@ namespace Bovender.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string User {
+        [global::System.Configuration.DefaultSettingValueAttribute("Bovender Framework")]
+        public string UserSettingsPath {
             get {
-                return ((string)(this["User"]));
-            }
-            set {
-                this["User"] = value;
+                return ((string)(this["UserSettingsPath"]));
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Email {
+        [global::System.Configuration.DefaultSettingValueAttribute("settings.yml")]
+        public string UserSettingsFile {
             get {
-                return ((string)(this["Email"]));
-            }
-            set {
-                this["Email"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool CcUser {
-            get {
-                return ((bool)(this["CcUser"]));
-            }
-            set {
-                this["CcUser"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UpdateDestinationFolder {
-            get {
-                return ((string)(this["UpdateDestinationFolder"]));
-            }
-            set {
-                this["UpdateDestinationFolder"] = value;
+                return ((string)(this["UserSettingsFile"]));
             }
         }
     }
