@@ -84,7 +84,7 @@ namespace Bovender.UserSettings
                 using (FileStream fs = File.Open(yamlFile, FileMode.Open, FileAccess.Read))
                 {
                     StreamReader sr = new StreamReader(fs);
-                    Deserializer des = new Deserializer();
+                    Deserializer des = new Deserializer(ignoreUnmatched: true);
                     optionsStore = des.Deserialize<T>(sr);
                     optionsStore.WasFromFile = true;
                 }
