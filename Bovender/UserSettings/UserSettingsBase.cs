@@ -79,24 +79,31 @@ namespace Bovender.UserSettings
             where T: UserSettingsBase, new()
         {
             T optionsStore;
-            try
+            if (File.Exists(yamlFile))
             {
-                using (FileStream fs = File.Open(yamlFile, FileMode.Open, FileAccess.Read))
+                try
                 {
-                    StreamReader sr = new StreamReader(fs);
-                    Deserializer des = new Deserializer(ignoreUnmatched: true);
-                    optionsStore = des.Deserialize<T>(sr);
-                    optionsStore.WasFromFile = true;
+                    using (FileStream fs = File.Open(yamlFile, FileMode.Open, FileAccess.Read))
+                    {
+                        StreamReader sr = new StreamReader(fs);
+                        Deserializer des = new Deserializer(ignoreUnmatched: true);
+                        optionsStore = des.Deserialize<T>(sr);
+                        optionsStore.WasFromFile = true;
+                    }
+                }
+                catch (IOException e)
+                {
+                    optionsStore = CreateDefaultOnException<T>(e);
+                }
+                catch (YamlException e)
+                {
+                    optionsStore = CreateDefaultOnException<T>(e);
                 }
             }
-            catch (IOException e)
-            {
-                optionsStore = CreateDefaultOnException<T>(e);
-            }
-            catch (YamlException e)
-            {
-                optionsStore = CreateDefaultOnException<T>(e);
-            }
+            else
+	        {
+                optionsStore = new T();
+	        }
             return optionsStore;
         }
 
@@ -158,7 +165,7 @@ namespace Bovender.UserSettings
             {
                 if (_downloadFolder == null)
                 {
-                    _downloadFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                    _downloadFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 }
                 return _downloadFolder;
             }

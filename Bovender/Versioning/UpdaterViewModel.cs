@@ -166,12 +166,7 @@ namespace Bovender.Versioning
             {
                 if (String.IsNullOrEmpty(_updater.DestinationFolder))
                 {
-                    string s = UserSettings.UserSettingsBase.Default.DownloadFolder;
-                    if (string.IsNullOrEmpty(s))
-                    {
-                        s = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    };
-                    _updater.DestinationFolder = s;
+                    _updater.DestinationFolder = UserSettings.UserSettingsBase.Default.DownloadFolder;
                     OnPropertyChanged("DestinationFolder");
                 };
                 return _updater.DestinationFolder;
@@ -468,7 +463,6 @@ namespace Bovender.Versioning
                     {
                         DestinationFolder = returnContent.Value;
                         UserSettings.UserSettingsBase.Default.DownloadFolder = DestinationFolder;
-                        UserSettings.UserSettingsBase.Default.Save();
                         ReadyToDownloadMessage.Send();
                     };
                 }
