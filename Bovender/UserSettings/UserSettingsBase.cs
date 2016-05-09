@@ -78,7 +78,7 @@ namespace Bovender.UserSettings
         protected static T FromFileOrDefault<T>(string yamlFile)
             where T: UserSettingsBase, new()
         {
-            T optionsStore;
+            T optionsStore = null;
             if (File.Exists(yamlFile))
             {
                 try
@@ -88,7 +88,10 @@ namespace Bovender.UserSettings
                         StreamReader sr = new StreamReader(fs);
                         Deserializer des = new Deserializer(ignoreUnmatched: true);
                         optionsStore = des.Deserialize<T>(sr);
-                        optionsStore.WasFromFile = true;
+                        if (optionsStore != null)
+                        {
+                            optionsStore.WasFromFile = true;
+                        }
                     }
                 }
                 catch (IOException e)
@@ -100,7 +103,7 @@ namespace Bovender.UserSettings
                     optionsStore = CreateDefaultOnException<T>(e);
                 }
             }
-            else
+            if (optionsStore == null)
 	        {
                 optionsStore = new T();
 	        }
