@@ -180,6 +180,25 @@ namespace Bovender.UserSettings
 
         #endregion
 
+        #region Public methods
+
+        /// <summary>
+        /// Creates a new settings object without loading the saved settings
+        /// from file and without saving the current settings from file.
+        /// </summary>
+        /// <remarks>
+        /// Derived classes shoudl implement their own static variant of this
+        /// method (which cannot be marked virtual because it is static), in
+        /// order to generate an instance of the derived class, rather than
+        /// an instance of UserSettingsBase.
+        /// </remarks>
+        public static void LoadDefaults()
+        {
+            _lazy = new Lazy<UserSettingsBase>(() => new UserSettingsBase());
+        }
+
+        #endregion
+
         #region Properties that are not being saved to the YAML file
 
         /// <summary>
