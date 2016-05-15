@@ -33,6 +33,7 @@ namespace Bovender.Mvvm.Actions
             string defaultString,
             string filter)
         {
+            Logger.Info("ChooseFolderAction.GetDialogResult");
             FolderBrowserDialog dlg = new FolderBrowserDialog();
             dlg.SelectedPath = defaultString;
             dlg.ShowNewFolderButton = true;
@@ -46,5 +47,13 @@ namespace Bovender.Mvvm.Actions
                 return String.Empty;
             }
         }
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
+
+        #endregion
     }
 }
