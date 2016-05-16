@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['delegatingcommand',['DelegatingCommand',['../classBovender_1_1Mvvm_1_1DelegatingCommand.html',1,'Bovender::Mvvm']]],
+  ['default',['Default',['../classBovender_1_1UserSettings_1_1UserSettingsBase.html#a354c52cc16d276b738ca7a581ffc5369',1,'Bovender::UserSettings::UserSettingsBase']]],
   ['delegatingcommand',['DelegatingCommand',['../classBovender_1_1Mvvm_1_1DelegatingCommand.html#aaff8d2154e6ceea6f77173761938b12d',1,'Bovender.Mvvm.DelegatingCommand.DelegatingCommand(Action&lt; object &gt; execute)'],['../classBovender_1_1Mvvm_1_1DelegatingCommand.html#a21a9b9af77fb986ec8bac831dc04779c',1,'Bovender.Mvvm.DelegatingCommand.DelegatingCommand(Action&lt; object &gt; execute, ViewModelBase viewModel)'],['../classBovender_1_1Mvvm_1_1DelegatingCommand.html#ab67ffe7f222ebbf5186f19e8af4c420d',1,'Bovender.Mvvm.DelegatingCommand.DelegatingCommand(Action&lt; object &gt; execute, Predicate&lt; object &gt; canExecute)'],['../classBovender_1_1Mvvm_1_1DelegatingCommand.html#a653e241d48696a72e08f48b47e18db99',1,'Bovender.Mvvm.DelegatingCommand.DelegatingCommand(Action&lt; object &gt; execute, Predicate&lt; object &gt; canExecute, ViewModelBase viewModel)']]],
+  ['delegatingcommand',['DelegatingCommand',['../classBovender_1_1Mvvm_1_1DelegatingCommand.html',1,'Bovender::Mvvm']]],
   ['devpath',['DevPath',['../classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#ae8adeea757ec3a44a050abd77e513b37',1,'Bovender::ExceptionHandler::ExceptionViewModel']]],
   ['dispatcher',['Dispatcher',['../classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a8916face3f34b7e99d26ccecc8380f1f',1,'Bovender::Mvvm::ViewModels::ViewModelBase']]],
   ['dllloadingfailedexception',['DllLoadingFailedException',['../classBovender_1_1Unmanaged_1_1DllLoadingFailedException.html',1,'Bovender::Unmanaged']]],

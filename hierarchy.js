@@ -7,6 +7,7 @@ var hierarchy =
     [ "Bovender.UnitTests.Extensions.ArrayExtensionsTest", "classBovender_1_1UnitTests_1_1Extensions_1_1ArrayExtensionsTest.html", null ],
     [ "Bovender.Mvvm.BindingWebBrowser", "classBovender_1_1Mvvm_1_1BindingWebBrowser.html", null ],
     [ "Bovender.ExceptionHandler.CentralHandler", "classBovender_1_1ExceptionHandler_1_1CentralHandler.html", null ],
+    [ "Bovender.CommonHelpers", "classBovender_1_1CommonHelpers.html", null ],
     [ "Bovender.UnitTests.Mvvm.EnumProviderTest", "classBovender_1_1UnitTests_1_1Mvvm_1_1EnumProviderTest.html", null ],
     [ "EventArgs", null, [
       [ "Bovender.ExceptionHandler.ManageExceptionEventArgs", "classBovender_1_1ExceptionHandler_1_1ManageExceptionEventArgs.html", null ],
@@ -54,6 +55,8 @@ var hierarchy =
         ] ],
         [ "Bovender.Mvvm.ViewModels.EnumViewModel< T >", "classBovender_1_1Mvvm_1_1ViewModels_1_1EnumViewModel.html", null ],
         [ "Bovender.UnitTests.Mvvm.TestViewModel", "classBovender_1_1UnitTests_1_1Mvvm_1_1TestViewModel.html", null ],
+        [ "Bovender.UserSettings.UserSettingsExceptionViewModel", "classBovender_1_1UserSettings_1_1UserSettingsExceptionViewModel.html", null ],
+        [ "Bovender.UserSettings.UserSettingsViewModel", "classBovender_1_1UserSettings_1_1UserSettingsViewModel.html", null ],
         [ "Bovender.Versioning.UpdaterViewModel", "classBovender_1_1Versioning_1_1UpdaterViewModel.html", null ]
       ] ]
     ] ],
@@ -75,6 +78,7 @@ var hierarchy =
       [ "Bovender.Unmanaged.DllManager", "classBovender_1_1Unmanaged_1_1DllManager.html", null ],
       [ "Bovender.Versioning.SemanticVersion", "classBovender_1_1Versioning_1_1SemanticVersion.html", null ]
     ] ],
+    [ "Bovender.Extensions.ObjectExtensions", "classBovender_1_1Extensions_1_1ObjectExtensions.html", null ],
     [ "ObservableCollection", null, [
       [ "Bovender.Mvvm.ViewModels.ViewModelCollection< TModel, TViewModel >", "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelCollection.html", null ]
     ] ],
@@ -82,6 +86,7 @@ var hierarchy =
     [ "Bovender.Unmanaged.Pinvoke", "classBovender_1_1Unmanaged_1_1Pinvoke.html", null ],
     [ "Bovender.UnitTests.PinvokeTests", "classBovender_1_1UnitTests_1_1PinvokeTests.html", null ],
     [ "Bovender.Settings", "classBovender_1_1Settings.html", null ],
+    [ "Bovender.Extensions.StringExtensions", "classBovender_1_1Extensions_1_1StringExtensions.html", null ],
     [ "Bovender.UnitTests.Mvvm.TestModel", "classBovender_1_1UnitTests_1_1Mvvm_1_1TestModel.html", null ],
     [ "TriggerAction", null, [
       [ "Bovender.Mvvm.Actions.MessageActionBase", "classBovender_1_1Mvvm_1_1Actions_1_1MessageActionBase.html", [
@@ -109,6 +114,11 @@ var hierarchy =
       [ "Bovender.UnitTests.UpdaterForTesting", "classBovender_1_1UnitTests_1_1UpdaterForTesting.html", null ]
     ] ],
     [ "Bovender.UnitTests.UpdaterViewModelTest", "classBovender_1_1UnitTests_1_1UpdaterViewModelTest.html", null ],
+    [ "Bovender.UserSettings.UserSettingsBase", "classBovender_1_1UserSettings_1_1UserSettingsBase.html", [
+      [ "Bovender.UnitTests.UserSettings.UserSettings", "classBovender_1_1UnitTests_1_1UserSettings_1_1UserSettings.html", null ]
+    ] ],
+    [ "Bovender.UnitTests.UserSettings.UserSettingsTest", "classBovender_1_1UnitTests_1_1UserSettings_1_1UserSettingsTest.html", null ],
+    [ "XLToolbox.Test.VersioningTest", "classXLToolbox_1_1Test_1_1VersioningTest.html", null ],
     [ "Bovender.Mvvm.ViewModels.ViewModelCollection< TestModel, TestViewModel >", "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelCollection.html", [
       [ "Bovender.UnitTests.Mvvm.ViewModelCollectionForTesting", "classBovender_1_1UnitTests_1_1Mvvm_1_1ViewModelCollectionForTesting.html", null ]
     ] ],

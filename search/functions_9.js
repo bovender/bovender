@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['manage',['Manage',['../classBovender_1_1ExceptionHandler_1_1CentralHandler.html#aa0e8bf5b3128ca2ee9838f54983d7e3e',1,'Bovender::ExceptionHandler::CentralHandler']]],
-  ['messagecontent',['MessageContent',['../classBovender_1_1Mvvm_1_1Messaging_1_1MessageContent.html#a03eb7bf74efa1ad3618bde363869852b',1,'Bovender::Mvvm::Messaging::MessageContent']]],
-  ['multiline',['Multiline',['../classBovender_1_1Text_1_1Multiline.html#a5986ea0fb8e6468869051b38e49477ab',1,'Bovender::Text::Multiline']]]
+  ['listenon',['ListenOn',['../classBovender_1_1Mvvm_1_1DelegatingCommand.html#a5f9eeafa6b4dd7e1d23c8cdb0caf035d',1,'Bovender::Mvvm::DelegatingCommand']]],
+  ['loaddefaults',['LoadDefaults',['../classBovender_1_1UserSettings_1_1UserSettingsBase.html#a331ceebd1b5dc026d79938c4ae01e719',1,'Bovender::UserSettings::UserSettingsBase']]],
+  ['loaddll',['LoadDll',['../classBovender_1_1Unmanaged_1_1DllManager.html#a63b7ae49647eb99626c1443e07f60b8c',1,'Bovender.Unmanaged.DllManager.LoadDll(string dllName)'],['../classBovender_1_1Unmanaged_1_1DllManager.html#a11bb061277e85528269ccb817113f6df',1,'Bovender.Unmanaged.DllManager.LoadDll(string dllName, string expectedSha1Hash)']]]
 ];

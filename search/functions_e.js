@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['unloaddll',['UnloadDll',['../classBovender_1_1Unmanaged_1_1DllManager.html#a379e71ee5c3a6cda22bfbe31a9c757ee',1,'Bovender::Unmanaged::DllManager']]]
+  ['tostring',['ToString',['../classBovender_1_1Versioning_1_1SemanticVersion.html#a62ca30241701df397803140b965bffe5',1,'Bovender::Versioning::SemanticVersion']]],
+  ['truncatewithellipsis',['TruncateWithEllipsis',['../classBovender_1_1Extensions_1_1StringExtensions.html#aaaafdc7e01a411f934f41b3fb613fbcc',1,'Bovender::Extensions::StringExtensions']]]
 ];

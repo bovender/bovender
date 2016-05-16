@@ -20,6 +20,7 @@ var classBovender_1_1Versioning_1_1UpdaterViewModel =
     [ "IsUpdatePending", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#ad6d870dd821fa16eea77aec2451cc7a9", null ],
     [ "IsUserAuthorized", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a2edd45e1532edd49966fd74e006d6c87", null ],
     [ "IsVerifiedDownload", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a16e8af4a2cee21a3c091b7ff301c074f", null ],
+    [ "Logger", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a42441d40d4c1b69de03bd066b55cca0a", null ],
     [ "NetworkFailureMessage", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#ac0c6679d98d539910f01f5e7e1c2ab2d", null ],
     [ "NewVersion", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#ac0ea9fdc816c52934c8eabf8f12f47b4", null ],
     [ "NoUpdateAvailableMessage", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a6297345e29bc5c1793a650e23b1acb01", null ],

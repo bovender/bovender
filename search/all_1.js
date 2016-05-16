@@ -15,10 +15,12 @@ var searchData=
   ['mvvm',['Mvvm',['../namespaceBovender_1_1Mvvm.html',1,'Bovender']]],
   ['properties',['Properties',['../namespaceBovender_1_1Properties.html',1,'Bovender']]],
   ['settings',['Settings',['../namespaceBovender_1_1Mvvm_1_1Views_1_1Settings.html',1,'Bovender::Mvvm::Views']]],
-  ['text',['Text',['../namespaceBovender_1_1UnitTests_1_1Text.html',1,'Bovender::UnitTests']]],
   ['text',['Text',['../namespaceBovender_1_1Text.html',1,'Bovender']]],
+  ['text',['Text',['../namespaceBovender_1_1UnitTests_1_1Text.html',1,'Bovender::UnitTests']]],
   ['unittests',['UnitTests',['../namespaceBovender_1_1UnitTests.html',1,'Bovender']]],
   ['unmanaged',['Unmanaged',['../namespaceBovender_1_1Unmanaged.html',1,'Bovender']]],
+  ['usersettings',['UserSettings',['../namespaceBovender_1_1UnitTests_1_1UserSettings.html',1,'Bovender::UnitTests']]],
+  ['usersettings',['UserSettings',['../namespaceBovender_1_1UserSettings.html',1,'Bovender']]],
   ['versioning',['Versioning',['../namespaceBovender_1_1Versioning.html',1,'Bovender']]],
   ['viewmodels',['ViewModels',['../namespaceBovender_1_1Mvvm_1_1ViewModels.html',1,'Bovender::Mvvm']]],
   ['views',['Views',['../namespaceBovender_1_1Mvvm_1_1Views.html',1,'Bovender::Mvvm']]]

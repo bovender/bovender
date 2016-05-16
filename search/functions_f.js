@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['viewmodelbase',['ViewModelBase',['../classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#abea21bdf6ecdca10baab86931821bb16',1,'Bovender::Mvvm::ViewModels::ViewModelBase']]],
-  ['viewmodelmessagecontent',['ViewModelMessageContent',['../classBovender_1_1Mvvm_1_1Messaging_1_1ViewModelMessageContent.html#acca38fe932d92c877a828c05d9f7a11b',1,'Bovender::Mvvm::Messaging::ViewModelMessageContent']]]
+  ['unloaddll',['UnloadDll',['../classBovender_1_1Unmanaged_1_1DllManager.html#a379e71ee5c3a6cda22bfbe31a9c757ee',1,'Bovender::Unmanaged::DllManager']]]
 ];

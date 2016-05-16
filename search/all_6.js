@@ -10,6 +10,7 @@ var searchData=
   ['getinstallerparameters',['GetInstallerParameters',['../classBovender_1_1Versioning_1_1Updater.html#a0306c694ef98f31e377e74ce3cc4047e',1,'Bovender::Versioning::Updater']]],
   ['getposturi',['GetPostUri',['../classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#ab8929d88a9e859d516e7523fef122e16',1,'Bovender::ExceptionHandler::ExceptionViewModel']]],
   ['getpostvalues',['GetPostValues',['../classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#a2487090732f4189ba7acfcbcd86e584a',1,'Bovender::ExceptionHandler::ExceptionViewModel']]],
+  ['getsettingsfilepath',['GetSettingsFilePath',['../classBovender_1_1UserSettings_1_1UserSettingsBase.html#af50ac20ddc387e025810508d8c40aacf',1,'Bovender::UserSettings::UserSettingsBase']]],
   ['gettooltip',['GetTooltip',['../classBovender_1_1Mvvm_1_1EnumProvider.html#a8fa29d8be0385af4423b8b2b84a28f0a',1,'Bovender::Mvvm::EnumProvider']]],
   ['getversioninfouri',['GetVersionInfoUri',['../classBovender_1_1Versioning_1_1Updater.html#a073a45fc9c650ca50e0137655e76b737',1,'Bovender.Versioning.Updater.GetVersionInfoUri()'],['../classBovender_1_1UnitTests_1_1UpdaterForTesting.html#ab0139afe1995e1e74e5bf4d9b37b48ff',1,'Bovender.UnitTests.UpdaterForTesting.GetVersionInfoUri()']]],
   ['getviewmodel',['GetViewModel',['../classBovender_1_1Mvvm_1_1EnumProvider.html#a545dd59f55bec208174fa35106a975b9',1,'Bovender::Mvvm::EnumProvider']]]

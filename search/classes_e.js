@@ -1,10 +1,15 @@
 var searchData=
 [
-  ['viewmodelbase',['ViewModelBase',['../classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html',1,'Bovender::Mvvm::ViewModels']]],
-  ['viewmodelcollection',['ViewModelCollection',['../classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelCollection.html',1,'Bovender::Mvvm::ViewModels']]],
-  ['viewmodelcollection_3c_20testmodel_2c_20testviewmodel_20_3e',['ViewModelCollection&lt; TestModel, TestViewModel &gt;',['../classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelCollection.html',1,'Bovender::Mvvm::ViewModels']]],
-  ['viewmodelcollectionfortesting',['ViewModelCollectionForTesting',['../classBovender_1_1UnitTests_1_1Mvvm_1_1ViewModelCollectionForTesting.html',1,'Bovender::UnitTests::Mvvm']]],
-  ['viewmodelcollectiontest',['ViewModelCollectionTest',['../classBovender_1_1UnitTests_1_1Mvvm_1_1ViewModelCollectionTest.html',1,'Bovender::UnitTests::Mvvm']]],
-  ['viewmodelmessagecontent',['ViewModelMessageContent',['../classBovender_1_1Mvvm_1_1Messaging_1_1ViewModelMessageContent.html',1,'Bovender::Mvvm::Messaging']]],
-  ['visibilitybooleanconverter',['VisibilityBooleanConverter',['../classBovender_1_1Mvvm_1_1Converters_1_1VisibilityBooleanConverter.html',1,'Bovender::Mvvm::Converters']]]
+  ['unexpectedresponseexception',['UnexpectedResponseException',['../classBovender_1_1ExceptionHandler_1_1UnexpectedResponseException.html',1,'Bovender::ExceptionHandler']]],
+  ['unhandledexception',['UnhandledException',['../classBovender_1_1ExceptionHandler_1_1UnhandledException.html',1,'Bovender::ExceptionHandler']]],
+  ['updater',['Updater',['../classBovender_1_1Versioning_1_1Updater.html',1,'Bovender::Versioning']]],
+  ['updaterfortesting',['UpdaterForTesting',['../classBovender_1_1UnitTests_1_1UpdaterForTesting.html',1,'Bovender::UnitTests']]],
+  ['updaterviewmodel',['UpdaterViewModel',['../classBovender_1_1Versioning_1_1UpdaterViewModel.html',1,'Bovender::Versioning']]],
+  ['updaterviewmodeltest',['UpdaterViewModelTest',['../classBovender_1_1UnitTests_1_1UpdaterViewModelTest.html',1,'Bovender::UnitTests']]],
+  ['uploadfailedeventargs',['UploadFailedEventArgs',['../classBovender_1_1ExceptionHandler_1_1UploadFailedEventArgs.html',1,'Bovender::ExceptionHandler']]],
+  ['usersettings',['UserSettings',['../classBovender_1_1UnitTests_1_1UserSettings_1_1UserSettings.html',1,'Bovender::UnitTests::UserSettings']]],
+  ['usersettingsbase',['UserSettingsBase',['../classBovender_1_1UserSettings_1_1UserSettingsBase.html',1,'Bovender::UserSettings']]],
+  ['usersettingsexceptionviewmodel',['UserSettingsExceptionViewModel',['../classBovender_1_1UserSettings_1_1UserSettingsExceptionViewModel.html',1,'Bovender::UserSettings']]],
+  ['usersettingstest',['UserSettingsTest',['../classBovender_1_1UnitTests_1_1UserSettings_1_1UserSettingsTest.html',1,'Bovender::UnitTests::UserSettings']]],
+  ['usersettingsviewmodel',['UserSettingsViewModel',['../classBovender_1_1UserSettings_1_1UserSettingsViewModel.html',1,'Bovender::UserSettings']]]
 ];

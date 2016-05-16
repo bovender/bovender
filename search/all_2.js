@@ -10,6 +10,8 @@ var searchData=
   ['choosefileopenaction',['ChooseFileOpenAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ChooseFileOpenAction.html',1,'Bovender::Mvvm::Actions']]],
   ['choosefilesaveaction',['ChooseFileSaveAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ChooseFileSaveAction.html',1,'Bovender::Mvvm::Actions']]],
   ['choosefolderaction',['ChooseFolderAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ChooseFolderAction.html',1,'Bovender::Mvvm::Actions']]],
+  ['commonhelpers',['CommonHelpers',['../classBovender_1_1CommonHelpers.html',1,'Bovender']]],
+  ['computemd5hash',['ComputeMD5Hash',['../classBovender_1_1CommonHelpers.html#ada83e362e71e2443cb6821913d601c30',1,'Bovender::CommonHelpers']]],
   ['confirmationaction',['ConfirmationAction',['../classBovender_1_1Mvvm_1_1Actions_1_1ConfirmationAction.html',1,'Bovender::Mvvm::Actions']]],
   ['confirmationview',['ConfirmationView',['../classBovender_1_1Mvvm_1_1Views_1_1ConfirmationView.html',1,'Bovender::Mvvm::Views']]],
   ['confirmcommand',['ConfirmCommand',['../classBovender_1_1Mvvm_1_1Messaging_1_1MessageContent.html#ae7524e4b6d162a97c442462ae56611b8',1,'Bovender::Mvvm::Messaging::MessageContent']]],

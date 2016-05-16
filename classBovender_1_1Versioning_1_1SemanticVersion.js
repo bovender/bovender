@@ -2,6 +2,7 @@ var classBovender_1_1Versioning_1_1SemanticVersion =
 [
     [ "SemanticVersion", "classBovender_1_1Versioning_1_1SemanticVersion.html#aebc0efc968cc32971b8b6660d099e8ee", null ],
     [ "SemanticVersion", "classBovender_1_1Versioning_1_1SemanticVersion.html#ad8d3192f0e33c18d6a3ea9949406a485", null ],
+    [ "BuildString", "classBovender_1_1Versioning_1_1SemanticVersion.html#aeb1bf8e8991438bbd2bcba2f275edc5d", null ],
     [ "CompareTo", "classBovender_1_1Versioning_1_1SemanticVersion.html#ab2d1b3e1d8464bb0877e2dfb8bff1da4", null ],
     [ "CurrentVersion", "classBovender_1_1Versioning_1_1SemanticVersion.html#af0e7712b7b5d44df6a530396325f72b0", null ],
     [ "CurrentVersion", "classBovender_1_1Versioning_1_1SemanticVersion.html#aa014fd8cf3335d8042cdcde79621fe84", null ],
