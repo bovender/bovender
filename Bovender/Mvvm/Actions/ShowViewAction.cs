@@ -1,7 +1,7 @@
 ﻿/* ShowViewAction.cs
  * part of Daniel's XL Toolbox NG
  * 
- * Copyright 2014-2015 Daniel Kraus
+ * Copyright 2014-2016 Daniel Kraus
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,14 +45,16 @@ namespace Bovender.Mvvm.Actions
             Window view = obj as Window;
             if (view != null)
             {
+                Logger.Info("CreateView");
                 ViewModelMessageContent content = Content as ViewModelMessageContent;
                 content.ViewModel.InjectInto(view);
                 return view;
             }
             else
             {
+                Logger.Fatal("Class {0} in assembly {1} is not derived from Window", Assembly, View);
                 throw new ArgumentException(String.Format(
-                    "Class name '{0}' in assembly '{1}' is not derived from Window.",
+                    "Class '{0}' in assembly '{1}' is not derived from Window.",
                     Assembly, View));
             }
         }
@@ -61,6 +63,14 @@ namespace Bovender.Mvvm.Actions
         {
             view.Show();
         }
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }

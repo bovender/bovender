@@ -1,7 +1,7 @@
 ﻿/* DllManager.cs
  * part of Daniel's XL Toolbox NG
  * 
- * Copyright 2014-2015 Daniel Kraus
+ * Copyright 2014-2016 Daniel Kraus
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,6 +89,7 @@ namespace Bovender.Unmanaged
                 if (n > 1) gracefulPath = Path.Combine(dirs[n - 2], gracefulPath);
                 if (n > 2) gracefulPath = Path.Combine("...", gracefulPath);
                 Win32Exception inner = new Win32Exception(Marshal.GetLastWin32Error());
+                Logger.Fatal("Failed to load DLL", inner);
                 throw new DllLoadingFailedException(
                     String.Format(
                         "LoadLibrary failed with code {0} on {1}",
@@ -114,11 +115,13 @@ namespace Bovender.Unmanaged
         // TODO: Use two expected hashes, one for Win32, one for x64
         public void LoadDll(string dllName, string expectedSha1Hash)
         {
+            Logger.Info("LoadDll");
             string dllPath = CompletePath(dllName);
             CheckFilePresent(dllPath);
             string actualSha1Hash = FileHelpers.Sha1Hash(dllPath);
             if (actualSha1Hash != expectedSha1Hash)
             {
+                Logger.Fatal("DLL checksum mismatch, expected {0}, got {1}", expectedSha1Hash, actualSha1Hash);
                 throw new DllSha1MismatchException(String.Format(
                     "Expected {0} but got {1} on {2}", expectedSha1Hash, actualSha1Hash, dllPath));
             };
@@ -131,6 +134,7 @@ namespace Bovender.Unmanaged
         /// <param name="dllName">Name of the DLL to unload.</param>
         public void UnloadDll(string dllName)
         {
+            Logger.Info("UnloadDll");
             IntPtr handle;
             if (_loadedDlls.TryGetValue(dllName, out handle))
             {
@@ -149,21 +153,22 @@ namespace Bovender.Unmanaged
 
         public void Dispose()
         {
-            if (!_disposed)
-            {
-                Dispose(true);
-                GC.SuppressFinalize(this);
-                _disposed = true;
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        protected virtual void Dispose(bool calledFromDispose)
         {
-            if (disposing)
+            if (_disposed)
             {
-                foreach (IntPtr handle in _loadedDlls.Values)
+                _disposed = true;
+                if (calledFromDispose)
                 {
-                    FreeLibrary(handle);
+                    Logger.Info("Disposing: Freeing managed DLL handles...");
+                    foreach (IntPtr handle in _loadedDlls.Values)
+                    {
+                        FreeLibrary(handle);
+                    }
                 }
             }
         }
@@ -187,6 +192,7 @@ namespace Bovender.Unmanaged
         {
             if (!System.IO.File.Exists(file))
             {
+                Logger.Fatal("File '{0}' does not exist.");
                 throw new DllNotFoundException(String.Format(
                     "Not found: {0}", file));
             };
@@ -208,11 +214,21 @@ namespace Bovender.Unmanaged
             {
                 fileName += ".dll";
             };
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+            string s = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
                 "lib",
                 Environment.Is64BitProcess ? "x64" : "Win32",
                 fileName);
+            Logger.Info("Complete path: '{0}'", s);
+            return s;
         }
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }

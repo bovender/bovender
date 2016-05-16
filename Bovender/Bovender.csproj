@@ -37,6 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.3\lib\net40\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -51,12 +55,19 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="YamlDotNet, Version=3.8.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.Signed.3.8.0\lib\net35\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonHelpers.cs" />
     <Compile Include="ExceptionHandler\CentralHandler.cs" />
     <Compile Include="ExceptionHandler\ManageExceptionEventArgs.cs" />
     <Compile Include="ExceptionHandler\UnhandledException.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Mvvm\Actions\ChooseFileOpenAction.cs" />
     <Compile Include="Mvvm\Actions\ChooseFileSaveAction.cs" />
     <Compile Include="Mvvm\Actions\ChooseFolderAction.cs" />
@@ -120,12 +131,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Versioning.settings</DependentUpon>
     </Compile>
+    <Compile Include="UserSettings\UserSettingsBase.cs" />
     <Compile Include="Text\Multiline.cs" />
     <Compile Include="Unmanaged\DllLoadingFailedException.cs" />
     <Compile Include="Unmanaged\DllManager.cs" />
     <Compile Include="Unmanaged\DllNotFoundException.cs" />
     <Compile Include="Unmanaged\DllSha1MismatchException.cs" />
     <Compile Include="Unmanaged\Pinvoke.cs" />
+    <Compile Include="UserSettings\UserSettingsExceptionViewModel.cs" />
+    <Compile Include="UserSettings\UserSettingsViewModel.cs" />
     <Compile Include="Versioning\DownloadCorruptException.cs" />
     <Compile Include="Versioning\InvalidVersionStringException.cs" />
     <Compile Include="Versioning\SemanticVersion.cs" />

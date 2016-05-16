@@ -56,6 +56,12 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <!-- Style to hide the columns header of a grid view         -->
+    <!-- http://stackoverflow.com/a/632556/270712                -->
+    <!-- Usage: <Gridview ColumnHeaderContainerStyle="NoHeader"> -->
+    <Style x:Key="NoHeader" TargetType="{x:Type GridViewColumnHeader}">
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
     <conv:EnumBooleanConverter x:Key="enumBoolConv" />
     <conv:VisibilityBooleanConverter x:Key="visBoolConv" />
     <conv:BooleanNegationConverter x:Key="boolNegConv" />

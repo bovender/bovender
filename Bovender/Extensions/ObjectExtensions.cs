@@ -1,5 +1,5 @@
-﻿/* NotificationView.xaml.cs
- * part of Daniel's XL Toolbox NG
+﻿/* ObjectExtensions.cs
+ * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
  * 
@@ -15,18 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace Bovender.Mvvm.Views
+namespace Bovender.Extensions
 {
-    /// <summary>
-    /// Interaction logic for NotificationView.xaml
-    /// </summary>
-    public partial class NotificationView : Window
+    public static class ObjectExtensions
     {
-        public NotificationView()
+        public static string ComputeMD5Hash(this object obj)
         {
-            InitializeComponent();
+            return CommonHelpers.ComputeMD5Hash(obj);
         }
     }
 }

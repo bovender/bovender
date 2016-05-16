@@ -1,7 +1,7 @@
 ﻿/* Settings.cs
  * part of Daniel's XL Toolbox NG
  * 
- * Copyright 2014-2015 Daniel Kraus
+ * Copyright 2014-2016 Daniel Kraus
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,34 +35,34 @@ namespace Bovender
     {
         public static string User
         {
-            get { return Properties.Settings.Default.User; }
+            get { return UserSettings.UserSettingsBase.Default.User; }
             set
             {
-                Properties.Settings.Default.User = value;
+                UserSettings.UserSettingsBase.Default.User = value;
             }
         }
 
         public static string Email
         {
-            get { return Properties.Settings.Default.Email; }
+            get { return UserSettings.UserSettingsBase.Default.Email; }
             set
             {
-                Properties.Settings.Default.Email = value;
+                UserSettings.UserSettingsBase.Default.Email = value;
             }
         }
 
         public static bool CcUser
         {
-            get { return Properties.Settings.Default.CcUser; }
+            get { return UserSettings.UserSettingsBase.Default.CcUserOnExceptionReport; }
             set
             {
-                Properties.Settings.Default.CcUser = value;
+                UserSettings.UserSettingsBase.Default.CcUserOnExceptionReport = value;
             }
         }
 
         public static void Save()
         {
-            Properties.Settings.Default.Save();
+            UserSettings.UserSettingsBase.Default.Save();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿/* UpdaterViewModel.cs
  * part of Daniel's XL Toolbox NG
  * 
- * Copyright 2014-2015 Daniel Kraus
+ * Copyright 2014-2016 Daniel Kraus
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -166,12 +166,7 @@ namespace Bovender.Versioning
             {
                 if (String.IsNullOrEmpty(_updater.DestinationFolder))
                 {
-                    string s = Properties.Settings.Default.UpdateDestinationFolder;
-                    if (string.IsNullOrEmpty(s))
-                    {
-                        s = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    };
-                    _updater.DestinationFolder = s;
+                    _updater.DestinationFolder = UserSettings.UserSettingsBase.Default.DownloadFolder;
                     OnPropertyChanged("DestinationFolder");
                 };
                 return _updater.DestinationFolder;
@@ -399,6 +394,7 @@ namespace Bovender.Versioning
 
         private void DoCheckForUpdate()
         {
+            Logger.Info("DoCheckForUpdate");
             IsLocked = true;
             CheckForUpdateMessage.Send(CheckProcessMessageContent);
             _updater.CheckForUpdate();
@@ -406,6 +402,7 @@ namespace Bovender.Versioning
 
         void _updater_CheckForUpdateFinished(object sender, EventArgs e)
         {
+            Logger.Info("_updater_CheckForUpdateFinished");
             IsLocked = false;
             Action action = new Action(() =>
                 { 
@@ -418,12 +415,14 @@ namespace Bovender.Versioning
                         {
                             if (_updater.IsAuthorized)
                             {
+                                Logger.Info("Update available, user authorized");
                                 UpdateAvailableMessage.Send(
                                     CheckProcessMessageContent,
                                     (content) => InstallUpdateCommand.Execute(null));
                             }
                             else
                             {
+                                Logger.Info("Update available, but user not authorized");
                                 UpdateAvailableButNotAuthorizedMessage.Send(
                                     CheckProcessMessageContent,
                                     (content) => CloseViewCommand.Execute(null));
@@ -431,6 +430,7 @@ namespace Bovender.Versioning
                         }
                         else
                         {
+                            Logger.Info("No update available");
                             NoUpdateAvailableMessage.Send(
                                 CheckProcessMessageContent,
                                 (content) => CloseViewCommand.Execute(null));
@@ -438,6 +438,7 @@ namespace Bovender.Versioning
                     }
                     else
                     {
+                        Logger.Warn(_updater.DownloadException, "Download exception");
                         OnPropertyChanged("DownloadException");
                         NetworkFailureMessage.Send(
                             CheckProcessMessageContent,
@@ -460,6 +461,7 @@ namespace Bovender.Versioning
 
         private void DoChooseDestinationFolder()
         {
+            Logger.Info("DoChooseDestinationFolder");
             ChooseDestinationFolderMessage.Send(
                 new FileNameMessageContent(DestinationFolder, String.Empty),
                 (FileNameMessageContent returnContent) =>
@@ -467,8 +469,7 @@ namespace Bovender.Versioning
                     if (returnContent.Confirmed)
                     {
                         DestinationFolder = returnContent.Value;
-                        Properties.Settings.Default.UpdateDestinationFolder = DestinationFolder;
-                        Properties.Settings.Default.Save();
+                        UserSettings.UserSettingsBase.Default.DownloadFolder = DestinationFolder;
                         ReadyToDownloadMessage.Send();
                     };
                 }
@@ -482,6 +483,7 @@ namespace Bovender.Versioning
 
         private void DoDownloadUpdate()
         {
+            Logger.Info("DoDownloadUpdate");
             IsLocked = true;
             DownloadUpdateMessage.Send(DownloadProcessMessageContent);
             _updater.DownloadUpdate();
@@ -490,6 +492,7 @@ namespace Bovender.Versioning
 
         void _updater_DownloadUpdateFinished(object sender, EventArgs e)
         {
+            Logger.Info("_updater_DownloadUpdateFinished");
             IsLocked = false;
             // When the download process is finished, the Updater model will verify
             // the downloaded file's Sha1. Since the view model exposes the
@@ -505,20 +508,24 @@ namespace Bovender.Versioning
                 {
                     if (_updater.IsVerifiedDownload)
                     {
+                        Logger.Info("Download verified");
                         UpdateInstallableMessage.Send(DownloadProcessMessageContent);
                     }
                     else
                     {
+                        Logger.Info("Failed verficiation");
                         UpdateFailedVerificationMessage.Send(DownloadProcessMessageContent);
                     }
                 }
                 else
                 {
+                    Logger.Info("User not authorized");
                     UpdateAvailableButNotAuthorizedMessage.Send(DownloadProcessMessageContent);
                 }
             }
             else
             {
+                Logger.Warn(DownloadProcessMessageContent.Exception, "Network failure");
                 NetworkFailureMessage.Send(DownloadProcessMessageContent);
             }
         }
@@ -530,6 +537,7 @@ namespace Bovender.Versioning
 
         private void DoInstallUpdate()
         {
+            Logger.Info("DoInstallUpdate");
             if (CanInstallUpdate())
             {
                 DoCloseView();
@@ -537,6 +545,7 @@ namespace Bovender.Versioning
             }
             else
             {
+                Logger.Warn("Cannot install update... Not authorized or not verified");
                 throw new InvalidOperationException("Cannot install update: User not authorized or update not verified.");
             }
         }
@@ -631,6 +640,14 @@ namespace Bovender.Versioning
         {
             return _updater;
         }
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }

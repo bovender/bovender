@@ -2,17 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Bovender.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="User" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="UserSettingsPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Bovender Framework</Value>
     </Setting>
-    <Setting Name="Email" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="CcUser" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="UpdateDestinationFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="UserSettingsFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">settings.yml</Value>
     </Setting>
   </Settings>
 </SettingsFile>

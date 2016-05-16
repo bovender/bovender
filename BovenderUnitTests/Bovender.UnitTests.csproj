@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.3\lib\net40\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
       <Private>False</Private>
@@ -60,6 +64,10 @@
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="YamlDotNet, Version=3.8.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.Signed.3.8.0\lib\net35\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -76,11 +84,14 @@
     <Compile Include="Mvvm\TestViewModel.cs" />
     <Compile Include="Mvvm\ViewModelCollectionForTesting.cs" />
     <Compile Include="Mvvm\ViewModelCollectionTest.cs" />
+    <Compile Include="UserSettings\UserSettings.cs" />
     <Compile Include="PinvokeTests.cs" />
+    <Compile Include="UserSettings\UserSettingsTest.cs" />
     <Compile Include="Text\MultilineTest.cs" />
     <Compile Include="UpdaterForTesting.cs" />
     <Compile Include="UpdaterViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Versioning\VersioningTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BovenderUnitTests.licenseheader" />
@@ -92,6 +103,7 @@
       <Name>Bovender</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

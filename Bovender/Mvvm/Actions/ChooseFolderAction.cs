@@ -1,7 +1,7 @@
 ﻿/* ChooseFolderAction.cs
  * part of Daniel's XL Toolbox NG
  * 
- * Copyright 2014-2015 Daniel Kraus
+ * Copyright 2014-2016 Daniel Kraus
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ namespace Bovender.Mvvm.Actions
             string defaultString,
             string filter)
         {
+            Logger.Info("ChooseFolderAction.GetDialogResult");
             FolderBrowserDialog dlg = new FolderBrowserDialog();
             dlg.SelectedPath = defaultString;
             dlg.ShowNewFolderButton = true;
@@ -46,5 +47,13 @@ namespace Bovender.Mvvm.Actions
                 return String.Empty;
             }
         }
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
+
+        #endregion
     }
 }

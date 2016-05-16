@@ -1,7 +1,7 @@
 ﻿/* ProcessCompletedAction.cs
  * part of Daniel's XL Toolbox NG
  * 
- * Copyright 2014-2015 Daniel Kraus
+ * Copyright 2014-2016 Daniel Kraus
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,28 +42,42 @@ namespace Bovender.Mvvm.Actions
 
         protected override Window CreateView()
         {
+            Logger.Info("ProcessCompletedAction.CreateView");
             ProcessMessageContent content = Content as ProcessMessageContent;
             if (Content is ProcessMessageContent)
             {
                 if (content.WasCancelled)
                 {
+                    Logger.Info("Process was cancelled");
                     return content.InjectInto(CreateCancelledWindow());
                 }
                 else if (content.WasSuccessful)
                 {
+                    Logger.Info("Process was successful");
                     return content.InjectInto(CreateSuccessWindow());
                 }
                 else
                 {
+                    Logger.Warn("Process failed!");
                     return content.InjectInto(CreateFailureWindow());
                 }
             }
             else
             {
+                Logger.Fatal("ProcessCompletedAction requires ProcessMessageContent, got {0}",
+                    Content.GetType().AssemblyQualifiedName);
                 throw new ArgumentException(
                     "This message action must be used for Messages with ProcessMessageContent only.");
             }
         }
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }

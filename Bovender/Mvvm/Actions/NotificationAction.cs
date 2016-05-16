@@ -1,7 +1,7 @@
 ﻿/* NotificationAction.cs
  * part of Daniel's XL Toolbox NG
  * 
- * Copyright 2014-2015 Daniel Kraus
+ * Copyright 2014-2016 Daniel Kraus
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,10 +75,16 @@ namespace Bovender.Mvvm.Actions
             {
                 try
                 {
-                    return String.Format(Message, Param1, Param2, Param3);
+                    if (_formattedText == null)
+                    {
+                        _formattedText = String.Format(Message, Param1, Param2, Param3);
+                    }
+                    Logger.Info(_formattedText);
+                    return _formattedText;
                 }
                 catch
                 {
+                    Logger.Warn("Cannot format notification message: no Message");
                     return "*** No message text given! ***";
                 }
             }
@@ -110,6 +116,37 @@ namespace Bovender.Mvvm.Actions
             OkButtonLabel = "OK";
         }
 
+        public NotificationAction(string caption, string message)
+            : this()
+        {
+            Caption = caption;
+            Message = message;
+        }
+
+        public NotificationAction(string caption, string message, string okButtonLabel)
+            : this(caption, message)
+        {
+            OkButtonLabel = okButtonLabel;
+        }
+
+        public NotificationAction(string caption, string message, string okButtonLabel, string param)
+            : this(caption, message, okButtonLabel)
+        {
+            Param1 = param;
+        }
+
+        public NotificationAction(string caption, string message, string okButtonLabel, string param1, string param2)
+            : this(caption, message, okButtonLabel, param1)
+        {
+            Param2 = param2;
+        }
+
+        public NotificationAction(string caption, string message, string okButtonLabel, string param1, string param2, string param3)
+            : this(caption, message, okButtonLabel, param1, param2)
+        {
+            Param3 = param3;
+        }
+
         #endregion
 
         #region Implementation of abstract base methods
@@ -118,6 +155,20 @@ namespace Bovender.Mvvm.Actions
         {
             return new NotificationView();
         }
+
+        #endregion
+
+        #region Private fields
+
+        private string _formattedText;
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }
