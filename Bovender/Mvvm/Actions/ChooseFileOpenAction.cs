@@ -33,6 +33,7 @@ namespace Bovender.Mvvm.Actions
             string defaultString,
             string filter)
         {
+            Logger.Info("ChooseFileOpenAction.GetDialog");
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Filter = filter;
             dlg.FileName = PathHelpers.GetFileNamePart(defaultString);
@@ -44,5 +45,13 @@ namespace Bovender.Mvvm.Actions
             dlg.ShowHelp = false;
             return dlg;
         }
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
+
+        #endregion
     }
 }

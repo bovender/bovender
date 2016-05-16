@@ -93,6 +93,7 @@ namespace Bovender.UserSettings
                             optionsStore.WasFromFile = true;
                         }
                     }
+                    Logger.Info("Loaded user settings from file '{0}'", yamlFile);
                 }
                 catch (IOException e)
                 {
@@ -105,6 +106,7 @@ namespace Bovender.UserSettings
             }
             if (optionsStore == null)
 	        {
+                Logger.Info("Creating user settings object from scratch");
                 optionsStore = new T();
 	        }
             return optionsStore;
@@ -242,12 +244,15 @@ namespace Bovender.UserSettings
                     sw.Flush();
                 }
                 Exception = null;
+                Logger.Info("Loaded user settings from file '{0}'", fn);
             }
             catch (IOException e)
             {
+                Logger.Warn("Could not save user settings", e);
                 Exception = e;
             }
         }
+
         /// <summary>
         /// Gets the complete path and file name for the user settings file.
         /// </summary>
@@ -300,10 +305,19 @@ namespace Bovender.UserSettings
         private static T CreateDefaultOnException<T>(Exception e)
             where T: UserSettingsBase, new()
         {
+            Logger.Warn(e, "Exception during loading of user settings, using default");
             T options = new T();
             options.Exception = e;
             return options;
         }
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }
