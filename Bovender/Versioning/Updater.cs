@@ -348,8 +348,8 @@ namespace Bovender.Versioning
             else
             {
                 DownloadException = null;
-                // If the download was cancelled, remove the incomplete file from disk.
-                System.IO.File.Delete(DestinationFolder);
+                // No need to remove the downloaded file, WebClient takes care of this.
+                // System.IO.File.Delete(DestinationFolder);
             }
         }
 
