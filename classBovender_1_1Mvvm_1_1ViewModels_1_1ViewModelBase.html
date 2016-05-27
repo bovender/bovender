@@ -130,9 +130,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4c5521878a0225514539cada6016bdb0"><td class="memItemLeft" align="right" valign="top">Window&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a4c5521878a0225514539cada6016bdb0">InjectInto</a> (Window view)</td></tr>
 <tr class="memdesc:a4c5521878a0225514539cada6016bdb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Injects the view model into an existing view by setting the view's DataContext.  <a href="#a4c5521878a0225514539cada6016bdb0">More...</a><br /></td></tr>
 <tr class="separator:a4c5521878a0225514539cada6016bdb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15968b1a6354e4a91262af20a068cbab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a15968b1a6354e4a91262af20a068cbab">InjectAndShowInThread&lt; T &gt;</a> (IntPtr ownerForm)</td></tr>
+<tr class="memdesc:a15968b1a6354e4a91262af20a068cbab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new thread that creates a new instance of the view <em>T</em> , sets its Forms owner and shows it modelessly.  <a href="#a15968b1a6354e4a91262af20a068cbab">More...</a><br /></td></tr>
+<tr class="separator:a15968b1a6354e4a91262af20a068cbab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33a11abf2ab24e2680f77941209b6800"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a33a11abf2ab24e2680f77941209b6800">InjectAndShowInThread&lt; T &gt;</a> ()</td></tr>
 <tr class="memdesc:a33a11abf2ab24e2680f77941209b6800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new thread that creates a new instance of the view <em>T</em>  and shows it modelessly.  <a href="#a33a11abf2ab24e2680f77941209b6800">More...</a><br /></td></tr>
 <tr class="separator:a33a11abf2ab24e2680f77941209b6800"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ed3a9c35b9e9744e6686a4f98afa37a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a6ed3a9c35b9e9744e6686a4f98afa37a">InjectAndShowDialogInThread&lt; T &gt;</a> (IntPtr ownerForm)</td></tr>
+<tr class="memdesc:a6ed3a9c35b9e9744e6686a4f98afa37a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new thread that creates a new instance of the view <em>T</em>  and shows it as a dialog.  <a href="#a6ed3a9c35b9e9744e6686a4f98afa37a">More...</a><br /></td></tr>
+<tr class="separator:a6ed3a9c35b9e9744e6686a4f98afa37a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -178,7 +184,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00027">27</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
+<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00028">28</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="abea21bdf6ecdca10baab86931821bb16"></a>
 <div class="memitem">
@@ -203,11 +209,111 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 
 <p>Does not allow public instantiation of this class. </p>
 
-<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00191">191</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
+<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00192">192</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a6ed3a9c35b9e9744e6686a4f98afa37a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bovender.Mvvm.ViewModels.ViewModelBase.InjectAndShowDialogInThread&lt; T &gt; </td>
+          <td>(</td>
+          <td class="paramtype">IntPtr&#160;</td>
+          <td class="paramname"><em>ownerForm</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new thread that creates a new instance of the view <em>T</em>  and shows it as a dialog. </p>
+<p>Use this to show dialogs during asynchronous operations. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ownerForm</td><td>Handle of the Forms window that the view should belong to.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>View (descendant of Window).</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="typeconstraint">
+<dl><dt><b>Type Constraints</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em>T</em></td><td>&#160;:</td><td valign="top"><em>Window</em></td><td>&#160;</td></tr>
+<tr><td valign="top"><em>T</em></td><td>&#160;:</td><td valign="top"><em>new()</em></td><td>&#160;</td></tr>
+</table>
+</dd>
+</dl>
+</div>
+
+<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00299">299</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a15968b1a6354e4a91262af20a068cbab"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bovender.Mvvm.ViewModels.ViewModelBase.InjectAndShowInThread&lt; T &gt; </td>
+          <td>(</td>
+          <td class="paramtype">IntPtr&#160;</td>
+          <td class="paramname"><em>ownerForm</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new thread that creates a new instance of the view <em>T</em> , sets its Forms owner and shows it modelessly. </p>
+<p>Use this to show views during asynchronous operations. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ownerForm</td><td>Handle of the Forms window that the view should belong to.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>View (descendant of Window).</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="typeconstraint">
+<dl><dt><b>Type Constraints</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em>T</em></td><td>&#160;:</td><td valign="top"><em>Window</em></td><td>&#160;</td></tr>
+<tr><td valign="top"><em>T</em></td><td>&#160;:</td><td valign="top"><em>new()</em></td><td>&#160;</td></tr>
+</table>
+</dd>
+</dl>
+</div>
+
+<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00253">253</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a33a11abf2ab24e2680f77941209b6800"></a>
 <div class="memitem">
 <div class="memproto">
@@ -247,7 +353,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 </dl>
 </div>
 
-<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00249">249</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
+<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00287">287</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
 
 </div>
 </div>
@@ -282,7 +388,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>View with current view model injected.</dd></dl>
 
-<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00223">223</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
+<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00224">224</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
 
 </div>
 </div>
@@ -325,7 +431,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 </dl>
 </div>
 
-<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00211">211</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
+<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00212">212</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
 
 </div>
 </div>
@@ -361,7 +467,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if model is wrapped by this; false if not (including null objects).</dd></dl>
 
-<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00112">112</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
+<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00113">113</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
 
 </div>
 </div>
@@ -415,7 +521,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 
 <p>Captures the dispatcher of the thread that the object was created in. </p>
 
-<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00151">151</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
+<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00152">152</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
 
 </div>
 </div>
@@ -432,7 +538,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 
 <p>Raised by the CloseView Command, signals that associated views are to be closed. </p>
 
-<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00043">43</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
+<p>Definition at line <a class="el" href="ViewModelBase_8cs_source.html#l00044">44</a> of file <a class="el" href="ViewModelBase_8cs_source.html">ViewModelBase.cs</a>.</p>
 
 </div>
 </div>
@@ -445,7 +551,7 @@ PropertyChangedEventHandler&#160;</td><td class="memItemRight" valign="bottom"><
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceBovender.html">Bovender</a></li><li class="navelem"><a class="el" href="namespaceBovender_1_1Mvvm.html">Mvvm</a></li><li class="navelem"><a class="el" href="namespaceBovender_1_1Mvvm_1_1ViewModels.html">ViewModels</a></li><li class="navelem"><a class="el" href="classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html">ViewModelBase</a></li>
-    <li class="footer">Generated on Tue May 24 2016 17:24:41 for bovender framework by
+    <li class="footer">Generated on Fri May 27 2016 16:42:26 for bovender framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

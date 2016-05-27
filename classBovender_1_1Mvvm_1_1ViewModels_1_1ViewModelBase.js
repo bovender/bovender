@@ -3,6 +3,8 @@ var classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase =
     [ "ViewModelBase", "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#abea21bdf6ecdca10baab86931821bb16", null ],
     [ "CanCloseView", "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a3649e8e7bd3e4f371d583932b3eac73a", null ],
     [ "DoCloseView", "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a3c621e62c077eaf7f8853547262237d2", null ],
+    [ "InjectAndShowDialogInThread< T >", "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a6ed3a9c35b9e9744e6686a4f98afa37a", null ],
+    [ "InjectAndShowInThread< T >", "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a15968b1a6354e4a91262af20a068cbab", null ],
     [ "InjectAndShowInThread< T >", "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a33a11abf2ab24e2680f77941209b6800", null ],
     [ "InjectInto", "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a4c5521878a0225514539cada6016bdb0", null ],
     [ "InjectInto< T >", "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#af95af94eef4cd55396ea35f23127e30f", null ],

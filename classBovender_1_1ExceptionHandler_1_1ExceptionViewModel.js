@@ -30,6 +30,7 @@ var classBovender_1_1ExceptionHandler_1_1ExceptionViewModel =
     [ "SubmitReportCommand", "classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#a31b350b0d52742e0f046a67d648d6b6a", null ],
     [ "SubmitReportMessage", "classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#a3a4501a329bea8b648e932762731a247", null ],
     [ "User", "classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#acd1578fe189a9a2f54f79cd58472c6ff", null ],
+    [ "UserSettings", "classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#a9f4e5279af8db1b0bd61aefd64b9e99e", null ],
     [ "ViewDetailsCommand", "classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#a7c943650e988cd3ed04e5f2ea620ddb4", null ],
     [ "ViewDetailsMessage", "classBovender_1_1ExceptionHandler_1_1ExceptionViewModel.html#a49fa18adada9a7fbe61a02275a3012df", null ]
 ];

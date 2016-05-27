@@ -85,7 +85,6 @@ var hierarchy =
     [ "Bovender.PathHelpers", "classBovender_1_1PathHelpers.html", null ],
     [ "Bovender.Unmanaged.Pinvoke", "classBovender_1_1Unmanaged_1_1Pinvoke.html", null ],
     [ "Bovender.UnitTests.PinvokeTests", "classBovender_1_1UnitTests_1_1PinvokeTests.html", null ],
-    [ "Bovender.Settings", "classBovender_1_1Settings.html", null ],
     [ "Bovender.Extensions.StringExtensions", "classBovender_1_1Extensions_1_1StringExtensions.html", null ],
     [ "Bovender.UnitTests.Mvvm.TestModel", "classBovender_1_1UnitTests_1_1Mvvm_1_1TestModel.html", null ],
     [ "TriggerAction", null, [

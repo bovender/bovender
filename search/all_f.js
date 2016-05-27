@@ -1,12 +1,11 @@
 var searchData=
 [
   ['save',['Save',['../classBovender_1_1UserSettings_1_1UserSettingsBase.html#af351b954ef47500893f0d5b04d874da6',1,'Bovender::UserSettings::UserSettingsBase']]],
-  ['semanticversion',['SemanticVersion',['../classBovender_1_1Versioning_1_1SemanticVersion.html',1,'Bovender::Versioning']]],
   ['semanticversion',['SemanticVersion',['../classBovender_1_1Versioning_1_1SemanticVersion.html#aebc0efc968cc32971b8b6660d099e8ee',1,'Bovender::Versioning::SemanticVersion']]],
+  ['semanticversion',['SemanticVersion',['../classBovender_1_1Versioning_1_1SemanticVersion.html',1,'Bovender::Versioning']]],
   ['send',['Send',['../classBovender_1_1Mvvm_1_1Messaging_1_1Message.html#a044a3d2758cb94994bc41c89378e8c1d',1,'Bovender.Mvvm.Messaging.Message.Send(T messageContent, Action&lt; T &gt; respond)'],['../classBovender_1_1Mvvm_1_1Messaging_1_1Message.html#a3d085392a7d4ed9f384d007a7b718519',1,'Bovender.Mvvm.Messaging.Message.Send(T messageContent)'],['../classBovender_1_1Mvvm_1_1Messaging_1_1Message.html#a7746b03a811db5c08853156fddbed502',1,'Bovender.Mvvm.Messaging.Message.Send()']]],
   ['sent',['Sent',['../classBovender_1_1Mvvm_1_1Messaging_1_1Message.html#a26fd1faa40a8611e07d65e08ecd0909f',1,'Bovender::Mvvm::Messaging::Message']]],
   ['setownerform',['SetOwnerForm',['../classBovender_1_1Extensions_1_1WindowExtensions.html#aea537404b19ee6ffa1cdbf53d032dc61',1,'Bovender::Extensions::WindowExtensions']]],
-  ['settings',['Settings',['../classBovender_1_1Settings.html',1,'Bovender']]],
   ['sha1hash',['Sha1Hash',['../classBovender_1_1FileHelpers.html#adf15cccbe9a22f02afecd06fef32e9b9',1,'Bovender::FileHelpers']]],
   ['sha256hash',['Sha256Hash',['../classBovender_1_1FileHelpers.html#aa23ff652befea5d71ee9e22411552c92',1,'Bovender::FileHelpers']]],
   ['showdialoginform',['ShowDialogInForm',['../classBovender_1_1Extensions_1_1WindowExtensions.html#aee9ee8aecf3f13a4307978e915e771f8',1,'Bovender.Extensions.WindowExtensions.ShowDialogInForm(this Window window, IntPtr parentForm)'],['../classBovender_1_1Extensions_1_1WindowExtensions.html#a75a715c17f373266d6275c9a28d85412',1,'Bovender.Extensions.WindowExtensions.ShowDialogInForm(this Window window)']]],
