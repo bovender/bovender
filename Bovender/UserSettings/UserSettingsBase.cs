@@ -244,7 +244,7 @@ namespace Bovender.UserSettings
                     sw.Flush();
                 }
                 Exception = null;
-                Logger.Info("Loaded user settings from file '{0}'", fn);
+                Logger.Info("Saved user settings to file '{0}'", fn);
             }
             catch (IOException e)
             {
