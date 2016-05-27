@@ -182,14 +182,14 @@ namespace Bovender.UserSettings
 
         #endregion
 
-        #region Public methods
+        #region Public static methods
 
         /// <summary>
         /// Creates a new settings object without loading the saved settings
         /// from file and without saving the current settings from file.
         /// </summary>
         /// <remarks>
-        /// Derived classes shoudl implement their own static variant of this
+        /// Derived classes should implement their own static variant of this
         /// method (which cannot be marked virtual because it is static), in
         /// order to generate an instance of the derived class, rather than
         /// an instance of UserSettingsBase.
@@ -244,7 +244,7 @@ namespace Bovender.UserSettings
                     sw.Flush();
                 }
                 Exception = null;
-                Logger.Info("Loaded user settings from file '{0}'", fn);
+                Logger.Info("Saved user settings to file '{0}'", fn);
             }
             catch (IOException e)
             {

@@ -21,6 +21,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Threading;
 using System.Windows.Threading;
+using Bovender.Extensions;
 
 namespace Bovender.Mvvm.ViewModels
 {
@@ -242,11 +243,14 @@ namespace Bovender.Mvvm.ViewModels
         }
 
         /// <summary>
-        /// Creates a new thread that creates a new instance of the view <typeparamref name="T"/>
-        /// and shows it modelessly. Use this to show views during asynchronous operations.
+        /// Creates a new thread that creates a new instance of the view <typeparamref name="T"/>,
+        /// sets its Forms owner and shows it modelessly.
+        /// Use this to show views during asynchronous operations.
         /// </summary>
+        /// <param name="ownerForm">Handle of the Forms window that the view should
+        /// belong to.</param>
         /// <typeparam name="T">View (descendant of Window).</typeparam>
-        public void InjectAndShowInThread<T>() where T: Window, new()
+        public void InjectAndShowInThread<T>(IntPtr ownerForm) where T: Window, new()
         {
             Thread t = new Thread(() =>
             {
@@ -268,8 +272,54 @@ namespace Bovender.Mvvm.ViewModels
                 // of the thread if there are other views that this view model
                 // has been injected into.
                 // view.Closed += (sender, args) => view.Dispatcher.InvokeShutdown();
-                view.Show();
+                view.ShowInForm(ownerForm);
                 System.Windows.Threading.Dispatcher.Run();
+            });
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+        }
+
+        /// <summary>
+        /// Creates a new thread that creates a new instance of the view <typeparamref name="T"/>
+        /// and shows it modelessly. Use this to show views during asynchronous operations.
+        /// </summary>
+        /// <typeparam name="T">View (descendant of Window).</typeparam>
+        public void InjectAndShowInThread<T>() where T: Window, new()
+        {
+            InjectAndShowInThread<T>(IntPtr.Zero);
+        }
+
+        /// <summary>
+        /// Creates a new thread that creates a new instance of the view <typeparamref name="T"/>
+        /// and shows it as a dialog. Use this to show dialogs during asynchronous operations.
+        /// </summary>
+        /// <param name="ownerForm">Handle of the Forms window that the view should
+        /// belong to.</param>
+        /// <typeparam name="T">View (descendant of Window).</typeparam>
+        public void InjectAndShowDialogInThread<T>(IntPtr ownerForm) where T : Window, new()
+        {
+            Thread t = new Thread(() =>
+            {
+                T view = new T();
+                EventHandler h = null;
+                h = (sender, args) =>
+                {
+                    this.RequestCloseView -= h;
+                    // view.Close();
+                    view.Dispatcher.Invoke(new Action(view.Close));
+                    view.Dispatcher.InvokeShutdown();
+                };
+                this.RequestCloseView += h;
+                ViewDispatcher = view.Dispatcher;
+                view.DataContext = this;
+                // Must shut down the Dispatcher, but this has been moved from
+                // the Closed event of the view to the RequestCloseView event
+                // of the view model in order to prevent premature termination
+                // of the thread if there are other views that this view model
+                // has been injected into.
+                // view.Closed += (sender, args) => view.Dispatcher.InvokeShutdown();
+                view.ShowDialogInForm(ownerForm);
+                // System.Windows.Threading.Dispatcher.Run();
             });
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
