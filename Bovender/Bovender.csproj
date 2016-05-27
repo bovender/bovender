@@ -105,7 +105,6 @@
     <Compile Include="Mvvm\Views\Settings\WindowState.cs" />
     <Compile Include="Extensions\WindowExtensions.cs" />
     <Compile Include="PathHelpers.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="ExceptionHandler\ExceptionViewModel.cs" />
     <Compile Include="FileHelpers.cs" />
     <Compile Include="Mvvm\Actions\MessageActionBase.cs" />

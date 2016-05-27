@@ -264,10 +264,9 @@ namespace Bovender.ExceptionHandler
                 InnerException = "";
                 InnerMessage = "";
             }
-
-            User = Settings.User;
-            Email = Settings.Email;
-            CcUser = Settings.CcUser;
+            User = UserSettings.User;
+            Email = UserSettings.Email;
+            CcUser = UserSettings.CcUserOnExceptionReport;
         }
 
         #endregion
@@ -280,16 +279,17 @@ namespace Bovender.ExceptionHandler
         /// <returns>Valid URI of a server that accepts POST requests.</returns>
         protected abstract Uri GetPostUri();
 
+        protected abstract Bovender.UserSettings.UserSettingsBase UserSettings { get;  }
+
         #endregion
 
         #region Overrides
 
         protected override void DoCloseView()
         {
-            Settings.User = User;
-            Settings.Email = Email;
-            Settings.CcUser = CcUser;
-            Settings.Save();
+            UserSettings.User = User;
+            UserSettings.Email = Email;
+            UserSettings.CcUserOnExceptionReport = CcUser;
             base.DoCloseView();
         }
 
