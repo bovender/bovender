@@ -59,8 +59,18 @@ namespace Bovender.Extensions
         /// </summary>
         public static bool? ShowDialogInForm(this Window window, IntPtr parentForm)
         {
-            window.SetOwnerForm(parentForm);
-            return window.ShowDialog();
+            try
+            {
+                window.SetOwnerForm(parentForm);
+                return window.ShowDialog();
+            }
+            catch (Exception e)
+            {
+                Logger.Warn(e, "Could not show dialog with owner form 0x{0:X08}; falling back to show dialog without owner",
+                    parentForm);
+                window.SetOwnerForm(IntPtr.Zero);
+                return window.ShowDialog();
+            }
         }
 
         /// <summary>
@@ -81,13 +91,18 @@ namespace Bovender.Extensions
         /// </summary>
         public static void ShowInForm(this Window window, IntPtr parentForm)
         {
-            if (parentForm != IntPtr.Zero)
+            try
             {
-                WindowInteropHelper h = new WindowInteropHelper(window);
-                // TODO
-                h.Owner = TopLevelWindow;
+                window.SetOwnerForm(parentForm);
+                window.Show();
             }
-            window.Show();
+            catch (Exception e)
+            {
+                Logger.Warn(e, "Could not show window with owner form 0x{0:X08}; falling back to show dialog without owner",
+                    parentForm);
+                window.SetOwnerForm(IntPtr.Zero);
+                window.Show();
+            }
         }
 
         /// <summary>
@@ -98,6 +113,14 @@ namespace Bovender.Extensions
         {
             window.ShowInForm(TopLevelWindow);
         }
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }
