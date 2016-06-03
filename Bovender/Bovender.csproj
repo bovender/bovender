@@ -144,6 +144,7 @@
     <Compile Include="Versioning\SemanticVersion.cs" />
     <Compile Include="Versioning\Updater.cs" />
     <Compile Include="Versioning\UpdaterViewModel.cs" />
+    <Compile Include="Win32Window.cs" />
     <Compile Include="WpfHelpers.cs" />
   </ItemGroup>
   <ItemGroup>

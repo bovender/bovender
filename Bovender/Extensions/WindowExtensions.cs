@@ -26,17 +26,6 @@ namespace Bovender.Extensions
     /// </summary>
     public static class WindowExtensions
     {
-        #region Global static property
-
-        /// <summary>
-        /// May hold the HWND of a Windows forms top-level window; if set, it
-        /// is used to set a WPF window's owner by ViewModels that inject
-        /// themselves into a WPF View.
-        /// </summary>
-        public static IntPtr TopLevelWindow { get; set; }
-
-        #endregion
-
         #region Public extension methods for Window
 
         /// <summary>
@@ -79,11 +68,12 @@ namespace Bovender.Extensions
         /// </summary>
         public static bool? ShowDialogInForm(this Window window)
         {
-            if (TopLevelWindow == IntPtr.Zero)
+            IntPtr mainWindowHandle = Win32Window.MainWindowHandleProvider();
+            if (mainWindowHandle == IntPtr.Zero)
             {
-                throw new InvalidOperationException("Must set TopLevelWindow property before calling this method.");
+                throw new InvalidOperationException("Must set MainWindowHandleProvider property before calling this method.");
             }
-            return window.ShowDialogInForm(TopLevelWindow);
+            return window.ShowDialogInForm(mainWindowHandle);
         }
 
         /// <summary>
@@ -111,7 +101,7 @@ namespace Bovender.Extensions
         /// <param name="window">WPF window who's Windows forms owner to set.</param>
         public static void ShowInForm(this Window window)
         {
-            window.ShowInForm(TopLevelWindow);
+            window.ShowInForm((new Win32Window(window)).Handle);
         }
 
         #endregion
