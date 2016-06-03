@@ -75,7 +75,7 @@ namespace Bovender.Mvvm.Actions
                     dlg.Filter = _messageContent.Filter;
                 }
             }
-            if (dlg.ShowDialog() == DialogResult.OK)
+            if (dlg.ShowDialog(new Win32Window()) == DialogResult.OK)
             {
                 return dlg.FileName;
             }

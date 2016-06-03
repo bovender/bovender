@@ -26,17 +26,6 @@ namespace Bovender.Extensions
     /// </summary>
     public static class WindowExtensions
     {
-        #region Global static property
-
-        /// <summary>
-        /// May hold the HWND of a Windows forms top-level window; if set, it
-        /// is used to set a WPF window's owner by ViewModels that inject
-        /// themselves into a WPF View.
-        /// </summary>
-        public static IntPtr TopLevelWindow { get; set; }
-
-        #endregion
-
         #region Public extension methods for Window
 
         /// <summary>
@@ -59,8 +48,18 @@ namespace Bovender.Extensions
         /// </summary>
         public static bool? ShowDialogInForm(this Window window, IntPtr parentForm)
         {
-            window.SetOwnerForm(parentForm);
-            return window.ShowDialog();
+            try
+            {
+                window.SetOwnerForm(parentForm);
+                return window.ShowDialog();
+            }
+            catch (Exception e)
+            {
+                Logger.Warn(e, "Could not show dialog with owner form 0x{0:X08}; falling back to show dialog without owner",
+                    parentForm);
+                window.SetOwnerForm(IntPtr.Zero);
+                return window.ShowDialog();
+            }
         }
 
         /// <summary>
@@ -69,11 +68,12 @@ namespace Bovender.Extensions
         /// </summary>
         public static bool? ShowDialogInForm(this Window window)
         {
-            if (TopLevelWindow == IntPtr.Zero)
+            IntPtr mainWindowHandle = Win32Window.MainWindowHandleProvider();
+            if (mainWindowHandle == IntPtr.Zero)
             {
-                throw new InvalidOperationException("Must set TopLevelWindow property before calling this method.");
+                throw new InvalidOperationException("Must set MainWindowHandleProvider property before calling this method.");
             }
-            return window.ShowDialogInForm(TopLevelWindow);
+            return window.ShowDialogInForm(mainWindowHandle);
         }
 
         /// <summary>
@@ -81,13 +81,18 @@ namespace Bovender.Extensions
         /// </summary>
         public static void ShowInForm(this Window window, IntPtr parentForm)
         {
-            if (parentForm != IntPtr.Zero)
+            try
             {
-                WindowInteropHelper h = new WindowInteropHelper(window);
-                // TODO
-                h.Owner = TopLevelWindow;
+                window.SetOwnerForm(parentForm);
+                window.Show();
             }
-            window.Show();
+            catch (Exception e)
+            {
+                Logger.Warn(e, "Could not show window with owner form 0x{0:X08}; falling back to show dialog without owner",
+                    parentForm);
+                window.SetOwnerForm(IntPtr.Zero);
+                window.Show();
+            }
         }
 
         /// <summary>
@@ -96,8 +101,16 @@ namespace Bovender.Extensions
         /// <param name="window">WPF window who's Windows forms owner to set.</param>
         public static void ShowInForm(this Window window)
         {
-            window.ShowInForm(TopLevelWindow);
+            window.ShowInForm((new Win32Window(window)).Handle);
         }
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }
