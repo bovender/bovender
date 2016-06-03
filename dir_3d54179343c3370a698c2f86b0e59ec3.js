@@ -12,5 +12,6 @@ var dir_3d54179343c3370a698c2f86b0e59ec3 =
     [ "CommonHelpers.cs", "CommonHelpers_8cs_source.html", null ],
     [ "FileHelpers.cs", "FileHelpers_8cs_source.html", null ],
     [ "PathHelpers.cs", "PathHelpers_8cs_source.html", null ],
+    [ "Win32Window.cs", "Win32Window_8cs_source.html", null ],
     [ "WpfHelpers.cs", "WpfHelpers_8cs_source.html", null ]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['text',['Text',['../classBovender_1_1Text_1_1Multiline.html#afd4d6fe2715b376ea42b8bf4f3497b71',1,'Bovender::Text::Multiline']]],
-  ['toplevelwindow',['TopLevelWindow',['../classBovender_1_1Extensions_1_1WindowExtensions.html#ac8997eb6ca58c811c18df9644d464bf4',1,'Bovender::Extensions::WindowExtensions']]]
+  ['rect',['Rect',['../classBovender_1_1Mvvm_1_1Views_1_1Settings_1_1WindowSettings.html#a047d9730d2cf3c5fb52a0a610a015bef',1,'Bovender::Mvvm::Views::Settings::WindowSettings']]]
 ];

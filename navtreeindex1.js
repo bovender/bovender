@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classBovender_1_1Mvvm_1_1Converters_1_1BooleanNegationConverter.html#a028f209a3f7416bbe2f78fa985fce736":[1,0,0,3,1,0,0],
 "classBovender_1_1Mvvm_1_1Converters_1_1BooleanNegationConverter.html#a8a50d4e37167da35e7fcbe9635001bf8":[1,0,0,3,1,0,1],
 "classBovender_1_1Mvvm_1_1Converters_1_1EnumBooleanConverter.html":[1,0,0,3,1,1],
 "classBovender_1_1Mvvm_1_1Converters_1_1EnumBooleanConverter.html#a362e79ca0f2f8bd228718ee01d7aaff1":[1,0,0,3,1,1,0],
@@ -240,14 +241,13 @@ var NAVTREEINDEX1 =
 "classBovender_1_1Unmanaged_1_1DllSha1MismatchException.html#a906aa44baa1fb0f55e732447fbe8ebd5":[1,0,0,6,3,2],
 "classBovender_1_1Unmanaged_1_1DllSha1MismatchException.html#a996a7bf71269a18ad8d0d3032ed209cb":[1,0,0,6,3,3],
 "classBovender_1_1Unmanaged_1_1Pinvoke.html":[1,0,0,6,4],
-"classBovender_1_1Unmanaged_1_1Pinvoke.html#a01f1951de65006f5d676d1f669b7dd5f":[1,0,0,6,4,4],
-"classBovender_1_1Unmanaged_1_1Pinvoke.html#a42ad203e65f3703623c25c29b68b045a":[1,0,0,6,4,6],
+"classBovender_1_1Unmanaged_1_1Pinvoke.html#a01f1951de65006f5d676d1f669b7dd5f":[1,0,0,6,4,5],
+"classBovender_1_1Unmanaged_1_1Pinvoke.html#a42ad203e65f3703623c25c29b68b045a":[1,0,0,6,4,7],
 "classBovender_1_1Unmanaged_1_1Pinvoke.html#a7150a5750eff6f01836ce02065ff3cf5":[1,0,0,6,4,0],
 "classBovender_1_1Unmanaged_1_1Pinvoke.html#a864dc505d34e307b57dde659c00c68a8":[1,0,0,6,4,2],
-"classBovender_1_1Unmanaged_1_1Pinvoke.html#a97a02829f212f36c9c0522886a61d441":[1,0,0,6,4,5],
-"classBovender_1_1Unmanaged_1_1Pinvoke.html#aa1c7cf80a16721ab6c20e9a4250ee4bc":[1,0,0,6,4,3],
+"classBovender_1_1Unmanaged_1_1Pinvoke.html#a97a02829f212f36c9c0522886a61d441":[1,0,0,6,4,6],
+"classBovender_1_1Unmanaged_1_1Pinvoke.html#aa1c7cf80a16721ab6c20e9a4250ee4bc":[1,0,0,6,4,4],
+"classBovender_1_1Unmanaged_1_1Pinvoke.html#ab7632396a5c1df0229531d92b3930524":[1,0,0,6,4,3],
 "classBovender_1_1Unmanaged_1_1Pinvoke.html#adc515cdb79d772eb87c04292f61d61d4":[1,0,0,6,4,1],
-"classBovender_1_1UserSettings_1_1UserSettingsBase.html":[1,0,0,7,0],
-"classBovender_1_1UserSettings_1_1UserSettingsBase.html#a19efd71589cf42d35d709c35f2aae09b":[1,0,0,7,0,6],
-"classBovender_1_1UserSettings_1_1UserSettingsBase.html#a2f50da8af1f2eeed1557092aecd4ce3c":[1,0,0,7,0,11]
+"classBovender_1_1UserSettings_1_1UserSettingsBase.html":[1,0,0,7,0]
 };

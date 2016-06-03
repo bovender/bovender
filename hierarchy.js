@@ -66,6 +66,9 @@ var hierarchy =
       [ "Bovender.Mvvm.Converters.SimpleExceptionConverter", "classBovender_1_1Mvvm_1_1Converters_1_1SimpleExceptionConverter.html", null ],
       [ "Bovender.Mvvm.Converters.VisibilityBooleanConverter", "classBovender_1_1Mvvm_1_1Converters_1_1VisibilityBooleanConverter.html", null ]
     ] ],
+    [ "IWin32Window", null, [
+      [ "Bovender.Win32Window", "classBovender_1_1Win32Window.html", null ]
+    ] ],
     [ "Bovender.Mvvm.Messaging.Message< Bovender.Mvvm.Messaging.ProcessMessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],
     [ "Bovender.Mvvm.Messaging.Message< FileNameMessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],
     [ "Bovender.Mvvm.Messaging.Message< MessageContent >", "classBovender_1_1Mvvm_1_1Messaging_1_1Message.html", null ],

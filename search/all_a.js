@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['mainwindowhandleprovider',['MainWindowHandleProvider',['../classBovender_1_1Win32Window.html#a5322636418837db8028883ff471c3772',1,'Bovender::Win32Window']]],
   ['manage',['Manage',['../classBovender_1_1ExceptionHandler_1_1CentralHandler.html#aa0e8bf5b3128ca2ee9838f54983d7e3e',1,'Bovender::ExceptionHandler::CentralHandler']]],
   ['manageexceptioneventargs',['ManageExceptionEventArgs',['../classBovender_1_1ExceptionHandler_1_1ManageExceptionEventArgs.html',1,'Bovender::ExceptionHandler']]],
   ['message',['Message',['../classBovender_1_1Mvvm_1_1Messaging_1_1Message.html',1,'Bovender::Mvvm::Messaging']]],
@@ -11,9 +12,9 @@ var searchData=
   ['messageactionbase',['MessageActionBase',['../classBovender_1_1Mvvm_1_1Actions_1_1MessageActionBase.html',1,'Bovender::Mvvm::Actions']]],
   ['messageactionextensions',['MessageActionExtensions',['../classBovender_1_1Mvvm_1_1Actions_1_1MessageActionExtensions.html',1,'Bovender::Mvvm::Actions']]],
   ['messageargs',['MessageArgs',['../classBovender_1_1Mvvm_1_1Messaging_1_1MessageArgs.html',1,'Bovender::Mvvm::Messaging']]],
-  ['messagecontent',['MessageContent',['../classBovender_1_1Mvvm_1_1Messaging_1_1MessageContent.html#a03eb7bf74efa1ad3618bde363869852b',1,'Bovender::Mvvm::Messaging::MessageContent']]],
   ['messagecontent',['MessageContent',['../classBovender_1_1Mvvm_1_1Messaging_1_1MessageContent.html',1,'Bovender::Mvvm::Messaging']]],
-  ['multiline',['Multiline',['../classBovender_1_1Text_1_1Multiline.html#a5986ea0fb8e6468869051b38e49477ab',1,'Bovender::Text::Multiline']]],
+  ['messagecontent',['MessageContent',['../classBovender_1_1Mvvm_1_1Messaging_1_1MessageContent.html#a03eb7bf74efa1ad3618bde363869852b',1,'Bovender::Mvvm::Messaging::MessageContent']]],
   ['multiline',['Multiline',['../classBovender_1_1Text_1_1Multiline.html',1,'Bovender::Text']]],
+  ['multiline',['Multiline',['../classBovender_1_1Text_1_1Multiline.html#a5986ea0fb8e6468869051b38e49477ab',1,'Bovender::Text::Multiline']]],
   ['multilinetest',['MultilineTest',['../classBovender_1_1UnitTests_1_1Text_1_1MultilineTest.html',1,'Bovender::UnitTests::Text']]]
 ];

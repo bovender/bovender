@@ -79,10 +79,11 @@ var NAVTREEINDEX0 =
 "ViewModelCollection_8cs_source.html":[2,0,0,3,3,2],
 "ViewModelMessageContent_8cs_source.html":[2,0,0,3,2,7],
 "VisibilityBooleanConverter_8cs_source.html":[2,0,0,3,1,3],
+"Win32Window_8cs_source.html":[2,0,0,12],
 "WindowExtensions_8cs_source.html":[2,0,0,1,3],
 "WindowSettings_8cs_source.html":[2,0,0,3,4,0,0],
 "WindowState_8cs_source.html":[2,0,0,3,4,0,1],
-"WpfHelpers_8cs_source.html":[2,0,0,12],
+"WpfHelpers_8cs_source.html":[2,0,0,13],
 "annotated.html":[1,0],
 "classBovender_1_1CommonHelpers.html":[1,0,0,9],
 "classBovender_1_1CommonHelpers.html#ada83e362e71e2443cb6821913d601c30":[1,0,0,9,0],
@@ -151,9 +152,9 @@ var NAVTREEINDEX0 =
 "classBovender_1_1Extensions_1_1StringExtensions.html#aaaafdc7e01a411f934f41b3fb613fbcc":[1,0,0,1,2,0],
 "classBovender_1_1Extensions_1_1WindowExtensions.html":[1,0,0,1,3],
 "classBovender_1_1Extensions_1_1WindowExtensions.html#a2b4f8b6265c6ef8a4fa42b8aae82b0d0":[1,0,0,1,3,3],
+"classBovender_1_1Extensions_1_1WindowExtensions.html#a2fd0661df2e0265853f718e3c12f57d5":[1,0,0,1,3,5],
 "classBovender_1_1Extensions_1_1WindowExtensions.html#a75a715c17f373266d6275c9a28d85412":[1,0,0,1,3,2],
 "classBovender_1_1Extensions_1_1WindowExtensions.html#a97947f5c99ecd395d2da17dc4e1d73e1":[1,0,0,1,3,4],
-"classBovender_1_1Extensions_1_1WindowExtensions.html#ac8997eb6ca58c811c18df9644d464bf4":[1,0,0,1,3,5],
 "classBovender_1_1Extensions_1_1WindowExtensions.html#aea537404b19ee6ffa1cdbf53d032dc61":[1,0,0,1,3,0],
 "classBovender_1_1Extensions_1_1WindowExtensions.html#aee9ee8aecf3f13a4307978e915e771f8":[1,0,0,1,3,1],
 "classBovender_1_1FileHelpers.html":[1,0,0,10],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classBovender_1_1Mvvm_1_1BindingWebBrowser.html#a7b9415263e11a4c3eecc0192f09ec712":[1,0,0,3,5,3],
 "classBovender_1_1Mvvm_1_1BindingWebBrowser.html#ab9b566df1a9c1d249b28b9a7977a1400":[1,0,0,3,5,0],
 "classBovender_1_1Mvvm_1_1BindingWebBrowser.html#aff66b16996ab4777f6cb0ccd0f86e552":[1,0,0,3,5,4],
-"classBovender_1_1Mvvm_1_1Converters_1_1BooleanNegationConverter.html":[1,0,0,3,1,0],
-"classBovender_1_1Mvvm_1_1Converters_1_1BooleanNegationConverter.html#a028f209a3f7416bbe2f78fa985fce736":[1,0,0,3,1,0,0]
+"classBovender_1_1Mvvm_1_1Converters_1_1BooleanNegationConverter.html":[1,0,0,3,1,0]
 };
