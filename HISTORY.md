@@ -1,3 +1,54 @@
+Version 0.8.1 (2016-06-11)
+------------------------------------------------------------------------
+
+- IMPROVED: Expect a JSON response to submitting an exception report that includes a URL to the issue page.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+Version 0.8.0. (2016-06-03)
+------------------------------------------------------------------------
+
+- CHANGE: FileDialogActionBase now shows the dialogs with the owner provided by Win32Window.
+- FIX: Show windows anyway even if invalid window handle exception occurred (fixes bovender/XLToolbox#7).
+- NEW: P/invoke wrapper for FindWindow.
+- NEW: Win32Window class that can be used to deal with main window handles.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+Version 0.7.0 (2016-05-27)
+------------------------------------------------------------------------
+
+- FIX: ExceptionViewModel did not make use of the new UserSettingsBase class.
+- FIX: Log message when saving UserSettingsBase.
+- FIX: Prevent null reference exceptions in ExceptionViewModel constructor if no exception is given.
+- IMPROVEMENT: The owner form can now be set when injecting view models into views.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+Version 0.6.1 (2016-05-24)
+------------------------------------------------------------------------
+
+- FIX: When aborting an update, do not attempt to delete the partially downloaded file, because the WebClient won't leave one.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+Version 0.6.0 (2016-05-16)
+------------------------------------------------------------------------
+
+- FIX: No longer crash if SemanticVersion variables with null value are compared.
+- FIX: Produce SemanticVersion string from current properties (instead of just returning the original string).
+- IMPROVED: Added logging and overloaded constructors of NotificationAction.
+- NEW: Add logging using the NLog framework.
+- NEW: Extension for Object to compute an object's MD5 checksum hash.
+- NEW: Extension for String to truncate with ellipsis.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.5.2 (2016-05-06)
 ------------------------------------------------------------------------
 
