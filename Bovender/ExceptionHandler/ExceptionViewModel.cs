@@ -19,8 +19,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Net;
 using System.Collections.Specialized;
+using System.Web.Helpers;
 using Bovender.Mvvm;
 using Bovender.Mvvm.Messaging;
 using Bovender.Mvvm.ViewModels;
@@ -137,6 +139,8 @@ namespace Bovender.ExceptionHandler
 
         public string ReportID { get; private set; }
 
+        public string IssueUrl { get; private set; }
+
         public string BovenderFramework
         {
             get
@@ -192,6 +196,19 @@ namespace Bovender.ExceptionHandler
             return _clearFormCommand;
             }
 
+        }
+
+        public DelegatingCommand NavigateIssueUrlCommand
+        {
+            get
+            {
+                if (_navigateIssueUrlCommand == null)
+                {
+                    _navigateIssueUrlCommand = new DelegatingCommand(
+                        (param) => DoNavigateIssueUrl());
+                }
+                return _navigateIssueUrlCommand;
+            }
         }
         #endregion
 
@@ -250,12 +267,12 @@ namespace Bovender.ExceptionHandler
             if (e != null)
             {
                 string devPath = DevPath();
-                if (devPath.Length > 0)
+                if (!String.IsNullOrWhiteSpace(devPath))
                 {
-                    this.Exception = e.ToString().Replace(devPath, String.Empty);
+                    this.Exception = Regex.Replace(e.ToString(), devPath, String.Empty);
                     if (!String.IsNullOrEmpty(e.StackTrace))
                     {
-                        StackTrace = e.StackTrace.Replace(devPath, String.Empty);
+                        StackTrace = Regex.Replace(e.StackTrace, devPath, String.Empty);
                     }
                     else
                     {
@@ -265,7 +282,7 @@ namespace Bovender.ExceptionHandler
                 Message = e.Message;
                 if (e.InnerException != null)
                 {
-                    InnerException = e.InnerException.ToString().Replace(devPath, String.Empty);
+                    InnerException = Regex.Replace(e.InnerException.ToString(), devPath, String.Empty);
                     InnerMessage = e.InnerException.Message;
                 }
                 else
@@ -312,33 +329,52 @@ namespace Bovender.ExceptionHandler
             // Set 'IsIndeterminate' to false to stop the ProgressBar animation.
             SubmissionProcessMessageContent.IsIndeterminate = false;
             SubmissionProcessMessageContent.WasSuccessful = false;
+            Logger.Info("Exception submission completed...");
             if (!e.Cancelled)
             {
                 SubmissionProcessMessageContent.WasCancelled = false;
                 if (e.Error == null)
                 {
-                    string result = Encoding.UTF8.GetString(e.Result);
-                    if (result == ReportID)
+                    string result = null;
+                    try
                     {
-                        SubmissionProcessMessageContent.WasSuccessful = true;
+                        result = Encoding.UTF8.GetString(e.Result);
+                        dynamic json = Json.Decode(result);
+                        if (json.ReportID == ReportID)
+                        {
+                            Logger.Info("json.IssueUrl: {0}", json.IssueUrl);
+                            IssueUrl = json.IssueUrl as string;
+                            SubmissionProcessMessageContent.WasSuccessful = true;
+                        }
+                        else
+                        {
+                            throw new UnexpectedResponseException(
+                                String.Format(
+                                    "Received an unexpected return value from the web service (should be report ID {0}).",
+                                    ReportID
+                                )
+                            );
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        SubmissionProcessMessageContent.Exception = new UnexpectedResponseException(
-                            String.Format(
-                                "Received an unexpected return value from the web service (should be report ID {0}).",
-                                ReportID
-                            )
-                        );
+                        Logger.Fatal("... but response cannot be interpreted!");
+                        Logger.Fatal(ex);
+                        Logger.Fatal("Response: {0}", result);
+                        SubmissionProcessMessageContent.Exception = new ExceptionSubmissionException(
+                            "Exception submission failed", ex);
                     }
                 }
                 else
                 {
+                    Logger.Warn("... with network error:");
+                    Logger.Warn(e.Error);
                     SubmissionProcessMessageContent.Exception = e.Error;
                 }
             }
             else
             {
+                Logger.Info("... was cancelled.");
                 SubmissionProcessMessageContent.WasCancelled = true;
             }
             SubmissionProcessMessageContent.Processing = false;
@@ -360,6 +396,7 @@ namespace Bovender.ExceptionHandler
 
         protected virtual void DoSubmitReport()
         {
+            Logger.Info("Submitting exception report");
             SubmissionProcessMessageContent.CancelProcess = new Action(CancelSubmission);
             SubmissionProcessMessageContent.Processing = true;
             _webClient = new WebClient();
@@ -391,6 +428,13 @@ namespace Bovender.ExceptionHandler
                 );
         }
 
+        protected virtual void DoNavigateIssueUrl()
+        {
+            Logger.Info("Navigating to issue URL: {0}", IssueUrl);
+            System.Diagnostics.Process.Start(IssueUrl);
+            DoCloseView();
+        }
+
         /// <summary>
         /// Returns a collection of key-value pairs of exception context information
         /// that will be submitted to the exception reporting server.
@@ -418,8 +462,9 @@ namespace Bovender.ExceptionHandler
         }
 
         /// <summary>
-        /// Returns the path on the development machine that shall be stripped
-        /// from the file information in the exception and stack trace.
+        /// Returns the path(s) on the development machine that shall be stripped
+        /// from the file information in the exception and stack trace. The return value
+        /// of this function is used as the pattern in a Regex.Replace() call.
         /// </summary>
         /// <remarks>
         /// If an application is distributed along with .pdb files, the entire path of
@@ -447,6 +492,7 @@ namespace Bovender.ExceptionHandler
                 if (_submissionProcessMessageContent == null)
                 {
                     _submissionProcessMessageContent = new ProcessMessageContent(
+                        this,
                         new Action(CancelSubmission)
                         );
                     _submissionProcessMessageContent.IsIndeterminate = true;
@@ -467,9 +513,18 @@ namespace Bovender.ExceptionHandler
         private DelegatingCommand _submitReportCommand;
         private DelegatingCommand _viewDetailsCommand;
         private DelegatingCommand _clearFormCommand;
+        private DelegatingCommand _navigateIssueUrlCommand;
         private Message<MessageContent> _submitReportMessage;
         private Message<ViewModelMessageContent> _viewDetailsMessage;
         private ProcessMessageContent _submissionProcessMessageContent;
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }
