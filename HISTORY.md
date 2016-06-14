@@ -1,3 +1,11 @@
+Version 0.8.2 (2016-06-14)
+------------------------------------------------------------------------
+
+- FIX: Handle denial of access for the Windows clipboard more gracefully (by waiting longer for access and raising a more meaningful exception).
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.8.1 (2016-06-11)
 ------------------------------------------------------------------------
 
@@ -126,6 +134,13 @@ Version 0.1.0 (2015-06-08)
 ------------------------------------------------------------------------
 
 Initial NuGet package after extracting the framework from the XL Toolbox NG solution.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+Documentation for version 0.8.0. (2016-06-03)
+------------------------------------------------------------------------
+
 
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
