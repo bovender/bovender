@@ -38,12 +38,17 @@ namespace Bovender.Unmanaged
             while (!opened && attempts < CLIPBOARD_MAX_ATTEMPTS)
             {
                 attempts++;
-                System.Threading.Thread.Sleep(CLIPBOARD_WAIT_MS);
+                System.Threading.Thread.Sleep(CLIPBOARD_WAIT_MS * attempts);
                 opened = Win32_OpenClipboard(hWndNewOwner);
             }
             if (!opened && !Win32_OpenClipboard(hWndNewOwner))
             {
-                throw new Win32Exception(Marshal.GetLastWin32Error());
+                // Compute total duration: https://en.wikipedia.org/wiki/Triangular_number
+                string s = String.Format(
+                    "Unable to get clipboard access; it is still locked by another application even after {0} attempts over {1:0.0} seconds",
+                    attempts, CLIPBOARD_WAIT_MS * attempts * (attempts + 1) / 2 / 1000);
+                Logger.Fatal(s);
+                throw new Win32Exception(Marshal.GetLastWin32Error(), s);
             }
         }
 
@@ -185,6 +190,14 @@ namespace Bovender.Unmanaged
 
         private const int CLIPBOARD_MAX_ATTEMPTS = 5;
         private const int CLIPBOARD_WAIT_MS = 200;
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }
