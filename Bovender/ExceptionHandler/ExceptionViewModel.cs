@@ -149,6 +149,14 @@ namespace Bovender.ExceptionHandler
             }
         }
 
+        public bool IsClickOnceDeployed
+        {
+            get
+            {
+                return System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed;
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -458,6 +466,7 @@ namespace Bovender.ExceptionHandler
             v["os_bitness"] = OSBitness;
             v["clr_version"] = CLR;
             v["bovender_version"] = BovenderFramework;
+            v["click_once"] = IsClickOnceDeployed.ToString();
             return v;
         }
 
