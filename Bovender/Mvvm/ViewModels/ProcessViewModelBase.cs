@@ -173,14 +173,7 @@ namespace Bovender.Mvvm.ViewModels
                 Logger.Info("Sending ProcessMessageContent.CompletedMessage");
                 ProcessMessageContent.CompletedMessage.Send();
             });
-            if (Dispatcher != null)
-            {
-                Dispatcher.BeginInvoke(action);
-            }
-            else
-            {
-                action();
-            }
+            Dispatch(action);
         }
 
         /// <summary>
@@ -240,7 +233,7 @@ namespace Bovender.Mvvm.ViewModels
                 _showProgressWasSent = true;
                 if (IsProcessing())
                 {
-                    Dispatcher.Invoke((Action)(() =>
+                    Dispatch((Action)(() =>
                     {
                         Logger.Info("UpdateProgress: Sending ShowProgressMessage");
                         ShowProgressMessage.Send(ProcessMessageContent);
