@@ -1,3 +1,15 @@
+Version 0.9.0 (2016-06-17)
+------------------------------------------------------------------------
+
+- IMPROVEMENT: DllManager now attempts to locate a DLL in an alternative directory as well.
+- NEW: Added property for Click Once installation to ExceptionViewModel.
+- NEW: Bovender.Mvvm.Models.ProcessModel for long-running processes.
+- NEW: ProcessViewModelBase class that facilitates showing progress on long-running processes.
+- NEW: ViewModelBase.Dispatch helper that dispatches an action of function either directly or via the associated view's dispatcher, if one exists.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.8.2 (2016-06-14)
 ------------------------------------------------------------------------
 
