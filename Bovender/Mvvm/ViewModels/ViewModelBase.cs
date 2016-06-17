@@ -182,6 +182,41 @@ namespace Bovender.Mvvm.ViewModels
             }
         }
 
+        /// <summary>
+        /// Dispatches an action, either using the associated view's dispatcher
+        /// if one exists, or directly.
+        /// </summary>
+        /// <param name="action">Action to dispatch</param>
+        protected virtual void Dispatch(Action action)
+        {
+            if (Dispatcher != null)
+            {
+                Dispatcher.Invoke(action);
+            }
+            else
+            {
+                action();
+            }
+        }
+
+        /// <summary>
+        /// Dispatches a function, either using the associated view's dispatcher
+        /// if one exists, or directly.
+        /// </summary>
+        /// <param name="action">Function to dispatch</param>
+        /// <typeparam name="TResult">Type of the return value</typeparam>
+        protected virtual TResult Dispatch<TResult>(Func<TResult> function)
+        {
+            if (Dispatcher != null)
+            {
+                return (TResult)Dispatcher.Invoke(function);
+            }
+            else
+            {
+                return function();
+            }
+        }
+
         #endregion
 
         #region Constructor

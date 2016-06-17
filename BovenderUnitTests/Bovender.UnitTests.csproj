@@ -80,6 +80,8 @@
   <ItemGroup>
     <Compile Include="Extensions\ArrayExtensionsTest.cs" />
     <Compile Include="Mvvm\EnumProviderTest.cs" />
+    <Compile Include="Mvvm\ProcessViewModelBaseTest.cs" />
+    <Compile Include="Mvvm\ProcessViewModelForTesting.cs" />
     <Compile Include="Mvvm\TestModel.cs" />
     <Compile Include="Mvvm\TestViewModel.cs" />
     <Compile Include="Mvvm\ViewModelCollectionForTesting.cs" />

@@ -45,6 +45,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Forms" />
@@ -92,7 +93,10 @@
     <Compile Include="Mvvm\EnumProvider.cs" />
     <Compile Include="Mvvm\Messaging\FileNameMessageContent.cs" />
     <Compile Include="Mvvm\Messaging\ViewModelMessageContent.cs" />
+    <Compile Include="Mvvm\Models\ProcessModel.cs" />
+    <Compile Include="Mvvm\Models\ProcessModelEventArgs.cs" />
     <Compile Include="Mvvm\ViewModels\EnumViewModel.cs" />
+    <Compile Include="Mvvm\ViewModels\ProcessViewModelBase.cs" />
     <Compile Include="Mvvm\ViewModels\ViewModelCollection.cs" />
     <Compile Include="Mvvm\Views\ConfirmationView.xaml.cs">
       <DependentUpon>ConfirmationView.xaml</DependentUpon>

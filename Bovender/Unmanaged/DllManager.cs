@@ -30,8 +30,19 @@ namespace Bovender.Unmanaged
     /// </summary>
     public class DllManager : Object, IDisposable
     {
-        #region constants
+        #region Constants
+
         private const string LIBDIR = "lib";
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets an alternative dir where DLL files 
+        /// </summary>
+        public virtual string AlternativeDir { get; set; }
+
         #endregion
 
         #region WinAPI
@@ -65,35 +76,65 @@ namespace Bovender.Unmanaged
         /// <remarks>
         /// The DLL is expected to reside in a subdirectory of the entry point assembly's
         /// directory, in "bin/lib/$(Platform)", where $(Platform) can be "Win32" or "x64",
-        /// for example.
+        /// for example. If DllManager.AlternativeDir is set, the subdirectories there will be
+        /// queried as well.
         /// </remarks>
         /// <exception cref="DllNotFoundException">if the file is not found in the path.</exception>
-        /// <exception cref="DllLoadingFailedException">if the file is not found in the path.</exception>
+        /// <exception cref="DllLoadingFailedException">if the file could not be loaded.</exception>
         /// <param name="dllName">Name of the DLL to load (without path).</param>
         public void LoadDll(string dllName)
         {
-            // Check if the DLL exists
-            string dllPath = CompletePath(dllName);
-            CheckFilePresent(dllPath);
+            LoadDll(dllName, String.Empty);
+        }
 
-            // Attempt to load the DLL
+        /// <summary>
+        /// Loads the given DLL from the appropriate subdirectory if its Sha1 hash
+        /// matches the provided hash.
+        /// </summary>
+        /// <remarks>
+        /// The DLL is expected to reside in a subdirectory of the entry point assembly's
+        /// directory, in "bin/lib/$(Platform)", where $(Platform) can be "Win32" or "x64",
+        /// for example. If DllManager.AlternativeDir is set, the subdirectories there will be
+        /// queried as well.
+        /// </remarks>
+        /// <param name="dllName">Name of the DLL to load (without path).</param>
+        /// <param name="expectedSha1Hash">Expected Sha1 hash of the DLL.</param>
+        /// <exception cref="DllNotFoundException">if the file is not found in the path.</exception>
+        /// <exception cref="DllLoadingFailedException">if the file could not be loaded.</exception>
+        /// <exception cref="DllSha1MismatchException">if the file's Sha1 is unexpected.</exception>
+        // TODO: Use two expected hashes, one for Win32, one for x64
+        public void LoadDll(string dllName, string expectedSha1Hash)
+        {
+            Logger.Info("LoadDll: {0}", dllName);
+
+            string dllPath = LocateDll(dllName);
+            if (String.IsNullOrEmpty(dllPath))
+            {
+                throw new DllNotFoundException(
+                    String.Format("Unable to locate DLL file"));
+            }
+            Logger.Info("Path: {0}", dllName);
+
+            if (!String.IsNullOrWhiteSpace(expectedSha1Hash))
+            {
+                Logger.Info("Verifying checksum, expected: {0}", expectedSha1Hash);
+                if (!VerifyChecksum(dllPath, expectedSha1Hash))
+                {
+                    Logger.Fatal("DLL checksum mismatch, expected {0} on {1}", expectedSha1Hash, dllPath);
+                    throw new DllSha1MismatchException(String.Format(
+                        "DLL checksum error: expected {0} on {2}", expectedSha1Hash, dllPath));
+                }
+            };
+
             IntPtr handle = LoadLibrary(dllPath);
             if (handle == IntPtr.Zero)
             {
-                // Strip the leading directories from the path info (they may contain
-                // sensitive information about where exactly a user has installed files).
-                string[] dirs = Path.GetDirectoryName(dllPath).Split(Path.DirectorySeparatorChar);
-                string gracefulPath = dllName;
-                int n = dirs.Length;
-                if (n > 0) gracefulPath = Path.Combine(dirs[n - 1], gracefulPath);
-                if (n > 1) gracefulPath = Path.Combine(dirs[n - 2], gracefulPath);
-                if (n > 2) gracefulPath = Path.Combine("...", gracefulPath);
                 Win32Exception inner = new Win32Exception(Marshal.GetLastWin32Error());
-                Logger.Fatal("Failed to load DLL", inner);
+                Logger.Fatal(inner);
                 throw new DllLoadingFailedException(
                     String.Format(
-                        "LoadLibrary failed with code {0} on {1}",
-                        Marshal.GetLastWin32Error(), gracefulPath
+                        "Could not load DLL file: LoadLibrary failed with code {0} on {1}",
+                        Marshal.GetLastWin32Error(), SanitizeDllPath(dllPath)
                     ),
                     inner
                 );
@@ -101,31 +142,6 @@ namespace Bovender.Unmanaged
 
             // Register the DLL and its handle in the internal database
             _loadedDlls.Add(dllName, handle);
-        }
-
-        /// <summary>
-        /// Loads the given DLL from the appropriate subdirectory if its Sha1 hash
-        /// matches the provided hash.
-        /// </summary>
-        /// <param name="dllName">Name of the DLL to load (without path).</param>
-        /// <param name="expectedSha1Hash">Expected Sha1 hash of the DLL.</param>
-        /// <exception cref="DllNotFoundException">if the file is not found in the path.</exception>
-        /// <exception cref="DllLoadingFailedException">if the file is not found in the path.</exception>
-        /// <exception cref="DllSha1MismatchException">if the file's Sha1 is unexpected.</exception>
-        // TODO: Use two expected hashes, one for Win32, one for x64
-        public void LoadDll(string dllName, string expectedSha1Hash)
-        {
-            Logger.Info("LoadDll");
-            string dllPath = CompletePath(dllName);
-            CheckFilePresent(dllPath);
-            string actualSha1Hash = FileHelpers.Sha1Hash(dllPath);
-            if (actualSha1Hash != expectedSha1Hash)
-            {
-                Logger.Fatal("DLL checksum mismatch, expected {0}, got {1}", expectedSha1Hash, actualSha1Hash);
-                throw new DllSha1MismatchException(String.Format(
-                    "Expected {0} but got {1} on {2}", expectedSha1Hash, actualSha1Hash, dllPath));
-            };
-            LoadDll(dllName);
         }
 
         /// <summary>
@@ -178,24 +194,29 @@ namespace Bovender.Unmanaged
         #region Helpers
 
         /// <summary>
-        /// Checks if the given file exists and throws a custom exception if not.
+        /// Attempts to locate a DLL file in the canonical location (subdirectory
+        /// of the application directory) or, if set, in an alternative location.
         /// </summary>
-        /// <remarks>
-        /// Since an exception will be thrown by the CLR anyway, this method may seem
-        /// redundant. However, throwing a custom exception might help to identify the
-        /// problem a user has if only the name of the exception is reported and the
-        /// call trace is unknown.
-        /// </remarks>
-        /// <exception cref="DllNotFoundException">if file was not found</exception>
-        /// <param name="file">File whose presence to check.</param>
-        private void CheckFilePresent(string file)
+        /// <param name="dllName">DLL to search</param>
+        /// <returns>Complete path to the DLL file, or String.Empty if the DLL
+        /// was not found.</returns>
+        private string LocateDll(string dllName)
         {
-            if (!System.IO.File.Exists(file))
+            string dllPath = CompletePath(ApplicationDir(), dllName);
+            bool found = File.Exists(dllPath);
+            if (!found && !String.IsNullOrWhiteSpace(AlternativeDir))
             {
-                Logger.Fatal("File '{0}' does not exist.");
-                throw new DllNotFoundException(String.Format(
-                    "Not found: {0}", file));
-            };
+                dllPath = CompletePath(AlternativeDir, dllName);
+                found = File.Exists(dllPath);
+            }
+            if (found)
+            {
+                return dllPath;
+            }
+            else
+            {
+                return String.Empty;
+            }
         }
 
         /// <summary>
@@ -208,18 +229,50 @@ namespace Bovender.Unmanaged
         /// </remarks>
         /// <param name="fileName">Name of the DLL (with or without extension).</param>
         /// <returns>Path to the DLL subdirectory (platform-dependent).</returns>
-        private string CompletePath(string fileName)
+        private string CompletePath(string baseDir, string fileName)
         {
             if (!Path.HasExtension(fileName))
             {
                 fileName += ".dll";
             };
-            string s = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+            string s = Path.Combine(baseDir,
                 "lib",
                 Environment.Is64BitProcess ? "x64" : "Win32",
                 fileName);
             Logger.Info("Complete path: '{0}'", s);
             return s;
+        }
+
+        private string ApplicationDir()
+        {
+            return AppDomain.CurrentDomain.BaseDirectory;
+        }
+
+        private bool VerifyChecksum(string dllPath, string expectedSha1Hash)
+        {
+            return FileHelpers.Sha1Hash(dllPath) == expectedSha1Hash;
+        }
+
+        /// <summary>
+        /// Sanitizes a DLL path by removing potentially sensitive information,
+        /// i.e. the user name.
+        /// </summary>
+        /// <param name="dllPath">Path to sanitize</param>
+        /// <returns></returns>
+        private string SanitizeDllPath(string dllPath)
+        {
+            Logger.Info("Sanitizing DLL path:");
+            Logger.Info("    {0}", dllPath);
+            // Strip the leading directories from the path info (they may contain
+            // sensitive information about where exactly a user has installed files).
+            string[] dirs = Path.GetDirectoryName(dllPath).Split(Path.DirectorySeparatorChar);
+            string gracefulPath = dllPath;
+            int n = dirs.Length;
+            if (n > 0) gracefulPath = Path.Combine(dirs[n - 1], gracefulPath);
+            if (n > 1) gracefulPath = Path.Combine(dirs[n - 2], gracefulPath);
+            if (n > 2) gracefulPath = Path.Combine("...", gracefulPath);
+            Logger.Info("--> {0}", gracefulPath);
+            return gracefulPath;
         }
 
         #endregion
