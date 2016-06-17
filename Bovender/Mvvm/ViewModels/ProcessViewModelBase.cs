@@ -1,5 +1,4 @@
-﻿using Bovender.Mvvm.Messaging;
-/* ProcessViewModelBase.cs
+﻿/* ProcessViewModelBase.cs
  * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
@@ -21,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Bovender.Mvvm.Messaging;
 
 namespace Bovender.Mvvm.ViewModels
 {
@@ -29,8 +29,39 @@ namespace Bovender.Mvvm.ViewModels
     /// </summary>
     /// <remarks>
     /// <para>
+    /// To show a progress bar, listen to the ProcessViewModelBase.ShowProgress message and
+    /// create a Bovender.Mvvm.Views.ProcessView instance when it is sent:
+    /// </para>
+    /// <code>
+    /// myProcessViewModel.ShowProgress.Sent += (sender, args) =>
+    ///     {
+    ///         args.Content.CancelButtonText = Strings.Cancel;
+    ///         args.Content.Caption = Strings.ExportCsvFile;
+    ///         args.Content.CompletedMessage.Sent += (sender2, args2) =>
+    ///         {
+    ///             args.Content.CloseViewCommand.Execute(null);
+    ///         };
+    ///         args.Content.InjectAndShowInThread&lt;Bovender.Mvvm.Views.ProcessView>()&gt;;
+    ///     };
+    /// </code>
+    /// <para>
+    /// When the process finishes successfully, the ProcessView will be
+    /// closed automatically.
+    /// </para>
+    /// <para>
+    /// If the process encounters an error, the ProcessViewModelBase.ProcessFailedMessage
+    /// will be sent, and you may want to listen for it to inform the user:
+    /// </para>
+    /// <code>
+    /// myProcessViewModel.ProcessFailedMessage.Sent += (sender, args) =>
+    ///     {
+    ///         MessageBox.Show(args.Content.Value, Strings.ExportCsvFile,
+    ///             MessageBoxButton.OK, MessageBoxImage.Warning);
+    ///     };
+    /// </code>
+    /// <para>
     /// Note that this class does not deal with separate threads.
-    /// Implementations may defer threading to a model or take care
+    /// Implementations should defer threading to a model or take care
     /// of it themselves.
     /// </para>
     /// </remarks>
@@ -44,15 +75,15 @@ namespace Bovender.Mvvm.ViewModels
         /// This message is sent only once. Subsequent status updates
         /// are written to the shared ProcessMessageContent object.
         /// </summary>
-        public Message<ProcessMessageContent> ShowProgress
+        public Message<ProcessMessageContent> ShowProgressMessage
         {
             get
             {
-                if (_showProgress == null)
+                if (_showProgressMessage == null)
                 {
-                    _showProgress = new Message<ProcessMessageContent>();
+                    _showProgressMessage = new Message<ProcessMessageContent>();
                 }
-                return _showProgress;
+                return _showProgressMessage;
             }
         }
 
@@ -103,9 +134,7 @@ namespace Bovender.Mvvm.ViewModels
 
         protected ProcessViewModelBase()
             : base()
-        {
-
-        }
+        { }
 
         #endregion
 
@@ -118,6 +147,7 @@ namespace Bovender.Mvvm.ViewModels
         /// </summary>
         protected virtual void StartProcess()
         {
+            Logger.Info("Starting process...");
             _progressTimer = new Timer(UpdateProgress, null, 1000, 300);
             Execute();
             AfterStartProcess();
@@ -128,7 +158,49 @@ namespace Bovender.Mvvm.ViewModels
         /// </summary>
         protected virtual void AfterStartProcess()
         {
+            Logger.Info("Additional work after starting the process");
             CloseViewCommand.Execute(null);
+        }
+
+        /// <summary>
+        /// Sends the ProcessMessageContent.CompletedMessage to signal
+        /// that the process has finished.
+        /// </summary>
+        protected virtual void SendCompletionMessage()
+        {
+            Action action = new Action(() =>
+            {
+                Logger.Info("Sending ProcessMessageContent.CompletedMessage");
+                ProcessMessageContent.CompletedMessage.Send();
+            });
+            if (Dispatcher != null)
+            {
+                Dispatcher.BeginInvoke(action);
+            }
+            else
+            {
+                action();
+            }
+        }
+
+        /// <summary>
+        /// Sends the ProcessFailedMessage to signal failure.
+        /// Also writes the information to the Logger.
+        /// </summary>
+        protected virtual void SendProcessFailedMessage(Exception e)
+        {
+            Logger.Warn(e);
+            SendProcessFailedMessage(e.Message);
+        }
+
+        /// <summary>
+        /// Sends the ProcessFailedMessage to signal failure.
+        /// Also writes the information to the Logger.
+        /// </summary>
+        protected virtual void SendProcessFailedMessage(string infoMessage)
+        {
+            Logger.Warn("Sending ProcessFailedMessage");
+            ProcessFailedMessage.Send(new StringMessageContent(infoMessage));
         }
 
         #endregion
@@ -168,15 +240,25 @@ namespace Bovender.Mvvm.ViewModels
                 _showProgressWasSent = true;
                 if (IsProcessing())
                 {
-                    ShowProgress.Send(ProcessMessageContent);
+                    Dispatcher.Invoke((Action)(() =>
+                    {
+                        Logger.Info("UpdateProgress: Sending ShowProgressMessage");
+                        ShowProgressMessage.Send(ProcessMessageContent);
+                        Logger.Debug("UpdateProgress: ... ShowProgressMessage was sent");
+
+                    }));
+
                 }
             }
             if (IsProcessing())
             {
-                ProcessMessageContent.PercentCompleted = GetPercentCompleted();
+                int percent = GetPercentCompleted();
+                Logger.Info("UpdateProgress: PercentCompleted: {0}", percent);
+                ProcessMessageContent.PercentCompleted = percent;
             }
             else
             {
+                Logger.Info("UpdateProgress: No longer processing, disposing update timer");
                 _progressTimer.Dispose();
             }
         }
@@ -185,7 +267,7 @@ namespace Bovender.Mvvm.ViewModels
 
         #region Private fields
 
-        private Message<ProcessMessageContent> _showProgress;
+        private Message<ProcessMessageContent> _showProgressMessage;
         private Message<StringMessageContent> _processFailedMessage;
         private ProcessMessageContent _processMessageContent;
         private Timer _progressTimer;
