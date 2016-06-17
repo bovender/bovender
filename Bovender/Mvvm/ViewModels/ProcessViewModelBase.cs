@@ -67,6 +67,32 @@ namespace Bovender.Mvvm.ViewModels
     /// </remarks>
     public abstract class ProcessViewModelBase : ViewModelBase
     {
+        #region Properties
+
+        public Bovender.Mvvm.Models.ProcessModel ProcessModel
+        {
+            get
+            {
+                return _processModel;
+            }
+            set
+            {
+                if (_processModel != null)
+                {
+                    _processModel.ProcessFailed -= ProcessModel_ProcessFailed;
+                    _processModel.ProcessSucceeded -= ProcessModel_ProcessSucceeded;
+                }
+                _processModel = value;
+                if (_processModel != null)
+                {
+                    _processModel.ProcessFailed += ProcessModel_ProcessFailed;
+                    _processModel.ProcessSucceeded += ProcessModel_ProcessSucceeded;
+                }
+            }
+        }
+
+        #endregion
+
         #region MVVM messages
 
         /// <summary>
@@ -88,15 +114,30 @@ namespace Bovender.Mvvm.ViewModels
         }
 
         /// <summary>
-        /// Message that signals if the process failed.
+        /// Message that signals when the process succeeded.
         /// </summary>
-        public Message<StringMessageContent> ProcessFailedMessage
+        public Message<ProcessMessageContent> ProcessSucceededMessage
+        {
+            get
+            {
+                if (_processSucceededMessage == null)
+                {
+                    _processSucceededMessage = new Message<ProcessMessageContent>();
+                }
+                return _processSucceededMessage;
+            }
+        }
+
+        /// <summary>
+        /// Message that signals when the process failed.
+        /// </summary>
+        public Message<ProcessMessageContent> ProcessFailedMessage
         {
             get
             {
                 if (_processFailedMessage == null)
                 {
-                    _processFailedMessage = new Message<StringMessageContent>();
+                    _processFailedMessage = new Message<ProcessMessageContent>();
                 }
                 return _processFailedMessage;
             }
@@ -166,11 +207,12 @@ namespace Bovender.Mvvm.ViewModels
         /// Sends the ProcessMessageContent.CompletedMessage to signal
         /// that the process has finished.
         /// </summary>
-        protected virtual void SendCompletionMessage()
+        protected virtual void SendProcessSucceededMessage()
         {
             Action action = new Action(() =>
             {
-                Logger.Info("Sending ProcessMessageContent.CompletedMessage");
+                Logger.Info("Sending ProcessSucceededMessage");
+                ProcessSucceededMessage.Send();
                 ProcessMessageContent.CompletedMessage.Send();
             });
             Dispatch(action);
@@ -193,7 +235,20 @@ namespace Bovender.Mvvm.ViewModels
         protected virtual void SendProcessFailedMessage(string infoMessage)
         {
             Logger.Warn("Sending ProcessFailedMessage");
-            ProcessFailedMessage.Send(new StringMessageContent(infoMessage));
+            ProcessFailedMessage.Send(ProcessMessageContent);
+        }
+
+        #endregion
+
+        #region Overrides
+
+        /// <summary>
+        /// Returns the associated Bovender.Mvvm.Models.ProcessModel (if any).
+        /// </summary>
+        /// <returns></returns>
+        public override object RevealModelObject()
+        {
+            return ProcessModel;
         }
 
         #endregion
@@ -255,16 +310,36 @@ namespace Bovender.Mvvm.ViewModels
                 _progressTimer.Dispose();
             }
         }
+
+        private void ProcessModel_ProcessSucceeded(object sender, Models.ProcessModelEventArgs e)
+        {
+            // Because the ProcessModel may raise the event from a different thread,
+            // we use the associated view's dispatcher (if any).
+            Dispatch((Action)(() =>
+            {
+                SendProcessSucceededMessage();
+            }));
+        }
+
+        private void ProcessModel_ProcessFailed(object sender, Models.ProcessModelEventArgs e)
+        {
+            Dispatch((Action)(() =>
+            {
+                SendProcessFailedMessage(e.ProcessException);
+            }));
+        }
         
         #endregion
 
         #region Private fields
 
         private Message<ProcessMessageContent> _showProgressMessage;
-        private Message<StringMessageContent> _processFailedMessage;
+        private Message<ProcessMessageContent> _processSucceededMessage;
+        private Message<ProcessMessageContent> _processFailedMessage;
         private ProcessMessageContent _processMessageContent;
         private Timer _progressTimer;
         private bool _showProgressWasSent;
+        private Bovender.Mvvm.Models.ProcessModel _processModel;
 
         #endregion
 

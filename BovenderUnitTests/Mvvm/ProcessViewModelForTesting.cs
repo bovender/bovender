@@ -55,7 +55,7 @@ namespace Bovender.UnitTests.Mvvm
                         Duration = watch.ElapsedMilliseconds;
                         Console.WriteLine(String.Format("Process took {0} ms", Duration));
                         _processing = false;
-                        SendCompletionMessage();
+                        SendProcessSucceededMessage();
                     }
                     catch (Exception e)
                     {

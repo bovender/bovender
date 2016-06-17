@@ -93,6 +93,8 @@
     <Compile Include="Mvvm\EnumProvider.cs" />
     <Compile Include="Mvvm\Messaging\FileNameMessageContent.cs" />
     <Compile Include="Mvvm\Messaging\ViewModelMessageContent.cs" />
+    <Compile Include="Mvvm\Models\ProcessModel.cs" />
+    <Compile Include="Mvvm\Models\ProcessModelEventArgs.cs" />
     <Compile Include="Mvvm\ViewModels\EnumViewModel.cs" />
     <Compile Include="Mvvm\ViewModels\ProcessViewModelBase.cs" />
     <Compile Include="Mvvm\ViewModels\ViewModelCollection.cs" />
