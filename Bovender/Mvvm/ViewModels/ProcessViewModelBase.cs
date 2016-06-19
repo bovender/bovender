@@ -225,16 +225,8 @@ namespace Bovender.Mvvm.ViewModels
         protected virtual void SendProcessFailedMessage(Exception e)
         {
             Logger.Warn(e);
-            SendProcessFailedMessage(e.Message);
-        }
-
-        /// <summary>
-        /// Sends the ProcessFailedMessage to signal failure.
-        /// Also writes the information to the Logger.
-        /// </summary>
-        protected virtual void SendProcessFailedMessage(string infoMessage)
-        {
             Logger.Warn("Sending ProcessFailedMessage");
+            ProcessMessageContent.Exception = e;
             ProcessFailedMessage.Send(ProcessMessageContent);
         }
 

@@ -1,5 +1,5 @@
-﻿/* MessageArgs.cs
- * part of Daniel's XL Toolbox NG
+﻿/* MessageArgsBase.cs
+ * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
  * 
@@ -22,14 +22,8 @@ using System.Text;
 
 namespace Bovender.Mvvm.Messaging
 {
-    public class MessageArgs<T> : MessageArgsBase where T : MessageContent
+    public abstract class MessageArgsBase : EventArgs
     {
-        public T Content { get; set; }
-
-        public MessageArgs(T content, Action respond)
-        {
-            Content = content;
-            Respond = respond;
-        }
+        public Action Respond { get; set; }
     }
 }

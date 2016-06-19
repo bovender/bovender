@@ -19,6 +19,8 @@ using System;
 using System.Windows;
 using System.Windows.Interactivity;
 using Bovender.Mvvm.Messaging;
+using Bovender.Mvvm.ViewModels;
+using Bovender.Extensions;
 
 namespace Bovender.Mvvm.Actions
 {
@@ -31,8 +33,6 @@ namespace Bovender.Mvvm.Actions
     {
         #region Public properties
 
-        public string Caption { get; set; }
-        public string Message { get; set; }
         public MessageContent Content { get; protected set; }
 
         #endregion
@@ -40,55 +40,53 @@ namespace Bovender.Mvvm.Actions
         #region TriggerAction overrides
 
         /// <summary>
-        /// Creates a view that has its dependent view model injected
-        /// into it.
+        /// Invokes the action by creating a view and a corresponding view model.
         /// </summary>
-        /// <remarks>
-        /// This methods delegates the creation of the view instance to
-        /// the virtual <see cref="CreateView"/> method. If this method
-        /// injects a view model into the view's DataContext, the view
-        /// will simply be shown (as a dialog). If the CreateView method
-        /// does not inject the dependeny, the Invoke method will inject
-        /// 'this' (i.e., the MessageActionBase object or a descendant)
-        /// into the view and sets the RequestClose event handler.
-        /// </remarks>
         /// <param name="parameter"><see cref="MessageArgs"/> argument
         /// for the <see cref="Message.Sent"/> event.</param>
         protected override void Invoke(object parameter)
         {
-            dynamic args = parameter;
+            dynamic args = parameter as MessageArgsBase;
+            dynamic content = null;
+            dynamic response = null;
             if (args != null)
             {
-                Content = args.Content;
-                Window window = CreateView();
-                if (window != null)
-                {
-                    // Only set the window's DataContext and handler for the
-                    // RequestClose event if the DataContext has not already been
-                    // assigned. We assume here that if a DataContext has been
-                    // assigned, it will have been done by a view models InjectInto
-                    // method, which also takes care of the close handler.
-                    if (window.DataContext == null)
-                    {
-                        window.DataContext = this;
-                        EventHandler closeHandler = null;
-                        closeHandler = (sender, e) =>
-                        {
-                            Content.RequestCloseView -= closeHandler;
-                            window.Close();
-                            if (args.Respond != null) args.Respond();
-                        };
-                        Content.RequestCloseView += closeHandler;
-                    }
-                    ShowView(window);
-                }
+                content = args.Content;
+                response = args.Respond;
             }
+            else
+            {
+                Logger.Warn("Invoke: Parameter is not a MessageArgsBase");
+            }
+            Invoke(content, response);
         }
 
-        protected void Invoke<T>(T messageContent, Action respond)
+        protected void Invoke<T>(T messageContent, Action response)
             where T : MessageContent
         {
-            Invoke(new MessageArgs<T>(messageContent, respond));
+            if (messageContent == null)
+            {
+                Logger.Warn("Invoke: messageContent is null");
+            }
+            Content = messageContent;
+            Window window = CreateView();
+            if (window != null)
+            {
+                MessageActionViewModel vm = CreateViewModel();
+                EventHandler responseHandler = null;
+                responseHandler = (sender, e) =>
+                {
+                    vm.RequestCloseView -= responseHandler;
+                    if (response != null) response();
+                };
+                vm.RequestCloseView += responseHandler;
+                vm.InjectInto(window);
+                ShowView(window);
+            }
+            else
+            {
+                Logger.Warn("Invoke: CreateView did not return a Window object!");
+            }
         }
 
         #endregion
@@ -104,7 +102,19 @@ namespace Bovender.Mvvm.Actions
         /// method.</remarks>
         protected virtual void ShowView(Window view)
         {
-            view.ShowDialog();
+            Logger.Info("ShowView: Showing view as dialog");
+            view.ShowDialogInForm();
+        }
+
+        /// <summary>
+        /// Creates a MessageActionViewModel that wraps this MessageActionBase object.
+        /// Can be overridden to create different view models.
+        /// </summary>
+        /// <returns>MessageActionViewModel wrapping 'this'.</returns>
+        protected virtual MessageActionViewModel CreateViewModel()
+        {
+            Logger.Info("CreateViewModel: Creating default MessageActionViewModel");
+            return new MessageActionViewModel(this);
         }
 
         #endregion
@@ -116,6 +126,14 @@ namespace Bovender.Mvvm.Actions
         /// </summary>
         /// <returns>Descendant of Window.</returns>
         protected abstract Window CreateView();
+
+        #endregion
+
+        #region Class logger
+
+        protected static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }

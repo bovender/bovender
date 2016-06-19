@@ -29,6 +29,24 @@ namespace Bovender.Mvvm.Actions
     {
         #region Public (dependency) properties
 
+        public string Caption
+        {
+            get { return (string)GetValue(CaptionProperty); }
+            set
+            {
+                SetValue(CaptionProperty, value);
+            }
+        }
+
+        public string Message
+        {
+            get { return (string)GetValue(MessageProperty); }
+            set
+            {
+                SetValue(MessageProperty, value);
+            }
+        }
+
         public string Param1
         {
             get { return (string)GetValue(Param1Property); }
@@ -56,12 +74,12 @@ namespace Bovender.Mvvm.Actions
             }
         }
 
-        public string OkButtonLabel
+        public string OkButtonText
         {
-            get { return (string)GetValue(OkButtonLabelProperty); }
+            get { return (string)GetValue(OkButtonTextProperty); }
             set
             {
-                SetValue(OkButtonLabelProperty, value);
+                SetValue(OkButtonTextProperty, value);
             }
         }
 
@@ -94,6 +112,12 @@ namespace Bovender.Mvvm.Actions
 
         #region Declarations of dependency properties
 
+        public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register(
+            "Caption", typeof(string), typeof(NotificationAction));
+
+        public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(
+            "Message", typeof(string), typeof(NotificationAction));
+
         public static readonly DependencyProperty Param1Property = DependencyProperty.Register(
             "Param1", typeof(string), typeof(NotificationAction));
 
@@ -103,17 +127,17 @@ namespace Bovender.Mvvm.Actions
         public static readonly DependencyProperty Param3Property = DependencyProperty.Register(
             "Param3", typeof(string), typeof(NotificationAction));
 
-        public static readonly DependencyProperty OkButtonLabelProperty = DependencyProperty.Register(
-            "OkButtonLabel", typeof(string), typeof(NotificationAction));
+        public static readonly DependencyProperty OkButtonTextProperty = DependencyProperty.Register(
+            "OkButtonText", typeof(string), typeof(NotificationAction));
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public NotificationAction()
             : base()
         {
-            OkButtonLabel = "OK";
+            OkButtonText = "OK";
         }
 
         public NotificationAction(string caption, string message)
@@ -123,26 +147,26 @@ namespace Bovender.Mvvm.Actions
             Message = message;
         }
 
-        public NotificationAction(string caption, string message, string okButtonLabel)
+        public NotificationAction(string caption, string message, string okButtonText)
             : this(caption, message)
         {
-            OkButtonLabel = okButtonLabel;
+            OkButtonText = okButtonText;
         }
 
-        public NotificationAction(string caption, string message, string okButtonLabel, string param)
-            : this(caption, message, okButtonLabel)
+        public NotificationAction(string caption, string message, string okButtonText, string param)
+            : this(caption, message, okButtonText)
         {
             Param1 = param;
         }
 
-        public NotificationAction(string caption, string message, string okButtonLabel, string param1, string param2)
-            : this(caption, message, okButtonLabel, param1)
+        public NotificationAction(string caption, string message, string okButtonText, string param1, string param2)
+            : this(caption, message, okButtonText, param1)
         {
             Param2 = param2;
         }
 
-        public NotificationAction(string caption, string message, string okButtonLabel, string param1, string param2, string param3)
-            : this(caption, message, okButtonLabel, param1, param2)
+        public NotificationAction(string caption, string message, string okButtonText, string param1, string param2, string param3)
+            : this(caption, message, okButtonText, param1, param2)
         {
             Param3 = param3;
         }
@@ -158,17 +182,18 @@ namespace Bovender.Mvvm.Actions
 
         #endregion
 
-        #region Private fields
+        #region Overrides
 
-        private string _formattedText;
+        protected override ViewModels.MessageActionViewModel CreateViewModel()
+        {
+            return new ViewModels.NotificationActionViewModel(this);
+        }
 
         #endregion
 
-        #region Class logger
+        #region Private fields
 
-        private static NLog.Logger Logger { get { return _logger.Value; } }
-
-        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
+        private string _formattedText;
 
         #endregion
     }

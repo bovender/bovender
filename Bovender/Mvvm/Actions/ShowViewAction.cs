@@ -28,7 +28,7 @@ namespace Bovender.Mvvm.Actions
     /// Injects a view with a view model that is referenced in a ViewModelMessageContent,
     /// and shows the view non-modally.
     /// </summary>
-    public class ShowViewAction : MessageActionBase
+    public class ShowViewAction : NotificationAction
     {
         #region Public properties
 
@@ -63,14 +63,6 @@ namespace Bovender.Mvvm.Actions
         {
             view.Show();
         }
-
-        #endregion
-
-        #region Class logger
-
-        private static NLog.Logger Logger { get { return _logger.Value; } }
-
-        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }
