@@ -1,3 +1,13 @@
+Version 0.10.0 (2016-06-20)
+------------------------------------------------------------------------
+
+- CHANGE: The MVVM MessageAction system no longer injects MessageActionBase objects into views, but ViewModelBase-derived classes.
+- IMPROVEMENT: Better out-of-the-box support for process actions.
+- IMPROVEMENT: The MVVM actions were rewired and changed so that they never inject themselves into views. Action view models are now used for this purpose.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.9.0 (2016-06-17)
 ------------------------------------------------------------------------
 
