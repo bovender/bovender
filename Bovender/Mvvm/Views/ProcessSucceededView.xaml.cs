@@ -1,5 +1,5 @@
-﻿/* MessageArgs.cs
- * part of Daniel's XL Toolbox NG
+﻿/* ProcessSucceededView.xaml.cs
+ * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
  * 
@@ -15,21 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Windows;
 
-namespace Bovender.Mvvm.Messaging
+namespace Bovender.Mvvm.Views
 {
-    public class MessageArgs<T> : MessageArgsBase where T : MessageContent
+    /// <summary>
+    /// Interaction logic for ProcessSucceededView.xaml
+    /// </summary>
+    public partial class ProcessSucceededView : Window
     {
-        public T Content { get; set; }
-
-        public MessageArgs(T content, Action respond)
+        public ProcessSucceededView()
         {
-            Content = content;
-            Respond = respond;
+            InitializeComponent();
         }
     }
 }

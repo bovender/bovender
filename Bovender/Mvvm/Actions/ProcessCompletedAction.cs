@@ -25,16 +25,116 @@ using Bovender.Mvvm.Messaging;
 namespace Bovender.Mvvm.Actions
 {
     /// <summary>
-    /// Abstract WPF action that invokes different views depending on the status
+    /// WPF action that invokes different views depending on the status
     /// of a completed process.
     /// </summary>
-    public abstract class ProcessCompletedAction : MessageActionBase
+    public class ProcessCompletedAction : NotificationAction
     {
-        #region Abstract methods
+        #region Properties
 
-        protected abstract Window CreateSuccessWindow();
-        protected abstract Window CreateFailureWindow();
-        protected abstract Window CreateCancelledWindow();
+        /// <summary>
+        /// Is true if the Content is a ProcessMessageContent and has an
+        /// Exception object.
+        /// </summary>
+        public bool HasException
+        {
+            get
+            {
+                ProcessMessageContent c = Content as ProcessMessageContent;
+                return (c != null && c.Exception != null);
+            }
+        }
+
+        #endregion
+
+        #region Constructors
+
+        public ProcessCompletedAction() : base() { }
+
+        public ProcessCompletedAction(ProcessMessageContent processMessageContent)
+            : this()
+        {
+            Content = processMessageContent;
+        }
+
+        public ProcessCompletedAction(
+            ProcessMessageContent processMessageContent,
+            string caption)
+            : this(processMessageContent)
+        {
+            Caption = caption;
+        }
+
+        public ProcessCompletedAction(
+            ProcessMessageContent processMessageContent,
+            string caption,
+            string message)
+            : this(processMessageContent, caption)
+        {
+            Message = message;
+        }
+
+        public ProcessCompletedAction(
+            ProcessMessageContent processMessageContent,
+            string caption,
+            string message,
+            string okButtonText)
+            : this(processMessageContent, caption, message)
+        {
+            OkButtonText = okButtonText;
+        }
+
+        public ProcessCompletedAction(
+            ProcessMessageContent processMessageContent,
+            string caption,
+            string message,
+            string okButtonText,
+            string param)
+            : this(processMessageContent, caption, message, okButtonText)
+        {
+            Param1 = param;
+        }
+
+        public ProcessCompletedAction(
+            ProcessMessageContent processMessageContent,
+            string caption,
+            string message,
+            string okButtonText,
+            string param1, string param2)
+            : this(processMessageContent, caption, message, okButtonText, param1)
+        {
+            Param2 = param2;
+        }
+
+        public ProcessCompletedAction(
+            ProcessMessageContent processMessageContent,
+            string caption,
+            string message,
+            string okButtonText,
+            string param1, string param2, string param3)
+            : this(processMessageContent, caption, message, okButtonText, param1, param2)
+        {
+            Param3 = param3;
+        }
+
+        #endregion
+
+        #region Virtual methods
+
+        protected virtual Window CreateSuccessWindow()
+        {
+            return new Bovender.Mvvm.Views.ProcessSucceededView();
+        }
+
+        protected virtual Window CreateFailureWindow()
+        {
+            return new Bovender.Mvvm.Views.ProcessFailedView();
+        }
+
+        protected virtual Window CreateCancelledWindow()
+        {
+            return new Bovender.Mvvm.Views.NotificationView();
+        }
 
         #endregion
 
@@ -49,17 +149,17 @@ namespace Bovender.Mvvm.Actions
                 if (content.WasCancelled)
                 {
                     Logger.Info("Process was cancelled");
-                    return content.InjectInto(CreateCancelledWindow());
+                    return CreateCancelledWindow();
                 }
                 else if (content.WasSuccessful)
                 {
                     Logger.Info("Process was successful");
-                    return content.InjectInto(CreateSuccessWindow());
+                    return CreateSuccessWindow();
                 }
                 else
                 {
                     Logger.Warn("Process failed!");
-                    return content.InjectInto(CreateFailureWindow());
+                    return CreateFailureWindow();
                 }
             }
             else

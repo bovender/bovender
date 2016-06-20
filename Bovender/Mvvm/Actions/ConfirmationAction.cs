@@ -26,7 +26,7 @@ namespace Bovender.Mvvm.Actions
 {
     /// <summary>
     /// Provides an action to confirm or cancel a message.
-    /// Adds a CancelButtonLabel to the NotificationAction
+    /// Adds a CancelButtonText to the NotificationAction
     /// base class and creates a ConfirmationView rather
     /// than a NotificationView.
     /// </summary>
@@ -34,12 +34,12 @@ namespace Bovender.Mvvm.Actions
     {
         #region Dependency properties
 
-        public string CancelButtonLabel
+        public string CancelButtonText
         {
-            get { return (string)GetValue(CancelButtonLabelProperty); }
+            get { return (string)GetValue(CancelButtonTextProperty); }
             set
             {
-                SetValue(CancelButtonLabelProperty, value);
+                SetValue(CancelButtonTextProperty, value);
             }
         }
 
@@ -47,8 +47,8 @@ namespace Bovender.Mvvm.Actions
 
         #region Declarations of dependency properties
 
-        public static readonly DependencyProperty CancelButtonLabelProperty = DependencyProperty.Register(
-            "CancelButtonLabel", typeof(string), typeof(ConfirmationAction));
+        public static readonly DependencyProperty CancelButtonTextProperty = DependencyProperty.Register(
+            "CancelButtonText", typeof(string), typeof(ConfirmationAction));
 
         #endregion
 
@@ -57,7 +57,7 @@ namespace Bovender.Mvvm.Actions
         public ConfirmationAction()
             : base()
         {
-            CancelButtonLabel = "Cancel";
+            CancelButtonText = "Cancel";
         }
 
         #endregion

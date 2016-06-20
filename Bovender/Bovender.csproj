@@ -92,6 +92,7 @@
     <Compile Include="Mvvm\Converters\VisibilityBooleanConverter.cs" />
     <Compile Include="Mvvm\EnumProvider.cs" />
     <Compile Include="Mvvm\Messaging\FileNameMessageContent.cs" />
+    <Compile Include="Mvvm\Messaging\MessageArgsBase.cs" />
     <Compile Include="Mvvm\Messaging\ViewModelMessageContent.cs" />
     <Compile Include="Mvvm\Models\ProcessModel.cs" />
     <Compile Include="Mvvm\Models\ProcessModelEventArgs.cs" />
@@ -110,6 +111,12 @@
     <Compile Include="Mvvm\Views\Settings\WindowSettings.cs" />
     <Compile Include="Mvvm\Views\Settings\WindowState.cs" />
     <Compile Include="Extensions\WindowExtensions.cs" />
+    <Compile Include="Mvvm\Views\ProcessFailedView.xaml.cs">
+      <DependentUpon>ProcessFailedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mvvm\Views\ProcessSucceededView.xaml.cs">
+      <DependentUpon>ProcessSucceededView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PathHelpers.cs" />
     <Compile Include="ExceptionHandler\ExceptionViewModel.cs" />
     <Compile Include="FileHelpers.cs" />
@@ -178,6 +185,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Mvvm\Views\ProcessView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mvvm\Views\ProcessFailedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mvvm\Views\ProcessSucceededView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

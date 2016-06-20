@@ -1,4 +1,5 @@
-﻿/* MessageActionExtensions.cs
+﻿using System;
+/* MessageActionExtensions.cs
  * part of Daniel's XL Toolbox NG
  * 
  * Copyright 2014-2016 Daniel Kraus
@@ -16,6 +17,7 @@
  * limitations under the License.
  */
 using System.Windows.Interactivity;
+using Bovender.Mvvm.Messaging;
 
 namespace Bovender.Mvvm.Actions
 {
@@ -24,19 +26,26 @@ namespace Bovender.Mvvm.Actions
         /// <summary>
         /// Invokes a <see cref="TriggerAction"/> with the specified parameter.
         /// </summary>
-        /// <param name="action">The <see cref="TriggerAction"/>.</param>
-        /// <param name="parameter">The parameter value.</param>
+        /// <param name="messageArgs">A MessageArgs&lt;T&gt; object.</param>
         /// <remarks>
-        /// After http://stackoverflow.com/a/12977944/270712
+        /// <para>
+        /// After http://stackoverflow.com/a/12977944/270712.
+        /// </para>
+        /// <para>
+        /// The <paramref name="messageArgs" /> parameter should be a MessageArgs&lt;T&gt;
+        /// object. However, because a generic class cannot be passed as a parameter without
+        /// specifying the type parameter, the parameter class EventArgs is used, which is
+        /// the direct ancestor of MessageArgs&lt;T&gt;.
+        /// </para>
         /// </remarks>
-        public static void Invoke(this MessageActionBase action, object parameter)
+        public static void Invoke(this MessageActionBase action, EventArgs messageArgs)
         {
             NonUiTrigger trigger = new NonUiTrigger();
             trigger.Actions.Add(action);
 
             try
             {
-                trigger.Invoke(parameter);
+                trigger.Invoke(messageArgs);
             }
             finally
             {
@@ -44,18 +53,30 @@ namespace Bovender.Mvvm.Actions
             }
         }
 
+        public static void InvokeWithContent<T>(this MessageActionBase action, T messageContent)
+            where T: MessageContent
+        {
+            NonUiTrigger trigger = new NonUiTrigger();
+            trigger.Actions.Add(action);
+
+            try
+            {
+                trigger.Invoke(new MessageArgs<T>(messageContent, null));
+            }
+            finally
+            {
+                trigger.Actions.Remove(action);
+            }
+        }
+
+
         /// <summary>
-        /// Invokes a <see cref="TriggerAction"/>.
+        /// Invokes a <see cref="TriggerAction"/> and sets the Content property to
+        /// a newly created Messaging.MessageArgs object .
         /// </summary>
-        /// <param name="action">The <see cref="TriggerAction"/>.</param>
         public static void Invoke(this MessageActionBase action)
         {
-            // Call Invoke with dummy message args and message content.
-            action.Invoke(
-                new Messaging.MessageArgs<Messaging.MessageContent>(
-                    new Messaging.MessageContent(), null
-                )
-            );
+            action.Invoke(null);
         }
     }
 }

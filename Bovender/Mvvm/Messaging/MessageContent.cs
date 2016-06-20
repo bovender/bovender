@@ -27,6 +27,12 @@ namespace Bovender.Mvvm.Messaging
     {
         #region Public properties
 
+        public string Caption { get; set; }
+
+        public string Message { get; set; }
+
+        public string OkButtonText { get; set; }
+
         public bool Confirmed { get; set; }
 
         #endregion

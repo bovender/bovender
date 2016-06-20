@@ -21,6 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using Bovender.Mvvm.Messaging;
+using Bovender.Extensions;
 
 namespace Bovender.Mvvm.Actions
 {
@@ -28,7 +29,7 @@ namespace Bovender.Mvvm.Actions
     /// Injects a view with a view model that is referenced in a ViewModelMessageContent,
     /// and shows the view non-modally.
     /// </summary>
-    public class ShowViewAction : MessageActionBase
+    public class ShowViewAction : NotificationAction
     {
         #region Public properties
 
@@ -45,9 +46,7 @@ namespace Bovender.Mvvm.Actions
             Window view = obj as Window;
             if (view != null)
             {
-                Logger.Info("CreateView");
-                ViewModelMessageContent content = Content as ViewModelMessageContent;
-                content.ViewModel.InjectInto(view);
+                Logger.Info("CreateView: Created {0}", view.GetType().FullName);
                 return view;
             }
             else
@@ -61,7 +60,22 @@ namespace Bovender.Mvvm.Actions
 
         protected override void ShowView(Window view)
         {
-            view.Show();
+            view.ShowInForm();
+        }
+
+        protected override ViewModels.ViewModelBase GetDataContext(MessageContent messageContent)
+        {
+            ViewModelMessageContent vmc = messageContent as ViewModelMessageContent;
+            if (vmc != null)
+            {
+                return vmc.ViewModel;
+            }
+            else
+            {
+                Logger.Fatal("GetDataContext: Expected ViewModelMessageContent, got {0}",
+                    messageContent == null ? "null" : messageContent.GetType().FullName);
+                throw new ArgumentException("Invalid message content: ShowViewAction requires ViewModelMessageContent");
+            }
         }
 
         #endregion

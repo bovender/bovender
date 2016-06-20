@@ -27,7 +27,7 @@ namespace Bovender.Mvvm.Actions
     /// Abstract base class for the <see cref="ChooseFileSaveAction"/> and
     /// <see cref="ChooseFolderAction"/> classes.
     /// </summary>
-    public abstract class FileFolderActionBase : MessageActionBase
+    public abstract class FileFolderActionBase : NotificationAction
     {
         #region Public properties
 

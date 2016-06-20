@@ -1,8 +1,8 @@
 ﻿<!--
-	NotificationView.xaml
-	part of Daniel's XL Toolbox NG
+	ProcessSucceededView.xaml
+	part of Bovender framework
 	
-	Copyright 2014-2015 Daniel Kraus
+	Copyright 2014-2016 Daniel Kraus
 	
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -16,32 +16,31 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 -->
-<Window x:Class="Bovender.Mvvm.Views.NotificationView"
+<Window x:Class="Bovender.Mvvm.Views.ProcessSucceededView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:bov="clr-namespace:Bovender.Mvvm.Views.Settings"
-        SizeToContent="Height" Width="320"
-        WindowStartupLocation="CenterScreen" bov:WindowState.CenterScreen="True"
-        Title="{Binding Caption}"
+        bov:WindowState.CenterScreen="True"
+        SizeToContent="WidthAndHeight" Title="{Binding Caption}"
         ResizeMode="NoResize" ShowInTaskbar="False"
-    >
-    <DockPanel Margin="10">
-        <TextBlock DockPanel.Dock="Left"
-                   FontSize="48" FontWeight="Bold" FontStyle="Italic"
-                   Foreground="MediumSlateBlue" Margin="10,0,20,0"
+        >
+    <Window.Resources>
+        <ResourceDictionary Source="/Bovender;component/style.xaml" />
+    </Window.Resources>
+    <StackPanel Margin="20" Orientation="Horizontal">
+        <TextBlock FontSize="48" FontWeight="Bold" Foreground="GreenYellow" Margin="0,0,20,0"
                    LineHeight="48" LineStackingStrategy="BlockLineHeight">
-                i
+            &#x2714;
             <TextBlock.Effect>
                 <DropShadowEffect BlurRadius="6" ShadowDepth="2" Opacity="0.6" />
             </TextBlock.Effect>
         </TextBlock>
-        <StackPanel HorizontalAlignment="Stretch">
-            <TextBlock Text="{Binding Message}" TextWrapping="Wrap" TextAlignment="Justify" />
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                <Button Command="{Binding CloseViewCommand}"
-                        Content="{Binding OkButtonText}" Padding="10,5,10,5" MinWidth="84"
-                        IsCancel="True" IsDefault="True" />
+        <StackPanel>
+            <TextBlock Text="{Binding Message}" Margin="0 0 0 20"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0">
+                <Button Command="{Binding CloseViewCommand}" Content="{Binding OkButtonText}"
+                        IsDefault="True" IsCancel="True" />
             </StackPanel>
         </StackPanel>
-    </DockPanel>
+    </StackPanel>
 </Window>
