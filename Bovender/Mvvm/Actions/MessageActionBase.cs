@@ -33,7 +33,7 @@ namespace Bovender.Mvvm.Actions
     {
         #region Public properties
 
-        public MessageContent Content { get; protected set; }
+        public MessageContent Content { get; set; }
 
         #endregion
 
@@ -64,24 +64,44 @@ namespace Bovender.Mvvm.Actions
         protected void Invoke<T>(T messageContent, Action response)
             where T : MessageContent
         {
-            if (messageContent == null)
-            {
-                Logger.Warn("Invoke: messageContent is null");
-            }
             Content = messageContent;
-            Window window = CreateView();
-            if (window != null)
+            ViewModelBase viewModel = GetDataContext(messageContent);
+            Window view = CreateView();
+            if (view != null)
             {
-                MessageActionViewModel vm = CreateViewModel();
-                EventHandler responseHandler = null;
-                responseHandler = (sender, e) =>
+                if (viewModel != null)
                 {
-                    vm.RequestCloseView -= responseHandler;
-                    if (response != null) response();
-                };
-                vm.RequestCloseView += responseHandler;
-                vm.InjectInto(window);
-                ShowView(window);
+                    EventHandler responseHandler = null;
+                    responseHandler = (sender, e) =>
+                    {
+                        viewModel.RequestCloseView -= responseHandler;
+                        if (response != null) response();
+                    };
+                    viewModel.RequestCloseView += responseHandler;
+                    if (view.DataContext == null)
+                    {
+                        viewModel.InjectInto(view);
+                    }
+                    else
+                    {
+                        Logger.Fatal("Invoke: Got view from CreateView() that already has a data context!");
+                        Logger.Fatal("Invoke: Data context must be returned from GetDataContext() only!");
+                        throw new InvalidOperationException("CreateView() must not create a view with a data context");
+                    }
+                }
+                else
+                {
+                    Logger.Info("Invoke: Did not get view model, cannot data bind view or set up event handlers");
+                }
+                if (view.DataContext != null)
+                {
+                    Logger.Info("Invoke: View is data-bound to {0}", view.DataContext.GetType().FullName);
+                }
+                else
+                {
+                    Logger.Info("Invoke: View has no data context");
+                }
+                ShowView(view);
             }
             else
             {
@@ -107,14 +127,16 @@ namespace Bovender.Mvvm.Actions
         }
 
         /// <summary>
-        /// Creates a MessageActionViewModel that wraps this MessageActionBase object.
-        /// Can be overridden to create different view models.
+        /// Gets a ViewModelBase object that will be injected into the view
+        /// In the abstract base class, this returns
+        /// the <paramref name="messageContent"/> parameter as-is.
         /// </summary>
-        /// <returns>MessageActionViewModel wrapping 'this'.</returns>
-        protected virtual MessageActionViewModel CreateViewModel()
+        /// <param name="messageContent">Message content that will be data-bound
+        /// to the view.</param>
+        /// <returns>ViewModelBase object</returns>
+        protected virtual ViewModelBase GetDataContext(MessageContent messageContent)
         {
-            Logger.Info("CreateViewModel: Creating default MessageActionViewModel");
-            return new MessageActionViewModel(this);
+            return messageContent;
         }
 
         #endregion
@@ -131,7 +153,7 @@ namespace Bovender.Mvvm.Actions
 
         #region Class logger
 
-        protected static NLog.Logger Logger { get { return _logger.Value; } }
+        private static NLog.Logger Logger { get { return _logger.Value; } }
 
         private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 

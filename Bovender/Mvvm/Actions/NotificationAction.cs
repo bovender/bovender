@@ -18,6 +18,7 @@
 using System;
 using System.Windows;
 using Bovender.Mvvm.Views;
+using Bovender.Mvvm.Messaging;
 
 namespace Bovender.Mvvm.Actions
 {
@@ -25,6 +26,10 @@ namespace Bovender.Mvvm.Actions
     /// Opens a generic WPF dialog window that displays a message and
     /// has a single OK button. The message string can include parameters.
     /// </summary>
+    /// <remarks>
+    /// The string properties must be declared as dependency properties
+    /// so that they can be data-bound in XAML.
+    /// </remarks>
     public class NotificationAction : MessageActionBase
     {
         #region Public (dependency) properties
@@ -82,7 +87,6 @@ namespace Bovender.Mvvm.Actions
                 SetValue(OkButtonTextProperty, value);
             }
         }
-
         /// <summary>
         /// Returns the <see cref="Message"/> string formatted with the
         /// three params.
@@ -184,9 +188,24 @@ namespace Bovender.Mvvm.Actions
 
         #region Overrides
 
-        protected override ViewModels.MessageActionViewModel CreateViewModel()
+        protected override ViewModels.ViewModelBase GetDataContext(MessageContent messageContent)
         {
-            return new ViewModels.NotificationActionViewModel(this);
+            if (!String.IsNullOrEmpty(Caption))
+            {
+                Logger.Info("ProcessMessageContent: Overriding caption");
+                messageContent.Caption = Caption;
+            }
+            if (!String.IsNullOrEmpty(Message))
+            {
+                Logger.Info("ProcessMessageContent: Overriding message");
+                messageContent.Message = FormattedText;
+            }
+            if (!String.IsNullOrEmpty(OkButtonText))
+            {
+                Logger.Info("ProcessMessageContent: Overriding OK button text");
+                messageContent.OkButtonText = OkButtonText;
+            }
+            return messageContent;
         }
 
         #endregion
@@ -194,6 +213,14 @@ namespace Bovender.Mvvm.Actions
         #region Private fields
 
         private string _formattedText;
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }

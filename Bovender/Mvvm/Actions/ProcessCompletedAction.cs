@@ -78,19 +78,19 @@ namespace Bovender.Mvvm.Actions
             ProcessMessageContent processMessageContent,
             string caption,
             string message,
-            string okButtonLabel)
+            string okButtonText)
             : this(processMessageContent, caption, message)
         {
-            OkButtonText = okButtonLabel;
+            OkButtonText = okButtonText;
         }
 
         public ProcessCompletedAction(
             ProcessMessageContent processMessageContent,
             string caption,
             string message,
-            string okButtonLabel,
+            string okButtonText,
             string param)
-            : this(processMessageContent, caption, message, okButtonLabel)
+            : this(processMessageContent, caption, message, okButtonText)
         {
             Param1 = param;
         }
@@ -99,9 +99,9 @@ namespace Bovender.Mvvm.Actions
             ProcessMessageContent processMessageContent,
             string caption,
             string message,
-            string okButtonLabel,
+            string okButtonText,
             string param1, string param2)
-            : this(processMessageContent, caption, message, okButtonLabel, param1)
+            : this(processMessageContent, caption, message, okButtonText, param1)
         {
             Param2 = param2;
         }
@@ -110,9 +110,9 @@ namespace Bovender.Mvvm.Actions
             ProcessMessageContent processMessageContent,
             string caption,
             string message,
-            string okButtonLabel,
+            string okButtonText,
             string param1, string param2, string param3)
-            : this(processMessageContent, caption, message, okButtonLabel, param1, param2)
+            : this(processMessageContent, caption, message, okButtonText, param1, param2)
         {
             Param3 = param3;
         }
@@ -170,6 +170,14 @@ namespace Bovender.Mvvm.Actions
                     "This message action must be used for Messages with ProcessMessageContent only.");
             }
         }
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }

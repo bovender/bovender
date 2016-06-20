@@ -53,9 +53,13 @@ namespace Bovender.Mvvm.Messaging
             T messageContent,
             Action<T> respond)
         {
-            if (Sent != null)
+            EventHandler<MessageArgs<T>> h = Sent;
+            if (h != null)
             {
-                Sent(this,
+                Logger.Info("Sending message to {0} subscriber(s)", h.GetInvocationList().Length);
+                Logger.Debug("Message content is a {0}",
+                    messageContent == null ? "null reference" : messageContent.GetType().FullName);
+                h(this,
                     new MessageArgs<T>(
                         messageContent,
                         () =>
@@ -85,6 +89,14 @@ namespace Bovender.Mvvm.Messaging
         {
             Send(new T(), null);
         }
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }

@@ -416,33 +416,25 @@ namespace Bovender.Versioning
                             if (_updater.IsAuthorized)
                             {
                                 Logger.Info("Update available, user authorized");
-                                UpdateAvailableMessage.Send(
-                                    CheckProcessMessageContent,
-                                    (content) => InstallUpdateCommand.Execute(null));
+                                UpdateAvailableMessage.Send(CheckProcessMessageContent);
                             }
                             else
                             {
                                 Logger.Info("Update available, but user not authorized");
-                                UpdateAvailableButNotAuthorizedMessage.Send(
-                                    CheckProcessMessageContent,
-                                    (content) => CloseViewCommand.Execute(null));
+                                UpdateAvailableButNotAuthorizedMessage.Send(CheckProcessMessageContent);
                             }
                         }
                         else
                         {
                             Logger.Info("No update available");
-                            NoUpdateAvailableMessage.Send(
-                                CheckProcessMessageContent,
-                                (content) => CloseViewCommand.Execute(null));
+                            NoUpdateAvailableMessage.Send(CheckProcessMessageContent);
                         }
                     }
                     else
                     {
                         Logger.Warn(_updater.DownloadException, "Download exception");
                         OnPropertyChanged("DownloadException");
-                        NetworkFailureMessage.Send(
-                            CheckProcessMessageContent,
-                            (content) => CloseViewCommand.Execute(null));
+                        NetworkFailureMessage.Send(CheckProcessMessageContent);
                     }
                 });
 
@@ -493,6 +485,7 @@ namespace Bovender.Versioning
         void _updater_DownloadUpdateFinished(object sender, EventArgs e)
         {
             Logger.Info("_updater_DownloadUpdateFinished");
+            CheckProcessMessageContent.CompletedMessage.Send();
             IsLocked = false;
             // When the download process is finished, the Updater model will verify
             // the downloaded file's Sha1. Since the view model exposes the
@@ -508,24 +501,25 @@ namespace Bovender.Versioning
                 {
                     if (_updater.IsVerifiedDownload)
                     {
-                        Logger.Info("Download verified");
+                        Logger.Info("Download verified, sending UpdateInstallableMessage");
                         UpdateInstallableMessage.Send(DownloadProcessMessageContent);
                     }
                     else
                     {
-                        Logger.Info("Failed verficiation");
+                        Logger.Info("Failed verficiation, sending UpdateFailedVerificationMessage");
                         UpdateFailedVerificationMessage.Send(DownloadProcessMessageContent);
                     }
                 }
                 else
                 {
-                    Logger.Info("User not authorized");
+                    Logger.Info("User not authorized, sending UpdateAvailableButNotAuthorizedMessage");
                     UpdateAvailableButNotAuthorizedMessage.Send(DownloadProcessMessageContent);
                 }
             }
             else
             {
-                Logger.Warn(DownloadProcessMessageContent.Exception, "Network failure");
+                Logger.Warn(DownloadProcessMessageContent.Exception);
+                Logger.Warn("Network failure, sending NetworkFailureMessage");
                 NetworkFailureMessage.Send(DownloadProcessMessageContent);
             }
         }

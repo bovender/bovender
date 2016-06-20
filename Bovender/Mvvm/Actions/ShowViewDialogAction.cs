@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 using System.Windows;
+using Bovender.Extensions;
 
 namespace Bovender.Mvvm.Actions
 {
@@ -27,7 +28,7 @@ namespace Bovender.Mvvm.Actions
     {
         protected override void ShowView(Window view)
         {
-            view.ShowDialog();
+            view.ShowDialogInForm();
         }
     }
 }

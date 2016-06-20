@@ -38,8 +38,8 @@
         <StackPanel HorizontalAlignment="Stretch">
             <TextBlock Text="{Binding Message}" TextWrapping="Wrap" TextAlignment="Justify" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                <Button Command="{Binding Content.CloseViewCommand}"
-                        Content="{Binding OkButtonLabel}" Padding="10,5,10,5" MinWidth="84"
+                <Button Command="{Binding CloseViewCommand}"
+                        Content="{Binding OkButtonText}" Padding="10,5,10,5" MinWidth="84"
                         IsCancel="True" IsDefault="True" />
             </StackPanel>
         </StackPanel>

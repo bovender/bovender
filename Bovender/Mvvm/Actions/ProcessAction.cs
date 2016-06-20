@@ -49,39 +49,49 @@ namespace Bovender.Mvvm.Actions
 
         #region Overrides
 
-        /// <summary>
-        /// Injects the message <see cref="Content"/> into a newly created
-        /// <see cref="ProcessView"/> and returns the view.
-        /// </summary>
-        /// <returns>Instance of <see cref="ProcessView"/> that is data bound
-        /// to the current message Content.</returns>
         protected override System.Windows.Window CreateView()
         {
-            ProcessMessageContent pcm = Content as ProcessMessageContent;
-            if (pcm != null)
+            Window view;
+            // Attempt to create a view from the Assembly and View
+            // parameters. If this fails, create a generic ProcessView.
+            try
             {
-                if (!string.IsNullOrEmpty(Caption)) pcm.Caption = Caption;
-                if (!string.IsNullOrEmpty(Message)) pcm.Message = Message;
-                if (!string.IsNullOrEmpty(CancelButtonText)) pcm.CancelButtonText = CancelButtonText;
-                Window view;
-                // Attempt to create a view from the Assembly and View
-                // parameters. If this fails, create a generic ProcessView.
-                try
-                {
-                    view = base.CreateView();
-                }
-                catch
-                {
-                    view = new ProcessView();
-                }
-                return Content.InjectInto(view);
+                view = base.CreateView();
             }
-            else
+            catch
             {
-                throw new ArgumentException(
-                    "This message action must be used for Messages with ProcessMessageContent only.");
+                view = new ProcessView();
             }
+            // The ShowViewAction injects a ViewModelBase object into the view.
+            // The ProcessAction returns a view with a ProcessMessageContent injected
+            // into it.
+            return view;
         }
+
+        protected override ViewModels.ViewModelBase GetDataContext(MessageContent messageContent)
+        {
+            ProcessMessageContent pmc = messageContent as ProcessMessageContent;
+            if (pmc == null)
+            {
+                Logger.Debug("ProcessMessageContent: Need ProcessMessageContent, got {0}",
+                    messageContent == null ? "null" : messageContent.GetType().AssemblyQualifiedName);
+                throw new ArgumentException("Cannot process because the message did not contain a ProcessMessageContent");
+            }
+            if (!string.IsNullOrEmpty(CancelButtonText))
+            {
+                Logger.Info("ProcessMessageContent: Overriding CancelButtonText");
+                pmc.CancelButtonText = CancelButtonText;
+            }
+            return pmc;
+        }
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }
