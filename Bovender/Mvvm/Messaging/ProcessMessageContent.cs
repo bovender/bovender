@@ -31,8 +31,6 @@ namespace Bovender.Mvvm.Messaging
     {
         #region Public properties
 
-        public string CancelButtonText { get; set; }
-
         public bool Processing
         {
             get { return _processing; }

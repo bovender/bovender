@@ -33,6 +33,8 @@ namespace Bovender.Mvvm.Messaging
 
         public string OkButtonText { get; set; }
 
+        public string CancelButtonText { get; set; }
+
         public bool Confirmed { get; set; }
 
         #endregion

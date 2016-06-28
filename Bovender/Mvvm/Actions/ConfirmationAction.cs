@@ -32,26 +32,6 @@ namespace Bovender.Mvvm.Actions
     /// </summary>
     public class ConfirmationAction : NotificationAction
     {
-        #region Dependency properties
-
-        public string CancelButtonText
-        {
-            get { return (string)GetValue(CancelButtonTextProperty); }
-            set
-            {
-                SetValue(CancelButtonTextProperty, value);
-            }
-        }
-
-        #endregion
-
-        #region Declarations of dependency properties
-
-        public static readonly DependencyProperty CancelButtonTextProperty = DependencyProperty.Register(
-            "CancelButtonText", typeof(string), typeof(ConfirmationAction));
-
-        #endregion
-
         #region Constructor
 
         public ConfirmationAction()

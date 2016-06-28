@@ -87,6 +87,16 @@ namespace Bovender.Mvvm.Actions
                 SetValue(OkButtonTextProperty, value);
             }
         }
+
+        public string CancelButtonText
+        {
+            get { return (string)GetValue(CancelButtonTextProperty); }
+            set
+            {
+                SetValue(CancelButtonTextProperty, value);
+            }
+        }
+    
         /// <summary>
         /// Returns the <see cref="Message"/> string formatted with the
         /// three params.
@@ -133,6 +143,9 @@ namespace Bovender.Mvvm.Actions
 
         public static readonly DependencyProperty OkButtonTextProperty = DependencyProperty.Register(
             "OkButtonText", typeof(string), typeof(NotificationAction));
+
+        public static readonly DependencyProperty CancelButtonTextProperty = DependencyProperty.Register(
+            "CancelButtonText", typeof(string), typeof(NotificationAction));
 
         #endregion
 
@@ -204,6 +217,11 @@ namespace Bovender.Mvvm.Actions
             {
                 Logger.Info("ProcessMessageContent: Overriding OK button text");
                 messageContent.OkButtonText = OkButtonText;
+            }
+            if (!String.IsNullOrEmpty(CancelButtonText))
+            {
+                Logger.Info("ProcessMessageContent: Overriding OK button text");
+                messageContent.CancelButtonText = CancelButtonText;
             }
             return messageContent;
         }
