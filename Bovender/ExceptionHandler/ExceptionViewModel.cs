@@ -22,7 +22,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Net;
 using System.Collections.Specialized;
-using System.Web.Helpers;
 using Bovender.Mvvm;
 using Bovender.Mvvm.Messaging;
 using Bovender.Mvvm.ViewModels;
@@ -347,11 +346,14 @@ namespace Bovender.ExceptionHandler
                     try
                     {
                         result = Encoding.UTF8.GetString(e.Result);
-                        dynamic json = Json.Decode(result);
-                        if (json.ReportID == ReportID)
+                        // Because System.Web.Helpers is not available on every system (dispite referencing
+                        // the System.Web.Helpers.dll assembly), we 'parse' the simple Json result ourselves.
+                        Match m = Regex.Match(result,
+                            @"{\s*""ReportId"":\s*""(?<reportid>[^""]+)"",\s*""IssueUrl"":\s*""(?<issueurl>[^""]+)""\s*}");
+                        if (m.Success && m.Groups["reportid"].Value == ReportID)
                         {
-                            Logger.Info("json.IssueUrl: {0}", json.IssueUrl);
-                            IssueUrl = json.IssueUrl as string;
+                            IssueUrl = m.Groups["issueurl"].Value;
+                            Logger.Info("issueUrl: {0}", IssueUrl);
                             SubmissionProcessMessageContent.WasSuccessful = true;
                         }
                         else

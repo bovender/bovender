@@ -23,51 +23,74 @@ using System.Text;
 namespace Bovender.Mvvm.Models
 {
     /// <summary>
-    /// Base class for models that perform a lengthy process asynchronously.
-    /// This class provides events to signal process termination and success
-    /// or failure. It is indended to be used with
+    /// Abstract base class for models that perform a lengthy process asynchronously.
+    /// This class is indended to be used with
     /// Bovender.Mvvm.ViewModels.ProcessViewModelBase.
     /// </summary>
-    public class ProcessModel
+    public abstract class ProcessModel
     {
+        #region Public methods
+
+        /// <summary>
+        /// Cancels the current process
+        /// </summary>
+        public void Cancel()
+        {
+            IsCancellationRequested = true;
+            OnCancelling();
+        }
+        
+        #endregion
+
         #region Events
 
-        public event EventHandler<ProcessModelEventArgs> ProcessFailed;
-
-        public event EventHandler<ProcessModelEventArgs> ProcessSucceeded;
+        public event EventHandler<ProcessModelEventArgs> Cancelling;
 
         #endregion
 
-        #region Event raising methods
+        #region Abstract methods
 
-        protected virtual void OnProcessSucceeded()
+        /// <summary>
+        /// This method may be called by a ProcessViewModelBase-derived class
+        /// in a worker task that wraps this method in a try...catch structure.
+        /// The implementation does not need to and should not handle tasks
+        /// or threads itself.
+        /// </summary>
+        /// <returns>True if successful, false if failed or cancelled.</returns>
+        public abstract bool Execute();
+
+        #endregion
+
+        #region Protected methods
+
+        protected virtual void OnCancelling()
         {
-            Logger.Info("Process succeeded");
-            EventHandler<ProcessModelEventArgs> handler = ProcessSucceeded;
-            if (handler != null)
+            EventHandler<ProcessModelEventArgs> h = Cancelling;
+            if (h != null)
             {
-                Logger.Info("Raising event for {0} subscribers", handler.GetInvocationList().Length);
-                handler(this, new ProcessModelEventArgs(this));
+                Logger.Info("Raising Cancel event; {0} subscriber(s)", h.GetInvocationList().Length);
+                h(this, new ProcessModelEventArgs(this));
             }
         }
 
-        protected virtual void OnProcessFailed(Exception e)
-        {
-            Logger.Warn("Process failed");
-            Logger.Warn(e);
-            EventHandler<ProcessModelEventArgs> handler = ProcessFailed;
-            if (handler != null)
-            {
-                Logger.Info("Raising event for {0} subscribers", handler.GetInvocationList().Length);
-                handler(this, new ProcessModelEventArgs(this, e));
-            }
-        }
+        #endregion
+
+        #region Protected properties
+
+        protected ProcessModel Dependent { get; set; }
+
+        /// <summary>
+        /// This property is set to true by the Cancel() method.
+        /// The implementation of the Execute method should query
+        /// this property during the process.
+        /// </summary>
+        protected bool IsCancellationRequested { get; set; }
 
         #endregion
 
         #region Class logger
 
-        protected static NLog.Logger Logger { get { return _logger.Value; } }
+        private static NLog.Logger Logger { get { return _logger.Value; } }
 
         private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 

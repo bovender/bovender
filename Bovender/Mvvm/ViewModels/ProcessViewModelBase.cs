@@ -21,6 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Bovender.Mvvm.Messaging;
+using System.Threading.Tasks;
 
 namespace Bovender.Mvvm.ViewModels
 {
@@ -69,28 +70,62 @@ namespace Bovender.Mvvm.ViewModels
     {
         #region Properties
 
-        public Bovender.Mvvm.Models.ProcessModel ProcessModel
+        public Bovender.Mvvm.Models.ProcessModel ProcessModel { get; protected set; }
+
+        public bool IsProcessing
         {
             get
             {
-                return _processModel;
-            }
-            set
-            {
-                if (_processModel != null)
-                {
-                    _processModel.ProcessFailed -= ProcessModel_ProcessFailed;
-                    _processModel.ProcessSucceeded -= ProcessModel_ProcessSucceeded;
-                }
-                _processModel = value;
-                if (_processModel != null)
-                {
-                    _processModel.ProcessFailed += ProcessModel_ProcessFailed;
-                    _processModel.ProcessSucceeded += ProcessModel_ProcessSucceeded;
-                }
+                return ProcessMessageContent.Processing;
             }
         }
 
+        public bool WasCancelled
+        {
+            get
+            {
+                return ProcessMessageContent.WasCancelled;
+            }
+        }
+
+        public bool WasSuccessful
+        {
+            get
+            {
+                return ProcessMessageContent.WasSuccessful;
+            }
+        }
+
+        #endregion
+
+        #region Public methods
+
+        /// <summary>
+        /// Entry point to starts the process. This method initializes the timer
+        /// that updates the process status in regular intervals, then calls
+        /// the Execute method followed by the EndProcess method.
+        /// </summary>
+        public virtual void StartProcess()
+        {
+            Logger.Info("Starting process...");
+            _progressTimer = new Timer(
+                UpdateProgress,
+                null,
+                Properties.Settings.Default.ShowProgressDelay,
+                Properties.Settings.Default.ShowProgressInterval);
+            Execute();
+        }
+
+        /// <summary>
+        /// Cancels the ongoing process.
+        /// </summary>
+        public virtual void CancelProcess()
+        {
+            Logger.Info("CancelProcess was called!");
+            ProcessMessageContent.WasCancelled = true;
+            ProcessModel.Cancel();
+        }
+        
         #endregion
 
         #region MVVM messages
@@ -116,30 +151,15 @@ namespace Bovender.Mvvm.ViewModels
         /// <summary>
         /// Message that signals when the process succeeded.
         /// </summary>
-        public Message<ProcessMessageContent> ProcessSucceededMessage
+        public Message<ProcessMessageContent> ProcessFinishedMessage
         {
             get
             {
-                if (_processSucceededMessage == null)
+                if (_processFinishedMessage == null)
                 {
-                    _processSucceededMessage = new Message<ProcessMessageContent>();
+                    _processFinishedMessage = new Message<ProcessMessageContent>();
                 }
-                return _processSucceededMessage;
-            }
-        }
-
-        /// <summary>
-        /// Message that signals when the process failed.
-        /// </summary>
-        public Message<ProcessMessageContent> ProcessFailedMessage
-        {
-            get
-            {
-                if (_processFailedMessage == null)
-                {
-                    _processFailedMessage = new Message<ProcessMessageContent>();
-                }
-                return _processFailedMessage;
+                return _processFinishedMessage;
             }
         }
 
@@ -148,54 +168,41 @@ namespace Bovender.Mvvm.ViewModels
         #region Abstract methods
 
         /// <summary>
-        /// Core method that takes care of the actual process.
-        /// </summary>
-        protected abstract void Execute();
-
-        /// <summary>
-        /// Cancels the ongoing process.
-        /// </summary>
-        protected abstract void CancelProcess();
-
-        /// <summary>
         /// Returns the percent completed value.
         /// </summary>
         /// <returns>Number between 0 and 100</returns>
         protected abstract int GetPercentCompleted();
 
-        /// <summary>
-        /// Returns true if the process is ongoing.
-        /// </summary>
-        /// <returns>True if the process is ongoing, otherwise false.</returns>
-        protected abstract bool IsProcessing();
-
         #endregion
 
         #region Constructor
 
-        protected ProcessViewModelBase()
+        protected ProcessViewModelBase(Models.ProcessModel processModel)
             : base()
-        { }
+        {
+            ProcessModel = processModel;
+        }
 
         #endregion
 
         #region Protected methods
 
         /// <summary>
-        /// Entry point to starts the process. This method initializes the timer
-        /// that updates the process status in regular intervals, then calls
-        /// the Execute method followed by the EndProcess method.
+        /// Additional work to do before the process is started.
+        /// This will be called synchronously.
         /// </summary>
-        protected virtual void StartProcess()
+        /// <returns>True or false. If true, the process is started.
+        /// If false, the process is not started.</returns>
+        protected virtual bool BeforeStartProcess()
         {
-            Logger.Info("Starting process...");
-            _progressTimer = new Timer(UpdateProgress, null, 1000, 300);
-            Execute();
-            AfterStartProcess();
+            Logger.Info("Additional work before starting the process");
+            return true;
         }
 
         /// <summary>
         /// Additional work to do after the process has started.
+        /// In the base implementation, this executes the
+        /// CloseViewCommand.
         /// </summary>
         protected virtual void AfterStartProcess()
         {
@@ -207,27 +214,13 @@ namespace Bovender.Mvvm.ViewModels
         /// Sends the ProcessMessageContent.CompletedMessage to signal
         /// that the process has finished.
         /// </summary>
-        protected virtual void SendProcessSucceededMessage()
+        protected virtual void SendProcessFinishedMessage()
         {
-            Action action = new Action(() =>
-            {
-                Logger.Info("Sending ProcessSucceededMessage");
-                ProcessSucceededMessage.Send();
-                ProcessMessageContent.CompletedMessage.Send();
-            });
-            Dispatch(action);
-        }
-
-        /// <summary>
-        /// Sends the ProcessFailedMessage to signal failure.
-        /// Also writes the information to the Logger.
-        /// </summary>
-        protected virtual void SendProcessFailedMessage(Exception e)
-        {
-            Logger.Warn(e);
-            Logger.Warn("Sending ProcessFailedMessage");
-            ProcessMessageContent.Exception = e;
-            ProcessFailedMessage.Send(ProcessMessageContent);
+            Logger.Info("Sending ProcessFinishedMessage");
+            ProcessMessageContent.Processing = false;
+            ProcessMessageContent.Exception = Exception;
+            ProcessFinishedMessage.Send(ProcessMessageContent);
+            ProcessMessageContent.CompletedMessage.Send(ProcessMessageContent);
         }
 
         #endregion
@@ -258,15 +251,52 @@ namespace Bovender.Mvvm.ViewModels
             {
                 if (_processMessageContent == null)
                 {
+                    Logger.Debug("Creating new ProcessMessageContent instance");
                     _processMessageContent = new ProcessMessageContent(CancelProcess);
                 }
                 return _processMessageContent;
             }
         }
 
+        protected Exception Exception { get; set; }
+
         #endregion
 
         #region Private methods
+
+        /// <summary>
+        /// Core method that takes care of the actual process. In the
+        /// base implementation, this calls the ProcessModelBase.Execute
+        /// method in a dedicated task. Upon completion of the task,
+        /// the ProcessSucceededMessage or the ProcessFailedMessage are
+        /// sent in the original synchronization context.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">if this method
+        /// is called while the process is already running.</exception>
+        private void Execute()
+        {
+            if (ProcessMessageContent.Processing)
+            {
+                throw new InvalidOperationException("Cannot start the process because it is already running");
+            }
+            if (!BeforeStartProcess()) return;
+
+            ProcessMessageContent.Processing = true;
+            ProcessMessageContent.WasSuccessful = false;
+            ProcessMessageContent.WasCancelled = false;
+            Task.Factory.StartNew((Action)(() =>
+            {
+                try
+                {
+                    ProcessMessageContent.WasSuccessful = ProcessModel.Execute();
+                }
+                catch (Exception e)
+                {
+                    Exception = e;
+                }
+            })).ContinueWith((task) => Dispatch(SendProcessFinishedMessage));
+            AfterStartProcess();
+        }
 
         /// <summary>
         /// Updates the process status. This is a callback method for
@@ -275,64 +305,54 @@ namespace Bovender.Mvvm.ViewModels
         /// <param name="state"></param>
         private void UpdateProgress(object state)
         {
-            if (!_showProgressWasSent)
+            lock (_lockUpdateProgress)
             {
-                _showProgressWasSent = true;
-                if (IsProcessing())
+                if (!_showProgressWasSent)
                 {
-                    Dispatch((Action)(() =>
+                    if (ProcessMessageContent.Processing)
                     {
-                        Logger.Info("UpdateProgress: Sending ShowProgressMessage");
-                        ShowProgressMessage.Send(ProcessMessageContent);
-                        Logger.Debug("UpdateProgress: ... ShowProgressMessage was sent");
-
-                    }));
-
+                        _showProgressWasSent = true;
+                        Dispatch(() =>
+                        {
+                            Logger.Info("UpdateProgress: Sending ShowProgressMessage");
+                            ShowProgressMessage.Send(ProcessMessageContent);
+                            Logger.Debug("UpdateProgress: ... ShowProgressMessage was sent");
+                        });
+                    }
+                }
+                else
+                {
+                    if (ProcessMessageContent.Processing)
+                    {
+                        int percent = GetPercentCompleted();
+                        Logger.Info("UpdateProgress: PercentCompleted: {0}", percent);
+                        ProcessMessageContent.PercentCompleted = percent;
+                    }
+                    else
+                    {
+                        Logger.Info("UpdateProgress: No longer processing, disposing update timer");
+                        _progressTimer.Dispose();
+                    }
                 }
             }
-            if (IsProcessing())
-            {
-                int percent = GetPercentCompleted();
-                Logger.Info("UpdateProgress: PercentCompleted: {0}", percent);
-                ProcessMessageContent.PercentCompleted = percent;
-            }
-            else
-            {
-                Logger.Info("UpdateProgress: No longer processing, disposing update timer");
-                _progressTimer.Dispose();
-            }
         }
 
-        private void ProcessModel_ProcessSucceeded(object sender, Models.ProcessModelEventArgs e)
-        {
-            // Because the ProcessModel may raise the event from a different thread,
-            // we use the associated view's dispatcher (if any).
-            Dispatch((Action)(() =>
-            {
-                SendProcessSucceededMessage();
-            }));
-        }
-
-        private void ProcessModel_ProcessFailed(object sender, Models.ProcessModelEventArgs e)
-        {
-            Dispatch((Action)(() =>
-            {
-                SendProcessFailedMessage(e.ProcessException);
-            }));
-        }
-        
         #endregion
 
         #region Private fields
 
         private Message<ProcessMessageContent> _showProgressMessage;
-        private Message<ProcessMessageContent> _processSucceededMessage;
-        private Message<ProcessMessageContent> _processFailedMessage;
+        private Message<ProcessMessageContent> _processFinishedMessage;
         private ProcessMessageContent _processMessageContent;
         private Timer _progressTimer;
         private bool _showProgressWasSent;
-        private Bovender.Mvvm.Models.ProcessModel _processModel;
 
+        #endregion
+
+        #region Private static fields
+        
+        private static readonly object _lockUpdateProgress = new object();
+        
         #endregion
 
         #region Class logger
@@ -342,6 +362,5 @@ namespace Bovender.Mvvm.ViewModels
         private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
-
     }
 }

@@ -1,5 +1,5 @@
 ﻿/* SemanticVersion.cs
- * part of Daniel's XL Toolbox NG
+ * part of Bovender
  * 
  * Copyright 2014-2016 Daniel Kraus
  * 
@@ -29,11 +29,11 @@ namespace Bovender.Versioning
 
     public enum Prerelease
     {
+        None = 0,
         Numeric = 1,
         Alpha = 2,
         Beta = 3,
         RC = 4,
-        None = 5
     }
 
     #endregion

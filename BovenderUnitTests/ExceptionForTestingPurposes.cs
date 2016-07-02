@@ -1,4 +1,4 @@
-﻿/* ProcessViewModelForTesting.cs
+﻿/* ExceptionForTestingPurposes.cs
  * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
@@ -16,23 +16,20 @@
  * limitations under the License.
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Bovender.Mvvm.ViewModels;
+using System.Runtime.Serialization;
 
-namespace Bovender.UnitTests.Mvvm
+namespace Bovender.UnitTests
 {
-    class ProcessViewModelForTesting : ProcessViewModelBase
+    [Serializable]
+    class ExceptionForTestingPurposes : Exception
     {
-        protected override int GetPercentCompleted()
-        {
-            return 33;
-        }
-
-        public ProcessViewModelForTesting(ProcessModelForTesting model)
-            : base(model) { }
+        public ExceptionForTestingPurposes() { }
+        public ExceptionForTestingPurposes(string message) : base(message) { }
+        public ExceptionForTestingPurposes(string message,
+            Exception innerException)
+            : base(message, innerException) { }
+        public ExceptionForTestingPurposes(SerializationInfo info,
+            StreamingContext context)
+            : base(info, context) { }
     }
 }

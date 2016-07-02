@@ -1,3 +1,13 @@
+Version 0.11.0 (2016-07-02)
+------------------------------------------------------------------------
+
+- FIX: Storing and retrieving SemanticVersion objects from Settings.
+- IMPROVEMENT: Process-related code was refactored and simplified.
+- NEW: Built-in LogFile class.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.10.0 (2016-06-20)
 ------------------------------------------------------------------------
 

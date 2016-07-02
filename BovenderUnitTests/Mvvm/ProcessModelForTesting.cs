@@ -1,4 +1,4 @@
-﻿/* ProcessViewModelForTesting.cs
+﻿/* ProcessModelForTesting.cs
  * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
@@ -19,20 +19,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Bovender.Mvvm.ViewModels;
+using Bovender.Mvvm.Models;
 
 namespace Bovender.UnitTests.Mvvm
 {
-    class ProcessViewModelForTesting : ProcessViewModelBase
+    class ProcessModelForTesting : ProcessModel
     {
-        protected override int GetPercentCompleted()
-        {
-            return 33;
-        }
+        public long Duration { get; private set; }
 
-        public ProcessViewModelForTesting(ProcessModelForTesting model)
-            : base(model) { }
+        public override bool Execute()
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            for (int i = 0; i < 40000; i++)
+            {
+                int n = i;
+                int f = n;
+                for (int j = 0; j < n; j++)
+                {
+                    f *= j;
+                }
+                if (IsCancellationRequested) break;
+            }
+            watch.Stop();
+            Duration = watch.ElapsedMilliseconds;
+            Console.WriteLine(String.Format("Process took {0} ms", Duration));
+            return !IsCancellationRequested;
+        }
     }
 }

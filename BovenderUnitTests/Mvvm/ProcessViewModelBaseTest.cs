@@ -21,36 +21,212 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Bovender.Mvvm.ViewModels;
+using System.Threading;
 
 namespace Bovender.UnitTests.Mvvm
 {
     [TestFixture]
     class ProcessViewModelBaseTest
     {
+        [SetUp]
+        public void Setup()
+        {
+            SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
+            Logging.LogFile.Default.EnableDebugLogging();
+            _model = new ProcessModelForTesting();
+            _viewModel = new ProcessViewModelForTesting(_model);
+            _messageContent = null;
+        }
+
         [Test]
         public void ShowProgress()
         {
-            ProcessViewModelForTesting vm = new ProcessViewModelForTesting();
             bool showProgressWasSent = false;
-            bool failure = false;
             bool completed = false;
-            vm.ShowProgressMessage.Sent += (sender, args) =>
+            _viewModel.ProcessFinishedMessage.Sent += (s, a) =>
             {
+                Logger.Info("ProcessFinishedMessage was sent");
+                completed = true;
+            };
+            _viewModel.ShowProgressMessage.Sent += (sender, args) =>
+            {
+                Logger.Info("ShowProgressMessage was sent");
+                _messageContent = args.Content;
                 showProgressWasSent = true;
-                args.Content.CompletedMessage.Sent += (s, a) =>
+            };
+            bool abort = false;
+            Timer t = new Timer((obj) =>
                 {
-                    completed = true;
-                };
-            };
-            vm.ProcessFailedMessage.Sent += (sender2, args2) =>
+                    if (_messageContent != null && _messageContent.Processing)
+                    {
+                        Logger.Info("aborting...");
+                        abort = true;
+                    }
+                }, null, 5000, Timeout.Infinite);
+            _viewModel.StartProcess();
+            while (!completed && !abort) ;
+            t.Dispose();
+            if (abort)
             {
-                failure = true;
-            };
-            vm.Start();
-            while (!completed) ;
-            Assert.IsTrue(vm.Duration > 1500, "Process took less than 1.5 seconds - increase faculty loop?");
+                Logger.Info("Cancelling...");
+                _viewModel.CancelProcess();
+            }
+            Logger.Info("Asserting...");
+            Assert.IsFalse(abort, "Task was aborted");
+            Assert.IsTrue(_model.Duration > 1500, "Process took less than 1.5 seconds - increase faculty loop?");
             Assert.IsTrue(showProgressWasSent, "ShowProgress message should have been sent");
-            Assert.IsFalse(failure, "ProcessFailedMessage should NOT have been sent");
+            Assert.IsTrue(_messageContent.WasSuccessful, "WasSuccessful should be true");
+            Assert.IsNull(_messageContent.Exception, "Exception should be null");
         }
+
+        [Test]
+        public void ProcessException()
+        {
+            bool showProgressWasSent = false;
+            bool completed = false;
+            _model = new ExceptionProcessModelForTesting();
+            _viewModel = new ProcessViewModelForTesting(_model);
+            _viewModel.ProcessFinishedMessage.Sent += (s, a) =>
+            {
+                Logger.Info("ProcessFinishedMessage was sent");
+                completed = true;
+            };
+            _viewModel.ShowProgressMessage.Sent += (sender, args) =>
+            {
+                Logger.Info("ShowProgressMessage was sent");
+                _messageContent = args.Content;
+                showProgressWasSent = true;
+            };
+            bool abort = false;
+            Timer t = new Timer((obj) =>
+            {
+                if (_messageContent.Processing)
+                {
+                    Logger.Info("aborting...");
+                    abort = true;
+                }
+            }, null, 5000, Timeout.Infinite);
+            _viewModel.StartProcess();
+            while (!completed && !abort) ;
+            t.Dispose();
+            if (abort)
+            {
+                Logger.Info("Cancelling...");
+                _viewModel.CancelProcess();
+            }
+            Logger.Info("Asserting...");
+            Assert.IsFalse(abort, "Task was aborted");
+            Assert.IsTrue(_model.Duration > 1500, "Process took less than 1.5 seconds - increase faculty loop?");
+            Assert.IsTrue(showProgressWasSent, "ShowProgress message should have been sent");
+            Assert.IsFalse(_messageContent.WasSuccessful, "WasSuccessful should be false");
+            Assert.IsInstanceOf<ExceptionForTestingPurposes>(_messageContent.Exception, "Exception was not handed over.");
+        }
+
+        [Test]
+        public void CancelProcessViaViewModel()
+        {
+            bool completed = false;
+            _viewModel.ProcessFinishedMessage.Sent += (s, a) =>
+            {
+                Logger.Info("ProcessFinishedMessage was sent");
+                completed = true;
+            };
+            _viewModel.ShowProgressMessage.Sent += (sender, args) =>
+            {
+                Logger.Info("ShowProgressMessage was sent");
+                _messageContent = args.Content;
+            };
+            bool abort = false;
+            Timer t = new Timer((obj) =>
+                {
+                    if (_messageContent.Processing)
+                    {
+                        Logger.Info("aborting...");
+                        abort = true;
+                    }
+                }, null, 5000, Timeout.Infinite);
+            Timer abortTimer = new Timer((obj) =>
+                {
+                    Logger.Info("Now simulating abort...");
+                    _viewModel.CancelProcess();
+                }, null, 1000, Timeout.Infinite);
+            _viewModel.StartProcess();
+            while (!completed && !abort) ;
+            t.Dispose();
+            if (abort)
+            {
+                Logger.Info("Cancelling...");
+                _viewModel.CancelProcess();
+            }
+            abortTimer.Dispose();
+            Logger.Info("Asserting...");
+            Assert.IsFalse(abort, "Task was aborted");
+            Assert.IsTrue(_model.Duration < 1300, "Process took more than 1.3 seconds - was not aborted?");
+            Assert.IsTrue(_messageContent.WasCancelled, "WasCancelled should be true");
+            Assert.IsNull(_messageContent.Exception, "Exception should be null");
+        }
+
+        [Test]
+        public void CancelProcessViaMessageContent()
+        {
+            bool completed = false;
+            _viewModel.ProcessFinishedMessage.Sent += (s, a) =>
+            {
+                Logger.Info("ProcessFinishedMessage was sent");
+                completed = true;
+            };
+            _viewModel.ShowProgressMessage.Sent += (sender, args) =>
+            {
+                Logger.Info("ShowProgressMessage was sent");
+                _messageContent = args.Content;
+            };
+            bool abort = false;
+            Timer t = new Timer((obj) =>
+            {
+                if (_messageContent != null && _messageContent.Processing)
+                {
+                    Logger.Info("aborting...");
+                    abort = true;
+                }
+            }, null, 5000, 2000);
+            Timer abortTimer = new Timer((obj) =>
+            {
+                if (_messageContent != null)
+                {
+                    Logger.Info("Now simulating cancellation...");
+                    _messageContent.CancelCommand.Execute(null);
+                }
+            }, null, 1200, 100);
+            _viewModel.StartProcess();
+            while (!completed && !abort) ;
+            t.Dispose();
+            if (abort)
+            {
+                Logger.Info("Cancelling...");
+                _viewModel.CancelProcess();
+            }
+            abortTimer.Dispose();
+            Logger.Info("Asserting...");
+            Assert.IsFalse(abort, "Task was aborted");
+            Assert.IsTrue(_model.Duration < 1500, "Process took more than 1.5 seconds - was not aborted?");
+            Assert.IsTrue(_messageContent.WasCancelled, "WasCancelled should be true");
+            Assert.IsNull(_messageContent.Exception, "Exception should be null");
+        }
+
+        #region Private fields
+
+        ProcessModelForTesting _model;
+        ProcessViewModelForTesting _viewModel;
+        Bovender.Mvvm.Messaging.ProcessMessageContent _messageContent;
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
+
+        #endregion
     }
 }

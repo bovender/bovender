@@ -22,48 +22,12 @@ using System.Windows.Input;
 using System.Threading;
 using System.Windows.Threading;
 using Bovender.Extensions;
+using System.Threading.Tasks;
 
 namespace Bovender.Mvvm.ViewModels
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
-        #region Private members
-
-        private string _displayString;
-        private DelegatingCommand _closeViewCommand;
-        private bool _isSelected;
-
-        #endregion
-
-        #region Events
-
-        /// <summary>
-        /// Raised by the CloseView Command, signals that associated views
-        /// are to be closed.
-        /// </summary>
-        public event EventHandler RequestCloseView;
-
-        #endregion
-
-        #region Commands
-
-        public ICommand CloseViewCommand
-        {
-            get
-            {
-                if (_closeViewCommand == null)
-                {
-                    _closeViewCommand = new DelegatingCommand(
-                        parameter => { DoCloseView(); },
-                        parameter => { return CanCloseView(); }
-                        );
-                };
-                return _closeViewCommand;
-            }
-        }
-
-        #endregion
-
         #region Public properties
 
         public virtual string DisplayString
@@ -125,116 +89,7 @@ namespace Bovender.Mvvm.ViewModels
 
         #endregion
 
-        #region Public (abstract) methods
-
-        /// <summary>
-        /// Returns the model object that this view model wraps or null
-        /// if there is no wrapped model object.
-        /// </summary>
-        /// <remarks>
-        /// This is a method rather than a property to make data binding
-        /// more difficult (if not impossible), because binding directly
-        /// to the model object is discouraged. However, certain users
-        /// such as a ViewModelCollection might need access to the wrapped
-        /// model object.
-        /// </remarks>
-        /// <returns>Model object.</returns>
-        public abstract object RevealModelObject();
-
-        #endregion
-
-        #region Protected properties
-
-        /// <summary>
-        /// Captures the dispatcher of the thread that the
-        /// object was created in.
-        /// </summary>
-        protected Dispatcher Dispatcher { get; private set; }
-
-        #endregion
-
-        #region INotifyPropertyChanged interface
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
-        #region Protected methods
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        protected virtual bool CanCloseView()
-        {
-            return true;
-        }
-
-        protected virtual void DoCloseView()
-        {
-            if (RequestCloseView != null && CanCloseView())
-            {
-                RequestCloseView(this, EventArgs.Empty);
-            }
-        }
-
-        /// <summary>
-        /// Dispatches an action, either using the associated view's dispatcher
-        /// if one exists, or directly.
-        /// </summary>
-        /// <param name="action">Action to dispatch</param>
-        protected virtual void Dispatch(Action action)
-        {
-            if (Dispatcher != null)
-            {
-                Dispatcher.Invoke(action);
-            }
-            else
-            {
-                action();
-            }
-        }
-
-        /// <summary>
-        /// Dispatches a function, either using the associated view's dispatcher
-        /// if one exists, or directly.
-        /// </summary>
-        /// <param name="action">Function to dispatch</param>
-        /// <typeparam name="TResult">Type of the return value</typeparam>
-        protected virtual TResult Dispatch<TResult>(Func<TResult> function)
-        {
-            if (Dispatcher != null)
-            {
-                return (TResult)Dispatcher.Invoke(function);
-            }
-            else
-            {
-                return function();
-            }
-        }
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Does not allow public instantiation of this class.
-        /// </summary>
-        protected ViewModelBase()
-        {
-            // Capture the current dispatcher to enable
-            // asynchronous operations that a view can
-            // react to dispite running in another thread.
-            Dispatcher = Dispatcher.CurrentDispatcher;
-        }
-
-        #endregion
-
-        #region Injectors
+        #region Public injectors
 
         /// <summary>
         /// Injects the ViewModel into a newly created View and wires the RequestCloseView
@@ -362,5 +217,153 @@ namespace Bovender.Mvvm.ViewModels
 
         #endregion
 
+        #region Public (abstract) methods
+
+        /// <summary>
+        /// Returns the model object that this view model wraps or null
+        /// if there is no wrapped model object.
+        /// </summary>
+        /// <remarks>
+        /// This is a method rather than a property to make data binding
+        /// more difficult (if not impossible), because binding directly
+        /// to the model object is discouraged. However, certain users
+        /// such as a ViewModelCollection might need access to the wrapped
+        /// model object.
+        /// </remarks>
+        /// <returns>Model object.</returns>
+        public abstract object RevealModelObject();
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Raised by the CloseView Command, signals that associated views
+        /// are to be closed.
+        /// </summary>
+        public event EventHandler RequestCloseView;
+
+        #endregion
+
+        #region Commands
+
+        public ICommand CloseViewCommand
+        {
+            get
+            {
+                if (_closeViewCommand == null)
+                {
+                    _closeViewCommand = new DelegatingCommand(
+                        parameter => { DoCloseView(); },
+                        parameter => { return CanCloseView(); }
+                        );
+                };
+                return _closeViewCommand;
+            }
+        }
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Does not allow public instantiation of this class.
+        /// </summary>
+        protected ViewModelBase()
+        {
+            // Capture the current dispatcher to enable
+            // asynchronous operations that a view can
+            // react to dispite running in another thread.
+            Dispatcher = Dispatcher.CurrentDispatcher;
+
+            if (SynchronizationContext.Current != null)
+            {
+                SyncContext = TaskScheduler.FromCurrentSynchronizationContext();
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged interface
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
+        #region Protected methods
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        protected virtual bool CanCloseView()
+        {
+            return true;
+        }
+
+        protected virtual void DoCloseView()
+        {
+            if (RequestCloseView != null && CanCloseView())
+            {
+                RequestCloseView(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// Dispatches an action in the current synchronization context
+        /// if one exists, or using the Dispatcher.
+        /// </summary>
+        /// <param name="action">Action to dispatch</param>
+        protected CancellationToken Dispatch(Action action)
+        {
+            if (SyncContext == null)
+            {
+                Logger.Info("Dispatch: Dispatching with dispatcher");
+                Dispatcher.Invoke(action);
+                return CancellationToken.None;
+            }
+            else
+            {
+                Logger.Info("Dispatch: Dispatching on current synchronization context");
+                // TaskScheduler context = TaskScheduler.FromCurrentSynchronizationContext();
+                CancellationToken token = new CancellationToken();
+                Task.Factory.StartNew(action, token, TaskCreationOptions.None, SyncContext);
+                return token;
+            }
+        }
+
+        #endregion
+
+        #region Protected properties
+
+        /// <summary>
+        /// Captures the dispatcher of the thread that the
+        /// object was created in.
+        /// </summary>
+        protected Dispatcher Dispatcher { get; private set; }
+
+        protected TaskScheduler SyncContext { get; private set; }
+
+        #endregion
+
+        #region Private fields
+
+        private string _displayString;
+        private DelegatingCommand _closeViewCommand;
+        private bool _isSelected;
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
+
+        #endregion
     }
 }

@@ -41,12 +41,6 @@ namespace Bovender.Mvvm.Actions
     /// </remarks>
     public class ProcessAction : ShowViewAction
     {
-        #region Public properties
-
-        public string CancelButtonText { get; set; }
-
-        #endregion
-
         #region Overrides
 
         protected override System.Windows.Window CreateView()
