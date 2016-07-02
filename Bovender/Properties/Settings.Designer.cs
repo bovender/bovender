@@ -40,5 +40,23 @@ namespace Bovender.Properties {
                 return ((string)(this["UserSettingsFile"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int ShowProgressDelay {
+            get {
+                return ((int)(this["ShowProgressDelay"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int ShowProgressInterval {
+            get {
+                return ((int)(this["ShowProgressInterval"]));
+            }
+        }
     }
 }

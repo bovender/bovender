@@ -1,4 +1,4 @@
-﻿/* ProcessViewModelForTesting.cs
+﻿/* ExceptionProcessModelForTesting.cs
  * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
@@ -19,20 +19,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Bovender.Mvvm.ViewModels;
 
 namespace Bovender.UnitTests.Mvvm
 {
-    class ProcessViewModelForTesting : ProcessViewModelBase
+    class ExceptionProcessModelForTesting : ProcessModelForTesting
     {
-        protected override int GetPercentCompleted()
+        public override bool Execute()
         {
-            return 33;
+            base.Execute();
+            throw new ExceptionForTestingPurposes();
         }
-
-        public ProcessViewModelForTesting(ProcessModelForTesting model)
-            : base(model) { }
     }
 }

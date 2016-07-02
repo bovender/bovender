@@ -78,8 +78,11 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="ExceptionForTestingPurposes.cs" />
     <Compile Include="Extensions\ArrayExtensionsTest.cs" />
     <Compile Include="Mvvm\EnumProviderTest.cs" />
+    <Compile Include="Mvvm\ExceptionProcessModelForTesting.cs" />
+    <Compile Include="Mvvm\ProcessModelForTesting.cs" />
     <Compile Include="Mvvm\ProcessViewModelBaseTest.cs" />
     <Compile Include="Mvvm\ProcessViewModelForTesting.cs" />
     <Compile Include="Mvvm\TestModel.cs" />
