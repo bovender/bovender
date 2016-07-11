@@ -76,7 +76,7 @@ namespace Bovender.Mvvm.Actions
         /// </summary>
         public static void Invoke(this MessageActionBase action)
         {
-            action.Invoke(null);
+            action.Invoke(new MessageArgs<MessageContent>(new MessageContent(), null));
         }
     }
 }
