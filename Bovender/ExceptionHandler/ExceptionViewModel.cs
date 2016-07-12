@@ -22,6 +22,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Net;
 using System.Collections.Specialized;
+using Microsoft.Win32;
 using Bovender.Mvvm;
 using Bovender.Mvvm.Messaging;
 using Bovender.Mvvm.ViewModels;
@@ -117,6 +118,37 @@ namespace Bovender.ExceptionHandler
             get
             {
                 return Environment.Version.ToString();
+            }
+        }
+
+        public string VstoRuntime
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_vstoRuntime))
+                {
+                    string suffix = String.Empty;
+                    RegistryKey hive = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
+                    RegistryKey v4 = hive.OpenSubKey(@"Software\Microsoft\VSTO Runtime Setup\V4");
+                    if (v4 == null)
+                    {
+                        v4 = hive.OpenSubKey(@"Software\Microsoft\VSTO Runtime Setup\V4R");
+                        suffix = " (v4R)";
+                    }
+                    if (v4 != null)
+                    {
+                        _vstoRuntime = v4.GetValue("Version") as string;
+                    }
+                    if (String.IsNullOrEmpty(_vstoRuntime))
+                    {
+                        _vstoRuntime = "(n/a)";
+                    }
+                    else
+                    {
+                        _vstoRuntime += suffix;
+                    }
+                }
+                return _vstoRuntime;
             }
         }
 
@@ -467,6 +499,7 @@ namespace Bovender.ExceptionHandler
             v["operating_system"] = OS;
             v["os_bitness"] = OSBitness;
             v["clr_version"] = CLR;
+            v["vstor_version"] = VstoRuntime;
             v["bovender_version"] = BovenderFramework;
             v["click_once"] = IsClickOnceDeployed.ToString();
             return v;
@@ -528,6 +561,7 @@ namespace Bovender.ExceptionHandler
         private Message<MessageContent> _submitReportMessage;
         private Message<ViewModelMessageContent> _viewDetailsMessage;
         private ProcessMessageContent _submissionProcessMessageContent;
+        private string _vstoRuntime;
 
         #endregion
 
