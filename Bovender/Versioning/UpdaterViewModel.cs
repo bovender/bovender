@@ -532,16 +532,31 @@ namespace Bovender.Versioning
         private void DoInstallUpdate()
         {
             Logger.Info("DoInstallUpdate");
+            bool success = false;
             if (CanInstallUpdate())
             {
+                Logger.Info("DoInstallUpdate: Closing view");
                 DoCloseView();
-                _updater.InstallUpdate();
+                try
+                {
+                    Logger.Info("DoInstallUpdate: Invoking updater...");
+                    _updater.InstallUpdate();
+                    Logger.Info("DoInstallUpdate: ... done");
+                    success = true;
+                }
+                catch (Exception e)
+                {
+                    Logger.Warn("DoInstallUpdate: Exception");
+                    Logger.Warn(e);
+                    DownloadProcessMessageContent.Exception = e;
+                }
             }
-            else
+            if (!success)
             {
                 Logger.Warn("Cannot install update... Not authorized or not verified");
-                throw new InvalidOperationException("Cannot install update: User not authorized or update not verified.");
+                UpdateFailedVerificationMessage.Send(new ViewModelMessageContent(this));
             }
+            Logger.Info("DoInstallUpdate: Exiting");
         }
 
         private bool CanInstallUpdate()

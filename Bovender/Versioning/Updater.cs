@@ -206,10 +206,12 @@ namespace Bovender.Versioning
             // As a security measure, compute the SHA1 again so we know it's current.
             if (VerifyDownload())
             {
+                Logger.Info("InstallUpdate: Installer is verified, proceeding");
                 DoInstallUpdate();
             }
             else
             {
+                Logger.Fatal("InstallUpdate: Installer NOT verified!");
                 throw new DownloadCorruptException("The checksum of the file on disk is unexpected.");
             }
         }
@@ -309,10 +311,10 @@ namespace Bovender.Versioning
         {
             if (IsVerifiedDownload)
             {
-                System.Diagnostics.Process.Start(
-                    GetInstallerCommand(),
-                    GetInstallerParameters()
-                );
+                string command = GetInstallerCommand();
+                string arguments = GetInstallerParameters();
+                Logger.Info("DoInstallUpdate: {0} {1}", command, arguments);
+                System.Diagnostics.Process.Start(command, arguments);
             }
         }
 
@@ -331,7 +333,7 @@ namespace Bovender.Versioning
         protected virtual string GetInstallerParameters()
         {
             // silencing parameters for InnoSetup installers
-            return "/SP- /SILENT /SUPPRESSMSGBOXES";
+            return "/UPDATE /SP- /SILENT /SUPPRESSMSGBOXES";
         }
 
         #endregion
@@ -428,6 +430,14 @@ namespace Bovender.Versioning
         private WebClient _client;
         private WebClient _versionInfoClient;
         private string _destinationFileName;
+
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
 
         #endregion
     }
