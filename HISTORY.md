@@ -1,4 +1,13 @@
-Version 0.11.2 (2016-07-12)
+Version 0.11.3 (2016-07-24)
+------------------------------------------------------------------------
+
+- IMPROVEMENT: An update installer is now executed with an additional /UPDATE command line switch.
+- IMPROVEMENT: Logging during updating.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+Version 0.11.2 (2016-07-13)
 ------------------------------------------------------------------------
 
 - IMPROVED: The ExceptionViewModel also provides access to the VSTO Runtime version now.
