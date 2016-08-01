@@ -76,8 +76,7 @@ namespace Bovender.Versioning
                         try
                         {
                             Logger.Info("Install: {0} {1}", command, arguments);
-                            // var process = System.Diagnostics.Process.Start(command, arguments);
-                            var process = System.Diagnostics.Process.Start("iexplore.exe");
+                            var process = System.Diagnostics.Process.Start(command, arguments);
                             Logger.Info("Install: Process: {0}", process);
                             Status = UpdaterStatus.InstallationStarted;
                             result = true;
