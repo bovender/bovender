@@ -207,9 +207,10 @@ namespace Bovender.Mvvm.Messaging
         {
             if (CanCancel())
             {
-                CancelProcess.Invoke();
-                WasCancelled = true;
+                Processing = false;
                 WasSuccessful = false;
+                WasCancelled = true;
+                CancelProcess.Invoke();
                 CompletedMessage.Send(this, null);
                 DoCloseView();
             }

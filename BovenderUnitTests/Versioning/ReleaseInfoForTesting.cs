@@ -1,4 +1,4 @@
-﻿/* ProcessViewModelForTesting.cs
+﻿/* ReleaseInfoForTesting.cs
  * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
@@ -19,20 +19,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Bovender.Mvvm.ViewModels;
+using Bovender.Versioning;
 
-namespace Bovender.UnitTests.Mvvm
+namespace Bovender.UnitTests.Versioning
 {
-    class ProcessViewModelForTesting : ProcessViewModelBase
+    class ReleaseInfoForTesting : ReleaseInfo
     {
-        protected override void UpdateProcessMessageContent(Bovender.Mvvm.Messaging.ProcessMessageContent processMessageContent)
+        public override bool Fetch()
         {
-            processMessageContent.PercentCompleted = 33;
+            return true; // do not attempt to fetch anything from the internet
         }
-
-        public ProcessViewModelForTesting(ProcessModelForTesting model)
-            : base(model) { }
-    }
+    
+        /// <summary>
+        /// Creates a new ReleaseInfo object with the given raw release information.
+        /// This constructor exists to facilitate testing.
+        /// </summary>
+        /// <param name="rawReleaseInfo"></param>
+        internal ReleaseInfoForTesting(string rawReleaseInfo)
+            : base()
+        {
+            RawReleaseInfo = rawReleaseInfo;
+            Parse(rawReleaseInfo);
+        }
+}
 }

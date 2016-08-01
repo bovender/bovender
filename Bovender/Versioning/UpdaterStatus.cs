@@ -1,4 +1,4 @@
-﻿/* ProcessViewModelForTesting.cs
+﻿/* UpdaterStatus.cs
  * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
@@ -19,20 +19,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Bovender.Mvvm.ViewModels;
 
-namespace Bovender.UnitTests.Mvvm
+namespace Bovender.Versioning
 {
-    class ProcessViewModelForTesting : ProcessViewModelBase
+    public enum UpdaterStatus
     {
-        protected override void UpdateProcessMessageContent(Bovender.Mvvm.Messaging.ProcessMessageContent processMessageContent)
-        {
-            processMessageContent.PercentCompleted = 33;
-        }
-
-        public ProcessViewModelForTesting(ProcessModelForTesting model)
-            : base(model) { }
+        InstallationFailed = -4,
+        DownloadFailed = -3,
+        VerificationFailed = -2,
+        NotAuthorizedToInstall = -1,
+        Undefined = 0,
+        Downloading = 1,
+        Downloaded = 2,
+        DownloadCancelled = 3,
+        InstallationStarted = 4,
     }
 }
