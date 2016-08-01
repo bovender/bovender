@@ -1,3 +1,11 @@
+Version 0.12.0 (2016-08-01)
+------------------------------------------------------------------------
+
+- IMPROVEMENT: The automatic updater facility was overhauled, it now makes use of the ProcessModel and ProcessViewModelBase.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.11.3 (2016-07-24)
 ------------------------------------------------------------------------
 
