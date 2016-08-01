@@ -205,22 +205,22 @@ namespace Bovender.Mvvm.Actions
         {
             if (!String.IsNullOrEmpty(Caption))
             {
-                Logger.Info("ProcessMessageContent: Overriding caption");
+                Logger.Info("GetDataContext: Overriding caption");
                 messageContent.Caption = Caption;
             }
             if (!String.IsNullOrEmpty(Message))
             {
-                Logger.Info("ProcessMessageContent: Overriding message");
+                Logger.Info("GetDataContext: Overriding message");
                 messageContent.Message = FormattedText;
             }
             if (!String.IsNullOrEmpty(OkButtonText))
             {
-                Logger.Info("ProcessMessageContent: Overriding OK button text");
+                Logger.Info("GetDataContext: Overriding OK button text");
                 messageContent.OkButtonText = OkButtonText;
             }
             if (!String.IsNullOrEmpty(CancelButtonText))
             {
-                Logger.Info("ProcessMessageContent: Overriding OK button text");
+                Logger.Info("GetDataContext: Overriding OK button text");
                 messageContent.CancelButtonText = CancelButtonText;
             }
             return messageContent;

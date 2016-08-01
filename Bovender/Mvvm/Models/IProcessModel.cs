@@ -1,4 +1,4 @@
-﻿/* ProcessViewModelForTesting.cs
+﻿/* IProcessModel.cs
  * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
@@ -15,24 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Bovender.Mvvm.ViewModels;
 
-namespace Bovender.UnitTests.Mvvm
+namespace Bovender.Mvvm.Models
 {
-    class ProcessViewModelForTesting : ProcessViewModelBase
+    public interface IProcessModel
     {
-        protected override void UpdateProcessMessageContent(Bovender.Mvvm.Messaging.ProcessMessageContent processMessageContent)
-        {
-            processMessageContent.PercentCompleted = 33;
-        }
-
-        public ProcessViewModelForTesting(ProcessModelForTesting model)
-            : base(model) { }
+        void Cancel();
+        bool Execute();
     }
 }

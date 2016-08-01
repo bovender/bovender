@@ -70,7 +70,7 @@ namespace Bovender.Mvvm.ViewModels
     {
         #region Properties
 
-        public Bovender.Mvvm.Models.ProcessModel ProcessModel { get; protected set; }
+        public Bovender.Mvvm.Models.IProcessModel ProcessModel { get; protected set; }
 
         public bool IsProcessing
         {
@@ -79,6 +79,8 @@ namespace Bovender.Mvvm.ViewModels
                 return ProcessMessageContent.Processing;
             }
         }
+
+        public bool IsIndeterminate { get { return ProcessMessageContent.IsIndeterminate; } }
 
         public bool WasCancelled
         {
@@ -95,6 +97,8 @@ namespace Bovender.Mvvm.ViewModels
                 return ProcessMessageContent.WasSuccessful;
             }
         }
+
+        public virtual Exception Exception { get; protected set; }
 
         #endregion
 
@@ -121,8 +125,9 @@ namespace Bovender.Mvvm.ViewModels
         /// </summary>
         public virtual void CancelProcess()
         {
-            Logger.Info("CancelProcess was called!");
             ProcessMessageContent.WasCancelled = true;
+            ProcessMessageContent.Processing = false;
+            Logger.Info("CancelProcess was called!");
             ProcessModel.Cancel();
         }
         
@@ -168,16 +173,22 @@ namespace Bovender.Mvvm.ViewModels
         #region Abstract methods
 
         /// <summary>
-        /// Returns the percent completed value.
+        /// Updates the given ProcessMessageContent with the current process.
+        /// Normally this involves setting the PercentCompleted property, but
+        /// if a descendant class is used, other informational properties may
+        /// be updated as well.
         /// </summary>
-        /// <returns>Number between 0 and 100</returns>
-        protected abstract int GetPercentCompleted();
+        /// <remarks>
+        /// To make use of a descendant class of <see cref="ProcessMessageContent"/>,
+        /// override the <see cref="ProcessMessageContent"/> property.
+        /// </remarks>
+        protected abstract void UpdateProcessMessageContent(ProcessMessageContent processMessageContent);
 
         #endregion
 
         #region Constructor
 
-        protected ProcessViewModelBase(Models.ProcessModel processModel)
+        protected ProcessViewModelBase(Models.IProcessModel processModel)
             : base()
         {
             ProcessModel = processModel;
@@ -219,6 +230,7 @@ namespace Bovender.Mvvm.ViewModels
             Logger.Info("Sending ProcessFinishedMessage");
             ProcessMessageContent.Processing = false;
             ProcessMessageContent.Exception = Exception;
+            ProcessMessageContent.WasSuccessful = Exception == null;
             ProcessFinishedMessage.Send(ProcessMessageContent);
             ProcessMessageContent.CompletedMessage.Send(ProcessMessageContent);
         }
@@ -245,20 +257,18 @@ namespace Bovender.Mvvm.ViewModels
         /// status updates occur. Process views get a hold of this
         /// message content when the ShowProcess message is sent.
         /// </summary>
-        protected ProcessMessageContent ProcessMessageContent
+        protected virtual ProcessMessageContent ProcessMessageContent
         {
             get
             {
                 if (_processMessageContent == null)
                 {
                     Logger.Debug("Creating new ProcessMessageContent instance");
-                    _processMessageContent = new ProcessMessageContent(CancelProcess);
+                    _processMessageContent = new ProcessMessageContent(this, CancelProcess);
                 }
                 return _processMessageContent;
             }
         }
-
-        protected Exception Exception { get; set; }
 
         #endregion
 
@@ -307,26 +317,30 @@ namespace Bovender.Mvvm.ViewModels
         {
             lock (_lockUpdateProgress)
             {
-                if (!_showProgressWasSent)
+                if (!_showProgressWasSent && ProcessMessageContent.Processing)
                 {
-                    if (ProcessMessageContent.Processing)
+                    _showProgressWasSent = true;
+                    Dispatch(() =>
                     {
-                        _showProgressWasSent = true;
-                        Dispatch(() =>
+                        if (IsIndeterminate)
                         {
-                            Logger.Info("UpdateProgress: Sending ShowProgressMessage");
-                            ShowProgressMessage.Send(ProcessMessageContent);
-                            Logger.Debug("UpdateProgress: ... ShowProgressMessage was sent");
-                        });
-                    }
+                            Logger.Info("UpdateProgress: The process is indeterminate");
+                        }
+                        Logger.Info("UpdateProgress: Sending ShowProgressMessage");
+                        ShowProgressMessage.Send(ProcessMessageContent);
+                        Logger.Debug("UpdateProgress: ... ShowProgressMessage was sent");
+                    });
                 }
                 else
                 {
                     if (ProcessMessageContent.Processing)
                     {
-                        int percent = GetPercentCompleted();
-                        Logger.Info("UpdateProgress: PercentCompleted: {0}", percent);
-                        ProcessMessageContent.PercentCompleted = percent;
+                        if (!IsIndeterminate)
+                        {
+                            UpdateProcessMessageContent(ProcessMessageContent);
+                            Logger.Info("UpdateProgress: PercentCompleted: {0}",
+                                ProcessMessageContent.PercentCompleted);
+                        }
                     }
                     else
                     {

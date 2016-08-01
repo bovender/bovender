@@ -36,7 +36,7 @@
             </TextBlock.Effect>
         </TextBlock>
         <StackPanel>
-            <TextBlock Text="{Binding Message}" />
+            <TextBlock Text="{Binding Message}" TextWrapping="Wrap" MaxWidth="380" />
             <TextBlock Text="{Binding Exception.Message}" Margin="0,10,0,0" Foreground="LightSlateGray" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
                 <Button Command="{Binding CloseViewCommand}" Content="{Binding OkButtonText}"

@@ -43,43 +43,6 @@ namespace Bovender.Versioning
     /// </summary>
     public class SemanticVersion : Object, IComparable
     {
-        #region Factories
-
-        /// <summary>
-        /// Factory method that creates an instance of the Version class with
-        /// the current version information, which must be contained in a file called
-        /// "VERSION" on the root level of the current *entry* assembly.
-        /// </summary>
-        /// <remarks>Note that this will throw an exception if called inside
-        /// a VSTO addin.</remarks>
-        /// <returns>Instance of Version</returns>
-        public static SemanticVersion CurrentVersion()
-        {
-            Assembly assembly = Assembly.GetEntryAssembly();
-            return CurrentVersion(assembly);
-        }
-
-        /// <summary>
-        /// Factory method that creates an instance of the Version class with
-        /// the current version information, which must be contained in a file called
-        /// "VERSION" that is built as an embedded resource. The first embedded "RESOURCE"
-        /// file that is found in all the namespaces of <paramref name="assembly"/> will
-        /// be used.
-        /// </summary>
-        /// <param name="assembly">Assembly that contains the VERSION file.</param>
-        /// <returns>Instance of Version</returns>
-        public static SemanticVersion CurrentVersion(Assembly assembly)
-        {
-            var versionFile = from resources in assembly.GetManifestResourceNames()
-                                      where resources.EndsWith(".VERSION")
-                                      select resources;
-            Stream stream = assembly.GetManifestResourceStream(versionFile.First());
-            StreamReader text = new StreamReader(stream);
-            return new SemanticVersion(text.ReadLine());
-        }
-
-        #endregion
-
         #region Public properties
 
         public int Major { get; set; }
@@ -100,6 +63,8 @@ namespace Bovender.Versioning
         #endregion
 
         #region Constructor
+        
+        public SemanticVersion() { }
 
         /// <summary>
         /// Instantiates the class from a given version string.
@@ -110,7 +75,24 @@ namespace Bovender.Versioning
             ParseString(version);
         }
 
-        public SemanticVersion() { }
+        /// <summary>
+        /// Creates an instance with
+        /// the current version information, which must be contained in a file called
+        /// "VERSION" that is built as an embedded resource. The first embedded "RESOURCE"
+        /// file that is found in all the namespaces of <paramref name="assembly"/> will
+        /// be used.
+        /// </summary>
+        /// <param name="assembly">Assembly that contains the VERSION file.</param>
+        /// <returns>Instance of Version</returns>
+        public SemanticVersion(Assembly assembly)
+        {
+            var versionFile = from resources in assembly.GetManifestResourceNames()
+                              where resources.EndsWith(".VERSION")
+                              select resources;
+            Stream stream = assembly.GetManifestResourceStream(versionFile.First());
+            StreamReader text = new StreamReader(stream);
+            ParseString(text.ReadLine());
+        }
 
         #endregion
 

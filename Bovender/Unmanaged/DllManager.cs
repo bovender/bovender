@@ -45,6 +45,48 @@ namespace Bovender.Unmanaged
 
         #endregion
 
+        #region Public methods
+
+        /// <summary>
+        /// Checks whether a DLL exists in the application directory or
+        /// in the custom <see cref="AlternativeDir"/>.
+        /// </summary>
+        /// <param name="dllFileName">DLL file name to check</param>
+        /// <returns>True if the file exists at either of the two locations; 
+        /// false if not.</returns>
+        public bool DllExists(string dllFileName)
+        {
+            return !String.IsNullOrEmpty(LocateDll(dllFileName));
+        }
+
+        /// <summary>
+        /// Attempts to locate a DLL file in the canonical location (subdirectory
+        /// of the application directory) or, if set, in an alternative location.
+        /// </summary>
+        /// <param name="dllName">DLL to search</param>
+        /// <returns>Complete path to the DLL file, or String.Empty if the DLL
+        /// was not found.</returns>
+        public string LocateDll(string dllName)
+        {
+            string dllPath = CompletePath(ApplicationDir(), dllName);
+            bool found = File.Exists(dllPath);
+            if (!found && !String.IsNullOrWhiteSpace(AlternativeDir))
+            {
+                dllPath = CompletePath(AlternativeDir, dllName);
+                found = File.Exists(dllPath);
+            }
+            if (found)
+            {
+                return dllPath;
+            }
+            else
+            {
+                return String.Empty;
+            }
+        }
+
+        #endregion
+
         #region WinAPI
 
         [DllImport("kernel32.dll", EntryPoint="LoadLibrary", SetLastError=true)]
@@ -192,32 +234,6 @@ namespace Bovender.Unmanaged
         #endregion
 
         #region Helpers
-
-        /// <summary>
-        /// Attempts to locate a DLL file in the canonical location (subdirectory
-        /// of the application directory) or, if set, in an alternative location.
-        /// </summary>
-        /// <param name="dllName">DLL to search</param>
-        /// <returns>Complete path to the DLL file, or String.Empty if the DLL
-        /// was not found.</returns>
-        private string LocateDll(string dllName)
-        {
-            string dllPath = CompletePath(ApplicationDir(), dllName);
-            bool found = File.Exists(dllPath);
-            if (!found && !String.IsNullOrWhiteSpace(AlternativeDir))
-            {
-                dllPath = CompletePath(AlternativeDir, dllName);
-                found = File.Exists(dllPath);
-            }
-            if (found)
-            {
-                return dllPath;
-            }
-            else
-            {
-                return String.Empty;
-            }
-        }
 
         /// <summary>
         /// Constructs and returns the complete path for a given DLL.

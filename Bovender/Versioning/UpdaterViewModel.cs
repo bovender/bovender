@@ -1,5 +1,5 @@
 ﻿/* UpdaterViewModel.cs
- * part of Daniel's XL Toolbox NG
+ * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
  * 
@@ -19,225 +19,80 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Net;
 using Bovender.Mvvm;
-using Bovender.Mvvm.Messaging;
 using Bovender.Mvvm.ViewModels;
+using Bovender.Mvvm.Messaging;
+using System.Diagnostics;
 
 namespace Bovender.Versioning
 {
-    /// <summary>
-    /// Acts as a view model for the <see cref="Updater"/> class which is concerned with
-    /// fetching version information and downloading the update. The view model implements
-    /// related interactivity.
-    /// </summary>
-    /// <remarks>
-    /// <para>
-    /// Views that subscribe to this view model should provide their own Updater class,
-    /// since the base Updater class is abstract. Derived Updater classes provide
-    /// project-specific information such as the download URI.
-    /// </para>
-    /// <para>
-    /// Checking for an available update and downloading it is a complex task that
-    /// involves several interactions with a user (or a view, to stay with MVVM
-    /// terminology). Basically, the process will be as follows:
-    /// </para>
-    /// 
-    /// <list type="bullet">
-    /// <item>
-    /// The View subscribes to the UpdaterViewModel's <see cref="CheckForUpdateMessage"/>
-    /// and executes the VM's <see cref="CheckForUpdateCommand"/>.
-    /// </item>
-    /// <item>
-    /// The VM then arranges for the Updater model to asynchronously fetch version
-    /// information from the remote repository and sends the <see cref="CheckForUpdateMessage"/>.
-    /// </item>
-    /// <item>
-    /// Upon receiving the <see cref="CheckForUpdateMessage"/>, the View could, for example,
-    /// invoke another view that displays an 'indeterminate progress'. It
-    /// could however just silently wait for the update check to finish. In either
-    /// case, _some_ view should listen to one of four self-explanatory messages
-    /// that the VM will send upon receiving the current version information:
-    ///     <list type="number">
-    ///     <item><see cref="UpdateAvailableMessage"/></item>
-    ///     <item><see cref="NoUpdateAvailableMessage"/></item>
-    ///     <item><see cref="UpdateAvailableButNotAuthorizedMessage"/> (if the current user
-    ///     does not have write permissions to the assembly's folder)</item>
-    ///     <item><see cref="NetworkFailureMessage"/></item> if any exception occurred while
-    ///     downloading the current version information.
-    ///     </list>
-    ///     </item>
-    /// <item>
-    /// The last three of these messages could be dealt with by simply showing
-    /// an informative view to the user, for example, or writing to a log file.
-    /// If the view receives the <see cref="UpdateAvailableMessage"/>, it could show the
-    /// update version information that is exposed in the VM's public properties
-    /// to the user.
-    /// </item>
-    /// <item>
-    /// Before starting to download the update, the VM's <see cref="ChooseDestinationFolderCommand"/>
-    /// must be executed. This will send the <see cref="ChooseDestinationFolderMessage"/>,
-    /// whose content is a <see cref="StringMessageContent"/> that carries the last used
-    /// destination folder (or the user's MyDocuments special folder).
-    /// </item>
-    /// <item>
-    /// The view can now optionally have the user choose the appropriate download folder and
-    /// set the VM's <see cref="DestinationFolder"/> property accordingly (e.g. by data binding).
-    /// If the view is a GUI (e.g. a WPF window), this is best done by invoking a
-    /// <see cref="ChooseFolderAction"/>, since there is no ready-to-use folder picker in the
-    /// WPF. The ChooseFolderAction responds to the VM's ChooseDestinationFolderMessage by
-    /// calling the message's respond method.
-    /// </item>
-    /// <item>
-    /// The VM now examines the content of the ChooseDestinationFolderMessage; if the
-    /// message content's Confirmed property is true, it will save the chosen folder in the
-    /// assembly's properties and send the <see cref="ReadyToDownloadMessage"/>.
-    /// </item>
-    /// <item>
-    /// The view that invoked the ChooseFolderAction listens for the ReadyToDownloadMessage
-    /// and executes the VM's <see cref="DownloadUpdateCommand"/>.
-    /// </item>
-    /// <item>
-    /// The DownloadUpdateCommand requests the Updater model to asynchronously download
-    /// the update to the desired folder. It sends the <see cref="DownloadUpdateMessage"/>
-    /// which contains the download progress (that can be data-bound to by a progress bar,
-    /// for example) and whose CancelCommand can be invoked by a view to cancel downloading.
-    /// </item>
-    /// <item>
-    /// The view that executed the DownloadUpdateCommand listens for a DownloadUpdateMessage
-    /// and could invoke a <see cref="ShowViewAction"/> with the message argument that shows a
-    /// progress bar view which is data-bound to the DownloadUpdateMessage's ProcessMessageContent.
-    /// </item>
-    /// <item>
-    /// When the download is finished, the VM compares the file's Sha1 checksum with the
-    /// expected checksum that was announced in the update version information and issues an
-    /// <see cref="UpdateInstallableMessage"/> or a <see cref="UpdateFailedVerificationMessage"/>
-    /// as appropriate. It may also send a <see cref="NetworkFailureMessage"/> if some exception
-    /// occurred while downloading.
-    /// </item>
-    /// <item>
-    /// Finally, upon receiving the UpdateInstallableMessage, the view may execute the VM's
-    /// <see cref="InstallUpdateCommand"/>.
-    /// </item>
-    /// The VM's InstallUpdateCommand logic will proceed with executing the downloaded file
-    /// (by calling the updater model's InstallUpdate method), or send an UpdateFailedVerificationMessage.
-    /// </list>
-    /// <para>
-    /// Note: Views (or code) that subscribe to the UpdaterViewModel do not necessarily have
-    /// to listen and respond to all of the VM's messages.
-    /// For example, it is not necessary to execute the ChooseDestinationFolderCommand, listen for
-    /// the ChooseDestinationFolderMessage, respond to it, and listen for the ReadyToDownloadMessage.
-    /// These commands and messages serve to facilitate displaying GUI views in the MVVM pattern.
-    /// If the code that wishes to check for an available update (e.g., in the background without
-    /// the user's attention) has another way to set the destination folder or is happy with the
-    /// last used or default destination folder, it may just proceed with executing the
-    /// DownloadUpdate command.
-    /// </para>
-    /// </remarks>
-    public class UpdaterViewModel : ViewModelBase
+    public class UpdaterViewModel : ProcessViewModelBase
     {
         #region Public properties
 
-        public SemanticVersion NewVersion { get { return _updater.NewVersion; } }
-
-        public SemanticVersion CurrentVersion { get { return _updater.CurrentVersion;  } }
-
-        public string UpdateSummary { get { return _updater.UpdateSummary; } }
-
-        public Uri DownloadUri { get { return _updater.DownloadUri; } }
-
-        public bool IsUserAuthorized { get { return _updater.IsAuthorized; } }
-
-        public bool IsVerifiedDownload { get { return _updater.IsVerifiedDownload; } }
-
-        public bool IsUpdatePending { get { return _updater.IsUpdatePending; } }
-
-        public bool CanCheckForUpdate
+        public double DownloadMegaBytesReceived
         {
             get
             {
-                return !IsLocked && !IsUpdatePending;
+                return Updater.DownloadBytesReceived / 1000000;
             }
         }
 
-        public string DestinationFolder
+        public double DownloadMegaBytesTotal
         {
             get
             {
-                if (String.IsNullOrEmpty(_updater.DestinationFolder))
-                {
-                    _updater.DestinationFolder = UserSettings.UserSettingsBase.Default.DownloadFolder;
-                    OnPropertyChanged("DestinationFolder");
-                };
-                return _updater.DestinationFolder;
-            }
-
-            set
-            {
-                _updater.DestinationFolder = value;
-                OnPropertyChanged("DestinationFolder");
+                return Updater.DownloadBytesTotal / 1000000;
             }
         }
 
-        public Exception DownloadException { get { return _updater.DownloadException;  } }
+        public SemanticVersion CurrentVersion { get { return Updater.CurrentVersion; } }
+
+        public SemanticVersion NewVersion { get { return Updater.ReleaseInfo.ReleaseVersion; } }
+
+        public string DownloadFolder { get; set; }
+
+        public string Summary { get { return Updater.ReleaseInfo.Summary; } }
 
         #endregion
 
-        #region Commands
+        #region MVVM commands
 
-        public DelegatingCommand CheckForUpdateCommand
+        public DelegatingCommand DownloadCommand
         {
             get
             {
-                if (_checkForUpdateCommand == null)
+                if (_downloadCommand == null)
                 {
-                    _checkForUpdateCommand = new DelegatingCommand(
-                        (param) => DoCheckForUpdate(),
-                        (param) => CanCheckForUpdate);
+                    _downloadCommand = new DelegatingCommand(
+                        param => StartProcess(),
+                        param => CanStartProcess());
                 }
-                return _checkForUpdateCommand;
+                return _downloadCommand;
             }
         }
 
-        public DelegatingCommand ChooseDestinationFolderCommand
+        public DelegatingCommand ChooseFolderCommand
         {
             get
             {
-                if (_chooseDestinationFolderCommand == null)
+                if (_chooseFolderCommand == null)
                 {
-                    _chooseDestinationFolderCommand = new DelegatingCommand(
-                        (param) => DoChooseDestinationFolder(),
-                        (param) => CanChooseDestinationFolder());
+                    _chooseFolderCommand = new DelegatingCommand(ChooseFolder);
                 }
-                return _chooseDestinationFolderCommand;
+                return _chooseFolderCommand;
             }
         }
 
-        public DelegatingCommand DownloadUpdateCommand
+        public DelegatingCommand InstallCommand
         {
             get
             {
-                if (_downloadUpdateCommand == null)
+                if (_installCommand == null)
                 {
-                    _downloadUpdateCommand = new DelegatingCommand(
-                        (param) => DoDownloadUpdate()
-                        );
+                    _installCommand = new DelegatingCommand(Install);
                 }
-                return _downloadUpdateCommand;
-            }
-        }
-
-        public DelegatingCommand InstallUpdateCommand
-        {
-            get
-            {
-                if (_installUpdateCommand == null)
-                {
-                    _installUpdateCommand = new DelegatingCommand(
-                        (param) => DoInstallUpdate(),
-                        (param) => CanInstallUpdate());
-                }
-                return _installUpdateCommand;
+                return _installCommand;
             }
         }
 
@@ -245,410 +100,171 @@ namespace Bovender.Versioning
 
         #region MVVM messages
 
-        public Message<ProcessMessageContent> CheckForUpdateMessage
+        public Message<FileNameMessageContent> ChooseFolderMessage
         {
             get
             {
-                if (_checkForUpdateMessage == null)
+                if (_chooseFolderMessage == null)
                 {
-                    _checkForUpdateMessage = new Message<ProcessMessageContent>();
+                    _chooseFolderMessage = new Message<FileNameMessageContent>();
                 }
-                return _checkForUpdateMessage;
+                return _chooseFolderMessage;
             }
         }
 
-        public Message<ViewModelMessageContent> UpdateAvailableMessage
+        public Message<ViewModelMessageContent> DownloadFinishedMessage
         {
             get
             {
-                if (_updateAvailableMessage == null)
+                if (_downloadFinishedMessage == null)
                 {
-                    _updateAvailableMessage = new Message<ViewModelMessageContent>();
+                    _downloadFinishedMessage = new Message<ViewModelMessageContent>();
                 }
-                return _updateAvailableMessage;
-            }
-            private set
-            {
-                _updateAvailableMessage = value;
+                return _downloadFinishedMessage;
             }
         }
 
-        public Message<ProcessMessageContent> ReadyToDownloadMessage
+        public Message<ViewModelMessageContent> DownloadFailedMessage
         {
             get
             {
-                if (_readyToDownloadMessage == null)
+                if (_downloadFailedMessage == null)
                 {
-                    _readyToDownloadMessage = new Message<ProcessMessageContent>();
+                    _downloadFailedMessage = new Message<ViewModelMessageContent>();
                 }
-                return _readyToDownloadMessage;
-            }
-            private set
-            {
-                _readyToDownloadMessage = value;
-            }
-        }
-
-        public Message<ViewModelMessageContent> UpdateAvailableButNotAuthorizedMessage
-        {
-            get
-            {
-                if (_updateAvailableButNotAuthorizedMessage == null)
-                {
-                    _updateAvailableButNotAuthorizedMessage = new Message<ViewModelMessageContent>();
-                }
-                return _updateAvailableButNotAuthorizedMessage;
-            }
-        }
-
-        public Message<ViewModelMessageContent> NoUpdateAvailableMessage
-        {
-            get
-            {
-                if (_noUpdateAvailableMessage == null)
-                {
-                    _noUpdateAvailableMessage = new Message<ViewModelMessageContent>();
-                }
-                return _noUpdateAvailableMessage;
-            }
-        }
-
-        public Message<FileNameMessageContent> ChooseDestinationFolderMessage
-        {
-            get
-            {
-                if (_chooseDestinationFolderMessage == null)
-                {
-                    _chooseDestinationFolderMessage = new Message<FileNameMessageContent>();
-                }
-                return _chooseDestinationFolderMessage;
-            }
-        }
-
-        public Message<ProcessMessageContent> DownloadUpdateMessage
-        {
-            get
-            {
-                if (_downloadUpdateMessage == null)
-                {
-                    _downloadUpdateMessage = new Message<ProcessMessageContent>();
-                }
-                return _downloadUpdateMessage;
-            }
-        }
-
-        public Message<ViewModelMessageContent> UpdateInstallableMessage
-        {
-            get
-            {
-                if (_updateInstallableMessage == null)
-                {
-                    _updateInstallableMessage = new Message<ViewModelMessageContent>();
-                }
-                return _updateInstallableMessage;
-            }
-        }
-
-        public Message<ViewModelMessageContent> UpdateFailedVerificationMessage
-        {
-            get
-            {
-                if (_updateFailedVerificationMessage == null)
-                {
-                    _updateFailedVerificationMessage = new Message<ViewModelMessageContent>();
-                }
-                return _updateFailedVerificationMessage;
-            }
-        }
-
-        public Message<ViewModelMessageContent> NetworkFailureMessage
-        {
-            get
-            {
-                if (_networkFailureMessage == null)
-                {
-                    _networkFailureMessage = new Message<ViewModelMessageContent>();
-                }
-                return _networkFailureMessage;
+                return _downloadFailedMessage;
             }
         }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
-        public UpdaterViewModel(Updater updater) 
-            : base()
-        {
-            _updater = updater;
-            CheckProcessMessageContent.CancelProcess = CancelCheckForUpdate;
-            DownloadProcessMessageContent.CancelProcess = CancelDownloadUpdate;
-            _updater.CheckForUpdateFinished += _updater_CheckForUpdateFinished;
-            _updater.DownloadProgressChanged += _updater_DownloadProgressChanged;
-            _updater.DownloadUpdateFinished += _updater_DownloadUpdateFinished;
-        }
-
+        public UpdaterViewModel(Updater updater)
+            : base(updater)
+        { }
+        
         #endregion
 
-        #region Private methods
+        #region Implementation of ProcessViewModelBase
 
-        private void DoCheckForUpdate()
+        protected override void UpdateProcessMessageContent(ProcessMessageContent processMessageContent)
         {
-            Logger.Info("DoCheckForUpdate");
-            IsLocked = true;
-            CheckForUpdateMessage.Send(CheckProcessMessageContent);
-            _updater.CheckForUpdate();
-        }
-
-        void _updater_CheckForUpdateFinished(object sender, EventArgs e)
-        {
-            Logger.Info("_updater_CheckForUpdateFinished");
-            IsLocked = false;
-            Action action = new Action(() =>
-                { 
-                    // Set the 'IsIndeterminate' property of the process message content to false
-                    // so that the progress bar stops its animation.
-                    CheckProcessMessageContent.IsIndeterminate = false;
-                    if (_updater.DownloadException == null)
-                    {
-                        if (_updater.IsUpdateAvailable)
-                        {
-                            if (_updater.IsAuthorized)
-                            {
-                                Logger.Info("Update available, user authorized");
-                                UpdateAvailableMessage.Send(CheckProcessMessageContent);
-                            }
-                            else
-                            {
-                                Logger.Info("Update available, but user not authorized");
-                                UpdateAvailableButNotAuthorizedMessage.Send(CheckProcessMessageContent);
-                            }
-                        }
-                        else
-                        {
-                            Logger.Info("No update available");
-                            NoUpdateAvailableMessage.Send(CheckProcessMessageContent);
-                        }
-                    }
-                    else
-                    {
-                        Logger.Warn(_updater.DownloadException, "Download exception");
-                        OnPropertyChanged("DownloadException");
-                        NetworkFailureMessage.Send(CheckProcessMessageContent);
-                    }
-                });
-
-            // Asynchronous operations that interact with GUI views must be invoked
-            // via the view's dispatcher. If there is no GUI view and hence no
-            // dispatcher, simply invoke the action itself (e.g., if the view
-            // is a non-GUI object).
-            if (ViewDispatcher != null)
+            DownloadProcessMessageContent d = processMessageContent as DownloadProcessMessageContent;
+            processMessageContent.PercentCompleted = Updater.PercentDownloaded;
+            if (d != null)
+	        {
+                d.DownloadMegaBytesReceived = (double)Updater.DownloadBytesReceived / 1000000;
+                d.DownloadMegaBytesTotal = (double)Updater.DownloadBytesTotal / 1000000;
+	        }
+            else
             {
-                ViewDispatcher.Invoke(action);
-            }
-            else {
-                action.Invoke();
+                Logger.Warn("UpdateProcessMessageContent: processMessageContent is not a DownloadProcessMessageContent!");
             }
         }
+        
+        #endregion
 
-        private void DoChooseDestinationFolder()
+        #region Protected methods
+
+        protected virtual void SendDownloadFinishedMessage()
         {
-            Logger.Info("DoChooseDestinationFolder");
-            ChooseDestinationFolderMessage.Send(
-                new FileNameMessageContent(DestinationFolder, String.Empty),
-                (FileNameMessageContent returnContent) =>
-                {
-                    if (returnContent.Confirmed)
-                    {
-                        DestinationFolder = returnContent.Value;
-                        UserSettings.UserSettingsBase.Default.DownloadFolder = DestinationFolder;
-                        ReadyToDownloadMessage.Send();
-                    };
-                }
-            );
+            Logger.Info("SendDownloadFinishedMessage");
+            DownloadFinishedMessage.Send(new ViewModelMessageContent(this));
         }
 
-        private bool CanChooseDestinationFolder()
+        protected virtual void SendDownloadFailedMessage()
         {
-            return _updater.IsAuthorized;
+            Logger.Info("SendDownloadFailedMessage");
+            DownloadFailedMessage.Send(new ViewModelMessageContent(this));
         }
 
-        private void DoDownloadUpdate()
+        protected virtual bool CanStartProcess()
         {
-            Logger.Info("DoDownloadUpdate");
-            IsLocked = true;
-            DownloadUpdateMessage.Send(DownloadProcessMessageContent);
-            _updater.DownloadUpdate();
-            // CloseViewCommand.Execute(null);
+            return !IsProcessing;
         }
 
-        void _updater_DownloadUpdateFinished(object sender, EventArgs e)
+        protected virtual void ChooseFolder(object param)
         {
-            Logger.Info("_updater_DownloadUpdateFinished");
-            CheckProcessMessageContent.CompletedMessage.Send();
-            IsLocked = false;
-            // When the download process is finished, the Updater model will verify
-            // the downloaded file's Sha1. Since the view model exposes the
-            // updater's IsVerifiedDownload, we need to notify subscribers to the
-            // view model's INotifyPropertyChanged interface (inherited from
-            // ViewModelBase).
-            OnPropertyChanged("IsVerifiedDownload");
-            OnPropertyChanged("IsUpdatePending");
+            ChooseFolderMessage.Send(new FileNameMessageContent(DownloadFolder), ConfirmFolder);
+        }
 
-            if (_updater.DownloadException == null)
+        protected virtual void ConfirmFolder(FileNameMessageContent fileNameMessageContent)
+        {
+            if (fileNameMessageContent.Confirmed)
             {
-                if (_updater.IsAuthorized)
-                {
-                    if (_updater.IsVerifiedDownload)
-                    {
-                        Logger.Info("Download verified, sending UpdateInstallableMessage");
-                        UpdateInstallableMessage.Send(DownloadProcessMessageContent);
-                    }
-                    else
-                    {
-                        Logger.Info("Failed verficiation, sending UpdateFailedVerificationMessage");
-                        UpdateFailedVerificationMessage.Send(DownloadProcessMessageContent);
-                    }
-                }
-                else
-                {
-                    Logger.Info("User not authorized, sending UpdateAvailableButNotAuthorizedMessage");
-                    UpdateAvailableButNotAuthorizedMessage.Send(DownloadProcessMessageContent);
-                }
+                Logger.Info("ConfirmFolder: Confirmed, proceeding to start download");
+                Updater.DestinationFolder = fileNameMessageContent.Value;
+                StartProcess();
             }
             else
             {
-                Logger.Warn(DownloadProcessMessageContent.Exception);
-                Logger.Warn("Network failure, sending NetworkFailureMessage");
-                NetworkFailureMessage.Send(DownloadProcessMessageContent);
+                Logger.Info("ConfirmFolder: Not confirmed!");
             }
         }
 
-        void _updater_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        protected virtual void Install(object param)
         {
-            DownloadProcessMessageContent.PercentCompleted = e.ProgressPercentage;
-        }
-
-        private void DoInstallUpdate()
-        {
-            Logger.Info("DoInstallUpdate");
-            bool success = false;
-            if (CanInstallUpdate())
-            {
-                Logger.Info("DoInstallUpdate: Closing view");
-                DoCloseView();
-                try
-                {
-                    Logger.Info("DoInstallUpdate: Invoking updater...");
-                    _updater.InstallUpdate();
-                    Logger.Info("DoInstallUpdate: ... done");
-                    success = true;
-                }
-                catch (Exception e)
-                {
-                    Logger.Warn("DoInstallUpdate: Exception");
-                    Logger.Warn(e);
-                    DownloadProcessMessageContent.Exception = e;
-                }
-            }
-            if (!success)
-            {
-                Logger.Warn("Cannot install update... Not authorized or not verified");
-                UpdateFailedVerificationMessage.Send(new ViewModelMessageContent(this));
-            }
-            Logger.Info("DoInstallUpdate: Exiting");
-        }
-
-        private bool CanInstallUpdate()
-        {
-            return (_updater.IsAuthorized && _updater.IsVerifiedDownload);
+            DoCloseView();
+            Updater.Install();
         }
 
         #endregion
 
-        #region Private Properties
+        #region Protected properties
 
-        private bool IsLocked
+        protected Updater Updater
         {
+            [DebuggerStepThrough]
             get
             {
-                return _isLocked;
-            }
-            set
-            {
-                _isLocked = value;
-                OnPropertyChanged("CanCheckForUpdate");
+                return (Updater)ProcessModel;
             }
         }
 
-        private ProcessMessageContent CheckProcessMessageContent
+        #endregion
+
+        #region Overrides
+
+        protected override void SendProcessFinishedMessage()
         {
-            get
+            base.SendProcessFinishedMessage();
+            switch (Updater.Status)
             {
-                if (_checkProcessMessageContent == null)
-                {
-                    _checkProcessMessageContent = new ProcessMessageContent(this);
-                    _checkProcessMessageContent.IsIndeterminate = true;
-                }
-                return _checkProcessMessageContent;
+                case UpdaterStatus.Downloaded:
+                    DownloadFinishedMessage.Send(ProcessMessageContent);
+                    break;
+                case UpdaterStatus.DownloadFailed:
+                    DownloadFailedMessage.Send(ProcessMessageContent);
+                    break;
+                default:
+                    break;
             }
         }
 
-        private ProcessMessageContent DownloadProcessMessageContent
+        protected override ProcessMessageContent ProcessMessageContent
         {
             get
             {
                 if (_downloadProcessMessageContent == null)
                 {
-                    _downloadProcessMessageContent = new ProcessMessageContent(this);
+                    _downloadProcessMessageContent = new DownloadProcessMessageContent(this, CancelProcess);
                 }
                 return _downloadProcessMessageContent;
             }
         }
-
-        private void CancelCheckForUpdate()
-        {
-            IsLocked = false;
-            _updater.CancelCheckForUpdate();
-        }
-
-        private void CancelDownloadUpdate()
-        {
-            IsLocked = false;
-             _updater.CancelDownload();
-        }
-
+       
         #endregion
 
-        #region Private fields
+        #region Fields
 
-        private Updater _updater;
-        private DelegatingCommand _checkForUpdateCommand;
-        private DelegatingCommand _downloadUpdateCommand;
-        private DelegatingCommand _installUpdateCommand;
-        private DelegatingCommand _chooseDestinationFolderCommand;
-        private Message<ProcessMessageContent> _checkForUpdateMessage;
-        private Message<ProcessMessageContent> _readyToDownloadMessage;
-        private Message<ProcessMessageContent> _downloadUpdateMessage;
-        private Message<ViewModelMessageContent> _updateAvailableMessage;
-        private Message<ViewModelMessageContent> _updateAvailableButNotAuthorizedMessage;
-        private Message<ViewModelMessageContent> _noUpdateAvailableMessage;
-        private Message<ViewModelMessageContent> _updateInstallableMessage;
-        private Message<ViewModelMessageContent> _updateFailedVerificationMessage;
-        private Message<ViewModelMessageContent> _networkFailureMessage;
-        private Message<FileNameMessageContent> _chooseDestinationFolderMessage;
-        private ProcessMessageContent _checkProcessMessageContent;
-        private ProcessMessageContent _downloadProcessMessageContent;
-        private bool _isLocked;
-
-        #endregion
-
-        #region Implementation of ViewModelBase's abstract methods
-
-        public override object RevealModelObject()
-        {
-            return _updater;
-        }
+        private DownloadProcessMessageContent _downloadProcessMessageContent;
+        private DelegatingCommand _downloadCommand;
+        private DelegatingCommand _chooseFolderCommand;
+        private DelegatingCommand _installCommand;
+        private Message<ViewModelMessageContent> _downloadFinishedMessage;
+        private Message<ViewModelMessageContent> _downloadFailedMessage;
+        private Message<FileNameMessageContent> _chooseFolderMessage;
 
         #endregion
 

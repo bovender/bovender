@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.3.3\lib\net40\NLog.dll</HintPath>
       <Private>True</Private>
@@ -93,9 +94,10 @@
     <Compile Include="PinvokeTests.cs" />
     <Compile Include="UserSettings\UserSettingsTest.cs" />
     <Compile Include="Text\MultilineTest.cs" />
-    <Compile Include="UpdaterForTesting.cs" />
-    <Compile Include="UpdaterViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Versioning\ReleaseInfoForTesting.cs" />
+    <Compile Include="Versioning\ReleaseInfoTest.cs" />
+    <Compile Include="Versioning\ReleaseInfoViewModelTest.cs" />
     <Compile Include="Versioning\VersioningTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +110,6 @@
       <Name>Bovender</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

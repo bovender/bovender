@@ -92,9 +92,11 @@
     <Compile Include="Mvvm\Converters\SimpleExceptionConverter.cs" />
     <Compile Include="Mvvm\Converters\VisibilityBooleanConverter.cs" />
     <Compile Include="Mvvm\EnumProvider.cs" />
+    <Compile Include="Mvvm\Messaging\DownloadProcessMessageContent.cs" />
     <Compile Include="Mvvm\Messaging\FileNameMessageContent.cs" />
     <Compile Include="Mvvm\Messaging\MessageArgsBase.cs" />
     <Compile Include="Mvvm\Messaging\ViewModelMessageContent.cs" />
+    <Compile Include="Mvvm\Models\IProcessModel.cs" />
     <Compile Include="Mvvm\Models\ProcessModel.cs" />
     <Compile Include="Mvvm\Models\ProcessModelEventArgs.cs" />
     <Compile Include="Mvvm\ViewModels\EnumViewModel.cs" />
@@ -155,8 +157,13 @@
     <Compile Include="UserSettings\UserSettingsViewModel.cs" />
     <Compile Include="Versioning\DownloadCorruptException.cs" />
     <Compile Include="Versioning\InvalidVersionStringException.cs" />
+    <Compile Include="Versioning\IReleaseInfo.cs" />
+    <Compile Include="Versioning\ReleaseInfo.cs" />
+    <Compile Include="Versioning\ReleaseInfoStatus.cs" />
+    <Compile Include="Versioning\ReleaseInfoViewModel.cs" />
     <Compile Include="Versioning\SemanticVersion.cs" />
     <Compile Include="Versioning\Updater.cs" />
+    <Compile Include="Versioning\UpdaterStatus.cs" />
     <Compile Include="Versioning\UpdaterViewModel.cs" />
     <Compile Include="Win32Window.cs" />
     <Compile Include="WpfHelpers.cs" />

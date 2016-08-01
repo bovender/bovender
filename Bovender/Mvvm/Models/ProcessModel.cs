@@ -27,7 +27,7 @@ namespace Bovender.Mvvm.Models
     /// This class is indended to be used with
     /// Bovender.Mvvm.ViewModels.ProcessViewModelBase.
     /// </summary>
-    public abstract class ProcessModel
+    public abstract class ProcessModel : IProcessModel
     {
         #region Public methods
 
