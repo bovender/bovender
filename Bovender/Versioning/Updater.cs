@@ -22,6 +22,7 @@ using System.Text.RegularExpressions;
 using Bovender.Mvvm;
 using Bovender.Mvvm.Messaging;
 using Bovender.Text;
+using System.Threading;
 
 namespace Bovender.Versioning
 {
@@ -37,246 +38,164 @@ namespace Bovender.Versioning
     /// 3) Sha1 of executable    1234abcd...
     /// 4) Version description   This is the first release of the next generation Toolbox
     /// </remarks>
-    public abstract class Updater
+    public class Updater : Mvvm.Models.ProcessModel, IDisposable
     {
         #region Public properties
 
+        public UpdaterStatus Status { get; protected set;  }
+
+        public Exception Exception { get; protected set; }
+
+        public IReleaseInfo ReleaseInfo { get; set; }
+
         public string DestinationFolder { get; set; }
 
-        public SemanticVersion NewVersion { get; protected set; }
+        public SemanticVersion CurrentVersion { get; set; }
 
-        public SemanticVersion CurrentVersion { get { return GetCurrentVersion(); } }
+        public int PercentDownloaded { get; protected set; }
 
-        /// <summary>
-        /// If true, an updated version is available for download.
-        /// </summary>
-        public bool IsUpdateAvailable { get; protected set; }
+        public long DownloadBytesTotal { get; protected set; }
 
-        /// <summary>
-        /// Indicates whether an update has been downloaded and could be
-        /// installed.
-        /// </summary>
-        public bool IsUpdatePending { get; protected set; }
-
-        /// <summary>
-        /// The URI of the remote file.
-        /// </summary>
-        public Uri DownloadUri { get; protected set; }
-
-        /// <summary>
-        /// Returns true if the Sha1 of the downloaded file matches
-        /// the one in the version information file.
-        /// </summary>
-        public bool IsVerifiedDownload { get; protected set; }
-
-        /// <summary>
-        /// The Sha1 hash of the remote file as reported in the version
-        /// info file.
-        /// </summary>
-        /// 
-        public string UpdateChecksum { get; protected set; }
-
-        /// <summary>
-        /// Summary of changes as reported in the version info file.
-        /// </summary>
-        public string UpdateSummary { get; protected set; }
-
-        /// <summary>
-        /// Determines whether the current user is authorized to write to the folder
-        /// where the addin files are stored. If the user does not have write permissions,
-        /// he/she cannot update the addin by herself/hisself.
-        /// </summary>
-        public virtual bool IsAuthorized
-        {
-            get
-            {
-                string addinPath = AppDomain.CurrentDomain.BaseDirectory;
-                /* Todo: compute permissions, rather than try and catch */
-                try
-                {
-                    string fn = Path.Combine(addinPath, "xltbupd.test");
-                    using (FileStream f = new FileStream(fn,
-                        FileMode.Create, FileAccess.Write))
-                    {
-                        f.WriteByte(0xff);
-                    };
-                    File.Delete(fn);
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-        }
-
-        public Exception DownloadException { get; protected set; }
-
-        #endregion
-
-        #region Events
-
-        /// <summary>
-        /// Signals that the current version information has been refreshed.
-        /// </summary>
-        public event EventHandler<EventArgs> CheckForUpdateFinished;
-
-        /// <summary>
-        /// Signals a change in the download process of the executable file. This event is
-        /// chained from WebClient's event with the same name.
-        /// </summary>
-        public event EventHandler<DownloadProgressChangedEventArgs> DownloadProgressChanged;
-
-        /// <summary>
-        /// Signals that an update has been downloaded. Subscribers need to
-        /// check if the update is actually installable.
-        /// </summary>
-        public event EventHandler<EventArgs> DownloadUpdateFinished;
+        public long DownloadBytesReceived { get; protected set; }
 
         #endregion
 
         #region Public methods
 
-        /// <summary>
-        /// Downloads the current version information file asynchronously from the project
-        /// home page.
-        /// </summary>
-        /// <remarks>
-        /// Eventually triggers the UpdateAvailable or NoUpdateAvailable events if the current version
-        /// information was downloaded successfully; and triggers the FetchingVersionFailed
-        /// event if the version information could not be downloaded.
-        /// </remarks>
-        public void CheckForUpdate()
+        public bool Install()
         {
-            _versionInfoClient = new WebClient();
-            _versionInfoClient.DownloadStringCompleted += VersionInfoClient_DownloadStringCompleted;
-            _versionInfoClient.DownloadStringAsync(GetVersionInfoUri());
-        }
-
-        public void CancelCheckForUpdate()
-        {
-            if (_versionInfoClient != null)
+            bool result = false;
+            if (Status == UpdaterStatus.Downloaded)
             {
-                _versionInfoClient.CancelAsync();
-            }
-        }
-
-        /// <summary>
-        /// Downloads the current release from the internet.
-        /// </summary>
-        public void DownloadUpdate()
-        {
-            _destinationFileName = BuildDestinationFileName();
-
-            /* Check if the file exists already. If the checksum is identical,
-             * do not download it again. If the checksum is different, it is a file
-             * with the same name, but different content (broken download?).
-             */
-            if (File.Exists(_destinationFileName) && VerifyDownload())
-            {
-                // Bypass the download and signal that the file is present
-                OnDownloadUpdateFinished();
-            }
-            else
-            {
-                _client = new WebClient();
-                _client.DownloadProgressChanged += _client_DownloadProgressChanged;
-                _client.DownloadFileCompleted += _client_DownloadFileCompleted;
-                _client.DownloadFileAsync(DownloadUri, _destinationFileName);
-            }
-        }
-
-        public void CancelDownload()
-        {
-            if (_client !=null)
-            {
-                _client.CancelAsync();
-            }
-        }
-
-        /// <summary>
-        /// Verifies the Sha1 checksum of the file on disk again and executes
-        /// the file if it is valid. Does nothing if no update is available.
-        /// </summary>
-        /// <exception cref="DownloadCorruptException">if the Sha1 is unexpected</exception>
-        public void InstallUpdate()
-        {
-            if (!IsUpdateAvailable) return;
-
-            // As a security measure, compute the SHA1 again so we know it's current.
-            if (VerifyDownload())
-            {
-                Logger.Info("InstallUpdate: Installer is verified, proceeding");
-                DoInstallUpdate();
+                if (Verify())
+                {
+                    if (CheckAuthorization())
+                    {
+                        string command = GetInstallerCommand();
+                        string arguments = GetInstallerParameters();
+                        try
+                        {
+                            Logger.Info("Install: {0} {1}", command, arguments);
+                            // var process = System.Diagnostics.Process.Start(command, arguments);
+                            var process = System.Diagnostics.Process.Start("iexplore.exe");
+                            Logger.Info("Install: Process: {0}", process);
+                            Status = UpdaterStatus.InstallationStarted;
+                            result = true;
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.Fatal("Install: Could not start process");
+                            Logger.Fatal(e);
+                            Status = UpdaterStatus.InstallationFailed;
+                            Exception = e;
+                        }
+                    }
+                    else
+                    {
+                        Logger.Warn("Install: Not authorized to install!");
+                        Status = UpdaterStatus.NotAuthorizedToInstall;
+                    }
+                }
+                else
+                {
+                    Logger.Warn("Install: Verification failed");
+                    Status = UpdaterStatus.VerificationFailed;
+                }
             }
             else
             {
-                Logger.Fatal("InstallUpdate: Installer NOT verified!");
-                throw new DownloadCorruptException("The checksum of the file on disk is unexpected.");
+                Logger.Warn("Install: No update available!");
+            }
+            return result;
+        }
+
+        #endregion
+
+        #region Constructors
+
+        public Updater() : base() { }
+
+        public Updater(IReleaseInfo releaseInfo)
+            : this()
+        {
+            ReleaseInfo = releaseInfo;
+        }
+
+        #endregion
+
+        #region Disposal
+
+        ~Updater()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                _disposed = true;
+                if (disposing)
+                {
+                    // May clean up managed resources
+                    if (_webClient != null)
+                    {
+                        _webClient.Dispose();
+                    }
+                }
             }
         }
 
         #endregion
 
-        #region Abstract methods
+        #region Implementation of ProcessModel
 
-        /// <summary>
-        /// Returns the URI for the file that provides current version information.
-        /// </summary>
-        /// <returns>URI for version info file.</returns>
-        protected abstract Uri GetVersionInfoUri();
-
-        /// <summary>
-        /// Returns the version number of the current program.
-        /// </summary>
-        /// <returns>Instance of <see cref="SemanticVersion"/> representing
-        /// the current version number.</returns>
-        protected abstract SemanticVersion GetCurrentVersion();
-
-        #endregion
-
-        #region Protected virtual methods
-
-        protected virtual void DoDownload()
+        public override bool Execute()
         {
-            string defaultPath = Properties.Versioning.Default.DownloadPath;
-            if (string.IsNullOrEmpty(defaultPath))
+            if (ReleaseInfo == null)
             {
-                defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            };
-
-        }
-
-        /// <summary>
-        /// Performs the actual download once the user has confirmed the download
-        /// destination.
-        /// </summary>
-        protected virtual void ConfirmDownload()
-        {
-
-        }
-
-        protected virtual bool CanDownload()
-        {
-            return IsAuthorized;
-        }
-
-        protected virtual void OnDownloadUpdateFinished()
-        {
-            IsUpdatePending = VerifyDownload();
-            if (DownloadUpdateFinished != null)
-            {
-                DownloadUpdateFinished(this, EventArgs.Empty);
+                throw new InvalidOperationException("Cannot download release because ReleaseInfo is null");
             }
+            if (ReleaseInfo.Status != ReleaseInfoStatus.InfoAvailable)
+            {
+                throw new InvalidOperationException("Cannot download release because no release info is available");
+            }
+            bool result = false;
+            _destinationFileName = GetDestinationFileName();
+
+            if (!(File.Exists(_destinationFileName) && Verify()))
+            {
+                Logger.Info("Execute: Starting download");
+                // http://stackoverflow.com/a/25834736/270712
+                _webClient = new WebClient();
+                _webClient.DownloadFileCompleted += WebClient_DownloadFileCompleted;
+                _webClient.DownloadProgressChanged += WebClient_DownloadProgressChanged;
+                var lockObject = new Object();
+                lock (lockObject)
+                {
+                    _webClient.DownloadFileAsync(ReleaseInfo.DownloadUri, _destinationFileName, lockObject);
+                    Monitor.Wait(lockObject);
+                }
+                result = true;
+                Logger.Info("Execute: exiting");
+            }
+            else
+            {
+                Logger.Info("Execute: Skipping download because destination file exists and is verified");
+                Status = UpdaterStatus.Downloaded;
+            }
+            return result;
         }
 
-        protected virtual void OnCheckForUpdateFinished()
-        {
-            if (CheckForUpdateFinished != null)
-            {
-                CheckForUpdateFinished(this, EventArgs.Empty);
-            }
-        }
+	    #endregion
+
+        #region Protected helper methods
 
         /// <summary>
         /// Builds the destination file name from the download URI
@@ -289,32 +208,31 @@ namespace Bovender.Versioning
         /// the version number.
         /// </remarks>
         /// <returns>Complete path of the destination file.</returns>
-        protected virtual string BuildDestinationFileName()
+        protected virtual string GetDestinationFileName()
         {
-            return System.IO.Path.Combine(
-                DestinationFolder,
-                String.Format("update-{0}.exe", NewVersion.ToString())
-                );
-        }
-
-        /// <summary>
-        /// Executes the update file. This method is called by <see cref="InstallUpdate()"/>
-        /// only if the Sha1 checksum of the file meets the expectation.
-        /// </summary>
-        /// <remarks>
-        /// The path of the downloaded file is stored in <see cref="_destinationFileName"/>.
-        /// Implementations of this class may want to override this method if updating is
-        /// not simply a matter of executing this file.
-        /// The base method executes the file with an "/UPDATE" command line parameter.
-        /// </remarks>
-        protected virtual void DoInstallUpdate()
-        {
-            if (IsVerifiedDownload)
+            string downloadUri = ReleaseInfo.DownloadUri.ToString();
+            Logger.Info("GetDestinationFileName: Examining {0}", downloadUri);
+            string fn;
+            Regex r = new Regex(@"(?<fn>[^/]+?\.exe)");
+            Match m = r.Match(downloadUri);
+            if (m.Success)
             {
-                string command = GetInstallerCommand();
-                string arguments = GetInstallerParameters();
-                Logger.Info("DoInstallUpdate: {0} {1}", command, arguments);
-                System.Diagnostics.Process.Start(command, arguments);
+                fn = m.Groups["fn"].Value;
+            }
+            else
+            {
+                Logger.Warn("GetDestinationFileName: Did not find file name pattern in download URI!");
+                fn = String.Format("release-{0}.exe", ReleaseInfo.ReleaseVersion.ToString());
+            };
+            Logger.Warn("GetDestinationFileName: {0}", fn);
+            if (String.IsNullOrEmpty(DestinationFolder))
+            {
+                Logger.Warn("GetDestinationFileName: No destination folder!");
+                return fn;
+            }
+            else
+            {
+                return Path.Combine(DestinationFolder, fn);
             }
         }
 
@@ -336,62 +254,33 @@ namespace Bovender.Versioning
             return "/UPDATE /SP- /SILENT /SUPPRESSMSGBOXES";
         }
 
-        #endregion
-
-        #region Private methods
-
-        void _client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
-            if (!e.Cancelled)
-            {
-                DownloadException = e.Error;
-                OnDownloadUpdateFinished();
-            }
-            else
-            {
-                DownloadException = null;
-                // No need to remove the downloaded file, WebClient takes care of this.
-                // System.IO.File.Delete(DestinationFolder);
-            }
-        }
-
-        void _client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            if (DownloadProgressChanged != null)
-            {
-                DownloadProgressChanged(this, e);
-            }
-        }
-
         /// <summary>
-        /// Inspects the downloaded version information.
+        /// Determines whether the current user is authorized to write to the folder
+        /// where the addin files are stored. If the user does not have write permissions,
+        /// he/she cannot update the addin by herself/hisself.
         /// </summary>
-        /// <param name="sender">System.Net.WebClient instance</param>
-        /// <param name="e">Event arguments</param>
-        void VersionInfoClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        protected virtual bool CheckAuthorization()
         {
-            if (!e.Cancelled) {
-                if (e.Error == null )
+            string installFolder = AppDomain.CurrentDomain.BaseDirectory;
+            /* Todo: compute permissions, rather than try and catch */
+            try
+            {
+                Logger.Info("CheckAuthorization: Attempting write to assembly's folder");
+                Logger.Info("CheckAuthorization: {0}", installFolder);
+                string fn = Path.Combine(installFolder, "bovender-framework-check-auth.txt");
+                using (FileStream f = new FileStream(fn, FileMode.Create, FileAccess.Write))
                 {
-                    StringReader r = new StringReader(e.Result);
-                    NewVersion = new SemanticVersion(r.ReadLine());
-                    string rawUri = r.ReadLine();
-                    // If the raw URI contains the placeholder $VERSION, replace
-                    // it with the new version.
-                    DownloadUri = new Uri(rawUri.Replace("$VERSION", NewVersion.ToString()));
-                    // Use only the first word of the line as Sha1 sum
-                    // to make it compatible with the output of `sha1sum`
-                    UpdateChecksum = r.ReadLine().Trim().Split(' ')[0];
-                    Multiline multi = new Multiline(r.ReadToEnd(), true);
-                    UpdateSummary = multi.Text;
-                    IsUpdateAvailable = NewVersion > GetCurrentVersion();
-                }
-                else
-                {
-                    DownloadException = e.Error;
-                    IsUpdateAvailable = false;
-                }
-                OnCheckForUpdateFinished();
+                    f.WriteByte(0xff);
+                };
+                File.Delete(fn);
+                Logger.Warn("CheckAuthorization: Successfully created and deleted test file");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.Warn("CheckAuthorization: Evidently not authorized");
+                Logger.Warn(e);
+                return false;
             }
         }
 
@@ -400,35 +289,101 @@ namespace Bovender.Versioning
         /// the IsVerifiedDownload property accordingly. Automatically
         /// switches between SHA-256 and the obsolete SHA-1 algorithms.
         /// </summary>
-        bool VerifyDownload()
+        protected virtual bool Verify()
         {
-            switch (UpdateChecksum.Length)
+            string actual;
+            bool verified = false;
+            Logger.Info("Verify: Expected: {0}", ReleaseInfo.ExpectedHash);
+            switch (ReleaseInfo.ExpectedHash.Length)
             {
                 case 40:
-                    IsVerifiedDownload = FileHelpers.Sha1Hash(_destinationFileName) == UpdateChecksum;
-                    break;
+                    actual = FileHelpers.Sha1Hash(_destinationFileName); break;
                 case 64:
-                    IsVerifiedDownload = FileHelpers.Sha256Hash(_destinationFileName) == UpdateChecksum;
-                    break;
+                    actual = FileHelpers.Sha256Hash(_destinationFileName); break;
                 default:
-                    IsVerifiedDownload = false;
-                    break;
+                    return false;
             }
-            return IsVerifiedDownload;
+            Logger.Info("Verify: Actual:   {0}", actual);
+            verified = actual == ReleaseInfo.ExpectedHash;
+            if (verified)
+            {
+                Logger.Info("Verify: OK");
+            }
+            else
+            {
+                Logger.Warn("Verify: Checksum mismacth!");
+            }
+            return verified;
         }
 
         #endregion
 
-        #region Private properties
+        #region Overrides
 
-        private string Sha1 { get; set; }
+        protected override void OnCancelling()
+        {
+            base.OnCancelling();
+            if (_webClient != null && _webClient.IsBusy)
+            {
+                _webClient.CancelAsync();
+            }
+        }
+
+        #endregion
+
+        #region Private event handlers
+
+        private void WebClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs args)
+        {
+            PercentDownloaded = args.ProgressPercentage;
+            DownloadBytesReceived = args.BytesReceived;
+            DownloadBytesTotal = args.TotalBytesToReceive;
+        }
+
+        private void WebClient_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs args)
+        {
+            lock (args.UserState)
+            {
+                Monitor.Pulse(args.UserState);
+            }
+            if (args.Cancelled)
+            {
+                Logger.Info("WebClient_DownloadFileCompleted: Cancelled");
+                try
+                {
+                    System.IO.File.Delete(_destinationFileName);
+                    Logger.Info("WebClient_DownloadFileCompleted: Deleted partially downloaded file");
+                }
+                catch (Exception e)
+                {
+                    Logger.Warn("WebClient_DownloadFileCompleted: Could not remove partially downloaded file");
+                    Logger.Warn(e);
+                }
+                Status = UpdaterStatus.DownloadCancelled;
+            }
+            else
+            {
+                if (args.Error == null)
+                {
+                    Logger.Info("WebClient_DownloadFileCompleted: Downloaded");
+                    Status = UpdaterStatus.Downloaded;
+                }
+                else
+                {
+                    Logger.Warn("WebClient_DownloadFileCompleted: Error!");
+                    Logger.Warn(args.Error);
+                    Status = UpdaterStatus.DownloadFailed;
+                    Exception = args.Error;
+                }
+            }
+        }
 
         #endregion
 
         #region Private fields
 
-        private WebClient _client;
-        private WebClient _versionInfoClient;
+        private bool _disposed;
+        private WebClient _webClient;
         private string _destinationFileName;
 
         #endregion

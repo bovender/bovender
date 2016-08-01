@@ -21,24 +21,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vs="clr-namespace:Bovender.Mvvm.Views.Settings"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterScreen" Topmost="True" ShowInTaskbar="False"
-        Title="{Binding Caption}" ResizeMode="NoResize"
-        vs:WindowState.CenterScreen="True"
+        Title="{Binding Caption}"
+        ShowInTaskbar="False"
+        SizeToContent="WidthAndHeight" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" vs:WindowState.CenterScreen="True"
     >
-    <!-- This window must have the TopMost property set to true, otherwise
-    the progress bar might not be visibly updated. -->
+    <Window.Resources>
+        <ResourceDictionary Source="/Bovender;component/style.xaml" />
+    </Window.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger SourceObject="{Binding CompletedMessage}" EventName="Sent">
             <i:InvokeCommandAction Command="{Binding CloseViewCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <StackPanel Margin="10">
-        <ProgressBar Value="{Binding PercentCompleted}" Minimum="0" Maximum="100"
+    <StackPanel Margin="20">
+        <ProgressBar Value="{Binding PercentCompleted}"
+                     Minimum="0" Maximum="100"
                      IsIndeterminate="{Binding IsIndeterminate}"
-                     Width="300" Height="20" />
+                     Width="300" Height="20"
+                     Margin="0 0 0 10"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-            <Button IsCancel="True" IsDefault="True" Padding="10,5,10,5"
+            <Button IsCancel="True" IsDefault="True"
                     Command="{Binding CancelCommand}"
                     Content="{Binding CancelButtonText}" />
         </StackPanel>

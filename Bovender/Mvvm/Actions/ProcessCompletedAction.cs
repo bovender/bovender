@@ -151,7 +151,7 @@ namespace Bovender.Mvvm.Actions
                     Logger.Info("Process was cancelled");
                     return CreateCancelledWindow();
                 }
-                else if (content.WasSuccessful)
+                else if (content.WasSuccessful && content.Exception == null)
                 {
                     Logger.Info("Process was successful");
                     return CreateSuccessWindow();
