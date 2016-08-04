@@ -35,7 +35,7 @@ namespace Bovender
         /// <returns>Sha1 hash.</returns>
         public static string Sha256Hash(string file)
         {
-            using (FileStream fs = new FileStream(file, FileMode.Open))
+            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
             using (BufferedStream bs = new BufferedStream(fs))
             {
                 using (SHA256Managed sha = new SHA256Managed())
@@ -52,7 +52,7 @@ namespace Bovender
         /// <returns>Sha1 hash.</returns>
         public static string Sha1Hash(string file)
         {
-            using (FileStream fs = new FileStream(file, FileMode.Open))
+            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
             using (BufferedStream bs = new BufferedStream(fs))
             {
                 using (SHA1Managed sha = new SHA1Managed())
