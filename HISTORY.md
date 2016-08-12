@@ -1,3 +1,13 @@
+Version 0.13.0 (2016-08-12)
+------------------------------------------------------------------------
+
+- FIX: Explicitly open files for read access only when computing checksums.
+- FIX: The RemoveSelected method of the ViewModelCollection no longer triggers a 'range actions not supported' exception.
+- NEW: Added a VisibilityBooleanNegationConverter.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.12.1 (2016-08-02)
 ------------------------------------------------------------------------
 
