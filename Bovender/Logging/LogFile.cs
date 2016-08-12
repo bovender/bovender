@@ -264,7 +264,7 @@ namespace Bovender.Logging
         private const string FILE_TARGET = "file";
         private const string DEBUG_TARGET = "debug";
         private const string LOG_FILE_NAME = "current-log.txt";
-        private const string ARCHIVE_FILE_NAME = "log-archived-on-{#}.txt";
+        private const string ARCHIVE_FILE_NAME = "log-{#}.txt";
         private const string ARCHIVE_DATE_FORMAT = "yyyy-MM-dd";
         private const int MAX_ARCHIVE_FILES = 7;
 

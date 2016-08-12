@@ -70,17 +70,19 @@ namespace Bovender.Mvvm.ViewModels
         /// </remarks>
         public void RemoveSelected()
         {
-            var selected = Items.Where<TViewModel>((vm) => vm.IsSelected).ToList<TViewModel>();
-            // Use Items.Remove() which does not trigger the CollectionChanged event.
-            selected.ForEach((vm) => Items.Remove(vm));
-            CountSelected = 0;
-            LastSelected = null;
-            OnPropertyChanged(new PropertyChangedEventArgs("Count"));
-            OnPropertyChanged(new PropertyChangedEventArgs("Items[]"));
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(
-                NotifyCollectionChangedAction.Remove, selected
-                )
-            );
+            var selectedItems = Items.Where(vm => vm.IsSelected).ToList();
+            if (selectedItems.Count > 0)
+            {
+                // Use Items.Remove() which does not trigger the CollectionChanged event.
+                selectedItems.ForEach(i => Items.Remove(i));
+                CountSelected = 0;
+                LastSelected = null;
+                OnPropertyChanged(new PropertyChangedEventArgs("Count"));
+                OnPropertyChanged(new PropertyChangedEventArgs("Items[]"));
+                OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)
+                );
+            }
         }
 
         #endregion
@@ -304,7 +306,7 @@ namespace Bovender.Mvvm.ViewModels
                 ViewModelPropertyChanged(sender, args);
             }
         }
-
+        
         #endregion
 
         #region Private fields
