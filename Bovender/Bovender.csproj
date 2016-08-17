@@ -106,6 +106,9 @@
     <Compile Include="Mvvm\Views\ConfirmationView.xaml.cs">
       <DependentUpon>ConfirmationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mvvm\Views\FailureSign.xaml.cs">
+      <DependentUpon>FailureSign.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Mvvm\Views\NotificationView.xaml.cs">
       <DependentUpon>NotificationView.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,9 @@
     </Compile>
     <Compile Include="Mvvm\Views\ProcessSucceededView.xaml.cs">
       <DependentUpon>ProcessSucceededView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mvvm\Views\SuccessSign.xaml.cs">
+      <DependentUpon>SuccessSign.xaml</DependentUpon>
     </Compile>
     <Compile Include="PathHelpers.cs" />
     <Compile Include="ExceptionHandler\ExceptionViewModel.cs" />
@@ -189,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Mvvm\Views\FailureSign.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Mvvm\Views\NotificationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -204,6 +214,10 @@
     <Page Include="Mvvm\Views\ProcessSucceededView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mvvm\Views\SuccessSign.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style.xaml">
       <Generator>MSBuild:Compile</Generator>
