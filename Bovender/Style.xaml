@@ -27,6 +27,7 @@
     </Style>
     <Style TargetType="{x:Type Button}">
         <Setter Property="Padding" Value="10,5,10,5" />
+        <Setter Property="MinWidth" Value="80" />
     </Style>
     <Style TargetType="{x:Type ComboBox}">
         <Setter Property="Padding" Value="10,5,10,5" />
@@ -66,4 +67,5 @@
     <conv:VisibilityBooleanConverter x:Key="visBoolConv" />
     <conv:BooleanNegationConverter x:Key="boolNegConv" />
     <conv:VisibilityBooleanNegationConverter x:Key="visBoolNegConv" />
+    <conv:AllCapsConverter x:Key="allCapsConv" />
 </ResourceDictionary>

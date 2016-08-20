@@ -85,8 +85,10 @@
     <Compile Include="Mvvm\Actions\ProcessCompletedAction.cs" />
     <Compile Include="Mvvm\Actions\ShowViewAction.cs" />
     <Compile Include="Mvvm\Actions\ShowViewDialogAction.cs" />
+    <Compile Include="Mvvm\Behaviors\FocusFirstBehavior.cs" />
     <Compile Include="Mvvm\BindingWebBrowser.cs" />
     <Compile Include="Mvvm\CommandManagerHelper.cs" />
+    <Compile Include="Mvvm\Converters\AllCapsConverter.cs" />
     <Compile Include="Mvvm\Converters\BooleanNegationConverter.cs" />
     <Compile Include="Mvvm\Converters\EnumBooleanConverter.cs" />
     <Compile Include="Mvvm\Converters\SimpleExceptionConverter.cs" />
@@ -106,6 +108,9 @@
     <Compile Include="Mvvm\Views\ConfirmationView.xaml.cs">
       <DependentUpon>ConfirmationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mvvm\Views\FailureSign.xaml.cs">
+      <DependentUpon>FailureSign.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Mvvm\Views\NotificationView.xaml.cs">
       <DependentUpon>NotificationView.xaml</DependentUpon>
     </Compile>
@@ -120,6 +125,9 @@
     </Compile>
     <Compile Include="Mvvm\Views\ProcessSucceededView.xaml.cs">
       <DependentUpon>ProcessSucceededView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mvvm\Views\SuccessSign.xaml.cs">
+      <DependentUpon>SuccessSign.xaml</DependentUpon>
     </Compile>
     <Compile Include="PathHelpers.cs" />
     <Compile Include="ExceptionHandler\ExceptionViewModel.cs" />
@@ -189,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Mvvm\Views\FailureSign.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Mvvm\Views\NotificationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -204,6 +216,10 @@
     <Page Include="Mvvm\Views\ProcessSucceededView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mvvm\Views\SuccessSign.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -55,8 +55,9 @@ namespace Bovender.Extensions
             }
             catch (Exception e)
             {
-                Logger.Warn(e, "Could not show dialog with owner form 0x{0:X08}; falling back to show dialog without owner",
+                Logger.Warn("ShowDialogInForm: Could not show dialog with owner form 0x{0:X08}; falling back to show dialog without owner",
                     parentForm);
+                Logger.Warn(e);
                 window.SetOwnerForm(IntPtr.Zero);
                 return window.ShowDialog();
             }
@@ -88,8 +89,9 @@ namespace Bovender.Extensions
             }
             catch (Exception e)
             {
-                Logger.Warn(e, "Could not show window with owner form 0x{0:X08}; falling back to show dialog without owner",
+                Logger.Warn("ShowInForm: Could not show window with owner form 0x{0:X08}; falling back to show dialog without owner",
                     parentForm);
+                Logger.Warn(e);
                 window.SetOwnerForm(IntPtr.Zero);
                 window.Show();
             }
