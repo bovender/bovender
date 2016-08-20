@@ -85,6 +85,7 @@
     <Compile Include="Mvvm\Actions\ProcessCompletedAction.cs" />
     <Compile Include="Mvvm\Actions\ShowViewAction.cs" />
     <Compile Include="Mvvm\Actions\ShowViewDialogAction.cs" />
+    <Compile Include="Mvvm\Behaviors\FocusFirstBehavior.cs" />
     <Compile Include="Mvvm\BindingWebBrowser.cs" />
     <Compile Include="Mvvm\CommandManagerHelper.cs" />
     <Compile Include="Mvvm\Converters\AllCapsConverter.cs" />
