@@ -1,3 +1,16 @@
+Version 0.14.0 (2016-08-20)
+------------------------------------------------------------------------
+
+- IMPROVEMENT: Log error message if ShowInForm or ShowDialogInForm fails.
+- NEW: Added all caps converter for WPF.
+- NEW: Focus-first behavior for WPF.
+- NEW: ReleaseComObject extension method for object.
+- NEW: Reusable FailureSign and SuccessSign components.
+- NEW: Set minimum width on all buttons to 80 in Style.xaml.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.13.0 (2016-08-12)
 ------------------------------------------------------------------------
 
