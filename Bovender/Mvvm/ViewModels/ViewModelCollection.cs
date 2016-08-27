@@ -77,8 +77,8 @@ namespace Bovender.Mvvm.ViewModels
                 selectedItems.ForEach(i => Items.Remove(i));
                 CountSelected = 0;
                 LastSelected = null;
-                OnPropertyChanged(new PropertyChangedEventArgs("Count"));
-                OnPropertyChanged(new PropertyChangedEventArgs("Items[]"));
+                // OnPropertyChanged(new PropertyChangedEventArgs("Count"));
+                // OnPropertyChanged(new PropertyChangedEventArgs("Items[]"));
                 OnCollectionChanged(
                     new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)
                 );
@@ -262,7 +262,7 @@ namespace Bovender.Mvvm.ViewModels
             try
             {
                 SynchronizeOff();
-                this.Clear();
+                _modelCollection.Clear();
                 foreach (TViewModel vm in Items)
                 {
                     _modelCollection.Add((TModel)vm.RevealModelObject());
