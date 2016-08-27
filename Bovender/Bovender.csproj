@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComHelpers.cs" />
     <Compile Include="CommonHelpers.cs" />
     <Compile Include="ExceptionHandler\CentralHandler.cs" />
     <Compile Include="ExceptionHandler\ExceptionSubmissionException.cs" />
