@@ -77,8 +77,8 @@ namespace Bovender.Mvvm.ViewModels
                 selectedItems.ForEach(i => Items.Remove(i));
                 CountSelected = 0;
                 LastSelected = null;
-                OnPropertyChanged(new PropertyChangedEventArgs("Count"));
-                OnPropertyChanged(new PropertyChangedEventArgs("Items[]"));
+                // OnPropertyChanged(new PropertyChangedEventArgs("Count"));
+                // OnPropertyChanged(new PropertyChangedEventArgs("Items[]"));
                 OnCollectionChanged(
                     new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)
                 );
@@ -111,6 +111,7 @@ namespace Bovender.Mvvm.ViewModels
             // when done, so there is no need to add the event handlers
             // via SynchronizeOn() in the constructor. Avoid adding the
             // handlers twice...
+            SynchronizeOn();
             BuildViewModelCollection();
         }
 
@@ -206,8 +207,12 @@ namespace Bovender.Mvvm.ViewModels
         /// </summary>
         protected void SynchronizeOn()
         {
-            _modelCollection.CollectionChanged += _modelCollection_CollectionChanged;
-            this.CollectionChanged += ViewModelCollection_CollectionChanged;
+            _synchronizing++;
+            if (_synchronizing == 1)
+            {
+                _modelCollection.CollectionChanged += _modelCollection_CollectionChanged;
+                this.CollectionChanged += ViewModelCollection_CollectionChanged;
+            }
         }
 
         /// <summary>
@@ -216,8 +221,12 @@ namespace Bovender.Mvvm.ViewModels
         /// </summary>
         protected void SynchronizeOff()
         {
-            _modelCollection.CollectionChanged -= _modelCollection_CollectionChanged;
-            this.CollectionChanged -= ViewModelCollection_CollectionChanged;
+            _synchronizing--;
+            if (_synchronizing == 0)
+            {
+                _modelCollection.CollectionChanged -= _modelCollection_CollectionChanged;
+                this.CollectionChanged -= ViewModelCollection_CollectionChanged;
+            }
         }
 
         protected void BuildViewModelCollection()
@@ -262,7 +271,7 @@ namespace Bovender.Mvvm.ViewModels
             try
             {
                 SynchronizeOff();
-                this.Clear();
+                _modelCollection.Clear();
                 foreach (TViewModel vm in Items)
                 {
                     _modelCollection.Add((TModel)vm.RevealModelObject());
@@ -313,6 +322,7 @@ namespace Bovender.Mvvm.ViewModels
 
         readonly ObservableCollection<TModel> _modelCollection;
         private int _countSelected;
+        private int _synchronizing;
         private TViewModel _lastSelected;
 
         #endregion

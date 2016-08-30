@@ -83,7 +83,7 @@ namespace Bovender.UserSettings
             {
                 try
                 {
-                    using (FileStream fs = File.Open(yamlFile, FileMode.Open, FileAccess.Read))
+                    using (FileStream fs = File.Open(yamlFile, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
                         StreamReader sr = new StreamReader(fs);
                         Deserializer des = new Deserializer(ignoreUnmatched: true);

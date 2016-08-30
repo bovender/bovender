@@ -1,4 +1,4 @@
-﻿/* ObjectExtensions.cs
+﻿/* ComHelpers.cs
  * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
@@ -18,15 +18,24 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Bovender.Extensions
+namespace Bovender
 {
-    public static class ObjectExtensions
+    public static class ComHelpers
     {
-        public static string ComputeMD5Hash(this object obj)
+        public static object ReleaseComObject(object obj)
         {
-            return CommonHelpers.ComputeMD5Hash(obj);
+            if (obj != null && Marshal.IsComObject(obj))
+            {
+                Marshal.ReleaseComObject(obj);
+                return null;
+            }
+            else
+            {
+                return obj;
+            }
         }
     }
 }
