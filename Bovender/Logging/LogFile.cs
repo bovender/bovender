@@ -1,8 +1,4 @@
-﻿using NLog;
-using NLog.Config;
-using NLog.Targets;
-using NLog.Targets.Wrappers;
-/* LogFile.cs
+﻿/* LogFile.cs
  * part of Bovender framework
  * 
  * Copyright 2014-2016 Daniel Kraus
@@ -23,6 +19,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NLog;
+using NLog.Config;
+using NLog.Targets;
+using NLog.Targets.Wrappers;
 
 namespace Bovender.Logging
 {
