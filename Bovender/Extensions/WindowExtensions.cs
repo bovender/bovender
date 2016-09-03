@@ -69,12 +69,24 @@ namespace Bovender.Extensions
         /// </summary>
         public static bool? ShowDialogInForm(this Window window)
         {
-            IntPtr mainWindowHandle = Win32Window.MainWindowHandleProvider();
-            if (mainWindowHandle == IntPtr.Zero)
+            IntPtr mainWindowHandle = IntPtr.Zero;
+            if (Win32Window.MainWindowHandleProvider != null)
             {
-                throw new InvalidOperationException("Must set MainWindowHandleProvider property before calling this method.");
+                mainWindowHandle = Win32Window.MainWindowHandleProvider();
             }
-            return window.ShowDialogInForm(mainWindowHandle);
+            else
+            {
+                Logger.Warn("ShowDialogInForm: Win32Window.MainWindowHandleProvider is not set!");
+            }
+            if (mainWindowHandle != IntPtr.Zero)
+            {
+                return window.ShowDialogInForm(mainWindowHandle);
+            }
+            else
+            {
+                Logger.Warn("ShowDialogInForm: No form handle, falling back to showing dialog outside of form!");
+                return window.ShowDialog();
+            }
         }
 
         /// <summary>
