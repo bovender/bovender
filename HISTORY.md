@@ -1,3 +1,13 @@
+Version 0.14.1 (2016-08-30)
+------------------------------------------------------------------------
+
+- CHANGE: Removed ReleaseComObject extension method and placed it in a new ComHelpers static class because COM objects do not agree well with extension methods on object.
+- FIX: Synchronization in ViewModelCollection.
+- FIX: ViewModelCollection did not properly regenerate model collection on mass change.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.14.0 (2016-08-20)
 ------------------------------------------------------------------------
 
