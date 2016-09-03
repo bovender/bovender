@@ -321,7 +321,10 @@ namespace Bovender.ExceptionHandler
                 Message = e.Message;
                 if (e.InnerException != null)
                 {
-                    InnerException = Regex.Replace(e.InnerException.ToString(), devPath, String.Empty);
+                    if (!String.IsNullOrWhiteSpace(devPath))
+                    {
+                        InnerException = Regex.Replace(e.InnerException.ToString(), devPath, String.Empty);
+                    }
                     InnerMessage = e.InnerException.Message;
                 }
                 else
