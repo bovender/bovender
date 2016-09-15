@@ -35,12 +35,17 @@ namespace Bovender
         /// <returns>Sha1 hash.</returns>
         public static string Sha256Hash(string file)
         {
-            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
-            using (BufferedStream bs = new BufferedStream(fs))
+            using (FileStream fs = SaveFileStream(file))
             {
-                using (SHA256Managed sha = new SHA256Managed())
+                using (BufferedStream bs = new BufferedStream(fs))
                 {
-                    return Checksum2Hash(sha.ComputeHash(bs));
+                    using (SHA256Managed sha = new SHA256Managed())
+                    {
+                        string hash = Checksum2Hash(sha.ComputeHash(bs));
+                        Logger.Info("Sha256Hash: {0}", file);
+                        Logger.Info("Sha256Hash: {0}", hash);
+                        return hash;
+                    }
                 }
             }
         }
@@ -52,12 +57,17 @@ namespace Bovender
         /// <returns>Sha1 hash.</returns>
         public static string Sha1Hash(string file)
         {
-            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
-            using (BufferedStream bs = new BufferedStream(fs))
+            using (FileStream fs = SaveFileStream(file))
             {
-                using (SHA1Managed sha = new SHA1Managed())
+                using (BufferedStream bs = new BufferedStream(fs))
                 {
-                    return Checksum2Hash(sha.ComputeHash(bs));
+                    using (SHA1Managed sha = new SHA1Managed())
+                    {
+                        string hash = Checksum2Hash(sha.ComputeHash(bs));
+                        Logger.Info("Sha1Hash: {0}", file);
+                        Logger.Info("Sha1Hash: {0}", hash);
+                        return hash;
+                    }
                 }
             }
         }
@@ -75,7 +85,49 @@ namespace Bovender
             }
             return formatted.ToString();
         }
+
+        /// <summary>
+        /// Makes up to 3 attempts to open a file stream in read mode.
+        /// </summary>
+        /// <param name="file">File to open</param>
+        /// <returns>File stream</returns>
+        private static FileStream SaveFileStream(string file)
+        {
+            int tries = 1;
+            FileStream fs = null;
+            Exception ex = null;
+            Logger.Info("SaveFileStream: Attempting to open \"{0}\"", file);
+            while (tries <= 3 && fs == null)
+            {
+                try
+                {
+                    fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read);
+                }
+                catch (Exception e)
+                {
+                    Logger.Warn("SaveFileStream: Failed to open stream on attempt #{0}", tries);
+                    Logger.Warn(e);
+                    ex = e;
+                    System.Threading.Thread.Sleep(333);
+                }
+                tries++;
+            }
+            if (fs == null)
+            {
+                Logger.Fatal("SaveFileStream: Unable to open stream in #{0} attempts!");
+                throw new IOException("Unable to access file", ex);
+            }
+            return fs;
+        }
         
+        #endregion
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
+
         #endregion
     }
 }

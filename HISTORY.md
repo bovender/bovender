@@ -1,3 +1,11 @@
+Version 0.14.6 (2016-09-15)
+------------------------------------------------------------------------
+
+- Fix: If file access is denied during checksum generation, up to three attempts are now made to open the file stream before an exception is raised.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.14.5 (2016-09-03)
 ------------------------------------------------------------------------
 
