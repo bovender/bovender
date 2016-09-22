@@ -86,6 +86,7 @@
     <Compile Include="Mvvm\Actions\ProcessCompletedAction.cs" />
     <Compile Include="Mvvm\Actions\ShowViewAction.cs" />
     <Compile Include="Mvvm\Actions\ShowViewDialogAction.cs" />
+    <Compile Include="Mvvm\Actions\SuppressibleNotificationAction.cs" />
     <Compile Include="Mvvm\Behaviors\FocusFirstBehavior.cs" />
     <Compile Include="Mvvm\BindingWebBrowser.cs" />
     <Compile Include="Mvvm\CommandManagerHelper.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Mvvm\Messaging\DownloadProcessMessageContent.cs" />
     <Compile Include="Mvvm\Messaging\FileNameMessageContent.cs" />
     <Compile Include="Mvvm\Messaging\MessageArgsBase.cs" />
+    <Compile Include="Mvvm\Messaging\SuppressibleMessageContent.cs" />
     <Compile Include="Mvvm\Messaging\ViewModelMessageContent.cs" />
     <Compile Include="Mvvm\Models\IProcessModel.cs" />
     <Compile Include="Mvvm\Models\ProcessModel.cs" />
@@ -111,6 +113,9 @@
     </Compile>
     <Compile Include="Mvvm\Views\FailureSign.xaml.cs">
       <DependentUpon>FailureSign.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mvvm\Views\SuppressibleNotificationView.xaml.cs">
+      <DependentUpon>SuppressibleNotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mvvm\Views\NotificationView.xaml.cs">
       <DependentUpon>NotificationView.xaml</DependentUpon>
@@ -201,6 +206,10 @@
     <Page Include="Mvvm\Views\FailureSign.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mvvm\Views\SuppressibleNotificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Mvvm\Views\NotificationView.xaml">
       <Generator>MSBuild:Compile</Generator>
