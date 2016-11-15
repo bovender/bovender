@@ -29,13 +29,28 @@ namespace Bovender
         {
             if (obj != null && Marshal.IsComObject(obj))
             {
-                Marshal.ReleaseComObject(obj);
+                int count = Marshal.ReleaseComObject(obj);
+                Logger.Info("ReleaseComObject: Ref count after release is {0}", count);
+                if (count < 0)
+                {
+                    string caller = new System.Diagnostics.StackFrame(1).GetMethod().Name;
+                    Logger.Warn("ReleaseComObject: Caller: {0}", caller);
+                }
                 return null;
             }
             else
             {
+                Logger.Warn("ReleaseComObject: Obj is null or not a COM object");
                 return obj;
             }
         }
+
+        #region Class logger
+
+        private static NLog.Logger Logger { get { return _logger.Value; } }
+
+        private static readonly Lazy<NLog.Logger> _logger = new Lazy<NLog.Logger>(() => NLog.LogManager.GetCurrentClassLogger());
+
+        #endregion
     }
 }
