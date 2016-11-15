@@ -28,24 +28,15 @@ namespace Bovender.Unmanaged
     /// <summary>
     /// Manages unmanaged DLLs. Unloads any loaded DLLs upon disposal.
     /// </summary>
-    public class DllManager : Object, IDisposable
+    public class DllManager : IDisposable
     {
-        #region Constants
+        #region Public static property
 
-        private const string LIBDIR = "lib";
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets an alternative dir where DLL files 
-        /// </summary>
-        public virtual string AlternativeDir { get; set; }
+        public static string AlternativeDir { get; set; }
 
         #endregion
 
-        #region Public methods
+        #region Public static methods
 
         /// <summary>
         /// Checks whether a DLL exists in the application directory or
@@ -54,8 +45,9 @@ namespace Bovender.Unmanaged
         /// <param name="dllFileName">DLL file name to check</param>
         /// <returns>True if the file exists at either of the two locations; 
         /// false if not.</returns>
-        public bool DllExists(string dllFileName)
+        public static bool DllExists(string dllFileName)
         {
+            Logger.Info("DllExists: {0}", dllFileName);
             return !String.IsNullOrEmpty(LocateDll(dllFileName));
         }
 
@@ -66,50 +58,65 @@ namespace Bovender.Unmanaged
         /// <param name="dllName">DLL to search</param>
         /// <returns>Complete path to the DLL file, or String.Empty if the DLL
         /// was not found.</returns>
-        public string LocateDll(string dllName)
+        public static string LocateDll(string dllName)
         {
+            Logger.Info("LocateDll: {0}", dllName);
             string dllPath = CompletePath(ApplicationDir(), dllName);
             bool found = File.Exists(dllPath);
             if (!found && !String.IsNullOrWhiteSpace(AlternativeDir))
             {
+                Logger.Info("LocateDll: Looking in alternative directory '{0}'", AlternativeDir);
                 dllPath = CompletePath(AlternativeDir, dllName);
                 found = File.Exists(dllPath);
             }
             if (found)
             {
+                Logger.Info("LocateDll: Found");
                 return dllPath;
             }
             else
             {
+                Logger.Warn("LocateDll: {0} not found", dllName);
                 return String.Empty;
             }
         }
 
         #endregion
 
-        #region WinAPI
+        #region Private static methods
 
-        [DllImport("kernel32.dll", EntryPoint="LoadLibrary", SetLastError=true)]
-        static extern IntPtr LoadLibrary(string dllToLoad);
-
-        [DllImport("kernel32.dll", EntryPoint="GetProcAddress", SetLastError=true)]
-        static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
-
-        [DllImport("kernel32.dll", EntryPoint = "FreeLibrary", SetLastError = true)]
-        static extern bool FreeLibrary(IntPtr hModule);
-
-        #endregion
-        
-        #region Private members
         /// <summary>
-        /// Holds the currently loaded DLL names and their handles.
+        /// Constructs and returns the complete path for a given DLL.
         /// </summary>
-        private Dictionary<string, IntPtr> _loadedDlls = new Dictionary<string, IntPtr>();
+        /// <remarks>
+        /// By convention, the path that the DLL is expected to reside in is a subdirectory
+        /// of the entry point assembly's base directory, in "bin/lib/$(Platform)", where
+        /// $(Platform) can be "Win32" or "x64", for example.
+        /// </remarks>
+        /// <param name="fileName">Name of the DLL (with or without extension).</param>
+        /// <returns>Path to the DLL subdirectory (platform-dependent).</returns>
+        private static string CompletePath(string baseDir, string fileName)
+        {
+            if (!Path.HasExtension(fileName))
+            {
+                fileName += ".dll";
+            };
+            string s = Path.Combine(baseDir,
+                "lib",
+                Environment.Is64BitProcess ? "x64" : "Win32",
+                fileName);
+            Logger.Info("CompletePath: '{0}'", s);
+            return s;
+        }
 
-        private bool _disposed;
+        private static string ApplicationDir()
+        {
+            return AppDomain.CurrentDomain.BaseDirectory;
+        }
+        
         #endregion
 
-        #region Loading and unloading DLLs
+        #region Public methods
 
         /// <summary>
         /// Loads the given DLL from the appropriate subdirectory, depending on the current
@@ -140,50 +147,42 @@ namespace Bovender.Unmanaged
         /// queried as well.
         /// </remarks>
         /// <param name="dllName">Name of the DLL to load (without path).</param>
-        /// <param name="expectedSha1Hash">Expected Sha1 hash of the DLL.</param>
+        /// <param name="expectedSha256Hash">Expected Sha1 hash of the DLL.</param>
         /// <exception cref="DllNotFoundException">if the file is not found in the path.</exception>
         /// <exception cref="DllLoadingFailedException">if the file could not be loaded.</exception>
         /// <exception cref="DllSha1MismatchException">if the file's Sha1 is unexpected.</exception>
         // TODO: Use two expected hashes, one for Win32, one for x64
-        public void LoadDll(string dllName, string expectedSha1Hash)
+        public void LoadDll(string dllName, string expectedSha256Hash)
         {
-            Logger.Info("LoadDll: {0}", dllName);
-
-            string dllPath = LocateDll(dllName);
-            if (String.IsNullOrEmpty(dllPath))
+            if (_dlls.Contains(dllName))
             {
-                throw new DllNotFoundException(
-                    String.Format("Unable to locate DLL file"));
+                Logger.Info("LoadDll: '{0}' already registered in this instance", dllName);
             }
-            Logger.Info("Path: {0}", dllName);
-
-            if (!String.IsNullOrWhiteSpace(expectedSha1Hash))
+            else
             {
-                Logger.Info("Verifying checksum, expected: {0}", expectedSha1Hash);
-                if (!VerifyChecksum(dllPath, expectedSha1Hash))
+                Logger.Info("LoadDll: '{0}'", dllName);
+
+                string dllPath = LocateDll(dllName);
+                if (String.IsNullOrEmpty(dllPath))
                 {
-                    Logger.Fatal("DLL checksum mismatch, expected {0} on {1}", expectedSha1Hash, dllPath);
-                    throw new DllSha1MismatchException(String.Format(
-                        "DLL checksum error: expected {0} on {2}", expectedSha1Hash, dllPath));
+                    Logger.Fatal("LoadDll: Unable to locate DLL!");
+                    throw new DllNotFoundException(String.Format("Unable to locate DLL file"));
                 }
-            };
 
-            IntPtr handle = LoadLibrary(dllPath);
-            if (handle == IntPtr.Zero)
-            {
-                Win32Exception inner = new Win32Exception(Marshal.GetLastWin32Error());
-                Logger.Fatal(inner);
-                throw new DllLoadingFailedException(
-                    String.Format(
-                        "Could not load DLL file: LoadLibrary failed with code {0} on {1}",
-                        Marshal.GetLastWin32Error(), SanitizeDllPath(dllPath)
-                    ),
-                    inner
-                );
+                DllFile dllFile;
+                if (_globalDlls.TryGetValue(dllName, out dllFile))
+                {
+                    Logger.Info("LoadDll: Already registered");
+                }
+                else
+                {
+                    Logger.Info("LoadDll: Registering new DLL");
+                    dllFile = new DllFile(dllPath, expectedSha256Hash);
+                    _globalDlls.Add(dllName, dllFile);
+                }
+                dllFile.Load();
+                _dlls.Add(dllName);
             }
-
-            // Register the DLL and its handle in the internal database
-            _loadedDlls.Add(dllName, handle);
         }
 
         /// <summary>
@@ -192,12 +191,46 @@ namespace Bovender.Unmanaged
         /// <param name="dllName">Name of the DLL to unload.</param>
         public void UnloadDll(string dllName)
         {
-            Logger.Info("UnloadDll");
-            IntPtr handle;
-            if (_loadedDlls.TryGetValue(dllName, out handle))
+            if (_dlls.Contains(dllName))
             {
-                FreeLibrary(handle);
+                DllFile dllFile;
+                if (_globalDlls.TryGetValue(dllName, out dllFile))
+                {
+                    Logger.Info("UnloadDll: Unloading '{0}'", dllName);
+                    // Decrease the usage counter
+                    dllFile.Unload();
+                    _globalDlls.Remove(dllName);
+                }
+                else
+                {
+                    Logger.Warn("UnloadDll: Attempting to unload '{0}' which is not globally registered?!", dllName);
+                }
+                _dlls.Remove(dllName);
             }
+            else
+            {
+                Logger.Warn("UnloadDll: '{0}' not known to this instance");
+            }
+        }
+
+        #endregion
+
+        #region Constructor
+
+        public DllManager()
+        {
+            _dlls = new List<string>();
+        }
+
+        public DllManager(params string[] loadDlls)
+            : this()
+        {
+            Logger.Info("DllManager: Constructor invoked with loadDlls array");
+            foreach (string dll in loadDlls)
+            {
+                LoadDll(dll);
+            }
+            Logger.Info("DllManager: All loaded");
         }
 
         #endregion
@@ -217,15 +250,20 @@ namespace Bovender.Unmanaged
 
         protected virtual void Dispose(bool calledFromDispose)
         {
-            if (_disposed)
+            if (!_disposed)
             {
                 _disposed = true;
                 if (calledFromDispose)
                 {
-                    Logger.Info("Disposing: Freeing managed DLL handles...");
-                    foreach (IntPtr handle in _loadedDlls.Values)
+                    // May use managed resources here
+                    Logger.Info("Dispose: Unloading {0} DLL(s).", _dlls.Count);
+                    foreach (string dll in _dlls)
                     {
-                        FreeLibrary(handle);
+                        DllFile dllFile;
+                        if (_globalDlls.TryGetValue(dll, out dllFile))
+                        {
+                            dllFile.Unload();
+                        }
                     }
                 }
             }
@@ -233,63 +271,25 @@ namespace Bovender.Unmanaged
 
         #endregion
 
-        #region Helpers
+        #region Private fields
+
+        private List<string> _dlls;
+        private bool _disposed;
+
+        #endregion
+
+        #region Private static fields
 
         /// <summary>
-        /// Constructs and returns the complete path for a given DLL.
+        /// Holds the currently loaded DLL names and their handles.
         /// </summary>
-        /// <remarks>
-        /// By convention, the path that the DLL is expected to reside in is a subdirectory
-        /// of the entry point assembly's base directory, in "bin/lib/$(Platform)", where
-        /// $(Platform) can be "Win32" or "x64", for example.
-        /// </remarks>
-        /// <param name="fileName">Name of the DLL (with or without extension).</param>
-        /// <returns>Path to the DLL subdirectory (platform-dependent).</returns>
-        private string CompletePath(string baseDir, string fileName)
-        {
-            if (!Path.HasExtension(fileName))
-            {
-                fileName += ".dll";
-            };
-            string s = Path.Combine(baseDir,
-                "lib",
-                Environment.Is64BitProcess ? "x64" : "Win32",
-                fileName);
-            Logger.Info("Complete path: '{0}'", s);
-            return s;
-        }
+        private static readonly Dictionary<string, DllFile> _globalDlls = new Dictionary<string, DllFile>();
 
-        private string ApplicationDir()
-        {
-            return AppDomain.CurrentDomain.BaseDirectory;
-        }
+        #endregion
 
-        private bool VerifyChecksum(string dllPath, string expectedSha1Hash)
-        {
-            return FileHelpers.Sha1Hash(dllPath) == expectedSha1Hash;
-        }
+        #region Private constant
 
-        /// <summary>
-        /// Sanitizes a DLL path by removing potentially sensitive information,
-        /// i.e. the user name.
-        /// </summary>
-        /// <param name="dllPath">Path to sanitize</param>
-        /// <returns></returns>
-        private string SanitizeDllPath(string dllPath)
-        {
-            Logger.Info("Sanitizing DLL path:");
-            Logger.Info("    {0}", dllPath);
-            // Strip the leading directories from the path info (they may contain
-            // sensitive information about where exactly a user has installed files).
-            string[] dirs = Path.GetDirectoryName(dllPath).Split(Path.DirectorySeparatorChar);
-            string gracefulPath = dllPath;
-            int n = dirs.Length;
-            if (n > 0) gracefulPath = Path.Combine(dirs[n - 1], gracefulPath);
-            if (n > 1) gracefulPath = Path.Combine(dirs[n - 2], gracefulPath);
-            if (n > 2) gracefulPath = Path.Combine("...", gracefulPath);
-            Logger.Info("--> {0}", gracefulPath);
-            return gracefulPath;
-        }
+        private const string LIBDIR = "lib";
 
         #endregion
 
