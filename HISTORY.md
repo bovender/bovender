@@ -1,3 +1,12 @@
+Version 0.15.1 (2016-11-15)
+------------------------------------------------------------------------
+
+- Improvement: DLL manager now keeps track of loaded DLLs globally.
+- Improvement: Write log messages when COM objects are released.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.15.0 (2016-09-22)
 ------------------------------------------------------------------------
 
