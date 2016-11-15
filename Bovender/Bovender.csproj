@@ -161,6 +161,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Versioning.settings</DependentUpon>
     </Compile>
+    <Compile Include="Unmanaged\DllFile.cs" />
     <Compile Include="UserSettings\UserSettingsBase.cs" />
     <Compile Include="Text\Multiline.cs" />
     <Compile Include="Unmanaged\DllLoadingFailedException.cs" />
