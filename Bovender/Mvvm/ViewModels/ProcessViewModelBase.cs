@@ -42,7 +42,7 @@ namespace Bovender.Mvvm.ViewModels
     ///         {
     ///             args.Content.CloseViewCommand.Execute(null);
     ///         };
-    ///         args.Content.InjectAndShowInThread&lt;Bovender.Mvvm.Views.ProcessView>()&gt;;
+    ///         args.Content.InjectAndShowInThread&lt;Bovender.Mvvm.Views.ProcessView>();
     ///     };
     /// </code>
     /// <para>
@@ -111,7 +111,7 @@ namespace Bovender.Mvvm.ViewModels
         /// </summary>
         public virtual void StartProcess()
         {
-            Logger.Info("Starting process...");
+            Logger.Info("StartProcess: Starting process...");
             _progressTimer = new Timer(
                 UpdateProgress,
                 null,
@@ -127,7 +127,7 @@ namespace Bovender.Mvvm.ViewModels
         {
             ProcessMessageContent.WasCancelled = true;
             ProcessMessageContent.Processing = false;
-            Logger.Info("CancelProcess was called!");
+            Logger.Info("CancelProcess: CancelProcess was called!");
             ProcessModel.Cancel();
         }
         
@@ -206,7 +206,7 @@ namespace Bovender.Mvvm.ViewModels
         /// If false, the process is not started.</returns>
         protected virtual bool BeforeStartProcess()
         {
-            Logger.Info("Additional work before starting the process");
+            Logger.Info("BeforeStartProcess");
             return true;
         }
 
@@ -217,7 +217,7 @@ namespace Bovender.Mvvm.ViewModels
         /// </summary>
         protected virtual void AfterStartProcess()
         {
-            Logger.Info("Additional work after starting the process");
+            Logger.Info("AfterStartProcess");
             CloseViewCommand.Execute(null);
         }
 
@@ -227,7 +227,7 @@ namespace Bovender.Mvvm.ViewModels
         /// </summary>
         protected virtual void SendProcessFinishedMessage()
         {
-            Logger.Info("Sending ProcessFinishedMessage");
+            Logger.Info("SendProcessFinishedMessage: Sending message");
             ProcessMessageContent.Processing = false;
             ProcessMessageContent.Exception = Exception;
             ProcessMessageContent.WasSuccessful = Exception == null;
@@ -287,6 +287,7 @@ namespace Bovender.Mvvm.ViewModels
         {
             if (ProcessMessageContent.Processing)
             {
+                Logger.Fatal("Execute: Process is already running!");
                 throw new InvalidOperationException("Cannot start the process because it is already running");
             }
             if (!BeforeStartProcess()) return;
@@ -294,6 +295,7 @@ namespace Bovender.Mvvm.ViewModels
             ProcessMessageContent.Processing = true;
             ProcessMessageContent.WasSuccessful = false;
             ProcessMessageContent.WasCancelled = false;
+            Logger.Info("Execute: Starting task");
             Task.Factory.StartNew((Action)(() =>
             {
                 try
@@ -302,6 +304,8 @@ namespace Bovender.Mvvm.ViewModels
                 }
                 catch (Exception e)
                 {
+                    Logger.Warn("Execute: Caught an exception!");
+                    Logger.Warn(e);
                     Exception = e;
                 }
             })).ContinueWith((task) => Dispatch(SendProcessFinishedMessage));
