@@ -198,9 +198,9 @@ namespace Bovender.Logging
 
         public void EnableDebugLogging()
         {
-            if (!_debugLogginEnabled)
+            if (!_debugLoggingEnabled)
             {
-                _debugLogginEnabled = true;
+                _debugLoggingEnabled = true;
                 DebuggerTarget t = new DebuggerTarget();
                 _config.AddTarget(DEBUG_TARGET, t);
                 _config.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, t));
@@ -251,7 +251,7 @@ namespace Bovender.Logging
         private string _logFolder;
         private string _currentLogPath;
         private string _archivedLogsPath;
-        private bool _debugLogginEnabled;
+        private bool _debugLoggingEnabled;
         private bool _fileLoggingEnabled;
         private LoggingConfiguration _config;
         private FileTarget _fileTarget;
