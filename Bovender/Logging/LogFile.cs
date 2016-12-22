@@ -98,6 +98,24 @@ namespace Bovender.Logging
             }
         }
 
+        public NLog.LogLevel LogLevel
+        {
+            get
+            {
+                return _logLevel;
+            }
+            set
+            {
+                Logger.Info("LogLevel_set: {0} ==> {1}", _logLevel, value);
+                if (_fileRule != null)
+                {
+                    _fileRule.DisableLoggingForLevel(_logLevel);
+                    _fileRule.EnableLoggingForLevel(value);
+                }
+                _logLevel = value;
+            }
+        }
+
         /// <summary>
         /// Gets the folder where log files are stored.
         /// </summary>
@@ -183,6 +201,7 @@ namespace Bovender.Logging
 
         protected LogFile()
         {
+            _logLevel = NLog.LogLevel.Info;
             _config = new LoggingConfiguration();
             LogManager.Configuration = _config;
         }
@@ -229,7 +248,7 @@ namespace Bovender.Logging
             }
             if (_fileRule == null)
             {
-                _fileRule = new LoggingRule("*", LogLevel.Info, _fileTarget);
+                _fileRule = new LoggingRule("*", LogLevel, _fileTarget);
             }
             _config.LoggingRules.Add(_fileRule);
             LogManager.ReconfigExistingLoggers();
@@ -253,6 +272,7 @@ namespace Bovender.Logging
         private string _archivedLogsPath;
         private bool _debugLoggingEnabled;
         private bool _fileLoggingEnabled;
+        private NLog.LogLevel _logLevel;
         private LoggingConfiguration _config;
         private FileTarget _fileTarget;
         private LoggingRule _fileRule;
