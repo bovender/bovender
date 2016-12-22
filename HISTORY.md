@@ -1,4 +1,13 @@
-Version 0.15.1 (2016-11-15)
+Version 0.16.0 (2016-12-22)
+------------------------------------------------------------------------
+
+- Improvement: Better exception reporting in ProcessViewModelBase.
+- New: Add ability to specify log level in LogFile.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+Version 0.15.1 (2016-11-16)
 ------------------------------------------------------------------------
 
 - Improvement: DLL manager now keeps track of loaded DLLs globally.
