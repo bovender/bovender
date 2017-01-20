@@ -109,8 +109,8 @@ namespace Bovender.Logging
                 Logger.Info("LogLevel_set: {0} ==> {1}", _logLevel, value);
                 if (_fileRule != null)
                 {
-                    _fileRule.DisableLoggingForLevel(_logLevel);
-                    _fileRule.EnableLoggingForLevel(value);
+                    // _fileRule.DisableLoggingForLevel(_logLevel);
+                    _fileRule.EnableLoggingForLevels(LogLevel.Trace, value);
                 }
                 _logLevel = value;
             }
