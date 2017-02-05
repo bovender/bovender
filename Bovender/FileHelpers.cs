@@ -1,7 +1,7 @@
 ﻿/* FileHelpers.cs
  * part of Daniel's XL Toolbox NG
  * 
- * Copyright 2014-2016 Daniel Kraus
+ * Copyright 2014-2017 Daniel Kraus
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,10 +32,10 @@ namespace Bovender
         /// Computes the Sha256 hash of a given file.
         /// </summary>
         /// <param name="file">File to compute the Sha256 for.</param>
-        /// <returns>Sha1 hash.</returns>
+        /// <returns>Sha256 hash.</returns>
         public static string Sha256Hash(string file)
         {
-            using (FileStream fs = SaveFileStream(file))
+            using (FileStream fs = SafeFileStream(file))
             {
                 using (BufferedStream bs = new BufferedStream(fs))
                 {
@@ -49,6 +49,22 @@ namespace Bovender
                 }
             }
         }
+        /// <summary>
+        /// Computes the Sha256 hash of an exception.
+        /// </summary>
+        /// <param name="exception">Exception to compute the Sha256 for.</param>
+        /// <returns>Sha256 hash.</returns>
+        public static string Sha256Hash(Exception exception)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(exception.ToString());
+            using (SHA256Managed sha = new SHA256Managed())
+            {
+                string hash = Checksum2Hash(sha.ComputeHash(bytes));
+                Logger.Info("Sha256Hash: {0}", exception.GetType().ToString());
+                Logger.Info("Sha256Hash: {0}", hash);
+                return hash;
+            }
+        }
 
         /// <summary>
         /// Computes the Sha1 hash of a given file.
@@ -57,7 +73,7 @@ namespace Bovender
         /// <returns>Sha1 hash.</returns>
         public static string Sha1Hash(string file)
         {
-            using (FileStream fs = SaveFileStream(file))
+            using (FileStream fs = SafeFileStream(file))
             {
                 using (BufferedStream bs = new BufferedStream(fs))
                 {
@@ -72,10 +88,6 @@ namespace Bovender
             }
         }
 
-        #endregion
-
-        #region Private helpers
-        
         private static string Checksum2Hash(byte[] bytes)
         {
             StringBuilder formatted = new StringBuilder(2 * bytes.Length);
@@ -86,12 +98,16 @@ namespace Bovender
             return formatted.ToString();
         }
 
+        #endregion
+
+        #region Private methods
+
         /// <summary>
         /// Makes up to 3 attempts to open a file stream in read mode.
         /// </summary>
         /// <param name="file">File to open</param>
         /// <returns>File stream</returns>
-        private static FileStream SaveFileStream(string file)
+        private static FileStream SafeFileStream(string file)
         {
             int tries = 1;
             FileStream fs = null;
@@ -105,7 +121,7 @@ namespace Bovender
                 }
                 catch (Exception e)
                 {
-                    Logger.Warn("SaveFileStream: Failed to open stream on attempt #{0}", tries);
+                    Logger.Warn("SafeFileStream: Failed to open stream on attempt #{0}", tries);
                     Logger.Warn(e);
                     ex = e;
                     System.Threading.Thread.Sleep(333);
@@ -114,7 +130,7 @@ namespace Bovender
             }
             if (fs == null)
             {
-                Logger.Fatal("SaveFileStream: Unable to open stream in #{0} attempts!");
+                Logger.Fatal("SafeFileStream: Unable to open stream in #{0} attempts!");
                 throw new IOException("Unable to access file", ex);
             }
             return fs;
