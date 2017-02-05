@@ -30,7 +30,7 @@ namespace Bovender
             if (obj != null && Marshal.IsComObject(obj))
             {
                 int count = Marshal.ReleaseComObject(obj);
-                Logger.Info("ReleaseComObject: Ref count after release is {0}", count);
+                Logger.Debug("ReleaseComObject: Ref count after release is {0}", count);
                 if (count < 0)
                 {
                     string caller = new System.Diagnostics.StackFrame(1).GetMethod().Name;
@@ -40,10 +40,37 @@ namespace Bovender
             }
             else
             {
-                Logger.Warn("ReleaseComObject: Obj is null or not a COM object");
+                Logger.Warn("ReleaseComObject: Obj is null or not a COM object (@ {0})",
+                    new System.Diagnostics.StackFrame(1).GetMethod().Name);
                 return obj;
             }
         }
+
+        /// <summary>
+        /// Tests whether a given object responds to a given method.
+        /// </summary>
+        /// <param name="obj">Object to query.</param>
+        /// <param name="method">Method to test.</param>
+        /// <returns>True or false.</returns>
+        /// <remarks>
+        /// This method cannot be used to determine whether a COM object exposes
+        /// a particular method, because System.__COMObject has only a limited number
+        /// of methods and does not reveal the COM interfaces methods this way.
+        /// </remarks>
+        public static bool HasMethod(dynamic obj, string method)
+        {
+            try
+            {
+                return obj.GetType().GetMethod(method) != null;
+            }
+            catch (System.Reflection.AmbiguousMatchException)
+            {
+                // If there is more than one method with this name, an
+                // AmbiguousMatchException is thrown, and we can return true.
+                Logger.Debug("HasMethod: Ambiguous match for {0}, returning true", method);
+                return true;
+            }
+        } 
 
         #region Class logger
 
