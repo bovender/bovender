@@ -1,3 +1,14 @@
+Version 0.16.1 (2017-02-05)
+------------------------------------------------------------------------
+
+- Change: Exception IDs are now SAH-256 checksum hashes of an exception.
+- Fix: Error messages from processes are now wrapped.
+- Fix: Exception wrapping in ProcessFailedView.
+- Fix: Log levels were not set correctly.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.16.0 (2016-12-22)
 ------------------------------------------------------------------------
 
