@@ -32,8 +32,8 @@
         <controls:FailureSign />
         <StackPanel>
             <TextBlock Text="{Binding Message}" TextWrapping="Wrap" MaxWidth="380" />
-            <TextBlock Text="{Binding Exception.Message}" TextWrapping="Wrap"
-                       Margin="0,10,0,0" Foreground="LightSlateGray" />
+            <TextBlock Text="{Binding Exception.Message}" TextWrapping="Wrap" MaxWidth="380"
+                       Margin="0,10,0,10" Foreground="Firebrick" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
                 <Button Command="{Binding CloseViewCommand}" Content="{Binding OkButtonText}"
                         IsCancel="True" IsDefault="True"/>
