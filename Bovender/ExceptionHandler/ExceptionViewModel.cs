@@ -294,17 +294,10 @@ namespace Bovender.ExceptionHandler
         /// </summary>
         public ExceptionViewModel(Exception e)
         {
-            /* To produce a 'unique' error ID, we take the system time in ticks
-             * elapsed since 1/1/2010, bit-shift it by 20 bits (empirically determined
-             * by balancing resolution with capacity of this code), then
-             * converting it to a hexadecimal string representation.
-             */
-            long baseDate = (new DateTime(2010, 1, 1)).Ticks >> 20;
-            long now = DateTime.Now.Ticks >> 20;
-            ReportID = Convert.ToString(now - baseDate, 16);
-
             if (e != null)
             {
+                ReportID = FileHelpers.Sha256Hash(e);
+
                 string devPath = DevPath();
                 if (!String.IsNullOrWhiteSpace(devPath))
                 {
