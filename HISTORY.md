@@ -1,3 +1,21 @@
+Version 0.17.0 (2017-03-03)
+------------------------------------------------------------------------
+
+- Change: List items in Style.xaml receive some top and bottom padding.
+- Improvement: The UserSettingsBase class now provides virtual methods that can provide YamlDotNet SerializerBuilder objects with custom properties.
+- Improvement: Use updated YamlDotNet (4.1.0) and NUnit packages.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+Version 0.16.2 (2017-02-15)
+------------------------------------------------------------------------
+
+- Fix: Rebuild binaries.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.16.1 (2017-02-05)
 ------------------------------------------------------------------------
 

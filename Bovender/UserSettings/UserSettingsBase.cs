@@ -72,12 +72,19 @@ namespace Bovender.UserSettings
         /// IUserSettings to make life easier for the outside world.
         /// </summary>
         /// <param name="yamlFile">Path to a YAML file that holds the options.</param>
+        /// <param name="deserializerBuilder">YamlDotNet DeserializerBuilder object that is used to build
+        /// the YAML deserializer.</param>
         /// <typeparam name="T">Type of the OptionsStore derivative to load.</typeparam>
         /// <returns>OptionsStore object, either with values loaded from file
         /// or with default values.</returns>
-        protected static T FromFileOrDefault<T>(string yamlFile)
+        protected static T FromFileOrDefault<T>(string yamlFile, DeserializerBuilder deserializerBuilder)
             where T: UserSettingsBase, new()
         {
+            if (deserializerBuilder == null)
+	        {
+		        throw new ArgumentNullException("deserializerBuilder",
+                    "Must provide a DeserializerBuilder object to load settings.");
+	        }
             T optionsStore = null;
             if (File.Exists(yamlFile))
             {
@@ -86,7 +93,7 @@ namespace Bovender.UserSettings
                     using (FileStream fs = File.Open(yamlFile, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
                         StreamReader sr = new StreamReader(fs);
-                        Deserializer des = new Deserializer(ignoreUnmatched: true);
+                        Deserializer des = deserializerBuilder.Build();
                         optionsStore = des.Deserialize<T>(sr);
                         if (optionsStore != null)
                         {
@@ -110,6 +117,23 @@ namespace Bovender.UserSettings
                 optionsStore = new T();
 	        }
             return optionsStore;
+        }
+
+        /// <summary>
+        /// Loads options from a file using default YAML deserialization options
+        /// (ignoring unmatched properties), or creates a default instance if the I/O
+        /// operation failed. This is a protected method. Implementations of
+        /// UserSettingsBase must provide simple-access methods defined in
+        /// IUserSettings to make life easier for the outside world.
+        /// </summary>
+        /// <param name="yamlFile">Path to a YAML file that holds the options.</param>
+        /// <typeparam name="T">Type of the OptionsStore derivative to load.</typeparam>
+        /// <returns>OptionsStore object, either with values loaded from file
+        /// or with default values.</returns>
+        protected static T FromFileOrDefault<T>(string yamlFile)
+            where T : UserSettingsBase, new()
+        {
+            return FromFileOrDefault<T>(yamlFile, new DeserializerBuilder().IgnoreUnmatchedProperties());
         }
 
         #endregion
@@ -239,7 +263,7 @@ namespace Bovender.UserSettings
                 {
                     StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
                     WriteYamlHeader(sw);
-                    Serializer ser = new Serializer();
+                    Serializer ser = ConstructSerializerBuilder().Build();
                     ser.Serialize(sw, this);
                     sw.Flush();
                 }
@@ -251,6 +275,23 @@ namespace Bovender.UserSettings
                 Logger.Warn("Could not save user settings", e);
                 Exception = e;
             }
+        }
+
+        /// <summary>
+        /// Builds a YamlDotNet serializer builder. This method may be overridden to provide
+        /// a serializer builder with RoundTrip enabled, for example.
+        /// </summary>
+        /// <returns>SerializerBuilder instance.</returns>
+        /// <remarks>
+        /// A custom SerializerBuilder with .EnsureRoundTrip() is needed if the derived settings
+        /// class has polymorphic properties, which cannot be deserialized unless the additional
+        /// info provided by .EnsureRoundTrip() is included in the YAML file. This is not enabled
+        /// by default because it adds a lot of technical information to the YAML file, which may
+        /// be perceived as noise.
+        /// </remarks>
+        protected virtual SerializerBuilder ConstructSerializerBuilder()
+        {
+            return new SerializerBuilder();
         }
 
         /// <summary>
