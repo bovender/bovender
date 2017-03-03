@@ -2,7 +2,7 @@
 	Style.xaml
 	part of Bovender framework
 	
-	Copyright 2014-2015 Daniel Kraus
+	Copyright 2014-2017 Daniel Kraus
 	
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@
         <Setter Property="Control.ToolTip" Value="{Binding Path=ToolTip, Mode=OneWay}" />
         <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}" />
         <Setter Property="IsEnabled" Value="{Binding Path=IsEnabled, Mode=OneTime}" />
+        <Setter Property="Padding" Value="0 2 0 2" />
     </Style>
     <Style TargetType="{x:Type ComboBoxItem}">
         <Setter Property="Control.ToolTip" Value="{Binding Path=ToolTip, Mode=OneWay}" />
