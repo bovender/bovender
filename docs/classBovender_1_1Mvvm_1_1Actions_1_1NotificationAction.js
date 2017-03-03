@@ -1,0 +1,27 @@
+var classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction =
+[
+    [ "NotificationAction", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#aa25482ce0fd19a4c860a65c4ce2f2c1b", null ],
+    [ "NotificationAction", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a8bb1a55967be72b01227ba00985c5e79", null ],
+    [ "NotificationAction", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#ad32eda0bd36f0597084a325e26ee7761", null ],
+    [ "NotificationAction", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a7a63683edfa234571140104aa5c47b52", null ],
+    [ "NotificationAction", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#ae210c76d7fde45ece40e064205549047", null ],
+    [ "NotificationAction", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#ab1ee88d8ee08ec13b186503ffac13b6c", null ],
+    [ "CreateView", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a6e789e3b1c7b180fa8326c556b26ba76", null ],
+    [ "GetDataContext", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a54de124b25cf8b6330bce402783b7bc0", null ],
+    [ "CancelButtonTextProperty", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a79eb9137d65fec1cfc005473e67695d1", null ],
+    [ "CaptionProperty", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#ac97469655573d2ead08207431a79d4e7", null ],
+    [ "MessageProperty", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a777bcfb1e622a672c35353b3e05fb14f", null ],
+    [ "OkButtonTextProperty", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a36276af9c74bd3c0f3bdcb5ae09e0e59", null ],
+    [ "Param1Property", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a09a6b253e400ebd542378b9a8261eab2", null ],
+    [ "Param2Property", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a3be1ff0bc8fea0a92aa0e39422aa2e15", null ],
+    [ "Param3Property", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#af40ce27fc52e4e317d30e029a2a5499d", null ],
+    [ "CancelButtonText", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#abf4f5c21d9b8c49c1b1e28f23535c03b", null ],
+    [ "Caption", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#aaedcdb2f5fc95d2933afec8fd0e06a3b", null ],
+    [ "FormattedText", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a08f404d391e5697443878ad4ba9ce811", null ],
+    [ "Logger", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a01a840e5df5a7c99af221071b500dd33", null ],
+    [ "Message", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a7c3e96d3917704a4dfecb52cdffcf303", null ],
+    [ "OkButtonText", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#aa8cfa9993c19125672aac12904e5ba2b", null ],
+    [ "Param1", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#abe17456357004fc71d8bb2180e30fbf3", null ],
+    [ "Param2", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#aba119c80332c794ab86af5fb0c72d47a", null ],
+    [ "Param3", "classBovender_1_1Mvvm_1_1Actions_1_1NotificationAction.html#a41905179db1d8036584e50c50da9b28a", null ]
+];

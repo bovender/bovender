@@ -1,0 +1,27 @@
+var classBovender_1_1Versioning_1_1UpdaterViewModel =
+[
+    [ "UpdaterViewModel", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a03141b2fe08a68cf03e94a983dc3991f", null ],
+    [ "CanStartProcess", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a05ef359012d8e5cfd175c721e74bd4b0", null ],
+    [ "ChooseFolder", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a4e82873a3159464e8cbe498c214a2b08", null ],
+    [ "ConfirmFolder", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a4c7728d97090d160cf865f716c7b1230", null ],
+    [ "Install", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a7da15298a5f00e180cf1f400e2939d92", null ],
+    [ "SendDownloadFailedMessage", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#ad8bea8f6e786f4c10d4151140aa39665", null ],
+    [ "SendDownloadFinishedMessage", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#aeb95689db182f21145c54d7cdf46d5c0", null ],
+    [ "SendProcessFinishedMessage", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a00404a37ebd9c5a95aa7fa298d60cb7e", null ],
+    [ "UpdateProcessMessageContent", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a59a9f2f94ed62af0cb2875b671583101", null ],
+    [ "ChooseFolderCommand", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a330f87763a339264995134ea87d2e00f", null ],
+    [ "ChooseFolderMessage", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#afe6ba8f02877b65c96eaf696eea57621", null ],
+    [ "CurrentVersion", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a3ea780e09aeae1556955d4889f4964f9", null ],
+    [ "DownloadCommand", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a48a0e0ae1294b464e5bfe892662356e8", null ],
+    [ "DownloadFailedMessage", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a427c5593ea14be5ddc386dc4124ee447", null ],
+    [ "DownloadFinishedMessage", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a9c98d7ba03c5f957e526162a067aade6", null ],
+    [ "DownloadFolder", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#aa4cf50b04613a9d40691746ee2bad6af", null ],
+    [ "DownloadMegaBytesReceived", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#aafbcf528a22bc37bae8b83d1b055cb14", null ],
+    [ "DownloadMegaBytesTotal", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a53685df913e491e4e6135ce7a891f3b9", null ],
+    [ "InstallCommand", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a730fd5a3face2cb3d452e2647c55df67", null ],
+    [ "Logger", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a42441d40d4c1b69de03bd066b55cca0a", null ],
+    [ "NewVersion", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#ac0ea9fdc816c52934c8eabf8f12f47b4", null ],
+    [ "ProcessMessageContent", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a5bb2dfaae139d37099b6ad551434c4c8", null ],
+    [ "Summary", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a0125ce1f1b047301f449fd77e4712a7b", null ],
+    [ "Updater", "classBovender_1_1Versioning_1_1UpdaterViewModel.html#a3f903ea7b8d7ea8a774356782b13a5b5", null ]
+];
