@@ -29,11 +29,11 @@ namespace Bovender.Versioning
 
     public enum Prerelease
     {
+        Alpha = -4,
+        Beta = -3,
+        RC = -2,
+        Numeric = -1,
         None = 0,
-        Numeric = 1,
-        Alpha = 2,
-        Beta = 3,
-        RC = 4,
     }
 
     #endregion
