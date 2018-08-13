@@ -130,7 +130,6 @@ namespace Bovender.Versioning
 
         protected override void SendProcessFinishedMessage()
         {
-            base.SendProcessFinishedMessage();
             switch (Status)
             {
                 case ReleaseInfoStatus.InfoAvailable:
@@ -159,6 +158,7 @@ namespace Bovender.Versioning
                 default:
                     break;
             }
+            base.SendProcessFinishedMessage();
         }
 
         #endregion
