@@ -1,5 +1,8 @@
 var NAVTREEINDEX2 =
 {
+"classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a55f4b1b391f268af657a9192af00b6ec":[1,0,0,4,5,2,11],
+"classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a5ae9a8604fdcdb398546a687f7466f30":[1,0,0,4,5,2,15],
+"classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a621fda93eadee2b20e86edd145ccf78f":[1,0,0,4,5,2,10],
 "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a6ed3a9c35b9e9744e6686a4f98afa37a":[1,0,0,4,5,2,4],
 "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a72e9cbb71f3862a489ab6eaac70a2509":[1,0,0,4,5,2,9],
 "classBovender_1_1Mvvm_1_1ViewModels_1_1ViewModelBase.html#a7d026a5e1bea721a84024f29a1d0a16b":[1,0,0,4,5,2,2],
@@ -246,8 +249,5 @@ var NAVTREEINDEX2 =
 "classBovender_1_1Versioning_1_1ReleaseInfo.html#ab06298d2f831fb92320ae5316b4f9569":[1,0,0,9,3,15],
 "classBovender_1_1Versioning_1_1ReleaseInfo.html#ab9cfeaf59253acc128a5ad64bac23431":[1,0,0,9,3,5],
 "classBovender_1_1Versioning_1_1ReleaseInfo.html#ad1f7ae402923389c29f07cad02586c3b":[1,0,0,9,3,4],
-"classBovender_1_1Versioning_1_1ReleaseInfo.html#ad7541d0eea4c8cf5c1ed917f293aa640":[1,0,0,9,3,11],
-"classBovender_1_1Versioning_1_1ReleaseInfo.html#ae764e6ad23d7999b13a3d939e2eb68ce":[1,0,0,9,3,13],
-"classBovender_1_1Versioning_1_1ReleaseInfo.html#af5a4c217bc9035bbff233d070ea19267":[1,0,0,9,3,2],
-"classBovender_1_1Versioning_1_1ReleaseInfoViewModel.html":[1,0,0,9,4]
+"classBovender_1_1Versioning_1_1ReleaseInfo.html#ad7541d0eea4c8cf5c1ed917f293aa640":[1,0,0,9,3,11]
 };
