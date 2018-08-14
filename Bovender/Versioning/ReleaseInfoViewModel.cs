@@ -1,7 +1,7 @@
 ﻿/* ReleaseInfoViewModel.cs
  * part of Bovender framework
  * 
- * Copyright 2014-2017 Daniel Kraus
+ * Copyright 2014-2018 Daniel Kraus
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -130,7 +130,6 @@ namespace Bovender.Versioning
 
         protected override void SendProcessFinishedMessage()
         {
-            base.SendProcessFinishedMessage();
             switch (Status)
             {
                 case ReleaseInfoStatus.InfoAvailable:
@@ -159,6 +158,7 @@ namespace Bovender.Versioning
                 default:
                     break;
             }
+            base.SendProcessFinishedMessage();
         }
 
         #endregion

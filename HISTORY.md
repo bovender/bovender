@@ -1,3 +1,12 @@
+Version 0.17.1 (2018-08-14)
+------------------------------------------------------------------------
+
+- Fix: Prevent race condition when checking for new release.
+- Fix: Semantic versions with pre-release information were not compared properly.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.17.0 (2017-03-03)
 ------------------------------------------------------------------------
 

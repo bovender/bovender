@@ -1,7 +1,7 @@
 ﻿/* SemanticVersion.cs
  * part of Bovender
  * 
- * Copyright 2014-2017 Daniel Kraus
+ * Copyright 2014-2018 Daniel Kraus
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,11 +29,11 @@ namespace Bovender.Versioning
 
     public enum Prerelease
     {
+        Alpha = -4,
+        Beta = -3,
+        RC = -2,
+        Numeric = -1,
         None = 0,
-        Numeric = 1,
-        Alpha = 2,
-        Beta = 3,
-        RC = 4,
     }
 
     #endregion
