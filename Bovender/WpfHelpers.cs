@@ -23,11 +23,18 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Bovender
 {
     public static class WpfHelpers
     {
+        #region Public properties
+
+        public static Dispatcher MainDispatcher { get; set; }
+
+        #endregion
+
         #region Public methods
 
         /// <summary>

@@ -1,3 +1,11 @@
+Version 0.17.2 (2018-09-05)
+------------------------------------------------------------------------
+
+- Improved: Added a static property WpfHelpers.MainDispatcher to facility storing a dispatcher for the main UI thread.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
 Version 0.17.1 (2018-08-14)
 ------------------------------------------------------------------------
 
