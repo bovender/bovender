@@ -59,7 +59,25 @@ namespace Bovender.Mvvm.ViewModels
             }
         }
 
-        public Dispatcher ViewDispatcher { get; set; }
+        public Dispatcher ViewDispatcher
+        {
+            get
+            {
+                if (_viewDispatcher == null)
+                {
+                    Logger.Warn("ViewDispatcher_get: Dispatcher not explicitly set, returning WpfHelpers.MainDispatcher");
+                    return WpfHelpers.MainDispatcher;
+                }
+                else
+                {
+                    return _viewDispatcher;
+                }
+            }
+            set
+            {
+                _viewDispatcher = value;
+            }
+        }
 
         #endregion
 
@@ -355,6 +373,7 @@ namespace Bovender.Mvvm.ViewModels
         private string _displayString;
         private DelegatingCommand _closeViewCommand;
         private bool _isSelected;
+        private Dispatcher _viewDispatcher;
 
         #endregion
 
