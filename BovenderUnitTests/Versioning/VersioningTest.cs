@@ -51,10 +51,11 @@ namespace XLToolbox.Test
         // }
 
         [Test]
-        [ExpectedException(typeof(InvalidVersionStringException))]
         public void InvalidVersionThrowsError()
         {
-            SemanticVersion v = new SemanticVersion("2.0");
+            Assert.Throws<InvalidVersionStringException>(() => {
+                SemanticVersion v = new SemanticVersion("2.0");
+            });
         }
 
         [Test]

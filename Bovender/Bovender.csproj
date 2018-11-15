@@ -1,16 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{52405856-03AA-4961-A60A-E8619AD43030}</ProjectGuid>
+    <ProjectGuid>{89B7143D-AE23-4573-AF51-604F4E745EFE}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bovender</RootNamespace>
-    <AssemblyName>Bovender</AssemblyName>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ClassLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,36 +30,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>bovender.snk</AssemblyOriginatorKeyFile>
+    <RootNamespace>Bovender</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.4.3\lib\net40\NLog.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\NLog.4.5.11\lib\net40-client\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.11.0\lib\net40\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
-    <Reference Include="YamlDotNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
-      <HintPath>..\packages\YamlDotNet.Signed.4.1.0\lib\net35\YamlDotNet.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="YamlDotNet, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.5.2.1\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -67,11 +67,17 @@
     <Compile Include="CommonHelpers.cs" />
     <Compile Include="ExceptionHandler\CentralHandler.cs" />
     <Compile Include="ExceptionHandler\ExceptionSubmissionException.cs" />
+    <Compile Include="ExceptionHandler\ExceptionViewModel.cs" />
     <Compile Include="ExceptionHandler\ManageExceptionEventArgs.cs" />
+    <Compile Include="ExceptionHandler\UnexpectedResponseException.cs" />
     <Compile Include="ExceptionHandler\UnhandledException.cs" />
+    <Compile Include="ExceptionHandler\UploadFailedEventArgs.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\WindowExtensions.cs" />
+    <Compile Include="FileHelpers.cs" />
+    <Compile Include="HtmlFiles\HtmlFileViewModel.cs" />
     <Compile Include="Logging\LogFile.cs" />
     <Compile Include="Mvvm\Actions\ChooseFileOpenAction.cs" />
     <Compile Include="Mvvm\Actions\ChooseFileSaveAction.cs" />
@@ -79,6 +85,7 @@
     <Compile Include="Mvvm\Actions\ConfirmationAction.cs" />
     <Compile Include="Mvvm\Actions\FileDialogActionBase.cs" />
     <Compile Include="Mvvm\Actions\FileFolderActionBase.cs" />
+    <Compile Include="Mvvm\Actions\MessageActionBase.cs" />
     <Compile Include="Mvvm\Actions\MessageActionExtensions.cs" />
     <Compile Include="Mvvm\Actions\NonUiTrigger.cs" />
     <Compile Include="Mvvm\Actions\NotificationAction.cs" />
@@ -94,12 +101,19 @@
     <Compile Include="Mvvm\Converters\BooleanNegationConverter.cs" />
     <Compile Include="Mvvm\Converters\EnumBooleanConverter.cs" />
     <Compile Include="Mvvm\Converters\SimpleExceptionConverter.cs" />
-    <Compile Include="Mvvm\Converters\VisibilityBooleanNegationConverter.cs" />
     <Compile Include="Mvvm\Converters\VisibilityBooleanConverter.cs" />
+    <Compile Include="Mvvm\Converters\VisibilityBooleanNegationConverter.cs" />
+    <Compile Include="Mvvm\DelegatingCommand.cs" />
     <Compile Include="Mvvm\EnumProvider.cs" />
     <Compile Include="Mvvm\Messaging\DownloadProcessMessageContent.cs" />
     <Compile Include="Mvvm\Messaging\FileNameMessageContent.cs" />
+    <Compile Include="Mvvm\Messaging\IMessage.cs" />
+    <Compile Include="Mvvm\Messaging\Message.cs" />
+    <Compile Include="Mvvm\Messaging\MessageArgs.cs" />
     <Compile Include="Mvvm\Messaging\MessageArgsBase.cs" />
+    <Compile Include="Mvvm\Messaging\MessageContent.cs" />
+    <Compile Include="Mvvm\Messaging\ProcessMessageContent.cs" />
+    <Compile Include="Mvvm\Messaging\StringMessageContent.cs" />
     <Compile Include="Mvvm\Messaging\SuppressibleMessageContent.cs" />
     <Compile Include="Mvvm\Messaging\ViewModelMessageContent.cs" />
     <Compile Include="Mvvm\Models\IProcessModel.cs" />
@@ -107,6 +121,7 @@
     <Compile Include="Mvvm\Models\ProcessModelEventArgs.cs" />
     <Compile Include="Mvvm\ViewModels\EnumViewModel.cs" />
     <Compile Include="Mvvm\ViewModels\ProcessViewModelBase.cs" />
+    <Compile Include="Mvvm\ViewModels\ViewModelBase.cs" />
     <Compile Include="Mvvm\ViewModels\ViewModelCollection.cs" />
     <Compile Include="Mvvm\Views\ConfirmationView.xaml.cs">
       <DependentUpon>ConfirmationView.xaml</DependentUpon>
@@ -114,61 +129,40 @@
     <Compile Include="Mvvm\Views\FailureSign.xaml.cs">
       <DependentUpon>FailureSign.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Mvvm\Views\SuppressibleNotificationView.xaml.cs">
-      <DependentUpon>SuppressibleNotificationView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Mvvm\Views\NotificationView.xaml.cs">
       <DependentUpon>NotificationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Mvvm\Views\ProcessView.xaml.cs">
-      <DependentUpon>ProcessView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Mvvm\Views\Settings\WindowSettings.cs" />
-    <Compile Include="Mvvm\Views\Settings\WindowState.cs" />
-    <Compile Include="Extensions\WindowExtensions.cs" />
     <Compile Include="Mvvm\Views\ProcessFailedView.xaml.cs">
       <DependentUpon>ProcessFailedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mvvm\Views\ProcessSucceededView.xaml.cs">
       <DependentUpon>ProcessSucceededView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mvvm\Views\ProcessView.xaml.cs">
+      <DependentUpon>ProcessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mvvm\Views\Settings\WindowSettings.cs" />
+    <Compile Include="Mvvm\Views\Settings\WindowState.cs" />
     <Compile Include="Mvvm\Views\SuccessSign.xaml.cs">
       <DependentUpon>SuccessSign.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mvvm\Views\SuppressibleNotificationView.xaml.cs">
+      <DependentUpon>SuppressibleNotificationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PathHelpers.cs" />
-    <Compile Include="ExceptionHandler\ExceptionViewModel.cs" />
-    <Compile Include="FileHelpers.cs" />
-    <Compile Include="Mvvm\Actions\MessageActionBase.cs" />
-    <Compile Include="Mvvm\DelegatingCommand.cs" />
-    <Compile Include="Mvvm\Messaging\ProcessMessageContent.cs" />
-    <Compile Include="Mvvm\Messaging\IMessage.cs" />
-    <Compile Include="Mvvm\Messaging\Message.cs" />
-    <Compile Include="Mvvm\Messaging\MessageArgs.cs" />
-    <Compile Include="Mvvm\Messaging\MessageContent.cs" />
-    <Compile Include="Mvvm\Messaging\StringMessageContent.cs" />
-    <Compile Include="Mvvm\ViewModels\ViewModelBase.cs" />
-    <Compile Include="HtmlFiles\HtmlFileViewModel.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ExceptionHandler\UnexpectedResponseException.cs" />
-    <Compile Include="ExceptionHandler\UploadFailedEventArgs.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Versioning.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Versioning.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Unmanaged\DllFile.cs" />
-    <Compile Include="UserSettings\UserSettingsBase.cs" />
     <Compile Include="Text\Multiline.cs" />
+    <Compile Include="Unmanaged\DllFile.cs" />
     <Compile Include="Unmanaged\DllLoadingFailedException.cs" />
     <Compile Include="Unmanaged\DllManager.cs" />
     <Compile Include="Unmanaged\DllNotFoundException.cs" />
     <Compile Include="Unmanaged\DllSha1MismatchException.cs" />
     <Compile Include="Unmanaged\Pinvoke.cs" />
+    <Compile Include="UserSettings\UserSettingsBase.cs" />
     <Compile Include="UserSettings\UserSettingsExceptionViewModel.cs" />
     <Compile Include="UserSettings\UserSettingsViewModel.cs" />
     <Compile Include="Versioning\DownloadCorruptException.cs" />
@@ -185,38 +179,24 @@
     <Compile Include="WpfHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Bovender.licenseheader" />
-    <None Include="bovender.snk" />
+    <None Include="Bovender.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Properties\Versioning.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Versioning.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Page Include="Mvvm\Views\ConfirmationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Mvvm\Views\FailureSign.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Mvvm\Views\SuppressibleNotificationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Mvvm\Views\NotificationView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Mvvm\Views\ProcessView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -228,21 +208,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Mvvm\Views\SuccessSign.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Mvvm\Views\ProcessView.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mvvm\Views\SuccessSign.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mvvm\Views\SuppressibleNotificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Style.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
