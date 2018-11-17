@@ -8,6 +8,7 @@
 *.ncb
 *.log 
 *.DS_Store
+.vs/
 [Tt]humbs.db 
 packages/
 ~*

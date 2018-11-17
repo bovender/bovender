@@ -93,7 +93,7 @@ namespace Bovender.UserSettings
                     using (FileStream fs = File.Open(yamlFile, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
                         StreamReader sr = new StreamReader(fs);
-                        Deserializer des = deserializerBuilder.Build();
+                        IDeserializer des = deserializerBuilder.Build();
                         optionsStore = des.Deserialize<T>(sr);
                         if (optionsStore != null)
                         {
@@ -263,7 +263,7 @@ namespace Bovender.UserSettings
                 {
                     StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
                     WriteYamlHeader(sw);
-                    Serializer ser = ConstructSerializerBuilder().Build();
+                    ISerializer ser = ConstructSerializerBuilder().Build();
                     ser.Serialize(sw, this);
                     sw.Flush();
                 }

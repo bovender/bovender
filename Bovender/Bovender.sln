@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bovender", "Bovender\Bovender.csproj", "{89B7143D-AE23-4573-AF51-604F4E745EFE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BovenderUnitTests", "BovenderUnitTests\BovenderUnitTests.csproj", "{11998A16-84A5-4B38-9A36-716DA6815048}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bovender", "Bovender.csproj", "{89B7143D-AE23-4573-AF51-604F4E745EFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,15 +15,11 @@ Global
 		{89B7143D-AE23-4573-AF51-604F4E745EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89B7143D-AE23-4573-AF51-604F4E745EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89B7143D-AE23-4573-AF51-604F4E745EFE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11998A16-84A5-4B38-9A36-716DA6815048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11998A16-84A5-4B38-9A36-716DA6815048}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11998A16-84A5-4B38-9A36-716DA6815048}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11998A16-84A5-4B38-9A36-716DA6815048}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8D7F5D79-A28C-458C-9573-18FA85BE291A}
+		SolutionGuid = {6870B975-CED4-4A34-9C15-6E43F971D7DA}
 	EndGlobalSection
 EndGlobal
